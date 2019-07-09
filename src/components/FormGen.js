@@ -64,7 +64,8 @@ const FormGen = ({
       });
       form.setFieldsValue(values);
     }
-  }, [edit, editConfig, form, formConfig]);
+    /* eslint-disable-next-line */
+  }, [edit]);
 
   const generateRules = ({ rules = [], type }, key) =>
     rules.reduce((result, r) => {
