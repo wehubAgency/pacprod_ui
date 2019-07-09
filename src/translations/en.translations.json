@@ -1,0 +1,416 @@
+{
+  "success": "Test",
+  "appForm": {
+    "createApp": "Create an App",
+    "editApp": "Update an App",
+    "label": {
+      "name": "Name",
+      "codeName": "Code Name",
+      "features": "Features",
+      "apiPrefix": "API url prefix",
+      "adminRoles": "Admin role",
+      "configFilename": "Config filename",
+      "adminName": "Admin account name",
+      "adminEmail": "Email admin account",
+      "adminPassword": "Admin password account"
+    },
+    "rules": {
+      "required": "Required",
+      "email": "The email must be valid"
+    },
+    "options": {
+      "quiz": "Quiz",
+      "referendum": "Referendum",
+      "flash": "Flashplay",
+      "vote": "Public vote"
+    },
+    "help": {
+      "codeName": "One word in camelCase"
+    }
+  },
+  "artistComponent": {
+    "image": "Image",
+    "name": "Name",
+    "description": "Description"
+  },
+  "artistForm": {
+    "label": {
+      "name": "Name",
+      "description": "Artist description",
+      "image": "Photos"
+    },
+    "placeholder": {
+      "name": "Name",
+      "description": "Your description here"
+    },
+    "rules": {
+      "max400": "The description cannot exceed 400 charaters",
+      "required": "Required"
+    },
+    "text": {
+      "image": "Upload the artist image. It must be jpg or png format and cannot exceed 3mb"
+    },
+    "uploadRules": {
+      "image": {
+        "number": "Maximum one file",
+        "formats": "The file must be jpg or png format",
+        "size": "The file cannot exceed 3mb"
+      }
+    },
+    "createArtist": "Create artist",
+    "editArtist": "Edit artist"
+  },
+  "artistPage": {
+    "h1": "Artists management",
+    "intro": "Manage here your artists for your Place au Cirque page and / or your app.",
+    "createArtist": "Create an Artist"
+  },
+  "artistTable": {
+    "showDisabled": "Show disabled artist"
+  },
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "circusForm": {
+    "label": {
+      "circusName": "Circus Name",
+      "descriptionCircus": "Circus description",
+      "contactMail": "Contact email",
+      "phone": "Phone",
+      "logo": "Logo",
+      "photos": "Pictures",
+      "videos": "Videos",
+      "facebook": "Facebook page",
+      "twitter": "Twitter Account",
+      "instagram": "Instagram page",
+      "website": "Your website"
+    },
+    "placeholder": {
+      "name": "Name",
+      "description": "Your description here..."
+    },
+    "rules": {
+      "required": "Required",
+      "max400": "The description cannot exceed 400 caracteres",
+      "email": "The email must be valid",
+      "patternFacebook": "The link must be a valid Facebook link (https://facebook.com/<your-account>)",
+      "patternTwitter": "The link must be a valid Twitter link (https://twitter.com/<your-account>)",
+      "patternInstagram": "The link must be a valid Instagram link (https://instagram.com/<your-account>)",
+      "patternWebsite": "The link must be a valid internet link (https://your-website.com)"
+    },
+    "text": {
+      "logo": "Upload your Circus logo here. It must be a jpg or png format and cannot exceed 3mb",
+      "photos": "Upload your Circus pictures that would appear on the Place au Cirque website. It must be a jpg or png format and cannot exceed 3mb",
+      "videos": "Upload your Circus videos that would appear on the Place au Cirque website. It must be a mp4 format and cannot exceed 10mb"
+    },
+    "uploadRules": {
+      "logo": {
+        "number": "Maximum 1 image",
+        "formats": "The file must be jpg or png format",
+        "size": "The file cannot exceed 3mb"
+      },
+      "photos": {
+        "number": "Maximum 5 images",
+        "formats": "The file must be jpg or png format",
+        "size": "The file cannot exceed 3mb"
+      },
+      "videos": {
+        "number": "Maximum 2 videos",
+        "formats": "The file must be mp4 format",
+        "size": "The file cannot exceed 10mb"
+      }
+    },
+    "createCircus": "Create a Circus",
+    "editCircus": "Edit a Circus"
+  },
+  "circusInfos": {
+    "description": "Description",
+    "emptyDescription": "No description",
+    "email": "Email",
+    "emptyEmail": "No Email",
+    "phone": "Phone",
+    "emptyPhone": "No Phone",
+    "photos": "Photos",
+    "emptyPhotos": "No Photos",
+    "videos": "Videos",
+    "emptyVideos": "No vidéos",
+    "facebook": "Facebook page",
+    "emptyFacebook": "No Facebook page",
+    "twitter": "Twitter account",
+    "emptyTwitter": "No Twitter account",
+    "instagram": "Instagram page",
+    "emptyInstagram": "No Instagram page",
+    "website": "Your website",
+    "emptyWebsite": "No website"
+  },
+  "circusPage": {
+    "h1": "Informations management about your Circus",
+    "intro": "The information you share here is the one that appears on your Place au Cirque page and / or your custom application.",
+    "createCircus": "Add a Circus",
+    "editCircus": "Edit a Circus",
+    "setVisible": "Set visible your circus on Place au Cirque",
+    "setNotVisible": "Set not visible your circus on Place au Cirque"
+  },
+  "currentApp": {
+    "choose": "Choose an app"
+  },
+  "homePage": {
+    "h1": "Home",
+    "h2": "Welcome to the PAC Prod administration interface",
+    "infos": "To begin, we invite you to record the information of your Circus, such as your artists, shows, programs, ... that are necessary for the proper functioning of the application and your good SEO on the website Place au Cirque.",
+    "button": "Begin to enter your informations"
+  },
+  "initPage": {
+    "h1": "Creation of your Circus",
+    "infos": "In order to make your application and / or your \"Place au Cirque\" page work, we need some information about your circus. We will start by entering your artists and thus create your program. Do not worry if you have forgotten an artist, a show, you can reconfigure all this informations after initialization."
+  },
+  "initStepper": {
+    "step1": "Circus",
+    "step2": "Artists",
+    "step3": "Shows",
+    "step4": "Program",
+    "next": "Next",
+    "createCircus": "Create a circus",
+    "createArtist": "Create artist",
+    "createShow": "Create a show",
+    "createProgram": "Create a program"
+  },
+  "locationComponent": {
+    "name": "Name",
+    "address": "Address",
+    "location": "Location"
+  },
+  "locationForm": {
+    "label": {
+      "name": "Location name",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "address": "Address"
+    },
+    "placeholder": {
+      "name": "Location..."
+    },
+    "simpleText": {
+      "helpLocation": "Type the address or coordinates on the map below or click on it to fill the latitude and longitude boxes"
+    },
+    "rules": {
+      "required": "Required"
+    },
+    "createLocation": "Create a location",
+    "editLocation": "Edit a location"
+  },
+  "locationPage": {
+    "h1": "My locations",
+    "intro": "Manage here the locations necessary to make your app work",
+    "createLocation": "Create a location"
+  },
+  "locationTable": {
+    "showDisabled": "Show disabled locations"
+  },
+  "map": {
+    "searchAdress": "Find an adress"
+  },
+  "mapCell": {
+    "button": "See the location"
+  },
+  "menu": {
+    "flashplayTitle": "FlashPlay",
+    "prizeTitle": "Prize",
+    "quizTitle": "Quiz",
+    "questionTitle": "Questions",
+    "quizRulesTitle": "Rules",
+    "userTitle": "Users",
+    "circusTitle": "Your Circus",
+    "circusInfosTitle": "Circus Informations",
+    "artistTitle": "Artists",
+    "showTitle": "Shows",
+    "programTitle": "Programs",
+    "sessionTitle": "Sessions",
+    "locationTitle": "Locations",
+    "seasonTitle": "Seasons",
+    "adminTitle": "Admin",
+    "logsTitle": "Logs",
+    "appsTitle": "Apps Management"
+  },
+  "prizePage": {
+    "h1": "Prize management"
+  },
+  "programCell": {
+    "button": "Show Program"
+  },
+  "programInfos": {
+    "editProgram": "Edit a program",
+    "disabled": "(disabled)",
+    "disableProgram": "Disabled the program",
+    "enableProgram": "Enable the program",
+    "deleteProgram": "Delete the program"
+  },
+  "programForm": {
+    "label": {
+      "name": "Program name"
+    },
+    "rules": {
+      "required": "Required"
+    },
+    "manageShow": "Add/Remove show to your program",
+    "show": "Show",
+    "program": "Program",
+    "createProgram": "Create a program",
+    "editProgram": "Edit a program",
+    "disabled": "(disabled)"
+  },
+  "programPage": {
+    "h1": "Programs management",
+    "intro": "Manage here your Circus's programs. Programs must be associated with session to be seen on your app and/or the website Place au Cirque. Programs can contain disabled shows but those would not appear in your app or on your Place au Cirque page.",
+    "createProgram": "Create a program"
+  },
+  "programShowOrder": {
+    "disabled": "(show disabled)"
+  },
+  "questionForm": {
+    "createQuestion": "Create a question",
+    "editQuestion": "Update a question",
+    "extra": {
+      "answers": "You can choose one or more good answers"
+    },
+    "label": {
+      "question": "Question",
+      "proposals": "Proposals",
+      "answers": "Good answers",
+      "points": "Points",
+      "image": "Image"
+    },
+    "options": {
+      "answer1": "Answer 1",
+      "answer2": "Answer 2",
+      "answer3": "Answer 3",
+      "answer4": "Answer 4"
+    },
+    "placeholder": {
+      "question": "Your question here..."
+    },
+    "rules": {
+      "required": "Required"
+    },
+    "text": {
+      "image": "Upload the image corresponding to the question. It must be jpg or png format and cannot exceed 3mb"
+    },
+    "uploadRules": {
+      "image": {
+        "number": "Maximum one file",
+        "formats": "The file must be png or jpg format",
+        "size": "The file cannot exceed 3mb"
+      }
+    }
+  },
+  "questionInfos": {
+    "moreInfos": "More infos",
+    "points": "Points",
+    "proposals": "Proposals",
+    "proposalsHelp": "Proposals in green are the one you chose to be good answers."
+  },
+  "questionPage": {
+    "h1": "Quiz questions",
+    "intro": "Manage here the questions that will appear in the Quiz of your app. Create, update, delete, and even change order of questions.",
+    "createQuestion": "Create a question"
+  },
+  "seasonComponent": {
+    "name": "Name"
+  },
+  "seasonForm": {
+    "label": {
+      "name": "Name"
+    },
+    "rules": {
+      "required": "Required"
+    },
+    "createSeason": "Create new Season",
+    "editSeason": "Update Season"
+  },
+  "seasonPage": {
+    "h1": "Season Management",
+    "intro": "The seasonal system separates artist, numbers, performances, etc. from one season to another. A default season is generated for each Circus you create. Please create a new season only when you need it. You can then change seasons at the top of the page.",
+    "createSeason": "Create new Season"
+  },
+  "sessionComponent": {
+    "name": "Name",
+    "date": "Date",
+    "duration": "Duration",
+    "location": "Location",
+    "program": "Program"
+  },
+  "sessionForm": {
+    "label": {
+      "name": "Name",
+      "date": "Date",
+      "duration": "Duration of the show",
+      "location": "Location",
+      "program": "Program"
+    },
+    "help": {
+      "duration": "The duration of the show if format HH:MM",
+      "name": "We recommend the format <City> - <Date and time> for example (Pau - 25/12/2019 15h00) to better recognize your session later"
+    },
+    "placeholder": {
+      "name": "Session name here..."
+    },
+    "rules": {
+      "required": "Required",
+      "patternDuration": "The duration must be HH:MM format"
+    },
+    "createSession": "Create a session",
+    "editSession": "Edit a session"
+  },
+  "sessionPage": {
+    "h1": "Sessions management",
+    "intro": "Manage ici your circus sessions. For the Quiz, and Animal Referendum, you need to insert your sessions.",
+    "createGroupSession": "Create a group",
+    "createSession": "Create a session"
+  },
+  "sessionTable": {
+    "showDisabled": "Show disabled sessions"
+  },
+  "showComponent": {
+    "name": "Name",
+    "image": "Image",
+    "description": "Description",
+    "artist": "Artist"
+  },
+  "showForm": {
+    "label": {
+      "name": "Name",
+      "artist": "Artist",
+      "description": "Show description",
+      "image": "Photos"
+    },
+    "placeholder": {
+      "name": "Name",
+      "description": "Your description here..."
+    },
+    "rules": {
+      "required": "Required",
+      "max400": "The description cannot exceed 400 characters"
+    },
+    "text": {
+      "image": "Upload the show image. It must be jpg or png format and cannot exceed 3mb"
+    },
+    "uploadRules": {
+      "image": {
+        "number": "Maximum one file",
+        "formats": "The file must be jpg or png format",
+        "size": "The file cannot exceed 3mb"
+      }
+    },
+    "createShow": "Create a show",
+    "editShow": "Edit a show"
+  },
+  "showPage": {
+    "h1": "Shows management",
+    "intro": "Manage here artist's shows. To create a show, you have to create the corresponding artist here :",
+    "createArtist": "Create an Artist",
+    "createShow": "Create a show"
+  },
+  "showTable": {
+    "showDisabled": "Show disabled shows"
+  }
+}

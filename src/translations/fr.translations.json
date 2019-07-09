@@ -1,0 +1,666 @@
+{
+  "createApp": "Créer une application",
+  "editApp": "Modifier une application",
+  "createArtist": "Créer un artiste",
+  "editArtist": "Modifier un artiste",
+  "createCircus": "Créer un Cirque",
+  "editCircus": "Modifier un Cirque",
+  "createLocation": "Créer un emplacement",
+  "editLocation": "Modifier un emplacement",
+  "createProgram": "Créer un programme",
+  "editProgram": "Modifier un programme",
+  "createQuestion": "Créer une question",
+  "editQuestion": "Editer une question",
+  "createSeason": "Créer nouvelle Saison",
+  "editSeason": "Modifier Saison",
+  "createSession": "Créer une séance",
+  "editSession": "Modifier une séance",
+  "createShow": "Créer un numéro",
+  "editShow": "Modifier un numéro",
+  "editRules": "Modifier les règles",
+  "createCompany": "Créer une enseigne",
+  "editCompany": "Modifier l'enseigne",
+  "createPlaypoint": "Créer un point de jeux",
+  "editPlaypoint": "Modifier un point de jeux",
+  "addPrize": "Ajouter un lot",
+  "removePrize": "Enlever un lot",
+  "editPrize": "Modifier un lot",
+  "createPrizeInfos": "Créer un lot",
+  "editPrizeInfos": "Modifier un lot",
+  "createQrcode": "Créer un QRCode",
+  "editQrcode": "Modifier un QRCode",
+  "addQrcode": "Ajouter ce QRCode",
+  "createCoin": "Créer une pièce",
+  "editFlashApp": "Modifier appli",
+  "createFlashApp": "Créer une appli",
+  "editCoin": "Modifier une pièce",
+  "update": "Modifier",
+  "yes": "Oui",
+  "no": "Non",
+  "success": "Opération réussie",
+  "fail": "Opération échouée",
+  "nodata": "Pas de données",
+  "disable": "Désactiver",
+  "enable": "Activer",
+  "delete": "Supprimer",
+  "disabled": "Désactivé",
+  "download": "Télécharger",
+  "showDisabled": "Voir les éléments désactivés",
+  "instructions": "Instructions",
+  "rules": {
+    "required": "Obligatoire",
+    "email": "L'email doit être valide.",
+    "max": "La description ne peut pas excéder ${max} caractères.",
+    "pattern": "Texte non valide. Exemple: ${exemple}"
+  },
+  "upload": {
+    "text": "Le fichier doit être au format ${format} et ne doit pas dépasser ${size}mb"
+  },
+  "uploadRules": {
+    "number": "${number} image(s) maximum",
+    "formats": "Le fichier doit être au format ${format}",
+    "size": "Le fichier ne doit pas dépasser ${size}mb"
+  },
+  "appComponent": {
+    "name": "Nom",
+    "type": "Type d'appli",
+    "codeName": "Nom de code",
+    "features": "Fonctionnalités"
+  },
+  "appForm": {
+    "label": {
+      "name": "Nom",
+      "codeName": "Nom de code",
+      "type": "Type d'appli",
+      "features": "Fonctionnalités",
+      "apiPrefix": "Préfix url API",
+      "adminRoles": "Role Admin",
+      "userRole": "Role Utilisateur",
+      "configFilename": "Nom du fichier de configuration",
+      "adminName": "Nom de compte de l'admin",
+      "adminEmail": "Email de l'admin",
+      "adminPassword": "Mot de passe de l'admin"
+    },
+    "options": {
+      "quiz": "Quiz",
+      "referendum": "Referendum",
+      "flashplay": "Flashplay",
+      "vote": "Vote du public",
+      "circus": "Cirque",
+      "flashapp": "Appli Flashplay"
+    },
+    "help": {
+      "codeName": "Un seul mot en camelCase"
+    }
+  },
+  "artistComponent": {
+    "image": "Image",
+    "name": "Nom",
+    "description": "Description",
+    "confirmRemove": "Êtes-vous sur de vouloir enlever cette artiste ? Cela enlevera également ses numéros dans vos programmes de cette saison"
+  },
+  "artistForm": {
+    "label": {
+      "name": "Nom",
+      "description": "Description de l'artiste",
+      "image": "Photos"
+    }
+  },
+  "artistPage": {
+    "h1": "Gestion des artistes",
+    "intro": "Gérer ici les artistes pour votre page Place au Cirque et/ou votre application."
+  },
+  "artistTable": {
+    "showDisabled": "Voir les artistes désactivés"
+  },
+  "breadcrumb": {
+    "home": "Accueil"
+  },
+  "circusForm": {
+    "label": {
+      "circusName": "Nom du Cirque",
+      "descriptionCircus": "Description du Cirque",
+      "contactMail": "Mail de contact",
+      "phone": "Téléphone",
+      "logo": "Logo",
+      "photos": "Photos",
+      "videos": "Vidéos",
+      "facebook": "Page Facebook",
+      "twitter": "Compte Twitter",
+      "instagram": "Page Instagram",
+      "youtube": "Compte Youtube",
+      "website": "Votre site internet"
+    }
+  },
+  "circusInfos": {
+    "description": "Description",
+    "emptyDescription": "Description non fournie",
+    "email": "Email",
+    "emptyEmail": "Email non fourni",
+    "phone": "Téléphone",
+    "emptyPhone": "Téléphone non fournie",
+    "photos": "Photos",
+    "emptyPhotos": "Pas de photos",
+    "videos": "Videos",
+    "emptyVideos": "Pas de vidéos",
+    "facebook": "Page Facebook",
+    "emptyFacebook": "Pas de page Facebook",
+    "twitter": "Compte Twitter",
+    "emptyTwitter": "Pas de compte Twitter",
+    "instagram": "Page Instagram",
+    "emptyInstagram": "Pas de page Instagram",
+    "youtube": "Compte Youtube",
+    "emptyYoutube": "Pas de compte Youtube",
+    "website": "Votre site internet",
+    "emptyWebsite": "Pas de site Internet"
+  },
+  "circusPage": {
+    "h1": "Gestion des informations sur votre Cirque",
+    "intro": "Les informations que vous partagez ici sont celles qui apparaissent sur votre page Place au Cirque et/ou sur votre application personnalisée.",
+    "createCircus": "Ajouter un Cirque",
+    "editCircus": "Modifier un Cirque",
+    "setVisible": "Rendre visible votre cirque sur Place au Cirque",
+    "setNotVisible": "Rendre votre Cirque non visible sur Place au Cirque"
+  },
+  "coinComponent": {
+    "name": "Nom",
+    "image": "Image",
+    "value": "Valeur",
+    "confirmRemove": "Êtes-vous sûr de vouloir supprimer cette pièce ?"
+  },
+  "coinForm": {
+    "label": {
+      "name": "Nom",
+      "value": "Valeur",
+      "image": "Image"
+    }
+  },
+  "companyForm": {
+    "label": {
+      "name": "Nom",
+      "phone": "Téléphone",
+      "email": "Email",
+      "logo": "Logo",
+      "description": "Description",
+      "address": "Adresse",
+      "city": "Ville",
+      "zipcode": "Code postal",
+      "country": "Pays"
+    }
+  },
+  "companyInfos": {
+    "title": "Informations enseigne",
+    "logo": "Logo",
+    "name": "Nom",
+    "description": "Description",
+    "phone": "Téléphone",
+    "email": "Email",
+    "fullAddress": "Adresse complète"
+  },
+  "currencyPage": {
+    "h1": "Gestion de la monnaie virtuelle",
+    "instructions": "Créez ici les pièces de votre monnaie virtuelle. Ces pièce peuvent alors faire partie des gains potentiels si vous cochez dans le menu \"Paramètre\" la case \"Gain de monnaie virtuelle\"."
+  },
+  "currentApp": {
+    "choose": "Choisissez une application"
+  },
+  "entityInfos": {
+    "address": "Adresse",
+    "location": "Emplacement",
+    "description": "Description",
+    "emptyDescription": "Description non fournie",
+    "email": "Email",
+    "emptyEmail": "Email non fourni",
+    "phone": "Téléphone",
+    "emptyPhone": "Téléphone non fournie",
+    "photos": "Photos",
+    "emptyPhotos": "Pas de photos",
+    "videos": "Videos",
+    "emptyVideos": "Pas de vidéos",
+    "facebook": "Page Facebook",
+    "emptyFacebook": "Pas de page Facebook",
+    "twitter": "Compte Twitter",
+    "emptyTwitter": "Pas de compte Twitter",
+    "instagram": "Page Instagram",
+    "emptyInstagram": "Pas de page Instagram",
+    "youtube": "Compte Youtube",
+    "emptyYoutube": "Pas de compte Youtube",
+    "website": "Votre site internet",
+    "emptyWebsite": "Pas de site Internet"
+  },
+  "flashAppForm": {
+    "label": {
+      "name": "Nom",
+      "description": "Description",
+      "map": "Emplacement",
+      "radius": "Rayon (en mètre)",
+      "email": "Email",
+      "phone": "Téléphone",
+      "facebook": "Page Facebook",
+      "twitter": "Compte Twitter",
+      "instagram": "Page Instagram",
+      "youtube": "Compte Youtube",
+      "website": "Votre site internet",
+      "logo": "Logo",
+      "photos": "Photos",
+      "videos": "Videos",
+      "address": "Adresse",
+      "city": "Ville",
+      "zipcode": "Code postal",
+      "country": "Pays"
+    },
+    "help": {
+      "map": "Localiser précisément le centre de votre évènement grâce à la carte. Vous pourrez ensuite choisir en dessous le rayon dans lequel les personnes peuvent participer à vos activité et voir le résultat sur la carte.",
+      "radius": "Rayon en mètre de la zone dans le laquelle les personnes peuvent participer à vos activités. N'hésitez pas à prendre plus large pour éviter les problèmes de géolocalisation pas assez précise sur certains téléphones."
+    }
+  },
+  "flashAppPage": {
+    "h1": "Gestion de votre application",
+    "intro": "Gérer ici les informations concernant votre application",
+    "setVisible": "Rendre visible votre application sur FlashPlay",
+    "setNotVisible": "Rendre non visible votre application sur FlashPlay"
+  },
+  "flashPlaySettingsPage": {
+    "h1": "Paramètres généraux FlashPlay",
+    "instructions": "Gérez ici les paramètres généraux du FlashPlay. Ces règles s'appliqueront par défaut à tous vos QRCodes ne possédant pas leurs propres règles. Vous pouvez également activer/désactiver totalement le jeu FlashPlay avec le bouton suivant.",
+    "enableFlashplay": "Activer Flashplay",
+    "disableFlashplay": "Désactiver Flashplay"
+  },
+  "formGen": {
+    "uploadError": "Une erreur est survenue pendant l'upload de l'image."
+  },
+  "homePage": {
+    "h1": "Accueil",
+    "h2": "Bienvenue sur l'interface d'administration PAC Prod",
+    "infoscircus": "Pour commencer, nous vous invitions à enregistrer les informations de votre Cirque, telles que vos artistes, numéros, programmes, ... qui sont nécéssaire au bon fonctionnement de l'application et à votre bon référencement sur le site Place au Cirque.",
+    "infosflashapp": "Pour commencer, nous vous invitions à enregistrer les informations de votre évènement qui sont nécéssaire au bon fonctionnement de l'application "
+  },
+  "locationComponent": {
+    "address": "Adresse",
+    "location": "Emplacement",
+    "confirmRemove": "Êtes-vous sur de retirer cette emplacement ?"
+  },
+  "locationForm": {
+    "label": {
+      "name": "Nom de l'emplacement",
+      "map": "Emplacement",
+      "address": "Adresse",
+      "zipcode": "Code postal",
+      "city": "Ville",
+      "country": "Pays"
+    },
+    "help": {
+      "map": "Localiser précisément le centre de votre chapiteau grâce à la carte."
+    }
+  },
+  "locationPage": {
+    "h1": "Mes emplacements",
+    "intro": "Gérer ici les emplacements nécessaires au fonctionnement de votre application. Veuillez indiquer précisément le centre de votre chapiteau dans les endroits ou votre Cirque sera cette saison."
+  },
+  "locationTable": {
+    "showDisabled": "Voir les emplacements désactivés"
+  },
+  "map": {
+    "searchAdress": "Recherchez une adresse"
+  },
+  "mapCell": {
+    "button": "Voir l'emplacement"
+  },
+  "menu": {
+    "flashplayTitle": "FlashPlay",
+    "flashappInfos": "Informations Application",
+    "flashappTitle": "Application",
+    "paidprizeTitle": "Lots payants",
+    "currencyTitle": "Monnaie",
+    "playpointTitle": "Point de jeux",
+    "flashPlaySettingsTitle": "Paramètres",
+    "prizeInfosTitle": "Lots",
+    "qrcodeTitle": "QRCode",
+    "quizTitle": "Quiz",
+    "questionTitle": "Questions",
+    "quizSettingsTitle": "Paramètres",
+    "userTitle": "Utilisateurs",
+    "circusTitle": "Votre Cirque",
+    "circusInfosTitle": "Informations Cirque",
+    "artistTitle": "Artistes",
+    "showTitle": "Numéros",
+    "programTitle": "Programmes",
+    "sessionTitle": "Représentations",
+    "locationTitle": "Emplacements",
+    "seasonTitle": "Saisons",
+    "adminTitle": "Admin",
+    "logsTitle": "Logs",
+    "appsTitle": "Gestion Apps"
+  },
+  "paidprizeComponent": {
+    "name": "Nom",
+    "image": "Image",
+    "barcode": "Code barre",
+    "stock": "Stock",
+    "cost": "Coût",
+    "description": "Description",
+    "tos": "Conditions générales d'utilisation",
+    "instructions": "Instructions",
+    "confirmRemove": "Vous êtes sur le point de supprimer ce lot. Il n'apparaitra plus dans l'application dans la liste des lots achetables. Voulez vous supprimer ce lot ?"
+  },
+  "paidprizeForm": {
+    "label": {
+      "name": "Nom",
+      "image": "Image",
+      "barcode": "Code barre",
+      "stock": "Stock",
+      "description": "Description",
+      "instructions": "Instructions",
+      "tos": "Conditions générales d'utilisation",
+      "cost": "Coût"
+    },
+    "help": {
+      "barcode": "Nécessaire si le retrait du lot passe par le flash d'un code barre à une borne.",
+      "instructions": "Instructions pour le retrait du lot (Exemple: \"A récuperer à l'accueil de votre magasin\".",
+      "tos": "Non nécéssaire mais important si les lots ont une date limite pour le retrait, si la réduction ne s'applique qu'à certains produit, etc...",
+      "stock": "Un stock infini est représenté par la valeur -1"
+    }
+  },
+  "paidprizePage": {
+    "h1": "Gestion des lots payants",
+    "instructions": "Créez et gérez ici les lots que les gens pourront acheter avec la monnaie virtuelle de votre application."
+  },
+  "playpointForm": {
+    "label": {
+      "name": "Nom",
+      "phone": "Téléphone",
+      "email": "Email",
+      "map": "Emplacement",
+      "logo": "Logo",
+      "description": "Description",
+      "address": "Adresse",
+      "zipcode": "Code postal",
+      "city": "Ville",
+      "country": "Pays",
+      "radius": "Rayon en mètre"
+    },
+    "help": {
+      "radius": "Rayon en mètre de la zone dans le laquelle les qrcodes du point de jeux peuvent être flashés. N'hésitez à prendre plus large pour éviter les problèmes de géolocalisation pas assez précise sur certains téléphones."
+    }
+  },
+  "playpointInfos": {
+    "description": "Description",
+    "address": "Adresse",
+    "email": "Email",
+    "phone": "Téléphone"
+  },
+  "playpointsList": {
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce point de jeux ? Les qrcodes qu'il contient ne seront pas désactivés mais personne ne pourra flasher dans le périmètre que votre point de jeux représente."
+  },
+  "playpointPage": {
+    "h1": "Gestion des points de jeux",
+    "intro": "Gérer ici vos enseignes partenaires et leurs points de jeux. Une enseigne peut avoir plusieurs points de jeux auquel vous devez rattacher des qrcodes afin que les gens puissent jouer.",
+    "selectCompany": "Selectionnez une enseigne",
+    "playPoints": "Points de jeu",
+    "prizes": "Lots",
+    "qrcodes": "QRCodes",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette enseigne ? Les qrcodes placées dans les points de jeux de l'enseigne ne fonctionneront plus. Cette action est irréversible."
+  },
+  "playpointSection": {
+    "title": "Points de jeux"
+  },
+  "prizeInfosForm": {
+    "label": {
+      "name": "Nom",
+      "image": "Image",
+      "barcode": "Code barre",
+      "description": "Description",
+      "instructions": "Instructions",
+      "tos": "Conditions générales d'utilisation"
+    },
+    "help": {
+      "barcode": "Nécessaire si le retrait du lot passe par le flash d'un code barre à une borne.",
+      "instructions": "Instructions pour le retrait du lot (Exemple: \"A récuperer à l'accueil de votre magasin\".",
+      "tos": "Non nécéssaire mais important si les lots ont une date limite pour le retrait, si la réduction ne s'applique qu'à certains produit, etc..."
+    }
+  },
+  "prizeInfosComponent": {
+    "name": "Nom",
+    "image": "Image",
+    "barcode": "Code barre",
+    "description": "Description",
+    "instructions": "Instructions",
+    "tos": "Conditions générales d'utilisation",
+    "confirmRemove": "Vous êtes sur le point de supprimer ce lot ce qui le rendra ingagnable. Si vous souhaitez cette effet pour une durée déterminée, nous vous conseillons plutôt de désactiver le lot. Voulez-vous donc vraiment le supprimer définitivement ?"
+  },
+  "prizeComponent": {
+    "name": "Nom",
+    "image": "Image",
+    "stock": "Stock",
+    "coef": "Coefficient",
+    "instructions": "Instructions",
+    "confirmRemove": "Si ce lot a déjà été gagné, nous vous conseillons plutot de le désactiver si vous voulez le rendre innaccessible. Êtes-vous sûr de supprimer ce lot ?"
+  },
+  "prizeForm": {
+    "label": {
+      "model": "Lot",
+      "stock": "Stock",
+      "coef": "Coefficient",
+      "instructions": "Instructions"
+    },
+    "help": {
+      "stock": "Un stock infini est représenté par la valeur -1",
+      "coef": "Le coefficient, pouvant aller de 1 à 10, représente les chances qu'un objet à d'être gagné par rapport aux autres. Plus il est haut, plus l'objet a des chances d'être gagné.",
+      "instructions": "Les instructions représente ce que le gagnant doit effectuer pour aller récupérer son lot, par exemple, \"Retirer votre lot à l'acceuil de votre magasin\"."
+    }
+  },
+  "prizeManager": {
+    "title": "Gestion des lots"
+  },
+  "prizePage": {
+    "h1": "Gestion des lots",
+    "instructions": "Gérer ici les lots sans distinction d'appartenance à une enseigne. Une fois les lots créés, vous pouvez désormais aller les assigner à un QRCode (Menu QRCode) que vous assignerez à son tour à un point de jeux."
+  },
+  "programCell": {
+    "button": "Afficher le programme"
+  },
+  "programInfos": {
+    "editProgram": "Modifier un programme",
+    "disabled": "(désactivé)",
+    "disableProgram": "Désactiver le programme",
+    "enableProgram": "Activer le programme",
+    "deleteProgram": "Supprimer le programme"
+  },
+  "programForm": {
+    "label": {
+      "name": "Nom du programme"
+    },
+    "manageShow": "Ajouter/Enlever des shows à votre programme",
+    "show": "Numéros",
+    "program": "Programme",
+    "disabled": "(désactivé)"
+  },
+  "programPage": {
+    "h1": "Gestion des Programmes",
+    "intro": "Gérer ici les programmes de votre Cirque. Les programmes doivent être associés aux séances ce qui les rendra visible sur votre application et/ou le site Place au Cirque. Pour créer votre programme, vous devez préalablement avoir créé des Numéros. (Les programmes peuvent contenir des numéros désactivés mais ces derniers n'apparaitront pas sur votre application ou sur votre page Place au Cirque.)"
+  },
+  "programShowOrder": {
+    "disabled": "(numéro désactivé)"
+  },
+  "qrcodeCard": {
+    "showPrizeList": "Liste des lots",
+    "hidePrizeList": "Masquer les lots"
+  },
+  "qrcodeComponent": {
+    "name": "Nom",
+    "qrcode": "QRCode"
+  },
+  "qrcodeForm": {
+    "label": {
+      "name": "Nom",
+      "dailyParticipation": "Participation journalière",
+      "generalWinrate": "Taux de gain général (%)",
+      "localized": "Géolocalisation",
+      "unique": "Flash unique par QRCode",
+      "haveCurrency": "Gain de monnaie virtuelle",
+      "currencyProportion": "Taux de monnaie virtuelle (%)"
+    },
+    "help": {
+      "dailyParticipation": "Nombre de fois qu'un joueur peut flasher le même qrcode dans la même journée.",
+      "generalWinrate": "Pourcentage de chance d'obtenir un gain (monnaie virtuelle ou lot) à chaque flash.",
+      "localized": "Les joueurs ont-ils besoin de se trouver dans le rayon du point de jeu pour jouer ou non.",
+      "unique": "Les qrcodes peuvent-ils être flashés une et une seule fois ou bien un nombre défini (participation journalière) de fois par jour.",
+      "haveCurrency": "Y a t-il ou non de la monnaie virtuelle dans les gains possibles.",
+      "currencyProportion": "Sur un gain, le pourcentage de chance d'obtenir de la monnaie virtuelle plutôt qu'un lot."
+    },
+    "instructions": "Générez ici un QRCode auquel vous pourrez ensuite ajouter des lots ainsi que des règles spécifiques."
+  },
+  "qrcodeInfos": {
+    "addRules": "Ajouter des règles",
+    "confirmRemove": "Vous êtes sur le point de supprimer ce qrcode, ce qui le rendra non flashable. Vous pouvez le désactiver pour avoir le même effet. Êtes-vous sur de vouloir supprimer ce qrcode ?"
+  },
+  "qrcodeManager": {
+    "title": "Gestion des QRCodes"
+  },
+  "qrcodePage": {
+    "h1": "QRCodes",
+    "instructions": "Générez puis gerez ici vos QRCodes en modifiant les lots que ces derniers peuvent faire gagner. N'oubliez pas ensuite d'aller assigner le qrcode créé à un point de jeux."
+  },
+  "qrcodeRules": {
+    "instructions": "Cochez les règles que vous voulez appliquer a ce qrcode. Les règles non cochées seront alors prises dans la configuration générale dans le menu \"Paramètres\".",
+    "label": {
+      "dailyParticipation": "Participation journalière",
+      "generalWinrate": "Taux de gain général (%)",
+      "localized": "Géolocalisation",
+      "unique": "Flash unique par QRCode",
+      "haveCurrency": "Gain de monnaie virtuelle",
+      "currencyProportion": "Taux de monnaie virtuelle (%)"
+    }
+  },
+  "questionForm": {
+    "extra": {
+      "answers": "Vous pouvez choisir une ou plusieurs bonnes réponses."
+    },
+    "label": {
+      "question": "Question",
+      "proposals": "Propositions",
+      "answers": "Bonnes réponses",
+      "points": "Points",
+      "image": "Image"
+    },
+    "options": {
+      "answer1": "Réponse 1",
+      "answer2": "Réponse 2",
+      "answer3": "Réponse 3",
+      "answer4": "Réponse 4"
+    }
+  },
+  "questionInfos": {
+    "moreInfos": "Informations complémentaires",
+    "points": "Points",
+    "proposals": "Propositions",
+    "proposalsHelp": "Les propositions en vert sont celle que vous avez choisi comme étant des bonnes réponses.",
+    "confirmDelete": "Êtes-vous sur de vouloir supprimer la question ?"
+  },
+  "questionPage": {
+    "h1": "Questions du Quiz",
+    "intro": "Gérer ici les questions qui apparaitront dans le Quiz de votre application. Créer, modifier, effacer et changer même l'ordre des questions"
+  },
+  "quizSessionsForm": {
+    "sessionsWithout": "Sans Quiz",
+    "sessionsWith": "Avec Quiz"
+  },
+  "quizSettingsPage": {
+    "h1": "Paramétrage du Quiz",
+    "intro": "Configurer votre quiz avec les différentes options ci-dessous.",
+    "gameMode": "Type de jeu",
+    "sessionsTitle": "Représentations avec le Quiz",
+    "sessionsInfos": "Déplacez dans la colonne de droite les représentations dans lesquelles, vous voulez que le quiz soit actif. Dans les représentations ou le quiz est actif, les joueurs pourront participer au quiz pendant la durée de la représentation (que vous avez du renseigner lors de la création de la représentation). Les joueurs ne pourront pas accéder au quiz pendant une représentation se trouvant dans la colonne de gauche."
+  },
+  "quizSettingsForm": {
+    "label": {
+      "randomQuestions": "Questions aléatoires",
+      "randomQuestionsNumber": "Nombre de questions choisies au hasard"
+    },
+    "help": {
+      "randomQuestions": "Lorque que vous cochez cette option, vos utilisateurs n'auront pas les mêmes questions, ces dernières seront choisies au hasard dans la liste de vos questions. \nDans ce mode de jeu, toutes les bonnes réponses comptent pour 1 point.",
+      "randomQuestionsNumber": "Ce nombre ne sera pris en compte que lorque vous aurez coché \"Questions aléatoires\". Il correspond au nombre de questions qu'il y aura dans votre quiz. Si vous mettez un chiffre supérieur au nombre de questions, toutes les questions seront prises."
+    }
+  },
+  "rulesForm": {
+    "label": {
+      "dailyParticipation": "Participation journalière",
+      "generalWinrate": "Taux de gain général (%)",
+      "localized": "Géolocalisation",
+      "unique": "Flash unique par QRCode",
+      "haveCurrency": "Gain de monnaie virtuelle",
+      "currencyProportion": "Taux de monnaie virtuelle (%)",
+      "coinsProportion": "Taux de distribution de monnaie (%)"
+    },
+    "help": {
+      "dailyParticipation": "Nombre de fois qu'un joueur peut flasher le même qrcode dans la même journée.",
+      "generalWinrate": "Pourcentage de chance d'obtenir un gain (monnaie virtuelle ou lot) à chaque flash.",
+      "localized": "Les joueurs ont-ils besoin de se trouver dans le rayon du point de jeu pour jouer ou non.",
+      "unique": "Les qrcodes peuvent-ils être flashés une et une seule fois ou bien un nombre défini (participation journalière) de fois par jour.",
+      "haveCurrency": "Y a t-il ou non de la monnaie virtuelle dans les gains possibles.",
+      "currencyProportion": "Sur un gain, le pourcentage de chance d'obtenir de la monnaie virtuelle plutôt qu'un lot."
+    }
+  },
+  "seasonComponent": {
+    "name": "Nom",
+    "startDate": "Date de départ"
+  },
+  "seasonForm": {
+    "label": {
+      "name": "Nom",
+      "startDate": "Date de départ"
+    }
+  },
+  "seasonPage": {
+    "h1": "Gestion des saisons",
+    "intro": "Le système de saison permet de séparer artiste, numéros, représentations, etc d'une saison à une autre. Une saison par défaut est générée à chaque Cirque que vous créez. Veuillez créez une nouvelle saison seulement quand vous en avez le besoin. Vous pourrez alors changer de saison en haut de la page."
+  },
+  "sessionComponent": {
+    "name": "Nom",
+    "date": "Date",
+    "duration": "Durée",
+    "location": "Emplacement",
+    "program": "Programme"
+  },
+  "sessionForm": {
+    "label": {
+      "name": "Nom",
+      "date": "Date",
+      "duration": "Durée du spectable",
+      "location": "Emplacement",
+      "program": "Programme"
+    },
+    "help": {
+      "name": "Nous nous conseillons le format <Ville> - <Date et heure> par exemple (Pau - 25/12/2019 15h00) afin de mieux reconnaitre votre séance plus tard.",
+      "duration": "Durée du spectable au format HH:MM"
+    }
+  },
+  "sessionPage": {
+    "h1": "Gestion des séances",
+    "intro": "Gérer ici les séances de votre cirque. Il est nécéssaire d'avoir rentré vos séances afin de faire fonctionner le Quiz et le Référendum des Animaux."
+  },
+  "sessionTable": {
+    "showDisabled": "Voir les séances désactivées"
+  },
+  "showComponent": {
+    "name": "Nom",
+    "image": "Image",
+    "description": "Description",
+    "artist": "Artiste"
+  },
+  "showForm": {
+    "label": {
+      "name": "Nom",
+      "artist": "Artiste",
+      "description": "Description du numéro",
+      "image": "Photos"
+    }
+  },
+  "showPage": {
+    "h1": "Gestion des numéros",
+    "intro": "Gérer ici les numéros de vos artistes. Pour créer un numéros, vous devez d'abord avoir créer l'artiste correspondant ici:"
+  },
+  "showTable": {
+    "showDisabled": "Voir les numéros désactivés"
+  }
+}

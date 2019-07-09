@@ -1,0 +1,2018 @@
+{
+  "routing": {
+    "flashplay": {
+      "key": "flash",
+      "title": "flashplayTitle",
+      "icon": "qrcode",
+      "routes": {
+        "playpoints": {
+          "title": "playpointTitle",
+          "path": "/playpoints",
+          "page": "PlaypointPage",
+          "exact": true
+        },
+        "qrcodes": {
+          "title": "qrcodeTitle",
+          "path": "/qrcodes",
+          "page": "QrcodePage",
+          "exact": true
+        },
+        "prizes": {
+          "title": "prizeInfosTitle",
+          "path": "/prizes",
+          "page": "PrizeInfosPage",
+          "exact": true
+        },
+        "currency": {
+          "title": "currencyTitle",
+          "path": "/currency",
+          "page": "CurrencyPage",
+          "exact": true
+        },
+        "paidprize": {
+          "title": "paidprizeTitle",
+          "path": "/paidprize",
+          "page": "PaidprizePage",
+          "exact": true
+        },
+        "settings": {
+          "title": "flashPlaySettingsTitle",
+          "path": "/flashPlaySettings",
+          "page": "FlashPlaySettingsPage",
+          "exact": true
+        }
+      }
+    },
+    "quiz": {
+      "key": "quiz",
+      "title": "quizTitle",
+      "icon": "question",
+      "routes": {
+        "questions": {
+          "title": "questionTitle",
+          "path": "/questions",
+          "page": "QuestionPage",
+          "exact": true
+        },
+        "settings": {
+          "title": "quizSettingsTitle",
+          "path": "/quizSettings",
+          "page": "QuizSettingsPage",
+          "exact": true
+        }
+      }
+    },
+    "user": {
+      "key": "user",
+      "title": "userTitle",
+      "icon": "user",
+      "path": "/users",
+      "page": "UserPage",
+      "exact": true
+    },
+    "circus": {
+      "key": "circus",
+      "title": "circusTitle",
+      "icon": "profile",
+      "routes": {
+        "circus": {
+          "title": "circusInfosTitle",
+          "path": "/circus",
+          "page": "CircusPage",
+          "exact": true
+        },
+        "artist": {
+          "title": "artistTitle",
+          "path": "/artists",
+          "page": "ArtistPage",
+          "exact": true
+        },
+        "show": {
+          "title": "showTitle",
+          "path": "/shows",
+          "page": "ShowPage",
+          "exact": true
+        },
+        "program": {
+          "title": "programTitle",
+          "path": "/program",
+          "page": "ProgramPage",
+          "exact": true
+        },
+        "location": {
+          "title": "locationTitle",
+          "path": "/locations",
+          "page": "LocationPage",
+          "exact": true
+        },
+        "session": {
+          "title": "sessionTitle",
+          "path": "/sessions",
+          "page": "SessionPage",
+          "exact": true
+        },
+        "season": {
+          "title": "seasonTitle",
+          "path": "/season",
+          "page": "SeasonPage",
+          "exact": true
+        }
+      }
+    },
+    "admin": {
+      "key": "admin",
+      "title": "adminTitle",
+      "icon": "setting",
+      "routes": {
+        "logs": {
+          "title": "logsTitle",
+          "path": "/logs",
+          "page": "LogsPage",
+          "exact": true
+        },
+        "apps": {
+          "title": "appsTitle",
+          "path": "/apps",
+          "page": "AppsPage",
+          "exact": true
+        }
+      }
+    },
+    "flashapp": {
+      "key": "flashapp",
+      "title": "flashappTitle",
+      "icon": "shop",
+      "routes": {
+        "settings": {
+          "title": "flashappInfos",
+          "path": "/flashappinfos",
+          "page": "FlashAppPage",
+          "exact": true
+        },
+        "flashAppSeason": {
+          "title": "seasonTitle",
+          "path": "/flashappseason",
+          "page": "FlashAppSeasonPage",
+          "exact": true
+        }
+      }
+    },
+    "common": ["user"]
+  },
+  "entities": {
+    "app": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "type": {
+          "type": "radiogrp",
+          "label": "type"
+        },
+        "codeName": {
+          "type": "text",
+          "label": "codeName",
+          "help": "codeName",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "features": {
+          "type": "checkboxgrp",
+          "label": "features"
+        },
+        "apiPrefix": {
+          "type": "text",
+          "label": "apiPrefix",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "adminRoles": {
+          "type": "text",
+          "label": "adminRoles",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "userRole": {
+          "type": "text",
+          "label": "userRole",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "adminName": {
+          "type": "text",
+          "label": "adminName",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "adminEmail": {
+          "type": "text",
+          "label": "adminEmail",
+          "rules": [
+            {
+              "type": "email",
+              "message": "email"
+            },
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "adminPassword": {
+          "type": "text",
+          "label": "adminPassword",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": [
+          "type",
+          "codeName",
+          "apiPrefix",
+          "adminRoles",
+          "userRole",
+          "adminName",
+          "adminEmail",
+          "adminPassword"
+        ]
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "type": {
+          "title": "type",
+          "dataIndex": "type"
+        },
+        "codeName": {
+          "title": "codeName",
+          "dataIndex": "codeName"
+        },
+        "features": {
+          "title": "features",
+          "dataIndex": "features",
+          "render": {
+            "type": "stringarray"
+          }
+        }
+      }
+    },
+    "artist": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "attributes": {
+            "type": "text"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "description": {
+          "type": "textarea",
+          "label": "description",
+          "attributes": {
+            "rows": 4
+          },
+          "rules": [
+            {
+              "max": 400,
+              "message": "max400"
+            }
+          ]
+        },
+        "image": {
+          "type": "upload",
+          "label": "image",
+          "text": "image",
+          "valuePropName": "fileList",
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "image": {
+          "title": "image",
+          "dataIndex": "image",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px",
+              "borderRadius": "50%"
+            }
+          }
+        },
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "description": {
+          "title": "description",
+          "dataIndex": "description",
+          "render": {
+            "type": "ellipsis",
+            "size": 100
+          }
+        }
+      }
+    },
+    "circus": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "circusName",
+          "attributes": {
+            "type": "text"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "description": {
+          "type": "textarea",
+          "label": "descriptionCircus",
+          "attributes": {
+            "rows": 4
+          },
+          "rules": [
+            {
+              "max": 400,
+              "message": "max400"
+            }
+          ]
+        },
+        "email": {
+          "type": "text",
+          "label": "contactMail",
+          "rules": [
+            {
+              "type": "email",
+              "message": "email"
+            }
+          ]
+        },
+        "phone": {
+          "type": "text",
+          "label": "phone"
+        },
+        "facebook": {
+          "type": "text",
+          "label": "facebook",
+          "rules": [
+            {
+              "pattern": "^https?:\\/\\/(www\\.)?facebook.com\\/[a-zA-Z0-9(\\.\\?)?]*",
+              "flags": "",
+              "exemple": "https://facebook.com/<votre-compte>"
+            }
+          ]
+        },
+        "twitter": {
+          "type": "text",
+          "label": "twitter",
+          "rules": [
+            {
+              "pattern": "^https?:\\/\\/(www\\.)?twitter.com\\/[a-zA-Z0-9(\\.\\?)?]*",
+              "flags": "",
+              "exemple": "https://twitter.com/<votre-compte>"
+            }
+          ]
+        },
+        "instagram": {
+          "type": "text",
+          "label": "instagram",
+          "rules": [
+            {
+              "pattern": "^https?:\\/\\/(www\\.)?instagram.com\\/[a-zA-Z0-9(\\.\\?)?]*",
+              "flags": "",
+              "exemple": "https://instagram.com/<votre-compte>"
+            }
+          ]
+        },
+        "youtube": {
+          "type": "text",
+          "label": "youtube",
+          "rules": [
+            {
+              "pattern": "^https?:\\/\\/(www\\.)?youtube.com\\/channel\\/[a-zA-Z0-9(\\.\\?)?]*",
+              "flags": "",
+              "exemple": "https://youtube.com/channel/<votre-compte>"
+            }
+          ]
+        },
+        "website": {
+          "type": "text",
+          "label": "website",
+          "rules": [
+            {
+              "pattern": "^http\\:\\/\\/|https\\:\\/\\/([a-z0-9][a-z0-9\\-]*\\.)+[a-z0-9][a-z0-9\\-]*",
+              "flags": "",
+              "exemple": "https://votre-site-internet.com"
+            }
+          ]
+        },
+        "logo": {
+          "type": "upload",
+          "label": "logo",
+          "text": "logo",
+          "valuePropName": "fileList",
+          "previewSettings": {
+            "ratio": {
+              "width": 1,
+              "height": 1
+            }
+          },
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "photos": {
+          "type": "upload",
+          "label": "photos",
+          "valuePropName": "fileList",
+          "text": "photos",
+          "uploadRules": {
+            "number": 5,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          }
+        },
+        "videos": {
+          "type": "upload",
+          "label": "videos",
+          "text": "videos",
+          "valuePropName": "fileList",
+          "uploadRules": {
+            "number": 2,
+            "formats": ["video/mp4"],
+            "size": 10
+          }
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {}
+    },
+    "coin": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "value": {
+          "type": "number",
+          "label": "value",
+          "attributes": {
+            "min": 1
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "image": {
+          "type": "upload",
+          "label": "image",
+          "text": "image",
+          "valuePropName": "fileList",
+          "previewSettings": {
+            "ratio": {
+              "width": 1,
+              "height": 1
+            }
+          },
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "image": {
+          "title": "image",
+          "dataIndex": "image",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "value": {
+          "title": "value",
+          "dataIndex": "value"
+        }
+      }
+    },
+    "company": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "phone": {
+          "type": "text",
+          "label": "phone"
+        },
+        "email": {
+          "type": "text",
+          "label": "email",
+          "rules": [
+            {
+              "type": "email",
+              "message": "email"
+            },
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "logo": {
+          "type": "upload",
+          "label": "logo",
+          "text": "image",
+          "valuePropName": "fileList",
+          "previewSettings": {
+            "ratio": {
+              "width": 1,
+              "height": 1
+            }
+          },
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "description": {
+          "type": "textarea",
+          "label": "description"
+        },
+        "address": {
+          "type": "text",
+          "label": "address",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "city": {
+          "type": "text",
+          "label": "city",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "country": {
+          "type": "text",
+          "label": "country",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {}
+    },
+    "flashApp": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "attributes": {
+            "type": "text"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "description": {
+          "type": "textarea",
+          "label": "description",
+          "attributes": {
+            "rows": 4
+          },
+          "rules": [
+            {
+              "max": 400,
+              "message": "max400"
+            }
+          ]
+        },
+        "map": {
+          "type": "map",
+          "label": "map",
+          "help": "map"
+        },
+        "radius": {
+          "type": "number",
+          "label": "radius",
+          "help": "radius",
+          "attributes": {
+            "min": 15
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "address": {
+          "type": "text",
+          "label": "address",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "city": {
+          "type": "text",
+          "label": "city",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "country": {
+          "type": "text",
+          "label": "country",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "lat": {
+          "type": "hidden",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "lng": {
+          "type": "hidden",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "email": {
+          "type": "text",
+          "label": "email",
+          "rules": [
+            {
+              "type": "email",
+              "message": "email"
+            }
+          ]
+        },
+        "phone": {
+          "type": "text",
+          "label": "phone"
+        },
+        "facebook": {
+          "type": "text",
+          "label": "facebook",
+          "rules": [
+            {
+              "pattern": "^https?:\\/\\/(www\\.)?facebook.com\\/[a-zA-Z0-9(\\.\\?)?]*",
+              "flags": "",
+              "exemple": "https://facebook.com/<votre-compte>"
+            }
+          ]
+        },
+        "twitter": {
+          "type": "text",
+          "label": "twitter",
+          "rules": [
+            {
+              "pattern": "^https?:\\/\\/(www\\.)?twitter.com\\/[a-zA-Z0-9(\\.\\?)?]*",
+              "flags": "",
+              "exemple": "https://twitter.com/<votre-compte>"
+            }
+          ]
+        },
+        "instagram": {
+          "type": "text",
+          "label": "instagram",
+          "rules": [
+            {
+              "pattern": "^https?:\\/\\/(www\\.)?instagram.com\\/[a-zA-Z0-9(\\.\\?)?]*",
+              "flags": "",
+              "exemple": "https://instagram.com/<votre-compte>"
+            }
+          ]
+        },
+        "youtube": {
+          "type": "text",
+          "label": "youtube",
+          "rules": [
+            {
+              "pattern": "^https?:\\/\\/(www\\.)?youtube.com\\/channel\\/[a-zA-Z0-9(\\.\\?)?]*",
+              "flags": "",
+              "exemple": "https://youtube.com/channel/<votre-compte>"
+            }
+          ]
+        },
+        "website": {
+          "type": "text",
+          "label": "website",
+          "rules": [
+            {
+              "pattern": "^http\\:\\/\\/|https\\:\\/\\/([a-z0-9][a-z0-9\\-]*\\.)+[a-z0-9][a-z0-9\\-]*",
+              "flags": "",
+              "exemple": "https://votre-site-internet.com"
+            }
+          ]
+        },
+        "logo": {
+          "type": "upload",
+          "label": "logo",
+          "text": "logo",
+          "valuePropName": "fileList",
+          "previewSettings": {
+            "ratio": {
+              "width": 1,
+              "height": 1
+            }
+          },
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "photos": {
+          "type": "upload",
+          "label": "photos",
+          "valuePropName": "fileList",
+          "text": "photos",
+          "uploadRules": {
+            "number": 5,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          }
+        },
+        "videos": {
+          "type": "upload",
+          "label": "videos",
+          "text": "videos",
+          "valuePropName": "fileList",
+          "uploadRules": {
+            "number": 2,
+            "formats": ["video/mp4"],
+            "size": 10
+          }
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {}
+    },
+    "flashPlayRules": {
+      "formConfig": {
+        "dailyParticipation": {
+          "type": "number",
+          "label": "dailyParticipation",
+          "initialValue": 1,
+          "attributes": {
+            "min": 1
+          },
+          "help": "dailyParticipation",
+          "rules": [{ "required": true, "message": "required" }]
+        },
+        "generalWinrate": {
+          "type": "number",
+          "label": "generalWinrate",
+          "initialValue": 50,
+          "attributes": {
+            "min": 1,
+            "max": 100
+          },
+          "help": "generalWinrate",
+          "rules": [{ "required": true, "message": "required" }]
+        },
+        "localized": {
+          "type": "checkbox",
+          "label": "localized",
+          "help": "localized"
+        },
+        "unique": {
+          "type": "checkbox",
+          "label": "unique",
+          "help": "unique"
+        },
+        "haveCurrency": {
+          "type": "checkbox",
+          "label": "haveCurrency",
+          "help": "haveCurrency"
+        },
+        "currencyProportion": {
+          "type": "number",
+          "label": "currencyProportion",
+          "initialValue": 50,
+          "help": "currencyProportion",
+          "attributes": {
+            "min": 1,
+            "max": 100
+          },
+          "rules": [{ "required": true, "message": "required" }]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      }
+    },
+    "show": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "attributes": {
+            "type": "text"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "artist": {
+          "type": "select",
+          "label": "artist",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "description": {
+          "type": "textarea",
+          "label": "description",
+          "attributes": {
+            "rows": 4
+          },
+          "rules": [
+            {
+              "max": 400,
+              "message": "max400"
+            }
+          ]
+        },
+        "image": {
+          "type": "upload",
+          "label": "image",
+          "text": "image",
+          "valuePropName": "fileList",
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "image": {
+          "title": "image",
+          "dataIndex": "image",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px",
+              "borderRadius": "50%"
+            }
+          }
+        },
+        "description": {
+          "title": "description",
+          "dataIndex": "description",
+          "render": {
+            "type": "ellipsis",
+            "size": 100
+          }
+        },
+        "artist": {
+          "title": "artist",
+          "dataIndex": "artist",
+          "render": {
+            "type": "custom",
+            "id": "ArtistCell",
+            "style": {
+              "image": {
+                "width": "50px",
+                "borderRadius": "50%",
+                "marginRight": "15px"
+              }
+            }
+          }
+        }
+      }
+    },
+    "paidprize": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "image": {
+          "type": "upload",
+          "label": "image",
+          "text": "image",
+          "valuePropName": "fileList",
+          "previewSettings": {
+            "ratio": {
+              "width": 1,
+              "height": 1
+            }
+          },
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "barcode": {
+          "type": "upload",
+          "label": "barcode",
+          "text": "image",
+          "help": "barcode",
+          "valuePropName": "fileList",
+          "previewSettings": {
+            "ratio": {
+              "width": 1,
+              "height": 1
+            }
+          },
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          }
+        },
+        "cost": {
+          "type": "number",
+          "label": "cost",
+          "attributes": {
+            "min": 1
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "stock": {
+          "type": "number",
+          "label": "stock",
+          "help": "stock",
+          "attributes": {
+            "min": -1
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "tos": {
+          "type": "textarea",
+          "label": "tos",
+          "help": "tos"
+        },
+        "instructions": {
+          "type": "textarea",
+          "label": "instructions",
+          "help": "instructions",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "image": {
+          "title": "image",
+          "dataIndex": "image",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "barcode": {
+          "title": "barcode",
+          "dataIndex": "barcode",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "stock": {
+          "title": "stock",
+          "dataIndex": "stock"
+        },
+        "cost": {
+          "title": "cost",
+          "dataIndex": "cost"
+        },
+        "description": {
+          "title": "description",
+          "dataIndex": "description",
+          "render": {
+            "type": "ellipsis",
+            "size": 50
+          }
+        },
+        "tos": {
+          "title": "tos",
+          "dataIndex": "tos",
+          "render": {
+            "type": "ellipsis",
+            "size": 50
+          }
+        },
+        "instructions": {
+          "title": "instructions",
+          "dataIndex": "instructions",
+          "render": {
+            "type": "ellipsis",
+            "size": 50
+          }
+        }
+      }
+    },
+    "playpoint": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "phone": {
+          "type": "text",
+          "label": "phone"
+        },
+        "email": {
+          "type": "text",
+          "label": "email",
+          "rules": [
+            {
+              "type": "email",
+              "message": "email"
+            },
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "logo": {
+          "type": "upload",
+          "label": "logo",
+          "text": "image",
+          "valuePropName": "fileList",
+          "previewSettings": {
+            "ratio": {
+              "width": 1,
+              "height": 1
+            }
+          },
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "description": {
+          "type": "textarea",
+          "label": "description"
+        },
+        "map": {
+          "type": "map",
+          "label": "map"
+        },
+        "lat": {
+          "type": "hidden",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "lng": {
+          "type": "hidden",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "radius": {
+          "type": "number",
+          "label": "radius",
+          "help": "radius",
+          "initialValue": "15",
+          "attributes": {
+            "min": 15
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "address": {
+          "type": "text",
+          "label": "address",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "city": {
+          "type": "text",
+          "label": "city",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "country": {
+          "type": "text",
+          "label": "country",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {}
+    },
+    "prize": {
+      "formConfig": {
+        "model": {
+          "type": "select",
+          "label": "model",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "stock": {
+          "type": "number",
+          "label": "stock",
+          "help": "stock",
+          "attributes": {
+            "min": -1
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "coef": {
+          "type": "number",
+          "label": "coef",
+          "help": "coef",
+          "attributes": {
+            "min": 0,
+            "max": 10
+          },
+          "initialValue": 5,
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "instructions": {
+          "type": "textarea",
+          "label": "instructions",
+          "help": "instructions",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": ["model"]
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "model.name"
+        },
+        "image": {
+          "title": "image",
+          "dataIndex": "model.image",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "stock": {
+          "title": "stock",
+          "dataIndex": "stock"
+        },
+        "coef": {
+          "title": "coef",
+          "dataIndex": "coef"
+        },
+        "instructions": {
+          "title": "instructions",
+          "dataIndex": "instructions",
+          "render": {
+            "type": "ellipsis",
+            "size": "50"
+          }
+        }
+      }
+    },
+    "prizeInfos": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "image": {
+          "type": "upload",
+          "label": "image",
+          "text": "image",
+          "valuePropName": "fileList",
+          "previewSettings": {
+            "ratio": {
+              "width": 1,
+              "height": 1
+            }
+          },
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "description": {
+          "type": "textarea",
+          "label": "description"
+        },
+        "barcode": {
+          "type": "upload",
+          "label": "barcode",
+          "text": "image",
+          "help": "barcode",
+          "valuePropName": "fileList",
+          "previewSettings": {
+            "ratio": {
+              "width": 1,
+              "height": 1
+            }
+          },
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          }
+        },
+        "tos": {
+          "type": "textarea",
+          "label": "tos",
+          "help": "tos"
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "image": {
+          "title": "image",
+          "dataIndex": "image",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "barcode": {
+          "title": "barcode",
+          "dataIndex": "barcode",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "description": {
+          "title": "description",
+          "dataIndex": "description",
+          "render": {
+            "type": "ellipsis",
+            "size": 50
+          }
+        },
+        "tos": {
+          "title": "tos",
+          "dataIndex": "tos",
+          "render": {
+            "type": "ellipsis",
+            "size": 50
+          }
+        }
+      }
+    },
+    "program": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "shows": {
+          "type": "hidden",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      }
+    },
+    "qrcode": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "image": {
+          "title": "qrcode",
+          "dataIndex": "image",
+          "render": {
+            "type": "svg"
+          }
+        }
+      }
+    },
+    "qrcodeRules": {
+      "formConfig": {
+        "dailyParticipation": {
+          "type": "number",
+          "label": "dailyParticipation",
+          "attributes": {
+            "min": 1
+          },
+          "help": "dailyParticipation"
+        },
+        "generalWinrate": {
+          "type": "number",
+          "label": "generalWinrate",
+          "attributes": {
+            "min": 1,
+            "max": 100
+          },
+          "help": "generalWinrate"
+        },
+        "localized": {
+          "type": "checkbox",
+          "label": "localized",
+          "help": "localized"
+        },
+        "unique": {
+          "type": "checkbox",
+          "label": "unique",
+          "help": "unique"
+        },
+        "haveCurrency": {
+          "type": "checkbox",
+          "label": "haveCurrency",
+          "help": "haveCurrency"
+        },
+        "currencyProportion": {
+          "type": "number",
+          "label": "currencyProportion",
+          "help": "currencyProportion",
+          "attributes": {
+            "min": 1,
+            "max": 100
+          }
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {}
+    },
+    "question": {
+      "formConfig": {
+        "question": {
+          "type": "text",
+          "label": "question",
+          "attributes": {
+            "type": "text"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "proposals[]": {
+          "type": "text",
+          "number": 4,
+          "label": "proposals",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "answers": {
+          "type": "checkboxgrp",
+          "label": "answers",
+          "extra": "answers",
+          "attributes": {
+            "options": [
+              { "label": "answer1", "value": 0 },
+              { "label": "answer2", "value": 1 },
+              { "label": "answer3", "value": 2 },
+              { "label": "answer4", "value": 3 }
+            ]
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "points": {
+          "type": "number",
+          "label": "points",
+          "initialValue": 1,
+          "attributes": {
+            "min": 0
+          },
+          "rules": [{ "required": true, "message": "required" }]
+        },
+        "image": {
+          "type": "upload",
+          "label": "image",
+          "text": "image",
+          "valuePropName": "fileList",
+          "previewSettings": {
+            "ratio": {
+              "width": 16,
+              "height": 9
+            }
+          },
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": ["image"]
+      },
+      "componentConfig": {}
+    },
+    "quizSessions": {
+      "formConfig": {
+        "sessions": {
+          "type": "hidden",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      }
+    },
+    "quizSettings": {
+      "formConfig": {
+        "randomQuestions": {
+          "type": "checkbox",
+          "label": "randomQuestions",
+          "help": "randomQuestions"
+        },
+        "randomQuestionsNumber": {
+          "type": "number",
+          "label": "randomQuestionsNumber",
+          "help": "randomQuestionsNumber",
+          "attributes": {
+            "min": 1
+          }
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      }
+    },
+    "location": {
+      "formConfig": {
+        "lat": {
+          "type": "hidden",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "lng": {
+          "type": "hidden",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "map": {
+          "type": "map",
+          "label": "map",
+          "help": "map"
+        },
+        "address": {
+          "type": "text",
+          "label": "address",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "city": {
+          "type": "text",
+          "label": "city",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "country": {
+          "type": "text",
+          "label": "country",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "address": {
+          "title": "address",
+          "dataIndex": "address.fullAddress"
+        },
+        "location": {
+          "title": "location",
+          "dataIndex": "location",
+          "render": {
+            "type": "custom",
+            "id": "MapCell"
+          }
+        }
+      }
+    },
+    "session": {
+      "formConfig": {
+        "date": {
+          "type": "date",
+          "label": "date",
+          "props": {
+            "showTime": {
+              "format": "HH:mm"
+            },
+            "format": "DD/MM/YYYY HH:mm"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "duration": {
+          "type": "text",
+          "label": "duration",
+          "initialValue": "2:00",
+          "help": "duration",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            },
+            {
+              "pattern": "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+              "flags": "",
+              "exemple": "14:00"
+            }
+          ]
+        },
+        "location": {
+          "type": "select",
+          "label": "location",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "program": {
+          "type": "select",
+          "label": "program",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "date": {
+          "title": "date",
+          "dataIndex": "date",
+          "render": {
+            "type": "date",
+            "format": "LLLL"
+          }
+        },
+        "duration": {
+          "title": "duration",
+          "dataIndex": "duration"
+        },
+        "location": {
+          "title": "location",
+          "dataIndex": "location.location",
+          "render": {
+            "type": "custom",
+            "id": "MapCell"
+          }
+        },
+        "program": {
+          "title": "program",
+          "dataIndex": "program",
+          "render": {
+            "type": "custom",
+            "id": "ProgramCell"
+          }
+        }
+      }
+    },
+    "season": {
+      "formConfig": {
+        "name": {
+          "label": "name",
+          "type": "text",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "startDate": {
+          "label": "startDate",
+          "type": "date",
+          "props": {
+            "format": "DD/MM/YYYY"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": ["startDate"]
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "startDate": {
+          "title": "startDate",
+          "dataIndex": "startDate",
+          "render": {
+            "type": "date",
+            "format": "LL"
+          }
+        }
+      }
+    }
+  }
+}

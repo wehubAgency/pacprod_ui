@@ -1,0 +1,76 @@
+@import 'theme';
+@import 'modules/index';
+
+body {
+  background-color: lightgray;
+}
+
+.absolute-centered {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ant-transfer {
+  display: flex;
+  align-items: center;
+  .ant-btn-primary {
+    margin: 0;
+  }
+  .ant-transfer-list {
+    width: 100%;
+    min-width: 250px;
+  }
+  .ant-transfer-operation {
+    overflow: visible;
+  }
+}
+
+.ant-spin {
+  display: block !important;
+}
+
+.pointer:hover {
+  cursor: pointer;
+  color: $blue;
+}
+
+.instructions {
+  position: relative;
+  padding: 25px;
+  border: $blue 1px solid;
+  border-radius: 8px;
+  margin: 25px 0;
+  h4 {
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    background-color: white;
+    line-height: 1;
+    padding: 0 15px;
+  }
+}
+
+.qrcode {
+  padding-left: 25px;
+}
+
+.selected-qrcode {
+  background-color: $blue;
+  span {
+    font-weight: bold;
+    color: white;
+  }
+}
+
+.qrcode-item {
+  button {
+    visibility: hidden;
+  }
+  &:hover {
+    button {
+      visibility: visible;
+    }
+  }
+}
