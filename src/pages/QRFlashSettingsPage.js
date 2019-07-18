@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Spin, Button } from 'antd';
 import { Translate } from 'react-localize-redux';
-import RulesForm from '../components/FlashPlay/RulesForm';
+import RulesForm from '../components/QRFlash/RulesForm';
 import iaxios from '../axios';
 
-const _FlashPlaySettingsPage = ({
+const _QRFlashSettingsPage = ({
   general: { currentApp, currentEntity, currentSeason },
 }) => {
   const [fetching, setFetching] = useState(false);
@@ -15,8 +15,8 @@ const _FlashPlaySettingsPage = ({
   useEffect(() => {
     setFetching(true);
     const ax = iaxios();
-    const rulesCall = ax.get('/flashplays/rules');
-    const enabledCall = ax.get('/flashplays/enabled');
+    const rulesCall = ax.get('/qrflashes/rules');
+    const enabledCall = ax.get('/qrflashes/enabled');
     Promise.all([rulesCall, enabledCall]).then(([rulesRes, enabledRes]) => {
       if (rulesRes !== 'error' && enabledCall !== 'error') {
         setRules(rulesRes.data);
@@ -27,11 +27,11 @@ const _FlashPlaySettingsPage = ({
     return () => ax.source.cancel();
   }, [currentApp, currentEntity, currentSeason]);
 
-  const toggleFlashplay = () => {
+  const toggleQrflash = () => {
     const data = new FormData();
     data.append('_method', 'PATCH');
     iaxios()
-      .post('/flashplays/enabled', data)
+      .post('/qrflashes/enabled', data)
       .then((res) => {
         if (res !== 'error') {
           setEnabled(res.data);
@@ -48,27 +48,27 @@ const _FlashPlaySettingsPage = ({
   return (
     <div>
       <h1>
-        <Translate id="flashPlaySettingsPage.h1" />
+        <Translate id="qrflashSettingsPage.h1" />
       </h1>
       <div className="instructions">
         <h4>
           <Translate id="instructions" />
         </h4>
-        <Translate id="flashPlaySettingsPage.instructions" />
+        <Translate id="qrflashSettingsPage.instructions" />
         {!fetching && (
           <div style={{ marginTop: 25 }}>
             <Button
               type={enabled ? 'danger' : 'primary'}
               icon="stop"
-              onClick={() => toggleFlashplay()}
+              onClick={toggleQrflash}
             >
               {enabled ? (
                 <span>
-                  <Translate id="flashPlaySettingsPage.disableFlashplay" />
+                  <Translate id="qrflashSettingsPage.disableQrflash" />
                 </span>
               ) : (
                 <span>
-                  <Translate id="flashPlaySettingsPage.enableFlashplay" />
+                  <Translate id="qrflashSettingsPage.enableQrflash" />
                 </span>
               )}
             </Button>
@@ -84,7 +84,7 @@ const _FlashPlaySettingsPage = ({
 
 const mapStateToProps = ({ general }) => ({ general });
 
-export const FlashPlaySettingsPage = connect(
+export const QRFlashSettingsPage = connect(
   mapStateToProps,
   {},
-)(_FlashPlaySettingsPage);
+)(_QRFlashSettingsPage);

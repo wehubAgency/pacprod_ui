@@ -39,6 +39,7 @@ const QuestionForm = ({
   selectQuestion,
   inModal,
   externalFormRef,
+  quiz,
 }) => {
   const [loading, setLoading] = useState(false);
   const { formConfig, editConfig } = config.entities.question;
@@ -52,6 +53,7 @@ const QuestionForm = ({
   }, [formMode]);
 
   const createQuestion = (formData, form) => {
+    formData.append('quiz', quiz);
     iaxios()
       .post('/questions', formData)
       .then((res) => {
@@ -73,7 +75,9 @@ const QuestionForm = ({
       .post(`/questions/${selectedQuestion}`, formData)
       .then((res) => {
         if (res !== 'error') {
-          const questionIndex = questions.findIndex(q => q.id === res.data.id);
+          const questionIndex = questions.findIndex(
+            (q) => q.id === res.data.id,
+          );
           const newQuestions = [...questions];
           newQuestions.splice(questionIndex, 1, res.data);
           form.resetFields();
@@ -113,7 +117,11 @@ const QuestionForm = ({
 
   const modalProps = {
     title:
-      formMode === 'create' ? <Translate id="createQuestion" /> : <Translate id="editQuestion" />,
+      formMode === 'create' ? (
+        <Translate id="createQuestion" />
+      ) : (
+        <Translate id="editQuestion" />
+      ),
     visible: modalVisible,
     onCancel: closeModal,
     onOk: onSubmit,
@@ -124,7 +132,10 @@ const QuestionForm = ({
     formConfig,
     editConfig,
     ref: externalFormRef || formRef,
-    edit: formMode === 'edit' ? questions.find(q => q.id === selectedQuestion) : null,
+    edit:
+      formMode === 'edit'
+        ? questions.find((q) => q.id === selectedQuestion)
+        : null,
     formName: 'questionForm',
   };
 

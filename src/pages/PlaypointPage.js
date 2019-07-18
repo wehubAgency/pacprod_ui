@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Select, Button, Popconfirm, Typography, Spin } from 'antd';
+import { Select, Button, Popconfirm, Typography, Spin, Empty } from 'antd';
 import { Translate } from 'react-localize-redux';
 import { connect } from 'react-redux';
 import CompanyForm from '../components/Company/CompanyForm';
@@ -11,6 +11,7 @@ const _PlaypointPage = ({
   general: { currentApp, currentEntity, currentSeason },
 }) => {
   const [companies, setCompanies] = useState([]);
+  const [fetching, setFetching] = useState(false);
   const [selectedCompany, selectCompany] = useState('');
   const [playpoints, setPlaypoints] = useState([]);
   const [selectedPlaypoint, selectPlaypoint] = useState('');
@@ -18,25 +19,29 @@ const _PlaypointPage = ({
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    iaxios()
-      .get('/companies')
-      .then((res) => {
-        if (res !== 'error') {
-          setCompanies(res.data);
-          selectCompany(res.data.length > 0 ? res.data[0].id : '');
-        }
-      });
+    const ax = iaxios();
+    ax.get('/companies').then((res) => {
+      if (res !== 'error') {
+        setCompanies(res.data);
+        selectCompany(res.data.length > 0 ? res.data[0].id : '');
+      }
+    });
+    return () => ax.source.cancel();
   }, [currentApp, currentEntity, currentSeason]);
 
   useEffect(() => {
     if (selectedCompany) {
-      iaxios()
-        .get('/playpoints', { params: { company: selectedCompany } })
-        .then((res) => {
+      setFetching(true);
+      const ax = iaxios();
+      ax.get('/playpoints', { params: { company: selectedCompany } }).then(
+        (res) => {
           if (res !== 'error') {
             setPlaypoints(res.data);
           }
-        });
+          setFetching(false);
+        },
+      );
+      return () => ax.source.cancel();
     }
   }, [selectedCompany]);
 
@@ -135,8 +140,10 @@ const _PlaypointPage = ({
         </Button>
         <CompanyForm {...formProps} />
       </div>
-      {!selectedCompany ? (
+      {fetching ? (
         <Spin />
+      ) : !selectedCompany ? (
+        <Empty />
       ) : (
         <div>
           {companies.find((c) => c.id === selectedCompany).enabled ? (

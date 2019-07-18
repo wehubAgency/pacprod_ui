@@ -34,7 +34,8 @@ const Map = compose(
     if (props.checkChanges) {
       props.checkChanges(markers);
     }
-  }, [markers, props]);
+    /* eslint-disable-next-line */
+  }, [markers]);
 
   const displayMarkers = (markerLocation, zooming = true) => {
     const newMarkerLocation = { ...markerLocation };
@@ -81,6 +82,7 @@ const Map = compose(
           <input
             type="text"
             placeholder={props.translate('map.searchAdress')}
+            autoComplete="nope"
             style={{
               boxSizing: 'border-box',
               border: '1px solid transparent',

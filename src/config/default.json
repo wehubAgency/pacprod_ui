@@ -1,28 +1,29 @@
 {
   "routing": {
-    "flashplay": {
-      "key": "flash",
-      "title": "flashplayTitle",
+    "qrflash": {
+      "key": "qrflash",
+      "title": "qrflashTitle",
       "icon": "qrcode",
       "routes": {
-        "playpoints": {
-          "title": "playpointTitle",
-          "path": "/playpoints",
-          "page": "PlaypointPage",
-          "exact": true
-        },
         "qrcodes": {
           "title": "qrcodeTitle",
           "path": "/qrcodes",
           "page": "QrcodePage",
           "exact": true
         },
-        "prizes": {
-          "title": "prizeInfosTitle",
-          "path": "/prizes",
-          "page": "PrizeInfosPage",
+        "settings": {
+          "title": "qrflashSettingsTitle",
+          "path": "/qrflashSettings",
+          "page": "QRFlashSettingsPage",
           "exact": true
-        },
+        }
+      }
+    },
+    "currency": {
+      "key": "currency",
+      "title": "currencyTitle",
+      "icon": "gold",
+      "routes": {
         "currency": {
           "title": "currencyTitle",
           "path": "/currency",
@@ -34,11 +35,26 @@
           "path": "/paidprize",
           "page": "PaidprizePage",
           "exact": true
-        },
-        "settings": {
-          "title": "flashPlaySettingsTitle",
-          "path": "/flashPlaySettings",
-          "page": "FlashPlaySettingsPage",
+        }
+      }
+    },
+    "prizeInfos": {
+      "key": "prizeInfos",
+      "title": "prizeInfosTitle",
+      "icon": "gift",
+      "path": "/prizes",
+      "page": "PrizeInfosPage",
+      "exact": true
+    },
+    "company": {
+      "key": "company",
+      "title": "companyTitle",
+      "icon": "shop",
+      "routes": {
+        "playpoints": {
+          "title": "playpointTitle",
+          "path": "/playpoints",
+          "page": "PlaypointPage",
           "exact": true
         }
       }
@@ -47,20 +63,36 @@
       "key": "quiz",
       "title": "quizTitle",
       "icon": "question",
+      "path": "/quiz",
+      "page": "QuizPage",
+      "exact": true
+    },
+    "circusQuiz": {
+      "key": "circusQuiz",
+      "title": "circusQuizTitle",
+      "icon": "question",
       "routes": {
         "questions": {
-          "title": "questionTitle",
-          "path": "/questions",
-          "page": "QuestionPage",
+          "title": "circusQuestionTitle",
+          "path": "/circusquestions",
+          "page": "CircusQuestionPage",
           "exact": true
         },
         "settings": {
-          "title": "quizSettingsTitle",
-          "path": "/quizSettings",
-          "page": "QuizSettingsPage",
+          "title": "circusQuizSettingsTitle",
+          "path": "/circusQuizSettings",
+          "page": "CircusQuizSettingsPage",
           "exact": true
         }
       }
+    },
+    "gameConditions": {
+      "key": "gameConditions",
+      "title": "gameConditionsTitle",
+      "icon": "control",
+      "path": "/gameConditions",
+      "page": "GameConditionsPage",
+      "exact": true
     },
     "user": {
       "key": "user",
@@ -141,7 +173,7 @@
     "flashapp": {
       "key": "flashapp",
       "title": "flashappTitle",
-      "icon": "shop",
+      "icon": "profile",
       "routes": {
         "settings": {
           "title": "flashappInfos",
@@ -223,13 +255,7 @@
         },
         "adminName": {
           "type": "text",
-          "label": "adminName",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
+          "label": "adminName"
         },
         "adminEmail": {
           "type": "text",
@@ -238,22 +264,12 @@
             {
               "type": "email",
               "message": "email"
-            },
-            {
-              "required": true,
-              "message": "required"
             }
           ]
         },
         "adminPassword": {
           "type": "text",
-          "label": "adminPassword",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
+          "label": "adminPassword"
         }
       },
       "editConfig": {
@@ -318,9 +334,9 @@
             }
           ]
         },
-        "image": {
+        "profilePicture": {
           "type": "upload",
-          "label": "image",
+          "label": "profilePicture",
           "text": "image",
           "valuePropName": "fileList",
           "uploadRules": {
@@ -334,15 +350,26 @@
               "message": "required"
             }
           ]
+        },
+        "gallery": {
+          "type": "upload",
+          "label": "gallery",
+          "text": "image",
+          "valuePropName": "fileList",
+          "uploadRules": {
+            "number": 5,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          }
         }
       },
       "editConfig": {
         "excludeFields": []
       },
       "componentConfig": {
-        "image": {
-          "title": "image",
-          "dataIndex": "image",
+        "profilePicture": {
+          "title": "profilePicture",
+          "dataIndex": "profilePicture",
           "render": {
             "type": "image",
             "style": {
@@ -361,6 +388,14 @@
           "render": {
             "type": "ellipsis",
             "size": 100
+          }
+        },
+        "gallery": {
+          "title": "gallery",
+          "dataIndex": "gallery",
+          "render": {
+            "type": "custom",
+            "id": "GalleryCell"
           }
         }
       }
@@ -717,6 +752,32 @@
             }
           ]
         },
+        "startDate": {
+          "type": "date",
+          "label": "startDate",
+          "props": {
+            "format": "DD/MM/YYYY HH:mm"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "endDate": {
+          "type": "date",
+          "label": "endDate",
+          "props": {
+            "format": "DD/MM/YYYY HH:mm"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
         "map": {
           "type": "map",
           "label": "map",
@@ -914,7 +975,143 @@
       },
       "componentConfig": {}
     },
-    "flashPlayRules": {
+    "gameCondition": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "map": {
+          "type": "map",
+          "label": "map"
+        },
+        "lat": {
+          "type": "hidden",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "lng": {
+          "type": "hidden",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "radius": {
+          "type": "number",
+          "label": "radius",
+          "attributes": {
+            "min": 15
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "startDate": {
+          "type": "date",
+          "label": "startDate",
+          "props": {
+            "showTime": {
+              "format": "HH:mm"
+            },
+            "format": "DD/MM/YYYY HH:mm"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "endDate": {
+          "type": "date",
+          "label": "endDate",
+          "props": {
+            "showTime": {
+              "format": "HH:mm"
+            },
+            "format": "DD/MM/YYYY HH:mm"
+          }
+        },
+        "gameHoursTable": {
+          "type": "timeslot",
+          "label": "gameHours",
+          "hiddenInput": "gameHours",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "gameHours": {
+          "type": "hidden",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "location": {
+          "title": "location",
+          "dataIndex": "location",
+          "render": {
+            "type": "custom",
+            "id": "MapCell"
+          }
+        },
+        "startDate": {
+          "title": "startDate",
+          "dataIndex": "startDate",
+          "render": {
+            "type": "date",
+            "format": "LLLL"
+          }
+        },
+        "endDate": {
+          "title": "endDate",
+          "dataIndex": "endDate",
+          "render": {
+            "type": "date",
+            "format": "LLLL"
+          }
+        },
+        "gameHours": {
+          "title": "gameHours",
+          "dataIndex": "gameHours",
+          "render": {
+            "type": "custom",
+            "id": "TimeSlotCell"
+          }
+        }
+      }
+    },
+    "qrflashRules": {
       "formConfig": {
         "dailyParticipation": {
           "type": "number",
@@ -1742,7 +1939,19 @@
             "number": 1,
             "formats": ["image/jpeg", "image/png"],
             "size": 3
-          },
+          }
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {}
+    },
+    "quiz": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
           "rules": [
             {
               "required": true,
@@ -1752,7 +1961,7 @@
         }
       },
       "editConfig": {
-        "excludeFields": ["image"]
+        "excludeFields": []
       },
       "componentConfig": {}
     },

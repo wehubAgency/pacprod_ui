@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Button } from 'antd';
-import { Translate } from 'react-localize-redux';
+import { Button, message } from 'antd';
+import { Translate, withLocalize } from 'react-localize-redux';
 import FormGen from '../FormGen';
 import iaxios from '../../axios';
 
@@ -13,7 +14,13 @@ const propTypes = {
   }).isRequired,
 };
 
-const QuizSettingsForm = ({ general: { config }, setQuiz, quiz }) => {
+const QuizSettingsForm = ({
+  general: { config },
+  quiz,
+  allQuiz,
+  setAllQuiz,
+  translate,
+}) => {
   const [loading, setLoading] = useState(false);
   const { formConfig, editConfig } = config.entities.quizSettings;
   const formRef = useRef(null);
@@ -30,8 +37,11 @@ const QuizSettingsForm = ({ general: { config }, setQuiz, quiz }) => {
           .patch(`/quiz/${quiz.id}/settings`, { ...values })
           .then((res) => {
             if (res !== 'error') {
-              setQuiz(res.data);
-              form.resetFields();
+              const index = allQuiz.findIndex((q) => q.id === res.data.id);
+              const newQuiz = [...allQuiz];
+              newQuiz.splice(index, 1, res.data);
+              setAllQuiz(newQuiz);
+              message.success(translate('success'));
             }
             setLoading(false);
           });
@@ -63,7 +73,10 @@ QuizSettingsForm.propTypes = propTypes;
 
 const mapStateToProps = ({ general }) => ({ general });
 
-export default connect(
-  mapStateToProps,
-  {},
+export default compose(
+  withLocalize,
+  connect(
+    mapStateToProps,
+    {},
+  ),
 )(QuizSettingsForm);

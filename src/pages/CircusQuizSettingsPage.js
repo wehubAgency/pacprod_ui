@@ -6,7 +6,7 @@ import QuizSettingsForm from '../components/QuizSettings/QuizSettingsForm';
 import QuizSessionsForm from '../components/QuizSettings/QuizSessionsForm';
 import iaxios from '../axios';
 
-const _QuizSettingsPage = ({
+const _CircusQuizSettingsPage = ({
   general: { currentApp, currentEntity, currentSeason },
 }) => {
   const [quiz, setQuiz] = useState(null);
@@ -14,7 +14,7 @@ const _QuizSettingsPage = ({
 
   useEffect(() => {
     const sessionsReq = iaxios().get('/session');
-    const quizReq = iaxios().get('/quiz');
+    const quizReq = iaxios().get('/circusquiz');
     Promise.all([sessionsReq, quizReq]).then(([sessionsRes, quizRes]) => {
       if (sessionsRes !== 'error' && quizRes !== 'error') {
         setSessions(sessionsRes.data);
@@ -66,7 +66,7 @@ const _QuizSettingsPage = ({
 
 const mapStateToProps = ({ general }) => ({ general });
 
-export const QuizSettingsPage = connect(
+export const CircusQuizSettingsPage = connect(
   mapStateToProps,
   {},
-)(_QuizSettingsPage);
+)(_CircusQuizSettingsPage);

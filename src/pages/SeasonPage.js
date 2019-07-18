@@ -25,7 +25,7 @@ const _SeasonPage = ({ general: { currentEntity, currentApp, config } }) => {
   useEffect(() => {
     setFetching(true);
     const ax = iaxios();
-    ax.get(`season?circus=${currentEntity.id}`).then((res) => {
+    ax.get(`circusseasons?circus=${currentEntity.id}`).then((res) => {
       if (res !== 'error') {
         setSeasons(res.data);
       }
@@ -60,6 +60,7 @@ const _SeasonPage = ({ general: { currentEntity, currentApp, config } }) => {
     selectSeason,
     config,
     fetching,
+    entityApiUri: 'circus',
   };
 
   return (

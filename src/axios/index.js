@@ -21,7 +21,7 @@ export default (role = 'admin') => {
   });
   iaxios.source = source;
   iaxios.interceptors.response.use(
-    res => res,
+    (res) => res,
     (err) => {
       console.log({ err });
       if (err.constructor.name !== 'Cancel') {
@@ -31,7 +31,7 @@ export default (role = 'admin') => {
         switch (type) {
           case 'validator':
             descriptionMessage = description
-              .map(e => `${e.property_path}: ${e.message}`)
+              .map((e) => `${e.property_path}: ${e.message}`)
               .join('\r\n');
             break;
           default:
@@ -52,7 +52,10 @@ export default (role = 'admin') => {
       if (['get', 'delete'].indexOf(config.method) >= 0 && currentEntity) {
         newConfig.params = { ...newConfig.params, season: currentSeason.id };
       }
-      if (['post', 'put', 'patch'].indexOf(config.method) >= 0 && currentEntity) {
+      if (
+        ['post', 'put', 'patch'].indexOf(config.method) >= 0 &&
+        currentEntity
+      ) {
         if (newConfig.data !== undefined) {
           if (newConfig.data instanceof FormData) {
             newConfig.data.append('season', currentSeason.id);

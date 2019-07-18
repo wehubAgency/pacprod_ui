@@ -14,10 +14,15 @@ const propTypes = {
   setItems: PropTypes.func.isRequired,
   selectedQuestion: PropTypes.string.isRequired,
   selectQuestion: PropTypes.func.isRequired,
+  quiz: PropTypes.string.isRequired,
 };
 
 const QuestionList = ({
-  items, setItems, selectedQuestion, selectQuestion,
+  items,
+  setItems,
+  selectedQuestion,
+  selectQuestion,
+  quiz,
 }) => {
   const [oldOrder, setOldOrder] = useState([]);
 
@@ -32,7 +37,8 @@ const QuestionList = ({
   const grid = 16;
 
   const getItemStyle = (isDragging, draggableStyle, id) => ({
-    border: selectedQuestion === id ? '2px solid lightgrey' : '',
+    border:
+      selectedQuestion === id ? '2px solid lightgrey' : '1px solid lightgrey',
     borderRadius: '2px',
     userSelect: 'none',
     padding: grid,
@@ -41,7 +47,7 @@ const QuestionList = ({
     ...draggableStyle,
   });
 
-  const getListStyle = isDraggingOver => ({
+  const getListStyle = (isDraggingOver) => ({
     background: isDraggingOver ? '#fafafa' : 'white',
     padding: grid,
     width: '100%',
@@ -57,7 +63,10 @@ const QuestionList = ({
     }
     setItems(reorder(items, result.source.index, result.destination.index));
     iaxios()
-      .patch(`/questions/${result.draggableId}/order`, { order: result.destination.index })
+      .patch(`/questions/${result.draggableId}/order`, {
+        order: result.destination.index,
+        quiz: quiz,
+      })
       .then((res) => {
         if (res === 'error') {
           setItems(oldOrder);
@@ -67,7 +76,10 @@ const QuestionList = ({
 
   return (
     <div>
-      <DragDropContext onDragEnd={onDragEnd} onBeforeDragStart={onBeforeDragStart}>
+      <DragDropContext
+        onDragEnd={onDragEnd}
+        onBeforeDragStart={onBeforeDragStart}
+      >
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div
@@ -82,7 +94,11 @@ const QuestionList = ({
                       ref={prov.innerRef}
                       {...prov.draggableProps}
                       {...prov.dragHandleProps}
-                      style={getItemStyle(snap.isDragging, prov.draggableProps.style, item.id)}
+                      style={getItemStyle(
+                        snap.isDragging,
+                        prov.draggableProps.style,
+                        item.id,
+                      )}
                       onClick={() => selectQuestion(item.id)}
                       role="button"
                       tabIndex={0}

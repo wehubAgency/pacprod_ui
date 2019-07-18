@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal } from 'antd';
 import { connect } from 'react-redux';
@@ -17,6 +17,9 @@ const propTypes = {
       current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]),
     }),
   ]),
+  gameConditions: PropTypes.arrayOf(PropTypes.shape()),
+  setGameConditions: PropTypes.func,
+  selectedGameCondition: PropTypes.string,
   formMode: PropTypes.string.isRequired,
   general: PropTypes.shape({
     config: PropTypes.shape().isRequired,
@@ -28,51 +31,32 @@ const defaultProps = {
   setModalVisible: () => {},
   modalVisible: false,
   externalFormRef: null,
+  gameConditions: [],
+  setGameConditions: () => {},
+  selectedGameCondition: '',
 };
 
-const PrizeForm = ({
+const GameConditionForm = ({
   general: { config },
   formMode,
   modalVisible,
   setModalVisible,
   inModal,
   externalFormRef,
-  prizes,
-  setPrizes,
-  selectedPrize,
-  selectPrize,
-  selectedGame,
-  className,
-  feature,
+  gameConditions,
+  setGameConditions,
+  selectedGameCondition,
 }) => {
   const [loading, setLoading] = useState(false);
-  const [models, setModels] = useState([]);
-  const { formConfig, editConfig } = config.entities.prize;
-  if (feature !== 'qrflash' && feature !== 'argame') {
-    delete formConfig.coef;
-    editConfig.excludeFields.push('coef');
-  }
-
+  const { formConfig, editConfig } = config.entities.gameCondition;
   const formRef = useRef(null);
 
-  useEffect(() => {
+  const createGameCondition = (formData) => {
     iaxios()
-      .get('/prizeinfos')
+      .post('/gameconditions', formData)
       .then((res) => {
         if (res !== 'error') {
-          setModels(res.data);
-        }
-      });
-  }, []);
-
-  const createPrize = (formData) => {
-    formData.append('classId', selectedGame.id);
-    formData.append('className', className);
-    iaxios()
-      .post('/prizes', formData)
-      .then((res) => {
-        if (res !== 'error') {
-          setPrizes([...prizes, res.data]);
+          setGameConditions([...gameConditions, res.data]);
           if (inModal) {
             setModalVisible(false);
           }
@@ -81,20 +65,19 @@ const PrizeForm = ({
       });
   };
 
-  const updatePrize = (formData) => {
+  const updateGameCondition = (formData) => {
     formData.append('_method', 'PUT');
     iaxios()
-      .post(`/prizes/${selectedPrize}`, formData)
+      .post(`/gameconditions/${selectedGameCondition}`, formData)
       .then((res) => {
         if (res !== 'error') {
-          const prizeIndex = prizes.findIndex((p) => p.id === res.data.id);
-          const newPrizes = [...prizes];
-          newPrizes.splice(prizeIndex, 1, res.data);
-          setPrizes(newPrizes);
+          const gcIndex = gameConditions.findIndex((g) => g.id === res.data.id);
+          const newGameConditions = [...gameConditions];
+          newGameConditions.splice(gcIndex, 1, res.data);
+          setGameConditions(newGameConditions);
           if (inModal) {
             setModalVisible(false);
           }
-          selectPrize('');
         }
         setLoading(false);
       });
@@ -111,9 +94,9 @@ const PrizeForm = ({
         const data = { ...values };
         const formData = formateData(data);
         if (formMode === 'create') {
-          createPrize(formData);
+          createGameCondition(formData);
         } else if (formMode === 'edit') {
-          updatePrize(formData);
+          updateGameCondition(formData);
         }
       } else {
         setLoading(false);
@@ -134,30 +117,27 @@ const PrizeForm = ({
   const modalProps = {
     title:
       formMode === 'create' ? (
-        <Translate id="addPrize" />
+        <Translate id="createGameConditions" />
       ) : (
-        <Translate id="editPrize" />
+        <Translate id="editGameConditions" />
       ),
     visible: modalVisible,
     onCancel: closeModal,
     onOk: onSubmit,
     confirmLoading: loading,
     destroyOnClose: true,
+    width: 700,
   };
-
-  const optionsModel = models.map((m) => ({
-    value: m.id,
-    label: m.name,
-  }));
 
   const formGenProps = {
     formConfig,
     editConfig,
     ref: externalFormRef || formRef,
-    datas: { model: optionsModel },
     edit:
-      formMode === 'edit' ? prizes.find((p) => p.id === selectedPrize) : null,
-    formName: 'prizeForm',
+      formMode === 'edit'
+        ? gameConditions.find((c) => c.id === selectedGameCondition)
+        : null,
+    formName: 'gameConditionForm',
   };
 
   if (externalFormRef) {
@@ -178,17 +158,17 @@ const PrizeForm = ({
     <div>
       <FormGen {...formGenProps} />
       <Button type="primary" onClick={onSubmit}>
-        <Translate id="addPrize" />
+        <Translate id="createGameCondition" />
       </Button>
     </div>
   );
 };
 
-PrizeForm.propTypes = propTypes;
-PrizeForm.defaultProps = defaultProps;
+GameConditionForm.propTypes = propTypes;
+GameConditionForm.defaultProps = defaultProps;
 const mapStateToProps = ({ general }) => ({ general });
 
 export default connect(
   mapStateToProps,
   {},
-)(PrizeForm);
+)(GameConditionForm);

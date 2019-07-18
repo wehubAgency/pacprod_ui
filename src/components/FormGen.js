@@ -18,6 +18,7 @@ import {
   Switch,
   Radio,
 } from 'antd';
+import TargetTime from './TargetTime/TargetTime';
 import axios from 'axios';
 import Map from './Map';
 import moment from '../moment';
@@ -273,10 +274,21 @@ const FormGen = ({
                 data={{
                   format: item.uploadRules.formats,
                   size: item.uploadRules.size,
+                  number: item.uploadRules.number,
                 }}
               />
             </p>
           </Upload.Dragger>
+        );
+      }
+      case 'timeslot': {
+        return (
+          <TargetTime
+            week={edit ? edit[item.hiddenInput] : null}
+            onChange={(week) => {
+              form.setFieldsValue({ [item.hiddenInput]: week });
+            }}
+          />
         );
       }
       case 'date':

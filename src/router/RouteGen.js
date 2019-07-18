@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import * as Pages from '../pages';
 import HomePage from '../pages/HomePage';
 import NoMatch from '../pages/NoMatch';
+import getFeatures from '../services/getFeatures';
 
 const propTypes = {
   general: PropTypes.shape({
@@ -24,11 +25,8 @@ const RouteGen = ({ general }) => {
 
   const createRouters = () => {
     const { features } = currentApp;
-    const commonMenu = routing.common;
-    const allFeatures = [...features, ...commonMenu, currentApp.type];
-    if (general.role === 'super_admin') {
-      allFeatures.push('admin');
-    }
+    const { common } = routing;
+    const allFeatures = getFeatures(features, common, currentApp.type, role);
 
     const routes = [];
     if (currentApp.initialized) {

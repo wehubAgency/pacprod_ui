@@ -62,18 +62,19 @@ const _FlashAppSeasonPage = ({
     selectSeason,
     config,
     fetching,
+    entityApiUri: 'flashapps',
   };
 
   return (
     <div>
       <h1>
-        <Translate id="seasonPage.h1" />
+        <Translate id="flashAppSeasonPage.h1" />
       </h1>
       <div className="instructions">
         <h4>
           <Translate id="instructions" />
         </h4>
-        <Translate id="seasonPage.intro" />
+        <Translate id="flashAppSeasonPage.intro" />
       </div>
       <Button type="primary" icon="plus" onClick={() => openModal('create')}>
         <span>

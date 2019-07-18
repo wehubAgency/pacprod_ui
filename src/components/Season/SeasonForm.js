@@ -14,7 +14,9 @@ const propTypes = {
   modalVisible: PropTypes.bool,
   externalFormRef: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.shape({ current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]) }),
+    PropTypes.shape({
+      current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]),
+    }),
   ]),
   seasons: PropTypes.arrayOf(PropTypes.shape()),
   setSeasons: PropTypes.func,
@@ -58,7 +60,7 @@ const SeasonForm = ({
     formData.append('circus', currentEntity.id);
     formData.append('app', currentApp.id);
     iaxios()
-      .post('/seasons', formData)
+      .post('/circusseasons', formData)
       .then((res) => {
         if (res !== 'error') {
           setSeasons([...seasons, res.data]);
@@ -74,10 +76,10 @@ const SeasonForm = ({
   const editSeason = (formData) => {
     formData.append('_method', 'PUT');
     iaxios()
-      .post(`/season/${selectedSeason}`, formData)
+      .post(`/circusseasons/${selectedSeason}`, formData)
       .then((res) => {
         if (res !== 'error') {
-          const seasonIndex = seasons.findIndex(s => s.id === res.data.id);
+          const seasonIndex = seasons.findIndex((s) => s.id === res.data.id);
           const newSeasons = [...seasons];
           newSeasons.splice(seasonIndex, 1, res.data);
           setSeasons(newSeasons);
@@ -122,7 +124,12 @@ const SeasonForm = ({
   };
 
   const modalProps = {
-    title: formMode === 'create' ? <Translate id="createSeason" /> : <Translate id="editSeason" />,
+    title:
+      formMode === 'create' ? (
+        <Translate id="createSeason" />
+      ) : (
+        <Translate id="editSeason" />
+      ),
     visible: modalVisible,
     onCancel: closeModal,
     onOk: onSubmit,
@@ -134,7 +141,8 @@ const SeasonForm = ({
     formConfig,
     editConfig,
     ref: externalFormRef || formRef,
-    edit: formMode === 'edit' ? seasons.find(s => s.id === selectedSeason) : null,
+    edit:
+      formMode === 'edit' ? seasons.find((s) => s.id === selectedSeason) : null,
     formName: 'seasonForm',
   };
 

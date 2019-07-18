@@ -1,6 +1,6 @@
 import React from 'react';
 import { Translate } from 'react-localize-redux';
-import { Button, Popconfirm, Icon } from 'antd';
+import { Button, Popconfirm, Icon, Tooltip } from 'antd';
 import InlineSVG from 'svg-inline-react';
 import FilterDropdown from '../components/FilterDropdown';
 import moment from '../moment';
@@ -94,43 +94,54 @@ export default (data, transId, actions = []) => {
             switch (a.type) {
               case 'edit':
                 return (
-                  <Button
-                    key={a.type}
-                    data-id={el.id}
-                    shape="circle"
-                    onClick={a.func}
-                    icon="edit"
-                  />
+                  <Tooltip key={a.type} title={<Translate id="edit" />}>
+                    <Button
+                      className="action-button"
+                      data-id={el.id}
+                      shape="circle"
+                      onClick={a.func}
+                      icon="edit"
+                    />
+                  </Tooltip>
                 );
               case 'disable':
                 return (
-                  <Button
-                    key={a.type}
-                    shape="circle"
-                    onClick={() => a.func(el.id)}
-                    icon={el.enabled ? 'stop' : 'check'}
-                  />
+                  <Tooltip key={a.type} title={<Translate id="disable" />}>
+                    <Button
+                      className="action-button"
+                      shape="circle"
+                      onClick={() => a.func(el.id)}
+                      icon={el.enabled ? 'stop' : 'check'}
+                    />
+                  </Tooltip>
                 );
               case 'remove':
                 return (
-                  <Popconfirm
-                    key={a.type}
-                    title={a.confirm}
-                    onConfirm={() => a.func(el.id)}
-                    overlayStyle={{ maxWidth: 300 }}
-                  >
-                    <Button shape="circle" icon="delete" />
-                  </Popconfirm>
+                  <Tooltip key={a.type} title={<Translate id="remove" />}>
+                    <Popconfirm
+                      title={a.confirm}
+                      onConfirm={() => a.func(el.id)}
+                      overlayStyle={{ maxWidth: 300 }}
+                    >
+                      <Button
+                        className="action-button"
+                        shape="circle"
+                        icon="delete"
+                      />
+                    </Popconfirm>
+                  </Tooltip>
                 );
               default:
                 return (
-                  <Button
-                    key={a.type}
-                    data-id={el.id}
-                    shape="circle"
-                    onClick={a.func}
-                    icon={a.icon}
-                  />
+                  <Tooltip key={a.type} title={a.tooltip}>
+                    <Button
+                      className="action-button"
+                      data-id={el.id}
+                      shape="circle"
+                      onClick={a.func}
+                      icon={a.icon}
+                    />
+                  </Tooltip>
                 );
             }
           })}

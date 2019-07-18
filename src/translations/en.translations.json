@@ -21,7 +21,7 @@
     "options": {
       "quiz": "Quiz",
       "referendum": "Referendum",
-      "flash": "Flashplay",
+      "qrflash": "QRFlash",
       "vote": "Public vote"
     },
     "help": {
@@ -214,7 +214,7 @@
     "button": "See the location"
   },
   "menu": {
-    "flashplayTitle": "FlashPlay",
+    "qrflashTitle": "QRFlash",
     "prizeTitle": "Prize",
     "quizTitle": "Quiz",
     "questionTitle": "Questions",

@@ -19,7 +19,7 @@ const _QrcodePage = ({
   useEffect(() => {
     setFetching(true);
     const ax = iaxios();
-    ax.get('/qrcode').then((res) => {
+    ax.get('/qrcodes').then((res) => {
       if (res !== 'error') {
         setQrcodes(res.data);
       }

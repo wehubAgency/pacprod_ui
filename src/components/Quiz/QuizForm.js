@@ -1,23 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal } from 'antd';
 import { connect } from 'react-redux';
+import { Modal, Button } from 'antd';
 import { Translate } from 'react-localize-redux';
-import formateData from '../../services/formateData';
 import FormGen from '../FormGen';
 import iaxios from '../../axios';
+import formateData from '../../services/formateData';
 
 const propTypes = {
   inModal: PropTypes.bool,
   setModalVisible: PropTypes.func,
   modalVisible: PropTypes.bool,
-  externalFormRef: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.shape({
-      current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]),
-    }),
-  ]),
+  externalFormRef: PropTypes.instanceOf(Element),
   formMode: PropTypes.string.isRequired,
+  allQuiz: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setAllQuiz: PropTypes.func.isRequired,
+  selectedQuiz: PropTypes.string.isRequired,
+  selectQuiz: PropTypes.func.isRequired,
   general: PropTypes.shape({
     config: PropTypes.shape().isRequired,
   }).isRequired,
@@ -30,71 +29,59 @@ const defaultProps = {
   externalFormRef: null,
 };
 
-const PrizeForm = ({
+const QuizForm = ({
   general: { config },
   formMode,
   modalVisible,
   setModalVisible,
+  allQuiz,
+  setAllQuiz,
+  selectedQuiz,
+  selectQuiz,
   inModal,
   externalFormRef,
-  prizes,
-  setPrizes,
-  selectedPrize,
-  selectPrize,
-  selectedGame,
-  className,
-  feature,
 }) => {
   const [loading, setLoading] = useState(false);
-  const [models, setModels] = useState([]);
-  const { formConfig, editConfig } = config.entities.prize;
-  if (feature !== 'qrflash' && feature !== 'argame') {
-    delete formConfig.coef;
-    editConfig.excludeFields.push('coef');
-  }
-
+  const { formConfig, editConfig } = config.entities.quiz;
   const formRef = useRef(null);
 
   useEffect(() => {
-    iaxios()
-      .get('/prizeinfos')
-      .then((res) => {
-        if (res !== 'error') {
-          setModels(res.data);
-        }
-      });
-  }, []);
+    const form = formRef.current;
+    if (form && formMode === 'create') {
+      form.resetFields();
+    }
+  }, [formMode]);
 
-  const createPrize = (formData) => {
-    formData.append('classId', selectedGame.id);
-    formData.append('className', className);
+  const createQuiz = (formData, form) => {
     iaxios()
-      .post('/prizes', formData)
+      .post('/quiz', formData)
       .then((res) => {
         if (res !== 'error') {
-          setPrizes([...prizes, res.data]);
+          setAllQuiz([...allQuiz, res.data]);
           if (inModal) {
             setModalVisible(false);
           }
+          selectQuiz(res.data.id);
+          form.resetFields();
         }
         setLoading(false);
       });
   };
 
-  const updatePrize = (formData) => {
+  const updateQuiz = (formData, form) => {
     formData.append('_method', 'PUT');
     iaxios()
-      .post(`/prizes/${selectedPrize}`, formData)
+      .post(`/quiz/${selectedQuiz}`, formData)
       .then((res) => {
         if (res !== 'error') {
-          const prizeIndex = prizes.findIndex((p) => p.id === res.data.id);
-          const newPrizes = [...prizes];
-          newPrizes.splice(prizeIndex, 1, res.data);
-          setPrizes(newPrizes);
+          const quizIndex = allQuiz.findIndex((q) => q.id === res.data.id);
+          const newQuiz = [...allQuiz];
+          newQuiz.splice(quizIndex, 1, res.data);
+          form.resetFields();
+          setAllQuiz(newQuiz);
           if (inModal) {
             setModalVisible(false);
           }
-          selectPrize('');
         }
         setLoading(false);
       });
@@ -106,14 +93,14 @@ const PrizeForm = ({
     const form = formRef.current;
 
     e.preventDefault();
-    form.validateFieldsAndScroll((err, values) => {
+    form.validateFields((err, values) => {
       if (err === null) {
         const data = { ...values };
         const formData = formateData(data);
         if (formMode === 'create') {
-          createPrize(formData);
+          createQuiz(formData, form);
         } else if (formMode === 'edit') {
-          updatePrize(formData);
+          updateQuiz(formData, form);
         }
       } else {
         setLoading(false);
@@ -122,42 +109,29 @@ const PrizeForm = ({
   };
 
   const closeModal = () => {
-    const form = formRef.current;
-    if (formMode === 'edit') {
-      form.resetFields();
-    }
-    if (inModal) {
-      setModalVisible(false);
-    }
+    setModalVisible(false);
   };
 
   const modalProps = {
     title:
       formMode === 'create' ? (
-        <Translate id="addPrize" />
+        <Translate id="createQuiz" />
       ) : (
-        <Translate id="editPrize" />
+        <Translate id="editQuiz" />
       ),
     visible: modalVisible,
     onCancel: closeModal,
     onOk: onSubmit,
     confirmLoading: loading,
-    destroyOnClose: true,
   };
-
-  const optionsModel = models.map((m) => ({
-    value: m.id,
-    label: m.name,
-  }));
 
   const formGenProps = {
     formConfig,
     editConfig,
     ref: externalFormRef || formRef,
-    datas: { model: optionsModel },
     edit:
-      formMode === 'edit' ? prizes.find((p) => p.id === selectedPrize) : null,
-    formName: 'prizeForm',
+      formMode === 'edit' ? allQuiz.find((q) => q.id === selectedQuiz) : null,
+    formName: 'quizForm',
   };
 
   if (externalFormRef) {
@@ -178,17 +152,18 @@ const PrizeForm = ({
     <div>
       <FormGen {...formGenProps} />
       <Button type="primary" onClick={onSubmit}>
-        <Translate id="addPrize" />
+        <Translate id="createQuiz" />
       </Button>
     </div>
   );
 };
 
-PrizeForm.propTypes = propTypes;
-PrizeForm.defaultProps = defaultProps;
+QuizForm.propTypes = propTypes;
+QuizForm.defaultProps = defaultProps;
+
 const mapStateToProps = ({ general }) => ({ general });
 
 export default connect(
   mapStateToProps,
   {},
-)(PrizeForm);
+)(QuizForm);

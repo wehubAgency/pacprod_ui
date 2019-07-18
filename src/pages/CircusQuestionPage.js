@@ -15,7 +15,7 @@ const propTypes = {
   }).isRequired,
 };
 
-const _QuestionPage = ({
+const _CircusQuestionPage = ({
   general: { currentApp, currentEntity, currentSeason },
 }) => {
   const [questions, setQuestions] = useState([]);
@@ -27,7 +27,7 @@ const _QuestionPage = ({
   useEffect(() => {
     setFetching(true);
     const ax = iaxios();
-    ax.get('question').then((res) => {
+    ax.get('questions', { params: { quiz: 'circusQuiz' } }).then((res) => {
       if (res !== 'error') {
         setQuestions(res.data);
       }
@@ -51,6 +51,7 @@ const _QuestionPage = ({
     setQuestions,
     selectedQuestion,
     selectQuestion,
+    quiz: 'circusQuiz',
   };
   const questionTableProps = {
     questions,
@@ -58,15 +59,16 @@ const _QuestionPage = ({
     openModal,
     selectQuestion,
     selectedQuestion,
+    quiz: 'circusQuiz',
   };
 
   return (
     <div>
       <h1>
-        <Translate id="questionPage.h1" />
+        <Translate id="circusQuestionPage.h1" />
       </h1>
       <div style={{ margin: '15px 0' }}>
-        <Translate id="questionPage.intro" />
+        <Translate id="circusQuestionPage.intro" />
       </div>
       <Button type="primary" icon="plus" onClick={() => openModal('create')}>
         <Translate id="createQuestion" />
@@ -79,11 +81,11 @@ const _QuestionPage = ({
   );
 };
 
-_QuestionPage.propTypes = propTypes;
+_CircusQuestionPage.propTypes = propTypes;
 
 const mapStateToProps = ({ general }) => ({ general });
 
-export const QuestionPage = connect(
+export const CircusQuestionPage = connect(
   mapStateToProps,
   {},
-)(_QuestionPage);
+)(_CircusQuestionPage);

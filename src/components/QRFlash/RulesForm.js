@@ -44,13 +44,13 @@ const RulesForm = ({
   translate,
 }) => {
   const [loading, setLoading] = useState(false);
-  const { formConfig, editConfig } = config.entities.flashPlayRules;
+  const { formConfig, editConfig } = config.entities.qrflashRules;
   const formRef = useRef(null);
 
   const editRules = (formData) => {
     formData.append('_method', 'PATCH');
     iaxios()
-      .post('/flashplays/rules', formData)
+      .post('/qrflashes/rules', formData)
       .then((res) => {
         if (res !== 'error') {
           setRules(res.data);
@@ -62,7 +62,7 @@ const RulesForm = ({
 
   const createRules = (formData) => {
     iaxios()
-      .post('/flashplay/rules', formData)
+      .post('/qrflashes/rules', formData)
       .then((res) => {
         if (res !== 'error') {
           setRules(res.data);
@@ -93,7 +93,12 @@ const RulesForm = ({
   };
 
   const modalProps = {
-    title: formMode === 'create' ? <Translate id="createRules" /> : <Translate id="editRules" />,
+    title:
+      formMode === 'create' ? (
+        <Translate id="createRules" />
+      ) : (
+        <Translate id="editRules" />
+      ),
     visible: modalVisible,
     onCancel: closeModal,
     onOk: onSubmit,
@@ -127,7 +132,11 @@ const RulesForm = ({
     <div>
       <FormGen {...formGenProps} />
       <Button type="primary" onClick={onSubmit}>
-        {formMode === 'create' ? <Translate id="createRules" /> : <Translate id="editRules" />}
+        {formMode === 'create' ? (
+          <Translate id="createRules" />
+        ) : (
+          <Translate id="editRules" />
+        )}
       </Button>
     </div>
   );

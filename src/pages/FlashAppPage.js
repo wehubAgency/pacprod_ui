@@ -45,7 +45,7 @@ const _FlashAppPage = ({ general: { currentEntity }, ...props }) => {
 
   const setVisible = () => {
     iaxios()
-      .patch(`/circus/${currentEntity.id}/visible`, {
+      .patch(`/flashapps/${currentEntity.id}/visible`, {
         visible: !currentEntity.visible,
       })
       .then((res) => {

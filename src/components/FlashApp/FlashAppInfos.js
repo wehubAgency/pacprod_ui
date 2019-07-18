@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
 import { Translate } from 'react-localize-redux';
 import Masonry from 'react-responsive-masonry';
+import moment from '../../moment';
 import Map from '../Map';
 import styles from '../../styles/components/EntityInfos.style';
 
@@ -24,6 +25,14 @@ const FlashAppInfos = ({ flashApp }) => {
         height="250"
         alt={flashApp.name}
       />
+      <p style={labelStyle}>
+        <Translate id="entityInfos.startDate" />
+      </p>
+      <p>{moment(flashApp.startDate).format('LL')}</p>
+      <p style={labelStyle}>
+        <Translate id="entityInfos.endDate" />
+      </p>
+      <p>{moment(flashApp.endDate).format('LL')}</p>
       <p style={labelStyle}>
         <Translate id="entityInfos.address" />
       </p>
@@ -50,11 +59,23 @@ const FlashAppInfos = ({ flashApp }) => {
       <p style={labelStyle}>
         <Translate id="entityInfos.email" />
       </p>
-      <p>{flashApp.email ? flashApp.email : <Translate id="entityInfos.emptyEmail" />}</p>
+      <p>
+        {flashApp.email ? (
+          flashApp.email
+        ) : (
+          <Translate id="entityInfos.emptyEmail" />
+        )}
+      </p>
       <p style={labelStyle}>
         <Translate id="entityInfos.phone" />
       </p>
-      <p>{flashApp.phone ? flashApp.phone : <Translate id="entityInfos.emptyPhone" />}</p>
+      <p>
+        {flashApp.phone ? (
+          flashApp.phone
+        ) : (
+          <Translate id="entityInfos.emptyPhone" />
+        )}
+      </p>
       <p style={labelStyle}>
         <Translate id="entityInfos.facebook" />
       </p>
@@ -84,7 +105,11 @@ const FlashAppInfos = ({ flashApp }) => {
       </p>
       <p>
         {flashApp.instagram ? (
-          <a href={flashApp.instagram} target="_blank" rel="noopener noreferrer">
+          <a
+            href={flashApp.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {flashApp.instagram}
           </a>
         ) : (
@@ -120,8 +145,13 @@ const FlashAppInfos = ({ flashApp }) => {
       </p>
       {flashApp.photos && flashApp.photos.length > 0 ? (
         <Masonry columnCount={3} gutter="15px">
-          {flashApp.photos.map(p => (
-            <img key={p} src={p} alt="photos" style={{ width: '100%', display: 'block' }} />
+          {flashApp.photos.map((p) => (
+            <img
+              key={p}
+              src={p}
+              alt="photos"
+              style={{ width: '100%', display: 'block' }}
+            />
           ))}
         </Masonry>
       ) : (
@@ -132,7 +162,7 @@ const FlashAppInfos = ({ flashApp }) => {
       </p>
       {flashApp.videos && flashApp.videos.length > 0 ? (
         <Row type="flex">
-          {flashApp.videos.map(v => (
+          {flashApp.videos.map((v) => (
             <Col>
               <video key={v} src={v} controls />
             </Col>

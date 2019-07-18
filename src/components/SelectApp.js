@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { Select } from 'antd';
 import PropTypes from 'prop-types';
 import jso from 'json-override';
 import { selectApp, setApps } from '../actions';
-import { CONFIG_DIR_URI } from '../constants';
+import { ADMIN_API_URI } from '../constants';
 import defaultConfig from '../config/default.json';
 import iaxios from '../axios';
 
@@ -30,8 +29,8 @@ const SelectApp = ({
 
   const handleChange = (value) => {
     const selectedApp = apps.find((a) => a.id === value);
-    axios
-      .get(`${CONFIG_DIR_URI + selectedApp.configFileName}.json`)
+    iaxios()
+      .get(`${ADMIN_API_URI}configs/${selectedApp.configFileName}`)
       .then((res) => {
         const config = jso(defaultConfig, res.data, {});
         selectApp({ selectedApp, config });
@@ -55,7 +54,8 @@ const SelectApp = ({
           }
         }
       });
-  }, [setApps, selectApp]);
+    /* eslint-disable-next-line */
+  }, []);
 
   const renderOptions = () => {
     const { Option } = Select;

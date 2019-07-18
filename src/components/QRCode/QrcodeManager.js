@@ -22,16 +22,18 @@ const QrcodeManager = ({ managerVisible, setManagerVisible, playpoint }) => {
   const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
-    setFetching(true);
-    const ax = iaxios();
-    ax.get('/qrcode').then((res) => {
-      if (res !== 'error') {
-        setQrcodes(res.data);
-      }
-      setFetching(false);
-    });
-    setTargetKeys(playpoint.qrcodes.map((q) => q.id));
-    return () => ax.source.cancel();
+    if (playpoint) {
+      setFetching(true);
+      const ax = iaxios();
+      ax.get('/qrcodes').then((res) => {
+        if (res !== 'error') {
+          setQrcodes(res.data);
+        }
+        setFetching(false);
+      });
+      setTargetKeys(playpoint.qrcodes.map((q) => q.id));
+      return () => ax.source.cancel();
+    }
   }, [playpoint]);
 
   const closeManager = () => {

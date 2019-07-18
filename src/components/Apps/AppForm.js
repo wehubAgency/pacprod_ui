@@ -120,12 +120,16 @@ const AppForm = ({
 
   const features = [
     {
+      value: 'circusQuiz',
+      label: 'circusQuiz',
+    },
+    {
       value: 'quiz',
       label: 'quiz',
     },
     {
-      value: 'flashplay',
-      label: 'flashplay',
+      value: 'qrflash',
+      label: 'qrflash',
     },
   ];
 

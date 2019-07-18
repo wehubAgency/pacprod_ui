@@ -11,6 +11,7 @@ const QuestionTable = ({
   selectedQuestion,
   selectQuestion,
   general: { config },
+  quiz,
 }) => {
   const [items, setItems] = useState([]);
   const { componentConfig } = config.entities.question;
@@ -30,6 +31,7 @@ const QuestionTable = ({
     setItems,
     selectedQuestion,
     selectQuestion,
+    quiz,
   };
   const questionInfosProps = {
     infos: questions.find((q) => q.id === selectedQuestion),
@@ -37,6 +39,7 @@ const QuestionTable = ({
     questions,
     setQuestions,
     openModal,
+    quiz,
   };
 
   if (questions.length === 0) {

@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Card, Icon, Row, Col, Divider, Popconfirm,
-} from 'antd';
-import { Translate } from 'react-localize-redux';
+import { Card, Icon, Row, Col, Divider, Popconfirm, message } from 'antd';
+import { Translate, withLocalize } from 'react-localize-redux';
 import iaxios from '../../axios';
 import styles from '../../styles/components/QuestionInfos.style';
 
@@ -17,6 +15,7 @@ const propTypes = {
   setQuestions: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   componentConfig: PropTypes.object.isRequired,
+  quiz: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
@@ -24,17 +23,23 @@ const defaultProps = {
 };
 
 const QuestionInfos = ({
-  infos, componentConfig, questions, setQuestions, openModal,
+  infos,
+  componentConfig,
+  questions,
+  setQuestions,
+  openModal,
+  translate,
+  quiz,
 }) => {
   const { cardStyle, listItemStyle } = styles;
   if (infos !== undefined) {
     const deleteQuestion = () => {
       const { id } = infos;
       iaxios()
-        .delete(`/questions/${id}`)
+        .delete(`/questions/${id}`, { params: { quiz } })
         .then((res) => {
           if (res !== 'error') {
-            const index = questions.findIndex(q => q.id === res.data.id);
+            const index = questions.findIndex((q) => q.id === res.data.id);
             const newQuestions = [...questions];
             newQuestions.splice(index, 1);
             setQuestions(newQuestions);
@@ -46,13 +51,36 @@ const QuestionInfos = ({
       openModal('edit');
     };
 
+    const toggleQuestion = () => {
+      const { id } = infos;
+      iaxios()
+        .patch(`/questions/${id}/enabled`, { enabled: !infos.enabled })
+        .then((res) => {
+          if (res !== 'error') {
+            const index = questions.findIndex((q) => q.id === res.data.id);
+            const newQuestions = [...questions];
+            newQuestions.splice(index, 1, res.data);
+            setQuestions(newQuestions);
+            message.success(translate('success'));
+          }
+        });
+    };
+
     return (
       <Card
         style={cardStyle}
-        title={infos.question}
-        cover={<img alt={infos.question} src={infos.image} />}
+        title={`${infos.question}${
+          infos.enabled ? '' : ` (${translate('disabled')})`
+        }`}
+        cover={
+          infos.image ? <img alt={infos.question} src={infos.image} /> : null
+        }
         actions={[
           <Icon type="edit" onClick={editQuestion} />,
+          <Icon
+            type={infos.enabled ? 'stop' : 'check'}
+            onClick={toggleQuestion}
+          />,
           <Popconfirm
             title={<Translate id="questionsInfos.confirmDelete" />}
             onConfirm={deleteQuestion}
@@ -63,19 +91,22 @@ const QuestionInfos = ({
       >
         <p>
           <strong>
-            <Translate id="questionInfos.proposals" />:
+            <Translate id="questionsInfos.proposals" />:
           </strong>
         </p>
         <p>
           <i>
-            <Translate id="questionInfos.proposalsHelp" />
+            <Translate id="questionsInfos.proposalsHelp" />
           </i>
         </p>
         <Row type="flex" gutter={16} justify="space-around">
           {infos.proposals.map((p, i) => (
             <Col key={p} span={24} md={{ span: 12 }} lg={{ span: 6 }}>
               <div
-                style={{ ...listItemStyle, background: infos.answers.includes(i) ? '#dcedc8' : '' }}
+                style={{
+                  ...listItemStyle,
+                  background: infos.answers.includes(i) ? '#dcedc8' : '',
+                }}
               >
                 {p}
               </div>
@@ -83,11 +114,11 @@ const QuestionInfos = ({
           ))}
         </Row>
         <Divider>
-          <Translate id="questionInfos.moreInfos" />
+          <Translate id="questionsInfos.moreInfos" />
         </Divider>
         <p>
           <b>
-            <Translate id="questionInfos.points" />
+            <Translate id="questionsInfos.points" />
           </b>
           : {infos.points}
         </p>
@@ -105,4 +136,4 @@ const QuestionInfos = ({
 QuestionInfos.propTypes = propTypes;
 QuestionInfos.defaultProps = defaultProps;
 
-export default QuestionInfos;
+export default withLocalize(QuestionInfos);

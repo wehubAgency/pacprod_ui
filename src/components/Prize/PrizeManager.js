@@ -6,17 +6,17 @@ import generateColumns from '../../services/generateColumns';
 import PrizeForm from './PrizeForm';
 import iaxios from '../../axios';
 
-const PrizeManager = ({ qrcode, general: { config } }) => {
+const PrizeManager = ({ game, className, feature, general: { config } }) => {
   const { componentConfig } = config.entities.prize;
   const [modalVisible, setModalVisible] = useState(false);
   const [formMode, setFormMode] = useState('create');
-  const [prizes, setPrizes] = useState(qrcode.prizes);
+  const [prizes, setPrizes] = useState(game.prizes);
   const [selectedPrize, selectPrize] = useState('');
   const [showDisabled, setShowDisabled] = useState(false);
 
   useEffect(() => {
-    setPrizes(qrcode.prizes);
-  }, [qrcode]);
+    setPrizes(game.prizes);
+  }, [game]);
 
   const openModal = (mode = 'create', e) => {
     setFormMode(mode);
@@ -28,10 +28,10 @@ const PrizeManager = ({ qrcode, general: { config } }) => {
 
   const deletePrize = (id) => {
     iaxios()
-      .delete(`/prizes/${id}`, { params: { qrcode: qrcode.id } })
+      .delete(`/prizes/${id}`, { params: { classId: game.id } })
       .then((res) => {
         if (res !== 'error') {
-          const index = prizes.findIndex(p => p.id === res.data.id);
+          const index = prizes.findIndex((p) => p.id === res.data.id);
           const newPrizes = [...prizes];
           newPrizes.splice(index, 1);
           setPrizes(newPrizes);
@@ -41,10 +41,12 @@ const PrizeManager = ({ qrcode, general: { config } }) => {
 
   const togglePrize = (id) => {
     iaxios()
-      .patch(`/prizes/${id}/enabled`, { enabled: !prizes.find(p => p.id === id).enabled })
+      .patch(`/prizes/${id}/enabled`, {
+        enabled: !prizes.find((p) => p.id === id).enabled,
+      })
       .then((res) => {
         if (res !== 'error') {
-          const index = prizes.findIndex(p => p.id === res.data.id);
+          const index = prizes.findIndex((p) => p.id === res.data.id);
           const newPrizes = [...prizes];
           newPrizes.splice(index, 1, res.data);
           setPrizes(newPrizes);
@@ -69,6 +71,9 @@ const PrizeManager = ({ qrcode, general: { config } }) => {
       confirm: <Translate id="prizeComponent.confirmRemove" />,
     },
   ];
+  if (feature !== 'qrflash' && feature !== 'argame') {
+    delete componentConfig.coef;
+  }
   const columns = generateColumns(componentConfig, 'prizeComponent', actions);
 
   const formProps = {
@@ -80,7 +85,9 @@ const PrizeManager = ({ qrcode, general: { config } }) => {
     setPrizes,
     selectedPrize,
     selectPrize,
-    selectedQrcode: qrcode,
+    selectedGame: game,
+    feature,
+    className,
   };
 
   return (
@@ -88,7 +95,12 @@ const PrizeManager = ({ qrcode, general: { config } }) => {
       <h4>
         <Translate id="prizeManager.title" />
       </h4>
-      <Button style={{ margin: '25px 0' }} type="primary" icon="plus" onClick={() => openModal()}>
+      <Button
+        style={{ margin: '25px 0' }}
+        type="primary"
+        icon="plus"
+        onClick={() => openModal()}
+      >
         <span>
           <Translate id="addPrize" />
         </span>{' '}
@@ -96,13 +108,13 @@ const PrizeManager = ({ qrcode, general: { config } }) => {
       <PrizeForm {...formProps} />
       <div>
         <div style={{ margin: '15px 0' }}>
-          <Switch checked={showDisabled} onChange={v => setShowDisabled(v)} />
+          <Switch checked={showDisabled} onChange={(v) => setShowDisabled(v)} />
           <span style={{ marginLeft: 10 }}>
             <Translate id="showDisabled" />
           </span>
         </div>
         <Table
-          dataSource={prizes.filter(p => p.enabled === !showDisabled)}
+          dataSource={prizes.filter((p) => p.enabled === !showDisabled)}
           columns={columns}
           rowKey="id"
         />

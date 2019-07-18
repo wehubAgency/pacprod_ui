@@ -32,9 +32,14 @@
   "addQrcode": "Ajouter ce QRCode",
   "createCoin": "Créer une pièce",
   "editFlashApp": "Modifier appli",
+  "createQuiz": "Créer un Quiz",
+  "editQuiz": "Modifier un Quiz",
   "createFlashApp": "Créer une appli",
+  "createGameConditions": "Créer des conditions de jeu",
+  "editGameConditions": "Modifier des conditions de jeu",
   "editCoin": "Modifier une pièce",
   "update": "Modifier",
+  "edit": "Modifier",
   "yes": "Oui",
   "no": "Non",
   "success": "Opération réussie",
@@ -43,10 +48,16 @@
   "disable": "Désactiver",
   "enable": "Activer",
   "delete": "Supprimer",
+  "remove": "Supprimer",
   "disabled": "Désactivé",
   "download": "Télécharger",
   "showDisabled": "Voir les éléments désactivés",
   "instructions": "Instructions",
+  "gameConditions": "Conditions de jeu",
+  "gameRules": "Règles du jeu",
+  "questions": "Questions",
+  "prizes": "Lots",
+  "updateGameConditions": "Mettre à jours les conditions de jeu",
   "rules": {
     "required": "Obligatoire",
     "email": "L'email doit être valide.",
@@ -54,7 +65,7 @@
     "pattern": "Texte non valide. Exemple: ${exemple}"
   },
   "upload": {
-    "text": "Le fichier doit être au format ${format} et ne doit pas dépasser ${size}mb"
+    "text": "Le fichier doit être au format ${format} et ne doit pas dépasser ${size}mb. (${number} fichier(s) maximum)"
   },
   "uploadRules": {
     "number": "${number} image(s) maximum",
@@ -83,8 +94,9 @@
     },
     "options": {
       "quiz": "Quiz",
+      "circusQuiz": "Quiz pour Cirque",
       "referendum": "Referendum",
-      "flashplay": "Flashplay",
+      "qrflash": "QRFlash",
       "vote": "Vote du public",
       "circus": "Cirque",
       "flashapp": "Appli Flashplay"
@@ -94,7 +106,8 @@
     }
   },
   "artistComponent": {
-    "image": "Image",
+    "profilePicture": "Image de profile",
+    "gallery": "Galerie",
     "name": "Nom",
     "description": "Description",
     "confirmRemove": "Êtes-vous sur de vouloir enlever cette artiste ? Cela enlevera également ses numéros dans vos programmes de cette saison"
@@ -103,7 +116,8 @@
     "label": {
       "name": "Nom",
       "description": "Description de l'artiste",
-      "image": "Photos"
+      "profilePicture": "Photo de profil",
+      "gallery": "Galerie"
     }
   },
   "artistPage": {
@@ -162,6 +176,10 @@
     "setVisible": "Rendre visible votre cirque sur Place au Cirque",
     "setNotVisible": "Rendre votre Cirque non visible sur Place au Cirque"
   },
+  "circusQuizSessions": {
+    "sessionsTitle": "Représentations avec le Quiz",
+    "sessionsInfos": "Déplacez dans la colonne de droite les représentations dans lesquelles, vous voulez que le quiz soit actif. Dans les représentations ou le quiz est actif, les joueurs pourront participer au quiz pendant la durée de la représentation (que vous avez du renseigner lors de la création de la représentation). Les joueurs ne pourront pas accéder au quiz pendant une représentation se trouvant dans la colonne de gauche."
+  },
   "coinComponent": {
     "name": "Nom",
     "image": "Image",
@@ -208,6 +226,8 @@
     "address": "Adresse",
     "location": "Emplacement",
     "description": "Description",
+    "startDate": "Date de départ",
+    "endDate": "Date de fin",
     "emptyDescription": "Description non fournie",
     "email": "Email",
     "emptyEmail": "Email non fourni",
@@ -232,6 +252,8 @@
     "label": {
       "name": "Nom",
       "description": "Description",
+      "startDate": "Date de départ",
+      "endDate": "Date de fin",
       "map": "Emplacement",
       "radius": "Rayon (en mètre)",
       "email": "Email",
@@ -260,11 +282,41 @@
     "setVisible": "Rendre visible votre application sur FlashPlay",
     "setNotVisible": "Rendre non visible votre application sur FlashPlay"
   },
-  "flashPlaySettingsPage": {
-    "h1": "Paramètres généraux FlashPlay",
-    "instructions": "Gérez ici les paramètres généraux du FlashPlay. Ces règles s'appliqueront par défaut à tous vos QRCodes ne possédant pas leurs propres règles. Vous pouvez également activer/désactiver totalement le jeu FlashPlay avec le bouton suivant.",
-    "enableFlashplay": "Activer Flashplay",
-    "disableFlashplay": "Désactiver Flashplay"
+  "flashAppSeasonPage": {
+    "h1": "Gestion des saisons",
+    "intro": "Le système de saison permet de séparer vos jeux, lots, etc d'une saison à une autre. La saison active est entourée en bleu dans le tableaux ci-dessous. Les jeux disponibles dans l'application sont alors les jeux que vous avez configuré dans la saison active. Veuillez créez une nouvelle saison seulement quand vous en avez le besoin. Vous pourrez alors changer de saison en haut de la page."
+  },
+  "gameConditionComponent": {
+    "name": "Nom",
+    "location": "Emplacement",
+    "startDate": "Date de départ",
+    "endDate": "Date de fin",
+    "gameHours": "Horaires de jeu",
+    "confirmRemove": "Vous êtes sur le point de supprimer des conditions de jeu. Tous les jeux qui incluent ces conditions ne les prendront plus en compte. Êtes-vous sûr de vouloir supprimer ces conditions de jeu ?"
+  },
+  "gameConditionForm": {
+    "label": {
+      "name": "Nom",
+      "map": "Emplacement",
+      "radius": "Rayon (en mètre)",
+      "startDate": "Date de départ",
+      "endDate": "Date de fin",
+      "gameHours": "Horaires de jeu"
+    }
+  },
+  "gameConditionInfos": {
+    "startDate": "Date de départ",
+    "endDate": "Date de fin"
+  },
+  "gameConditionsPage": {
+    "h1": "Conditions de jeu",
+    "instructions": "Les conditions de jeu peuvent être associées à différents jeux tels que le Quiz, le Vote, etc... Ils permettent de créer des conditions précises pour que vos utilisateurs participent à vos jeux aux endroits et aux moments que vous aurez choisis."
+  },
+  "qrflashSettingsPage": {
+    "h1": "Paramètres généraux QRFlash",
+    "instructions": "Gérez ici les paramètres généraux du QRFlash. Ces règles s'appliqueront par défaut à tous vos QRCodes ne possédant pas leurs propres règles. Vous pouvez également activer/désactiver totalement le jeu QRFlash avec le bouton suivant.",
+    "enableQrflash": "Activer QRFlash",
+    "disableQrflash": "Désactiver QRFlash"
   },
   "formGen": {
     "uploadError": "Une erreur est survenue pendant l'upload de l'image."
@@ -304,21 +356,26 @@
     "searchAdress": "Recherchez une adresse"
   },
   "mapCell": {
-    "button": "Voir l'emplacement"
+    "button": "Voir l'emplacement",
+    "openGallery": "Ouvrir galerie",
+    "showTimeSlot": "Voir les horaires"
   },
   "menu": {
-    "flashplayTitle": "FlashPlay",
+    "qrflashTitle": "QRFlash",
+    "quizTitle": "Quiz",
     "flashappInfos": "Informations Application",
+    "companyTitle": "Enseigne et points de jeux",
+    "gameConditionsTitle": "Conditions de jeu",
     "flashappTitle": "Application",
     "paidprizeTitle": "Lots payants",
     "currencyTitle": "Monnaie",
     "playpointTitle": "Point de jeux",
-    "flashPlaySettingsTitle": "Paramètres",
+    "qrflashSettingsTitle": "Paramètres",
     "prizeInfosTitle": "Lots",
     "qrcodeTitle": "QRCode",
-    "quizTitle": "Quiz",
-    "questionTitle": "Questions",
-    "quizSettingsTitle": "Paramètres",
+    "circusQuizTitle": "Quiz du Cirque",
+    "circusQuestionTitle": "Questions",
+    "circusQuizSettingsTitle": "Paramètres",
     "userTitle": "Utilisateurs",
     "circusTitle": "Votre Cirque",
     "circusInfosTitle": "Informations Cirque",
@@ -550,27 +607,37 @@
       "answer4": "Réponse 4"
     }
   },
-  "questionInfos": {
+  "questionsInfos": {
     "moreInfos": "Informations complémentaires",
     "points": "Points",
     "proposals": "Propositions",
     "proposalsHelp": "Les propositions en vert sont celle que vous avez choisi comme étant des bonnes réponses.",
     "confirmDelete": "Êtes-vous sur de vouloir supprimer la question ?"
   },
-  "questionPage": {
+  "circusQuestionPage": {
     "h1": "Questions du Quiz",
-    "intro": "Gérer ici les questions qui apparaitront dans le Quiz de votre application. Créer, modifier, effacer et changer même l'ordre des questions"
+    "intro": "Gérer ici les questions qui apparaitront dans le Quiz concernant votre cirque, de votre application. Créer, modifier, effacer et changer même l'ordre des questions"
+  },
+  "quizForm": {
+    "label": {
+      "name": "Nom"
+    }
+  },
+  "quizPage": {
+    "h1": "Gestion des Quiz",
+    "instructions": "Gérez ici vos différents Quiz. Vous pouvez ajouter des questions, des lots, ajuster les conditions de jeu, modifier les paramètres du Quiz etc... Veuillez commencer par choisir un Quiz ci-dessous ou par en créer un avec le bouton.",
+    "chooseQuiz": "Choisis un quiz",
+    "enableQuiz": "Activer Quiz",
+    "disableQuiz": "Désactiver Quiz",
+    "removeQuiz": "Supprimer Quiz",
+    "confirmRemove": "Vous êtes sur le point de supprimer le quiz. Il n'apparaitra donc plus sur l'application. Êtes-vous sûr de vouloir le supprimer ?"
   },
   "quizSessionsForm": {
     "sessionsWithout": "Sans Quiz",
     "sessionsWith": "Avec Quiz"
   },
-  "quizSettingsPage": {
-    "h1": "Paramétrage du Quiz",
-    "intro": "Configurer votre quiz avec les différentes options ci-dessous.",
-    "gameMode": "Type de jeu",
-    "sessionsTitle": "Représentations avec le Quiz",
-    "sessionsInfos": "Déplacez dans la colonne de droite les représentations dans lesquelles, vous voulez que le quiz soit actif. Dans les représentations ou le quiz est actif, les joueurs pourront participer au quiz pendant la durée de la représentation (que vous avez du renseigner lors de la création de la représentation). Les joueurs ne pourront pas accéder au quiz pendant une représentation se trouvant dans la colonne de gauche."
+  "quizSettings": {
+    "gameMode": "Type de jeu"
   },
   "quizSettingsForm": {
     "label": {
@@ -603,7 +670,8 @@
   },
   "seasonComponent": {
     "name": "Nom",
-    "startDate": "Date de départ"
+    "startDate": "Date de départ",
+    "selectSeason": "Activer Saison"
   },
   "seasonForm": {
     "label": {
