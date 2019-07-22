@@ -20,3 +20,4 @@ export * from './FlashAppPage';
 export * from './FlashAppSeasonPage';
 export * from './GameConditionsPage';
 export * from './QuizPage';
+export * from './PartnerPage';

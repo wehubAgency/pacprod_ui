@@ -1,4 +1,4 @@
-export default (features, common, appType, role) => {
+export default (features = [], common, appType, role) => {
   let allFeatures = [...features];
   const games = ['qrflash', 'argame', 'quiz', 'vote', 'circusQuiz'];
   const conditionnalGames = ['quiz', 'vote'];
@@ -16,10 +16,6 @@ export default (features, common, appType, role) => {
   allFeatures.push(appType);
   if (role === 'super_admin') {
     allFeatures.push('admin');
-  }
-  if (appType === 'flashapp') {
-    const index = allFeatures.indexOf('user');
-    allFeatures.splice(index, 1);
   }
 
   return allFeatures;

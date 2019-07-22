@@ -3,3 +3,4 @@ export * from './MapCell';
 export * from './ProgramCell';
 export * from './GalleryCell';
 export * from './TimeSlotCell';
+export * from './VideoCell';

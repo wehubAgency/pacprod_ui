@@ -60,33 +60,42 @@ const _FlashAppPage = ({ general: { currentEntity }, ...props }) => {
       <h1>
         <Translate id="flashAppPage.h1" />
       </h1>
-      <div>
-        <Translate id="flashAppPage.intro" />
+      <div className="instructions">
+        <h4>
+          <Translate id="instructions" />
+        </h4>
+        <Translate id="flashAppPage.instructions" />
       </div>
       <div style={{ marginTop: 15 }}>
-        <Button
-          style={{ marginRight: 15 }}
-          type="primary"
-          icon="edit"
-          onClick={() => openModal('edit')}
-        >
-          <span>
-            <Translate id="editFlashApp" />
-          </span>
-        </Button>
-        <Button
-          type={currentEntity.visible ? 'danger' : 'primary'}
-          onClick={setVisible}
-        >
-          {currentEntity.visible ? (
-            <Translate id="flashAppPage.setNotVisible" />
-          ) : (
-            <Translate id="flashAppPage.setVisible" />
-          )}
-        </Button>
-        <div style={{ marginTop: 50 }}>
-          {flashApp ? <FlashAppInfos flashApp={flashApp} /> : <Spin />}
-        </div>
+        {flashApp ? (
+          <div style={{ marginTop: 50 }}>
+            <Button
+              style={{ marginRight: 15 }}
+              type="primary"
+              icon="edit"
+              onClick={() => openModal('edit')}
+            >
+              <span>
+                <Translate id="editFlashApp" />
+              </span>
+            </Button>
+            <Button
+              type={flashApp.visible ? 'danger' : 'primary'}
+              onClick={setVisible}
+            >
+              {flashApp.visible ? (
+                <Translate id="flashAppPage.setNotVisible" />
+              ) : (
+                <Translate id="flashAppPage.setVisible" />
+              )}
+            </Button>
+            <div style={{ marginTop: 50 }}>
+              <FlashAppInfos flashApp={flashApp} />
+            </div>
+          </div>
+        ) : (
+          <Spin />
+        )}
       </div>
       <FlashAppForm {...formProps} />
     </div>

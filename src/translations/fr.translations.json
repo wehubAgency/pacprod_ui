@@ -33,11 +33,13 @@
   "createCoin": "Créer une pièce",
   "editFlashApp": "Modifier appli",
   "createQuiz": "Créer un Quiz",
-  "editQuiz": "Modifier un Quiz",
+  "editQuiz": "Modifier le Quiz",
   "createFlashApp": "Créer une appli",
   "createGameConditions": "Créer des conditions de jeu",
   "editGameConditions": "Modifier des conditions de jeu",
   "editCoin": "Modifier une pièce",
+  "createPartner": "Créer un partenaire",
+  "updatePartner": "Modifier un partenaire",
   "update": "Modifier",
   "edit": "Modifier",
   "yes": "Oui",
@@ -57,6 +59,7 @@
   "gameRules": "Règles du jeu",
   "questions": "Questions",
   "prizes": "Lots",
+  "description": "Description",
   "updateGameConditions": "Mettre à jours les conditions de jeu",
   "rules": {
     "required": "Obligatoire",
@@ -99,7 +102,8 @@
       "qrflash": "QRFlash",
       "vote": "Vote du public",
       "circus": "Cirque",
-      "flashapp": "Appli Flashplay"
+      "flashapp": "Appli Flashplay",
+      "partner": "Partenaires"
     },
     "help": {
       "codeName": "Un seul mot en camelCase"
@@ -278,7 +282,7 @@
   },
   "flashAppPage": {
     "h1": "Gestion de votre application",
-    "intro": "Gérer ici les informations concernant votre application",
+    "instructions": "Gérer ici les informations concernant votre application",
     "setVisible": "Rendre visible votre application sur FlashPlay",
     "setNotVisible": "Rendre non visible votre application sur FlashPlay"
   },
@@ -358,10 +362,14 @@
   "mapCell": {
     "button": "Voir l'emplacement",
     "openGallery": "Ouvrir galerie",
-    "showTimeSlot": "Voir les horaires"
+    "showTimeSlot": "Voir les horaires",
+    "openVideo": "Voir vidéos",
+    "noVideo": "Pas de vidéo",
+    "noImages": "Pas d'image"
   },
   "menu": {
     "qrflashTitle": "QRFlash",
+    "partnerTitle": "Partenaires",
     "quizTitle": "Quiz",
     "flashappInfos": "Informations Application",
     "companyTitle": "Enseigne et points de jeux",
@@ -421,6 +429,38 @@
   "paidprizePage": {
     "h1": "Gestion des lots payants",
     "instructions": "Créez et gérez ici les lots que les gens pourront acheter avec la monnaie virtuelle de votre application."
+  },
+  "partnerComponent": {
+    "name": "Nom",
+    "description": "Description",
+    "mail": "Email",
+    "phone": "Téléphone",
+    "address": "Adresse",
+    "logo": "Logo",
+    "photos": "Photos",
+    "videos": "Videos",
+    "confirmRemove": "Vous êtes sur le point de supprimer un de vos partnaires. Il n'apparaitra donc plus dans votre application. Êtes-vous sur de vouloir le supprimer ?"
+  },
+  "partnerForm": {
+    "label": {
+      "name": "Nom",
+      "description": "Description",
+      "mail": "Email",
+      "phone": "Téléphone",
+      "address": "Adresse",
+      "city": "Ville",
+      "zipcode": "Code postal",
+      "country": "Pays",
+      "facebook": "Page Facebook",
+      "website": "Site Web",
+      "logo": "Logo",
+      "photos": "Photos",
+      "videos": "Videos"
+    }
+  },
+  "partnerPage": {
+    "h1": "Vos Partenaires",
+    "instructions": "Gérez ici vos partenaires. Tous ceux qui ne sont pas désactivé apparaitront sur votre page \"Partenaire\" dans votre application."
   },
   "playpointForm": {
     "label": {
@@ -620,7 +660,11 @@
   },
   "quizForm": {
     "label": {
-      "name": "Nom"
+      "name": "Nom",
+      "description": "Description"
+    },
+    "help": {
+      "description": "Texte descriptif du quiz sur son sujet, ses gains, la date de son tirage au sort, etc..."
     }
   },
   "quizPage": {
@@ -642,11 +686,15 @@
   "quizSettingsForm": {
     "label": {
       "randomQuestions": "Questions aléatoires",
-      "randomQuestionsNumber": "Nombre de questions choisies au hasard"
+      "randomQuestionsNumber": "Nombre de questions choisies au hasard",
+      "uniqueParticipation": "Participation unique",
+      "dailyParticipation": "Participation journalière"
     },
     "help": {
       "randomQuestions": "Lorque que vous cochez cette option, vos utilisateurs n'auront pas les mêmes questions, ces dernières seront choisies au hasard dans la liste de vos questions. \nDans ce mode de jeu, toutes les bonnes réponses comptent pour 1 point.",
-      "randomQuestionsNumber": "Ce nombre ne sera pris en compte que lorque vous aurez coché \"Questions aléatoires\". Il correspond au nombre de questions qu'il y aura dans votre quiz. Si vous mettez un chiffre supérieur au nombre de questions, toutes les questions seront prises."
+      "randomQuestionsNumber": "Ce nombre ne sera pris en compte que lorque vous aurez coché \"Questions aléatoires\". Il correspond au nombre de questions qu'il y aura dans votre quiz. Si vous mettez un chiffre supérieur au nombre de questions, toutes les questions seront prises.",
+      "uniqueParticipation": "Les joueurs ne peuvent jouer au quiz qu'une seule fois",
+      "dailyParticipation": "Nombre de fois qu'un joueur peut jouer au quiz par jour. Ce paramètre n'est pas pris en compte si vous avez coché \"Participation unique\""
     }
   },
   "rulesForm": {

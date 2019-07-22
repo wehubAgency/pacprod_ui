@@ -4,7 +4,6 @@ import { Button, Modal } from 'antd';
 import { connect } from 'react-redux';
 import { Translate } from 'react-localize-redux';
 import formateData from '../../services/formateData';
-import { selectApp, setApps } from '../../actions';
 import FormGen from '../FormGen';
 import iaxios from '../../axios';
 
@@ -18,9 +17,9 @@ const propTypes = {
       current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]),
     }),
   ]),
-  apps: PropTypes.arrayOf(PropTypes.shape()),
-  setApps: PropTypes.func.isRequired,
-  selectedApp: PropTypes.string,
+  partners: PropTypes.arrayOf(PropTypes.shape()),
+  setPartnerss: PropTypes.func,
+  selectedPartner: PropTypes.string,
   formMode: PropTypes.string.isRequired,
   general: PropTypes.shape({
     config: PropTypes.shape().isRequired,
@@ -32,32 +31,32 @@ const defaultProps = {
   setModalVisible: () => {},
   modalVisible: false,
   externalFormRef: null,
-  apps: [],
-  selectedApp: '',
+  partners: [],
+  setPartners: () => {},
+  selectedPartner: '',
 };
 
-const AppForm = ({
-  general: { config, currentApp },
+const PartnerForm = ({
+  general: { config },
   formMode,
   modalVisible,
   setModalVisible,
   inModal,
   externalFormRef,
-  apps,
-  setApps,
-  selectedApp,
-  ...props
+  partners,
+  setPartners,
+  selectedPartner,
 }) => {
   const [loading, setLoading] = useState(false);
-  const { formConfig, editConfig } = config.entities.app;
+  const { formConfig, editConfig } = config.entities.partner;
   const formRef = useRef(null);
 
-  const createApp = (formData) => {
-    iaxios('super_admin')
-      .post('/apps', formData)
+  const createPartner = (formData) => {
+    iaxios()
+      .post('/partners', formData)
       .then((res) => {
         if (res !== 'error') {
-          setApps({ apps: [...apps, res.data] });
+          setPartners([...partners, res.data]);
           if (inModal) {
             setModalVisible(false);
           }
@@ -66,19 +65,16 @@ const AppForm = ({
       });
   };
 
-  const updateApp = (formData) => {
+  const updatePartner = (formData) => {
     formData.append('_method', 'PUT');
-    iaxios('super_admin')
-      .post(`/apps/${selectedApp}`, formData)
+    iaxios()
+      .post(`/partners/${selectedPartner}`, formData)
       .then((res) => {
         if (res !== 'error') {
-          const appIndex = apps.findIndex((a) => a.id === res.data.id);
-          const newApps = [...apps];
-          newApps.splice(appIndex, 1, res.data);
-          setApps({ apps: newApps });
-          if (currentApp.id === res.data.id) {
-            props.selectApp({ selectedApp: res.data, config, update: true });
-          }
+          const partnerIndex = partners.findIndex((c) => c.id === res.data.id);
+          const newPartners = [...partners];
+          newPartners.splice(partnerIndex, 1, res.data);
+          setPartners(newPartners);
           if (inModal) {
             setModalVisible(false);
           }
@@ -98,9 +94,9 @@ const AppForm = ({
         const data = { ...values };
         const formData = formateData(data);
         if (formMode === 'create') {
-          createApp(formData);
+          createPartner(formData);
         } else if (formMode === 'edit') {
-          updateApp(formData);
+          updatePartner(formData);
         }
       } else {
         setLoading(false);
@@ -118,42 +114,20 @@ const AppForm = ({
     }
   };
 
-  const features = [
-    {
-      value: 'circusQuiz',
-      label: 'circusQuiz',
-    },
-    {
-      value: 'quiz',
-      label: 'quiz',
-    },
-    {
-      value: 'qrflash',
-      label: 'qrflash',
-    },
-    {
-      value: 'partner',
-      label: 'partner',
-    },
-  ];
-
-  const type = [
-    {
-      value: 'circus',
-      label: 'circus',
-    },
-    {
-      value: 'flashapp',
-      label: 'flashapp',
-    },
-  ];
+  const edit = () => {
+    const partner = partners.find((p) => p.id === selectedPartner);
+    return {
+      ...partner,
+      ...partner.address,
+    };
+  };
 
   const modalProps = {
     title:
       formMode === 'create' ? (
-        <Translate id="createApp" />
+        <Translate id="createPartner" />
       ) : (
-        <Translate id="editApp" />
+        <Translate id="editPartner" />
       ),
     visible: modalVisible,
     onCancel: closeModal,
@@ -166,12 +140,8 @@ const AppForm = ({
     formConfig,
     editConfig,
     ref: externalFormRef || formRef,
-    edit: formMode === 'edit' ? apps.find((a) => a.id === selectedApp) : null,
-    formName: 'appForm',
-    datas: {
-      features,
-      type,
-    },
+    edit: formMode === 'edit' ? edit() : null,
+    formName: 'partnerForm',
   };
 
   if (externalFormRef) {
@@ -192,17 +162,17 @@ const AppForm = ({
     <div>
       <FormGen {...formGenProps} />
       <Button type="primary" onClick={onSubmit}>
-        <Translate id="createApp" />
+        <Translate id="createPartner" />
       </Button>
     </div>
   );
 };
 
-AppForm.propTypes = propTypes;
-AppForm.defaultProps = defaultProps;
+PartnerForm.propTypes = propTypes;
+PartnerForm.defaultProps = defaultProps;
 const mapStateToProps = ({ general }) => ({ general });
 
 export default connect(
   mapStateToProps,
-  { selectApp, setApps },
-)(AppForm);
+  {},
+)(PartnerForm);

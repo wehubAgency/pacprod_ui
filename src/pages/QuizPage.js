@@ -18,7 +18,9 @@ const _QuizPage = ({
     const ax = iaxios();
     ax.get('/quiz').then((res) => {
       setAllQuiz(res.data);
-      selectQuiz(res.data[0].id);
+      if (res.data.length > 0) {
+        selectQuiz(res.data[0].id);
+      }
     });
   }, [currentApp, currentEntity, currentSeason]);
 
@@ -113,6 +115,14 @@ const _QuizPage = ({
         </Button>
         {selectedQuiz && (
           <>
+            <Button
+              style={{ marginLeft: 15 }}
+              onClick={() => openModal('edit')}
+            >
+              <span>
+                <Translate id="editQuiz" />
+              </span>
+            </Button>
             <Button
               style={{ marginLeft: 15 }}
               type={

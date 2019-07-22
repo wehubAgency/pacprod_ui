@@ -9,12 +9,12 @@ const GameConditionInfos = ({ gameCondition }) => {
   return (
     <div>
       <p>
-        <Translate id="gameConditionInfos.startDate" />:
-        {moment(gameCondition.startDate).format('LLLL')}
+        <Translate id="gameConditionInfos.startDate" /> :
+        {` ${moment(gameCondition.startDate).format('LLLL')}`}
       </p>
       <p>
-        <Translate id="gameConditionInfos.endDate" />:
-        {moment(gameCondition.endDate).format('LLLL')}
+        <Translate id="gameConditionInfos.endDate" /> :
+        {` ${moment(gameCondition.endDate).format('LLLL')}`}
       </p>
       <Map
         markers={[{ lng: coordinates[0], lat: coordinates[1] }]}

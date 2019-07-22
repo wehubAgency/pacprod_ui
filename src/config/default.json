@@ -170,6 +170,14 @@
         }
       }
     },
+    "partner": {
+      "key": "partner",
+      "title": "partnerTitle",
+      "icon": "team",
+      "path": "/partners",
+      "page": "PartnerPage",
+      "exact": true
+    },
     "flashapp": {
       "key": "flashapp",
       "title": "flashappTitle",
@@ -1051,13 +1059,7 @@
         "gameHoursTable": {
           "type": "timeslot",
           "label": "gameHours",
-          "hiddenInput": "gameHours",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
+          "hiddenInput": "gameHours"
         },
         "gameHours": {
           "type": "hidden",
@@ -1422,6 +1424,192 @@
           "render": {
             "type": "ellipsis",
             "size": 50
+          }
+        }
+      }
+    },
+    "partner": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "attributes": {
+            "type": "text"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "description": {
+          "type": "textarea",
+          "label": "description",
+          "attributes": {
+            "rows": 4
+          }
+        },
+        "email": {
+          "type": "text",
+          "label": "mail",
+          "rules": [
+            {
+              "type": "email",
+              "message": "email"
+            }
+          ]
+        },
+        "phone": {
+          "type": "text",
+          "label": "phone"
+        },
+        "address": {
+          "type": "text",
+          "label": "address",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "city": {
+          "type": "text",
+          "label": "city",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "country": {
+          "type": "text",
+          "label": "country",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "facebook": {
+          "type": "text",
+          "label": "facebook",
+          "rules": [
+            {
+              "pattern": "^https?:\\/\\/(www\\.)?facebook.com\\/[a-zA-Z0-9(\\.\\?)?]*",
+              "flags": "",
+              "exemple": "https://facebook.com/<votre-compte>"
+            }
+          ]
+        },
+        "website": {
+          "type": "text",
+          "label": "website",
+          "rules": [
+            {
+              "pattern": "^http\\:\\/\\/|https\\:\\/\\/([a-z0-9][a-z0-9\\-]*\\.)+[a-z0-9][a-z0-9\\-]*",
+              "flags": "",
+              "exemple": "https://votre-site-internet.com"
+            }
+          ]
+        },
+        "logo": {
+          "type": "upload",
+          "label": "logo",
+          "text": "logo",
+          "valuePropName": "fileList",
+          "previewSettings": {
+            "ratio": {
+              "width": 1,
+              "height": 1
+            }
+          },
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          }
+        },
+        "photos": {
+          "type": "upload",
+          "label": "photos",
+          "valuePropName": "fileList",
+          "text": "photos",
+          "uploadRules": {
+            "number": 5,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 3
+          }
+        },
+        "videos": {
+          "type": "upload",
+          "label": "videos",
+          "text": "videos",
+          "valuePropName": "fileList",
+          "uploadRules": {
+            "number": 2,
+            "formats": ["video/mp4"],
+            "size": 10
+          }
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "logo": {
+          "title": "logo",
+          "dataIndex": "logo",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "email": {
+          "title": "mail",
+          "dataIndex": "mail"
+        },
+        "phone": {
+          "title": "phone",
+          "dataIndex": "phone"
+        },
+        "address": {
+          "title": "address",
+          "dataIndex": "address.fullAddress"
+        },
+        "photos": {
+          "title": "photos",
+          "dataIndex": "photos",
+          "render": {
+            "type": "custom",
+            "id": "GalleryCell"
+          }
+        },
+        "videos": {
+          "title": "videos",
+          "dataIndex": "videos",
+          "render": {
+            "type": "custom",
+            "id": "VideoCell"
           }
         }
       }
@@ -1958,6 +2146,11 @@
               "message": "required"
             }
           ]
+        },
+        "description": {
+          "type": "textarea",
+          "label": "description",
+          "help": "description"
         }
       },
       "editConfig": {
@@ -1992,6 +2185,19 @@
           "type": "number",
           "label": "randomQuestionsNumber",
           "help": "randomQuestionsNumber",
+          "attributes": {
+            "min": 1
+          }
+        },
+        "uniqueParticipation": {
+          "type": "checkbox",
+          "label": "uniqueParticipation",
+          "help": "uniqueParticipation"
+        },
+        "dailyParticipation": {
+          "type": "number",
+          "label": "dailyParticipation",
+          "help": "dailyParticipation",
           "attributes": {
             "min": 1
           }

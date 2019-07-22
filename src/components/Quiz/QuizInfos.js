@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tabs, message } from 'antd';
+import { Tabs, message, Typography } from 'antd';
 import { Translate, withLocalize } from 'react-localize-redux';
 import QuestionsManager from '../Questions/QuestionsManager';
 import iaxios from '../../axios';
@@ -46,6 +46,11 @@ const QuizInfos = ({ quiz, setAllQuiz, allQuiz, translate }) => {
 
   return (
     <div style={{ marginTop: 50 }}>
+      <Typography.Title level={3}>{quiz.name}</Typography.Title>
+      <Typography.Text strong>
+        <Translate id="description" />:
+      </Typography.Text>
+      <p>{quiz.description ? quiz.description : <Translate id="nodata" />}</p>
       <Tabs defaultActiveKey="1">
         <Tabs.TabPane tab={<Translate id="questions" />} key="1">
           <QuestionsManager {...questionsManagerProps} />

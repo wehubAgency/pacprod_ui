@@ -42,7 +42,7 @@ const LoginPage = ({ form, setAuthenticated }) => {
     >
       <Form onSubmit={submitForm} className="login-form">
         <Form.Item>
-          {getFieldDecorator('username', {
+          {getFieldDecorator('mail', {
             rules: [{ required: true, message: ' ' }],
           })(
             <Input

@@ -26,11 +26,15 @@ const GalleryCell = ({ infos }) => {
         destroyOnClose
         onCancel={onCancel}
       >
-        <Carousel
-          views={infos.map((i) => ({
-            src: i,
-          }))}
-        />
+        {infos.length > 0 ? (
+          <Carousel
+            views={infos.map((i) => ({
+              src: i,
+            }))}
+          />
+        ) : (
+          <Translate id="mapCell.noImages" />
+        )}
       </Modal>
     </div>
   );
