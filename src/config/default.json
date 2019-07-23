@@ -764,7 +764,7 @@
           "type": "date",
           "label": "startDate",
           "props": {
-            "format": "DD/MM/YYYY HH:mm"
+            "format": "DD/MM/YYYY"
           },
           "rules": [
             {
@@ -777,7 +777,7 @@
           "type": "date",
           "label": "endDate",
           "props": {
-            "format": "DD/MM/YYYY HH:mm"
+            "format": "DD/MM/YYYY"
           },
           "rules": [
             {
