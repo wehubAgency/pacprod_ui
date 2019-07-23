@@ -21,6 +21,9 @@ const _PartnerPage = ({
     ax.get('/partners').then((res) => {
       if (res !== 'error') {
         setPartners(res.data);
+        if (res.data.length > 0) {
+          selectPartner(res.data[0].id);
+        }
       }
       setFetching(false);
     });
@@ -28,17 +31,16 @@ const _PartnerPage = ({
     return () => ax.source.cancel();
   }, [currentApp, currentEntity, currentSeason]);
 
-  const openModal = (mode = 'create', e) => {
+  const openModal = (mode = 'create') => {
     setModalVisible(true);
     setFormMode(mode);
-    if (e && e.currentTarget.dataset.id) {
-      selectPartner(e.currentTarget.dataset.id);
-    }
   };
 
   const tableProps = {
     partners,
     setPartners,
+    selectPartner,
+    selectedPartner,
     config,
     fetching,
     openModal,

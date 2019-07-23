@@ -103,7 +103,8 @@
       "vote": "Vote du public",
       "circus": "Cirque",
       "flashapp": "Appli Flashplay",
-      "partner": "Partenaires"
+      "partner": "Partenaires",
+      "selfie": "Selfie"
     },
     "help": {
       "codeName": "Un seul mot en camelCase"

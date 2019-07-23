@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Table, Switch } from 'antd';
-import { Translate } from 'react-localize-redux';
-import generateColumns from '../../services/generateColumns';
-import iaxios from '../../axios';
+import { Empty, Row, Col } from 'antd';
+import PartnerInfos from './PartnerInfos';
+import PartnerList from './PartnerList';
 
 const propTypes = {
   partners: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   setPartners: PropTypes.func.isRequired,
+  selectPartner: PropTypes.func.isRequired,
+  selectedPartner: PropTypes.string.isRequired,
   openModal: PropTypes.func.isRequired,
   config: PropTypes.shape().isRequired,
   fetching: PropTypes.bool.isRequired,
@@ -16,73 +17,37 @@ const propTypes = {
 const PartnerTable = ({
   partners,
   setPartners,
+  selectPartner,
+  selectedPartner,
   openModal,
   config,
   fetching,
 }) => {
-  const { componentConfig } = config.entities.partner;
-  const [showDisabled, setShowDisabled] = useState(false);
-
-  const togglePartner = (id) => {
-    const partner = partners.find((a) => a.id === id);
-    iaxios()
-      .patch(`/partners/${partner.id}/enabled`, { enabled: !partner.enabled })
-      .then((res) => {
-        if (res !== 'error') {
-          const partnerIndex = partners.findIndex((s) => s.id === res.data.id);
-          const newPartners = [...partners];
-          newPartners.splice(partnerIndex, 1, res.data);
-          setPartners(newPartners);
-        }
-      });
+  const partnerListProps = {
+    partners,
+    setPartners,
+    selectedPartner,
+    selectPartner,
+  };
+  const partnerInfosProps = {
+    partner: partners.find((p) => p.id === selectedPartner),
+    partners,
+    setPartners,
+    openModal,
   };
 
-  const removePartner = (id) => {
-    iaxios()
-      .delete(`/partners/${id}`)
-      .then((res) => {
-        if (res !== 'error') {
-          const index = partners.findIndex((p) => p.id === res.data.id);
-          const newPartners = [...partners];
-          newPartners.splice(index, 1);
-          setPartners(newPartners);
-        }
-      });
-  };
-
-  const actions = [
-    {
-      type: 'edit',
-      func: (e) => {
-        openModal('edit', e);
-      },
-    },
-    {
-      type: 'disable',
-      func: togglePartner,
-    },
-    {
-      type: 'remove',
-      func: removePartner,
-      confirm: <Translate id="partnerComponent.confirmRemove" />,
-    },
-  ];
-
-  const columns = generateColumns(componentConfig, 'partnerComponent', actions);
-
+  if (partners.length === 0) {
+    return <Empty />;
+  }
   return (
-    <div style={{ marginTop: '50px' }}>
-      <Switch checked={showDisabled} onChange={(v) => setShowDisabled(v)} />
-      <span style={{ marginLeft: 15 }}>
-        <Translate id="showDisabled" />
-      </span>
-      <Table
-        dataSource={partners.filter((s) => s.enabled === !showDisabled)}
-        columns={columns}
-        rowKey="id"
-        loading={fetching}
-      />
-    </div>
+    <Row type="flex" style={{ marginTop: '25px' }}>
+      <Col span={24} lg={{ span: 8 }}>
+        <PartnerList {...partnerListProps} />
+      </Col>
+      <Col span={24} lg={{ span: 16 }}>
+        {selectedPartner && <PartnerInfos {...partnerInfosProps} />}
+      </Col>
+    </Row>
   );
 };
 

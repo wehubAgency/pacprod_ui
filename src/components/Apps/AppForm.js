@@ -135,6 +135,10 @@ const AppForm = ({
       value: 'partner',
       label: 'partner',
     },
+    {
+      value: 'selfie',
+      label: 'selfie'
+    }
   ];
 
   const type = [

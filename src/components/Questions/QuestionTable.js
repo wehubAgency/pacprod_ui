@@ -46,7 +46,7 @@ const QuestionTable = ({
     return <Empty />;
   }
   return (
-    <Row type="flex" style={{ marginTop: '25px' }}>
+    <Row type="flex" gutter={16} style={{ marginTop: '25px', maxHeight: 700 }}>
       <Col span={24} lg={{ span: 8 }}>
         <QuestionList {...questionListProps} />
       </Col>
