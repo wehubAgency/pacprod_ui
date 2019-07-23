@@ -25,14 +25,16 @@ const CurrentApp = ({ general: { currentApp } }) => {
   const displayAppInfos = () => (
     <div>
       {currentApp.logo && <img src={currentApp.logo} alt={currentApp.name} />}
-      <h1 style={{ color: 'white' }}>{currentApp.name}</h1>
+      <h1 style={{ color: 'white', padding: 15 }}>{currentApp.name}</h1>
     </div>
   );
 
   const { containerStyle } = styles;
 
   return (
-    <div style={containerStyle}>{currentApp !== null ? displayAppInfos() : displayChooseApp()}</div>
+    <div style={containerStyle}>
+      {currentApp !== null ? displayAppInfos() : displayChooseApp()}
+    </div>
   );
 };
 
