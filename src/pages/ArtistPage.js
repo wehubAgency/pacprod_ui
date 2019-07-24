@@ -17,7 +17,9 @@ const propTypes = {
 };
 
 const _ArtistPage = ({
-  general: { currentEntity, currentApp, currentSeason, config },
+  general: {
+    currentEntity, currentApp, currentSeason, config,
+  },
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [fetching, setFetching] = useState(false);

@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Modal } from 'antd';
 import { Translate } from 'react-localize-redux';
+
+const propTypes = {
+  infos: PropTypes.shape().isRequired,
+};
 
 const VideoCell = ({ infos }) => {
   const [visible, setVisible] = useState(false);
@@ -80,5 +85,7 @@ const VideoCell = ({ infos }) => {
     </div>
   );
 };
+
+VideoCell.propTypes = propTypes;
 
 export { VideoCell };

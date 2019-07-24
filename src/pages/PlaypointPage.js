@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Select, Button, Popconfirm, Typography, Spin, Empty } from 'antd';
+import {
+  Select, Button, Popconfirm, Typography, Spin, Empty,
+} from 'antd';
 import { Translate } from 'react-localize-redux';
 import { connect } from 'react-redux';
 import CompanyForm from '../components/Company/CompanyForm';
@@ -7,9 +9,7 @@ import iaxios from '../axios';
 import CompanyInfos from '../components/Company/CompanyInfos';
 import PlaypointSection from '../components/Playpoint/PlaypointSection';
 
-const _PlaypointPage = ({
-  general: { currentApp, currentEntity, currentSeason },
-}) => {
+const _PlaypointPage = ({ general: { currentApp, currentEntity, currentSeason } }) => {
   const [companies, setCompanies] = useState([]);
   const [fetching, setFetching] = useState(false);
   const [selectedCompany, selectCompany] = useState('');
@@ -33,24 +33,22 @@ const _PlaypointPage = ({
     if (selectedCompany) {
       setFetching(true);
       const ax = iaxios();
-      ax.get('/playpoints', { params: { company: selectedCompany } }).then(
-        (res) => {
-          if (res !== 'error') {
-            setPlaypoints(res.data);
-          }
-          setFetching(false);
-        },
-      );
+      ax.get('/playpoints', { params: { company: selectedCompany } }).then((res) => {
+        if (res !== 'error') {
+          setPlaypoints(res.data);
+        }
+        setFetching(false);
+      });
       return () => ax.source.cancel();
     }
+    return () => {};
   }, [selectedCompany]);
 
-  const renderOptions = () =>
-    companies.map((c) => (
+  const renderOptions = () => companies.map(c => (
       <Option key={c.id} value={c.id}>
         {c.name}
       </Option>
-    ));
+  ));
 
   const filterOption = (input, option) => {
     const { children } = option.props;
@@ -65,13 +63,11 @@ const _PlaypointPage = ({
   const toggleCompany = () => {
     iaxios()
       .patch(`/companies/${selectedCompany}/enabled`, {
-        enabled: !companies.find((c) => c.id === selectedCompany).enabled,
+        enabled: !companies.find(c => c.id === selectedCompany).enabled,
       })
       .then((res) => {
         if (res !== 'error') {
-          const companyIndex = companies.findIndex(
-            (c) => c.id === selectedCompany,
-          );
+          const companyIndex = companies.findIndex(c => c.id === selectedCompany);
           const newCompanies = [...companies];
           newCompanies.splice(companyIndex, 1, res.data);
           setCompanies(newCompanies);
@@ -84,9 +80,7 @@ const _PlaypointPage = ({
       .delete(`/companies/${selectedCompany}`)
       .then((res) => {
         if (res !== 'error') {
-          const companyIndex = companies.findIndex(
-            (c) => c.id === selectedCompany,
-          );
+          const companyIndex = companies.findIndex(c => c.id === selectedCompany);
           const newCompanies = [...companies];
           setCompanies(newCompanies);
           newCompanies.splice(companyIndex, 1);
@@ -126,7 +120,7 @@ const _PlaypointPage = ({
           showSearch
           style={{ width: 200 }}
           placeholder={<Translate id="playpointPage.selectCompany" />}
-          onChange={(value) => selectCompany(value)}
+          onChange={value => selectCompany(value)}
           optionFilterProp="children"
           filterOption={filterOption}
           value={selectedCompany}
@@ -142,64 +136,60 @@ const _PlaypointPage = ({
       </div>
       {fetching ? (
         <Spin />
-      ) : !selectedCompany ? (
-        <Empty />
       ) : (
         <div>
-          {companies.find((c) => c.id === selectedCompany).enabled ? (
-            ''
+          {!selectedCompany ? (
+            <Empty />
           ) : (
-            <Title type="secondary" level={4}>
-              <Translate id="disabled" />
-            </Title>
-          )}
-          <CompanyInfos
-            company={companies.find((c) => c.id === selectedCompany)}
-          />
-          <Button type="primary" icon="edit" onClick={() => openModal('edit')}>
-            <span>
-              <Translate id="editCompany" />
-            </span>
-          </Button>
-          <Button
-            type={
-              companies.find((c) => c.id === selectedCompany).enabled
-                ? 'danger'
-                : 'success'
-            }
-            icon="stop"
-            onClick={toggleCompany}
-          >
-            <span>
-              <Translate
-                id={
-                  companies.find((c) => c.id === selectedCompany).enabled
-                    ? 'disable'
-                    : 'enable'
-                }
+            <div>
+              {companies.find(c => c.id === selectedCompany).enabled ? (
+                ''
+              ) : (
+                <Title type="secondary" level={4}>
+                  <Translate id="disabled" />
+                </Title>
+              )}
+              <CompanyInfos company={companies.find(c => c.id === selectedCompany)} />
+              <Button type="primary" icon="edit" onClick={() => openModal('edit')}>
+                <span>
+                  <Translate id="editCompany" />
+                </span>
+              </Button>
+              <Button
+                type={companies.find(c => c.id === selectedCompany).enabled ? 'danger' : 'success'}
+                icon="stop"
+                onClick={toggleCompany}
+              >
+                <span>
+                  <Translate
+                    id={
+                      companies.find(c => c.id === selectedCompany).enabled ? 'disable' : 'enable'
+                    }
+                  />
+                </span>
+              </Button>
+              <Popconfirm
+                overlayStyle={{ maxWidth: 300 }}
+                title={<Translate id="playpointPage.confirmDelete" />}
+                onConfirm={deleteCompany}
+                okText={<Translate id="yes" />}
+                cancelText={<Translate id="no" />}
+              >
+                <Button style={{ margin: '25px 15px' }} type="danger" icon="delete">
+                  <span>
+                    <Translate id="delete" />
+                  </span>
+                </Button>
+              </Popconfirm>
+              <PlaypointSection
+                playpoints={playpoints}
+                setPlaypoints={setPlaypoints}
+                selectedPlaypoint={selectedPlaypoint}
+                selectPlaypoint={selectPlaypoint}
+                selectedCompany={selectedCompany}
               />
-            </span>
-          </Button>
-          <Popconfirm
-            overlayStyle={{ maxWidth: 300 }}
-            title={<Translate id="playpointPage.confirmDelete" />}
-            onConfirm={deleteCompany}
-            okText={<Translate id="yes" />}
-            cancelText={<Translate id="no" />}
-          >
-            <Button style={{ margin: '25px 15px' }} type="danger" icon="delete">
-              <span>
-                <Translate id="delete" />
-              </span>
-            </Button>
-          </Popconfirm>
-          <PlaypointSection
-            playpoints={playpoints}
-            setPlaypoints={setPlaypoints}
-            selectedPlaypoint={selectedPlaypoint}
-            selectPlaypoint={selectPlaypoint}
-            selectedCompany={selectedCompany}
-          />
+            </div>
+          )}
         </div>
       )}
     </div>

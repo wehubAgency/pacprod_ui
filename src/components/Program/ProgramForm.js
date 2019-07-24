@@ -33,16 +33,15 @@ const ProgramForm = ({
     if (form) {
       form.setFieldsValue({
         ...formState,
-        shows: programShows.map((p) => p.id),
+        shows: programShows.map(p => p.id),
       });
     }
   }, [externalFormRef, formState, programShows]);
 
   useEffect(() => {
     if (selectedProgram && formMode === 'edit') {
-      const selectedShows = programs.find((p) => p.id === selectedProgram)
-        .shows;
-      setTargetKeys(selectedShows.map((s) => s.id));
+      const selectedShows = programs.find(p => p.id === selectedProgram).shows;
+      setTargetKeys(selectedShows.map(s => s.id));
       setProgramShows(selectedShows);
     }
   }, [selectedProgram, formMode, programs]);
@@ -59,7 +58,7 @@ const ProgramForm = ({
       setFormState(form.getFieldsValue());
     }
     setTargetKeys(nextTargetKeys);
-    setProgramShows(nextTargetKeys.map((k) => shows.find((s) => s.id === k)));
+    setProgramShows(nextTargetKeys.map(k => shows.find(s => s.id === k)));
   };
 
   const createProgram = (formData) => {
@@ -82,7 +81,7 @@ const ProgramForm = ({
       .post(`/program/${selectedProgram}`, formData)
       .then((res) => {
         if (res !== 'error') {
-          const programIndex = programs.findIndex((p) => p.id === res.data.id);
+          const programIndex = programs.findIndex(p => p.id === res.data.id);
           const newPrograms = [...programs];
           newPrograms.splice(programIndex, 1, res.data);
           setPrograms(newPrograms);
@@ -116,9 +115,9 @@ const ProgramForm = ({
   };
 
   const edit = () => {
-    const program = programs.find((p) => p.id === selectedProgram);
+    const program = programs.find(p => p.id === selectedProgram);
     const pShows = program.shows;
-    const editProgram = { ...program, shows: pShows.map((s) => s.id) };
+    const editProgram = { ...program, shows: pShows.map(s => s.id) };
     return editProgram;
   };
 
@@ -145,16 +144,12 @@ const ProgramForm = ({
           <Translate id="programForm.manageShow" />
         </h2>
         <Transfer
-          dataSource={shows.map((s) => ({ ...s, key: s.id }))}
-          titles={[
-            translate('programForm.show'),
-            translate('programForm.program'),
-          ]}
+          dataSource={shows.map(s => ({ ...s, key: s.id }))}
+          titles={[translate('programForm.show'), translate('programForm.program')]}
           targetKeys={targetKeys}
-          render={(item) => (
+          render={item => (
             <span>
-              {item.name}{' '}
-              {!item.enabled ? <Translate id="programForm.disabled" /> : ''}
+              {item.name} {!item.enabled ? <Translate id="programForm.disabled" /> : ''}
             </span>
           )}
           onChange={handleChange}
@@ -166,11 +161,7 @@ const ProgramForm = ({
 
   const modalProps = {
     title:
-      formMode === 'create' ? (
-        <Translate id="createProgram" />
-      ) : (
-        <Translate id="editProgram" />
-      ),
+      formMode === 'create' ? <Translate id="createProgram" /> : <Translate id="editProgram" />,
     visible: modalVisible,
     onCancel: closeModal,
     onOk: onSubmit,

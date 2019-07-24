@@ -197,6 +197,14 @@
         }
       }
     },
+    "selfie": {
+      "key": "selfie",
+      "title": "selfieTitle",
+      "icon": "camera",
+      "path": "/selfie",
+      "page": "SelfiePage",
+      "exact": true
+    },
     "common": ["user"]
   },
   "entities": {

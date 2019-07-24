@@ -16,7 +16,9 @@ const propTypes = {
 };
 
 const _PrizeInfosPage = ({
-  general: { currentApp, currentEntity, currentSeason, config },
+  general: {
+    currentApp, currentEntity, currentSeason, config,
+  },
 }) => {
   const [fetching, setFetching] = useState(false);
   const [prizeInfos, setPrizeInfos] = useState([]);

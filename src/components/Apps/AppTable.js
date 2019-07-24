@@ -11,17 +11,19 @@ const propTypes = {
   openModal: PropTypes.func.isRequired,
 };
 
-const AppTable = ({ apps, setApps, config, openModal }) => {
+const AppTable = ({
+  apps, setApps, config, openModal,
+}) => {
   const { componentConfig } = config.entities.app;
 
   const toggleApp = (id) => {
     iaxios('super_admin')
       .patch(`/apps/${id}/enabled`, {
-        enabled: !apps.find((a) => a.id === id).enabled,
+        enabled: !apps.find(a => a.id === id).enabled,
       })
       .then((res) => {
         if (res !== 'error') {
-          const index = apps.findIndex((a) => a.id === res.data.id);
+          const index = apps.findIndex(a => a.id === res.data.id);
           const newApps = [...apps];
           newApps.splice(index, 1, res.data);
           setApps({ apps: newApps });

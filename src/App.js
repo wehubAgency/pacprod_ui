@@ -23,7 +23,7 @@ const App = ({ general: { locale } }) => {
     if (token) {
       setFetching(true);
       iaxios()
-        .get(`checktoken`)
+        .get('checktoken')
         .then((res) => {
           if (res.data === 'OK') {
             setAuthenticated(true);
@@ -38,12 +38,16 @@ const App = ({ general: { locale } }) => {
       <LocaleProvider locale={locale}>
         {fetching ? (
           <Spin size="large" className="absolute-centered" />
-        ) : !authenticated ? (
-          <LoginPage setAuthenticated={setAuthenticated} />
         ) : (
-          <Router>
-            <AdminLayout />
-          </Router>
+          <div>
+            {!authenticated ? (
+              <LoginPage setAuthenticated={setAuthenticated} />
+            ) : (
+              <Router>
+                <AdminLayout />
+              </Router>
+            )}
+          </div>
         )}
       </LocaleProvider>
     </LocalizeProvider>

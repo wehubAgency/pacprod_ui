@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import iaxios from '../axios';
 import { Button } from 'antd';
 import { Translate } from 'react-localize-redux';
+import iaxios from '../axios';
 import PartnerTable from '../components/Partner/PartnerTable';
 import PartnerForm from '../components/Partner/PartnerForm';
 
 const _PartnerPage = ({
-  general: { currentApp, currentEntity, currentSeason, config },
+  general: {
+    currentApp, currentEntity, currentSeason, config,
+  },
 }) => {
   const [fetching, setFetching] = useState(false);
   const [partners, setPartners] = useState([]);

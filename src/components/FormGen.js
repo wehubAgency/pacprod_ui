@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { compose } from 'redux';
-import { Translate, withLocalize } from 'react-localize-redux';
+import { Translate } from 'react-localize-redux';
 import {
   Form,
   Input,
@@ -9,33 +8,23 @@ import {
   Col,
   Checkbox,
   InputNumber,
-  Upload,
-  Icon,
   Modal,
-  message,
   DatePicker,
   TimePicker,
   Switch,
   Radio,
 } from 'antd';
 import TargetTime from './TargetTime/TargetTime';
-import axios from 'axios';
 import Map from './Map';
 import moment from '../moment';
-import { ADMIN_API_URI } from '../constants';
 import DeleteFile from './DeleteFile';
 import styles from '../styles/components/FormGen.style';
+import UploadFile from './UploadFile';
 
 const { TextArea } = Input;
 
 const FormGen = ({
-  formConfig,
-  form,
-  edit,
-  editConfig,
-  datas,
-  formName,
-  translate,
+  formConfig, form, edit, editConfig, datas, formName,
 }) => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -68,100 +57,37 @@ const FormGen = ({
     /* eslint-disable-next-line */
   }, [edit]);
 
-  const generateRules = ({ rules = [], type }, key) =>
-    rules.reduce((result, r) => {
-      if ('pattern' in r) {
-        result.push({
-          pattern: RegExp(r.pattern, r.flags),
-          message: (
-            <Translate id="rules.pattern" data={{ exemple: r.exemple }} />
-          ),
-        });
-      } else if ('max' in r) {
-        result.push({
-          ...r,
-          message: <Translate id="rules.max" data={{ max: r.max }} />,
-        });
-      } else if (edit && type === 'upload' && 'required' in r) {
-        if (
-          form.getFieldValue(`${key}ToDelete`) &&
-          form.getFieldValue(`${key}ToDelete`).length > 0
-        ) {
-          result.push({ ...r, message: <Translate id="rules.required" /> });
-        } else {
-          return result;
-        }
+  const generateRules = ({ rules = [], type }, key) => rules.reduce((result, r) => {
+    if ('pattern' in r) {
+      result.push({
+        pattern: RegExp(r.pattern, r.flags),
+        message: <Translate id="rules.pattern" data={{ exemple: r.exemple }} />,
+      });
+    } else if ('max' in r) {
+      result.push({
+        ...r,
+        message: <Translate id="rules.max" data={{ max: r.max }} />,
+      });
+    } else if (edit && type === 'upload' && 'required' in r) {
+      if (
+        form.getFieldValue(`${key}ToDelete`)
+          && form.getFieldValue(`${key}ToDelete`).length > 0
+      ) {
+        result.push({ ...r, message: <Translate id="rules.required" /> });
       } else {
-        result.push({ ...r, message: <Translate id={`rules.${r.message}`} /> });
+        return result;
       }
-      return result;
-    }, []);
-
-  const beforeUpload = (file, key, item) => {
-    const fileList = form.getFieldsValue()[key] || [];
-    const filesLength = fileList.length;
-
-    const { uploadRules } = item;
-    let hasEnoughImage;
-    if (edit && edit[key]) {
-      const filesToDelete = form.getFieldValue(`${key}ToDelete`);
-      const filesToDeleteLength = Array.isArray(filesToDelete)
-        ? filesToDelete.length
-        : 0;
-      const originFilesLength = Array.isArray(edit[key]) ? edit[key].length : 1;
-      hasEnoughImage =
-        originFilesLength + filesLength - filesToDeleteLength <
-        uploadRules.number;
     } else {
-      hasEnoughImage = filesLength < uploadRules.number;
+      result.push({ ...r, message: <Translate id={`rules.${r.message}`} /> });
     }
-    if (!hasEnoughImage) {
-      message.error(
-        translate('uploadRules.number', { number: uploadRules.number }),
-      );
-    }
-
-    const goodFormat = uploadRules.formats.includes(file.type);
-    if (!goodFormat) {
-      message.error(
-        translate('uploadRules.formats', { format: uploadRules.formats }),
-      );
-    }
-
-    const goodSize = file.size / 1024 / 1024 < uploadRules.size;
-    if (!goodSize) {
-      message.error(translate('uploadRules.size', { size: uploadRules.size }));
-    }
-
-    if (!(hasEnoughImage && goodFormat && goodSize)) {
-      throw new Error("Erreur pendant l'upload");
-    }
-
-    return true;
-  };
-
-  const onPreview = (file, item) => {
-    if (file.type !== 'video/mp4') {
-      let settings;
-      if (item.previewSettings) {
-        const { ratio } = item.previewSettings;
-        settings = { paddingTop: `${(ratio.height / ratio.width) * 100}%` };
-      } else {
-        settings = { height: '50vh', backgroundSize: 'contain' };
-      }
-      setPreviewSettings(settings);
-      setPreviewImage(file.url || file.thumbUrl);
-      setPreviewVisible(true);
-    }
-  };
+    return result;
+  }, []);
 
   const onFileUpdate = (url, property, active) => {
     const actualValue = form.getFieldValue(`${property}ToDelete`);
     if (active) {
       form.setFieldsValue({
-        [`${property}ToDelete`]: Array.isArray(actualValue)
-          ? [...actualValue, url]
-          : [url],
+        [`${property}ToDelete`]: Array.isArray(actualValue) ? [...actualValue, url] : [url],
       });
     } else {
       const index = actualValue.indexOf(url);
@@ -176,24 +102,6 @@ const FormGen = ({
       return e;
     }
     return e && e.fileList;
-  };
-
-  const customRequest = ({ file, onSuccess }) => {
-    const data = new FormData();
-    data.append('file', file);
-    const reqConfig = {
-      headers: {
-        Authorization: localStorage.getItem('token'),
-      },
-    };
-    axios
-      .post(`${ADMIN_API_URI}uploads`, data, reqConfig)
-      .then((res) => {
-        onSuccess(res.data, file);
-      })
-      .catch(() => {
-        message.error(translate('formGen.uploadError'));
-      });
   };
 
   const getMapChanges = (markers) => {
@@ -212,9 +120,7 @@ const FormGen = ({
 
     switch (item.type) {
       case 'text':
-        return (
-          <Input addonBefore={item.number > 1 ? +i + 1 : ''} {...attributes} />
-        );
+        return <Input addonBefore={item.number > 1 ? +i + 1 : ''} {...attributes} />;
       case 'number':
         return <InputNumber {...attributes} />;
       case 'textarea':
@@ -223,14 +129,12 @@ const FormGen = ({
         const options = datas[key] || item.options;
         return (
           <Select {...item.attributes}>
-            {options.map((o) => (
+            {options.map(o => (
               <Select.Option key={o.value} value={o.value}>
                 {(datas[key] && (
-                  <Translate id={`${formName}.options.${o.label}`}>
-                    {o.label}
-                  </Translate>
-                )) ||
-                  o.label}
+                  <Translate id={`${formName}.options.${o.label}`}>{o.label}</Translate>
+                ))
+                  || o.label}
               </Select.Option>
             ))}
           </Select>
@@ -238,7 +142,7 @@ const FormGen = ({
       }
       case 'checkboxgrp': {
         const optionsDatas = (datas && datas[key]) || attributes.options;
-        const options = optionsDatas.map((o) => ({
+        const options = optionsDatas.map(o => ({
           label: <Translate id={`${formName}.options.${o.label}`} />,
           value: o.value,
         }));
@@ -246,40 +150,26 @@ const FormGen = ({
       }
       case 'radiogrp': {
         const optionsDatas = (datas && datas[key]) || attributes.options;
-        const options = optionsDatas.map((o) => ({
+        const options = optionsDatas.map(o => ({
           label: <Translate id={`${formName}.options.${o.label}`} />,
           value: o.value,
         }));
         return <Radio.Group options={options} />;
       }
       case 'checkbox': {
-        return (
-          <Switch defaultChecked={edit ? edit[key] : false} {...attributes} />
-        );
+        return <Switch defaultChecked={edit ? edit[key] : false} {...attributes} />;
       }
       case 'upload': {
-        return (
-          <Upload.Dragger
-            listType="picture-card"
-            beforeUpload={(file) => beforeUpload(file, key, item)}
-            onPreview={(file) => onPreview(file, item)}
-            customRequest={customRequest}
-          >
-            <p className="ant-upload-drag-icon">
-              <Icon type="inbox" />
-            </p>
-            <p className="ant-upload-text">
-              <Translate
-                id="upload.text"
-                data={{
-                  format: item.uploadRules.formats,
-                  size: item.uploadRules.size,
-                  number: item.uploadRules.number,
-                }}
-              />
-            </p>
-          </Upload.Dragger>
-        );
+        const props = {
+          elKey: key,
+          item,
+          edit,
+          form,
+          setPreviewImage,
+          setPreviewSettings,
+          setPreviewVisible,
+        };
+        return <UploadFile {...props} />;
       }
       case 'timeslot': {
         return (
@@ -308,11 +198,11 @@ const FormGen = ({
               markers={
                 edit
                   ? [
-                      {
-                        lng: edit.location.coordinates[0],
-                        lat: edit.location.coordinates[1],
-                      },
-                    ]
+                    {
+                      lng: edit.location.coordinates[0],
+                      lat: edit.location.coordinates[1],
+                    },
+                  ]
                   : []
               }
             />
@@ -327,7 +217,7 @@ const FormGen = ({
     const formFields = { ...formConfig };
     if (edit) {
       const { excludeFields } = editConfig;
-      excludeFields.forEach((f) => delete formFields[f]);
+      excludeFields.forEach(f => delete formFields[f]);
     }
 
     return Object.entries(formFields).map(([key, el]) => {
@@ -360,9 +250,7 @@ const FormGen = ({
             <Item
               key={itemKey}
               validateStatus={getFieldError(itemKey) ? 'error' : ''}
-              extra={
-                el.help ? <Translate id={`${formName}.help.${el.help}`} /> : ''
-              }
+              extra={el.help ? <Translate id={`${formName}.help.${el.help}`} /> : ''}
               label={
                 i === 0 && el.type !== 'hidden' ? (
                   <Translate id={`${formName}.label.${el.label}`} />
@@ -393,11 +281,7 @@ const FormGen = ({
     <>
       <Form layout="vertical">{renderItems()}</Form>
 
-      <Modal
-        visible={previewVisible}
-        footer={null}
-        onCancel={() => setPreviewVisible(false)}
-      >
+      <Modal visible={previewVisible} footer={null} onCancel={() => setPreviewVisible(false)}>
         <div
           style={{
             backgroundImage: `url(${previewImage})`,
@@ -410,7 +294,4 @@ const FormGen = ({
   );
 };
 
-export default compose(
-  Form.create({ name: 'form_gen' }),
-  withLocalize,
-)(FormGen);
+export default Form.create({ name: 'form_gen' })(FormGen);

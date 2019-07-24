@@ -7,7 +7,9 @@ import GameConditionForm from '../components/GameCondition/GameConditionForm';
 import GameConditionTable from '../components/GameCondition/GameConditionTable';
 
 const _GameConditionsPage = ({
-  general: { currentApp, currentEntity, currentSeason, config },
+  general: {
+    currentApp, currentEntity, currentSeason, config,
+  },
 }) => {
   const [gameConditions, setGameConditions] = useState([]);
   const [fetching, setFetching] = useState(false);

@@ -18,7 +18,7 @@ const QuestionTable = ({
 
   useEffect(() => {
     setItems(
-      questions.map((s) => ({
+      questions.map(s => ({
         id: s.id,
         order: s.order,
         question: s.question,
@@ -34,7 +34,7 @@ const QuestionTable = ({
     quiz,
   };
   const questionInfosProps = {
-    infos: questions.find((q) => q.id === selectedQuestion),
+    infos: questions.find(q => q.id === selectedQuestion),
     componentConfig,
     questions,
     setQuestions,

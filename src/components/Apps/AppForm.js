@@ -44,7 +44,6 @@ const AppForm = ({
   inModal,
   externalFormRef,
   apps,
-  setApps,
   selectedApp,
   ...props
 }) => {
@@ -57,7 +56,7 @@ const AppForm = ({
       .post('/apps', formData)
       .then((res) => {
         if (res !== 'error') {
-          setApps({ apps: [...apps, res.data] });
+          props.setApps({ apps: [...apps, res.data] });
           if (inModal) {
             setModalVisible(false);
           }
@@ -72,10 +71,10 @@ const AppForm = ({
       .post(`/apps/${selectedApp}`, formData)
       .then((res) => {
         if (res !== 'error') {
-          const appIndex = apps.findIndex((a) => a.id === res.data.id);
+          const appIndex = apps.findIndex(a => a.id === res.data.id);
           const newApps = [...apps];
           newApps.splice(appIndex, 1, res.data);
-          setApps({ apps: newApps });
+          props.setApps({ apps: newApps });
           if (currentApp.id === res.data.id) {
             props.selectApp({ selectedApp: res.data, config, update: true });
           }
@@ -137,8 +136,8 @@ const AppForm = ({
     },
     {
       value: 'selfie',
-      label: 'selfie'
-    }
+      label: 'selfie',
+    },
   ];
 
   const type = [
@@ -153,12 +152,7 @@ const AppForm = ({
   ];
 
   const modalProps = {
-    title:
-      formMode === 'create' ? (
-        <Translate id="createApp" />
-      ) : (
-        <Translate id="editApp" />
-      ),
+    title: formMode === 'create' ? <Translate id="createApp" /> : <Translate id="editApp" />,
     visible: modalVisible,
     onCancel: closeModal,
     onOk: onSubmit,
@@ -170,7 +164,7 @@ const AppForm = ({
     formConfig,
     editConfig,
     ref: externalFormRef || formRef,
-    edit: formMode === 'edit' ? apps.find((a) => a.id === selectedApp) : null,
+    edit: formMode === 'edit' ? apps.find(a => a.id === selectedApp) : null,
     formName: 'appForm',
     datas: {
       features,

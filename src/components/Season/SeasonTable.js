@@ -12,6 +12,11 @@ const propTypes = {
   config: PropTypes.shape().isRequired,
   openModal: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
+  general: PropTypes.shape({
+    currentEntity: PropTypes.shape().isRequired,
+  }).isRequired,
+  entityApiUri: PropTypes.string.isRequired,
+  updateEntity: PropTypes.func.isRequired,
 };
 
 const SeasonTable = ({
@@ -21,12 +26,12 @@ const SeasonTable = ({
   fetching,
   general: { currentEntity },
   entityApiUri,
-  updateEntity,
+  ...props
 }) => {
   const { componentConfig } = config.entities.season;
 
   const selectSeason = (e) => {
-    const id = e.currentTarget.dataset.id;
+    const { id } = e.currentTarget.dataset;
     iaxios()
       .patch(`${entityApiUri}/${currentEntity.id}/currentseason`, {
         currentSeason: id,
@@ -36,10 +41,10 @@ const SeasonTable = ({
         const entity = {
           id: data.id,
           name: data.name,
-          seasons: data.seasons.map((s) => ({ id: s.id, name: s.name })),
+          seasons: data.seasons.map(s => ({ id: s.id, name: s.name })),
           currentSeason: data.currentSeason.id,
         };
-        updateEntity(entity);
+        props.updateEntity(entity);
       });
   };
 
@@ -69,9 +74,7 @@ const SeasonTable = ({
         columns={columns}
         rowKey="id"
         loading={fetching}
-        rowClassName={(record) =>
-          record.id === currentEntity.currentSeason ? 'current-season' : ''
-        }
+        rowClassName={record => (record.id === currentEntity.currentSeason ? 'current-season' : '')}
       />
     </div>
   );

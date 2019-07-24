@@ -14,7 +14,9 @@ const propTypes = {
 };
 
 const _LocationPage = ({
-  general: { config, currentApp, currentEntity, currentSeason },
+  general: {
+    config, currentApp, currentEntity, currentSeason,
+  },
 }) => {
   const [formMode, setFormMode] = useState([]);
   const [fetching, setFetching] = useState(false);

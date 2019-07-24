@@ -12,7 +12,13 @@ const propTypes = {
   fetching: PropTypes.bool.isRequired,
 };
 
-const QuestionsManager = ({ questions, setQuestions, quiz, fetching }) => {
+const defaultProps = {
+  questions: [],
+};
+
+const QuestionsManager = ({
+  questions, setQuestions, quiz, fetching,
+}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [formMode, setFormMode] = useState('create');
   const [selectedQuestion, selectQuestion] = useState('');
@@ -57,5 +63,6 @@ const QuestionsManager = ({ questions, setQuestions, quiz, fetching }) => {
 };
 
 QuestionsManager.propTypes = propTypes;
+QuestionsManager.defaultProps = defaultProps;
 
 export default QuestionsManager;

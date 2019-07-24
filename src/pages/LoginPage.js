@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
-import { Button, Form, Icon, Input, message } from 'antd';
+import PropTypes from 'prop-types';
+import {
+  Button, Form, Icon, Input, message,
+} from 'antd';
 import axios from 'axios';
 import { API_URI } from '../constants';
+
+const propTypes = {
+  form: PropTypes.shape().isRequired,
+  setAuthenticated: PropTypes.func.isRequired,
+};
 
 const LoginPage = ({ form, setAuthenticated }) => {
   const [loading, setLoading] = useState(false);
@@ -44,11 +52,7 @@ const LoginPage = ({ form, setAuthenticated }) => {
         <Form.Item>
           {getFieldDecorator('mail', {
             rules: [{ required: true, message: ' ' }],
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,0.5)' }} />}
-            />,
-          )}
+          })(<Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,0.5)' }} />} />)}
         </Form.Item>
         <Form.Item>
           {getFieldDecorator('password', {
@@ -60,17 +64,14 @@ const LoginPage = ({ form, setAuthenticated }) => {
             />,
           )}
         </Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          className="login-form-button"
-          loading={loading}
-        >
+        <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
           Log in
         </Button>
       </Form>
     </div>
   );
 };
+
+LoginPage.propTypes = propTypes;
 
 export default Form.create({ name: 'loginForm' })(LoginPage);

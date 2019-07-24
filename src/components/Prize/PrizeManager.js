@@ -6,7 +6,9 @@ import generateColumns from '../../services/generateColumns';
 import PrizeForm from './PrizeForm';
 import iaxios from '../../axios';
 
-const PrizeManager = ({ game, className, feature, general: { config } }) => {
+const PrizeManager = ({
+  game, className, feature, general: { config },
+}) => {
   const { componentConfig } = config.entities.prize;
   const [modalVisible, setModalVisible] = useState(false);
   const [formMode, setFormMode] = useState('create');
@@ -31,7 +33,7 @@ const PrizeManager = ({ game, className, feature, general: { config } }) => {
       .delete(`/prizes/${id}`, { params: { classId: game.id } })
       .then((res) => {
         if (res !== 'error') {
-          const index = prizes.findIndex((p) => p.id === res.data.id);
+          const index = prizes.findIndex(p => p.id === res.data.id);
           const newPrizes = [...prizes];
           newPrizes.splice(index, 1);
           setPrizes(newPrizes);
@@ -42,11 +44,11 @@ const PrizeManager = ({ game, className, feature, general: { config } }) => {
   const togglePrize = (id) => {
     iaxios()
       .patch(`/prizes/${id}/enabled`, {
-        enabled: !prizes.find((p) => p.id === id).enabled,
+        enabled: !prizes.find(p => p.id === id).enabled,
       })
       .then((res) => {
         if (res !== 'error') {
-          const index = prizes.findIndex((p) => p.id === res.data.id);
+          const index = prizes.findIndex(p => p.id === res.data.id);
           const newPrizes = [...prizes];
           newPrizes.splice(index, 1, res.data);
           setPrizes(newPrizes);
@@ -95,12 +97,7 @@ const PrizeManager = ({ game, className, feature, general: { config } }) => {
       <h4>
         <Translate id="prizeManager.title" />
       </h4>
-      <Button
-        style={{ margin: '25px 0' }}
-        type="primary"
-        icon="plus"
-        onClick={() => openModal()}
-      >
+      <Button style={{ margin: '25px 0' }} type="primary" icon="plus" onClick={() => openModal()}>
         <span>
           <Translate id="addPrize" />
         </span>{' '}
@@ -108,13 +105,13 @@ const PrizeManager = ({ game, className, feature, general: { config } }) => {
       <PrizeForm {...formProps} />
       <div>
         <div style={{ margin: '15px 0' }}>
-          <Switch checked={showDisabled} onChange={(v) => setShowDisabled(v)} />
+          <Switch checked={showDisabled} onChange={v => setShowDisabled(v)} />
           <span style={{ marginLeft: 10 }}>
             <Translate id="showDisabled" />
           </span>
         </div>
         <Table
-          dataSource={prizes.filter((p) => p.enabled === !showDisabled)}
+          dataSource={prizes.filter(p => p.enabled === !showDisabled)}
           columns={columns}
           rowKey="id"
         />

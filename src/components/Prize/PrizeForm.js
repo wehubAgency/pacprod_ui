@@ -87,7 +87,7 @@ const PrizeForm = ({
       .post(`/prizes/${selectedPrize}`, formData)
       .then((res) => {
         if (res !== 'error') {
-          const prizeIndex = prizes.findIndex((p) => p.id === res.data.id);
+          const prizeIndex = prizes.findIndex(p => p.id === res.data.id);
           const newPrizes = [...prizes];
           newPrizes.splice(prizeIndex, 1, res.data);
           setPrizes(newPrizes);
@@ -132,12 +132,7 @@ const PrizeForm = ({
   };
 
   const modalProps = {
-    title:
-      formMode === 'create' ? (
-        <Translate id="addPrize" />
-      ) : (
-        <Translate id="editPrize" />
-      ),
+    title: formMode === 'create' ? <Translate id="addPrize" /> : <Translate id="editPrize" />,
     visible: modalVisible,
     onCancel: closeModal,
     onOk: onSubmit,
@@ -145,7 +140,7 @@ const PrizeForm = ({
     destroyOnClose: true,
   };
 
-  const optionsModel = models.map((m) => ({
+  const optionsModel = models.map(m => ({
     value: m.id,
     label: m.name,
   }));
@@ -155,8 +150,7 @@ const PrizeForm = ({
     editConfig,
     ref: externalFormRef || formRef,
     datas: { model: optionsModel },
-    edit:
-      formMode === 'edit' ? prizes.find((p) => p.id === selectedPrize) : null,
+    edit: formMode === 'edit' ? prizes.find(p => p.id === selectedPrize) : null,
     formName: 'prizeForm',
   };
 

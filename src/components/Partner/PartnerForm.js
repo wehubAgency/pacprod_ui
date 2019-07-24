@@ -18,7 +18,7 @@ const propTypes = {
     }),
   ]),
   partners: PropTypes.arrayOf(PropTypes.shape()),
-  setPartnerss: PropTypes.func,
+  setPartners: PropTypes.func,
   selectedPartner: PropTypes.string,
   formMode: PropTypes.string.isRequired,
   general: PropTypes.shape({
@@ -71,7 +71,7 @@ const PartnerForm = ({
       .post(`/partners/${selectedPartner}`, formData)
       .then((res) => {
         if (res !== 'error') {
-          const partnerIndex = partners.findIndex((c) => c.id === res.data.id);
+          const partnerIndex = partners.findIndex(c => c.id === res.data.id);
           const newPartners = [...partners];
           newPartners.splice(partnerIndex, 1, res.data);
           setPartners(newPartners);
@@ -115,7 +115,7 @@ const PartnerForm = ({
   };
 
   const edit = () => {
-    const partner = partners.find((p) => p.id === selectedPartner);
+    const partner = partners.find(p => p.id === selectedPartner);
     return {
       ...partner,
       ...partner.address,
@@ -124,11 +124,7 @@ const PartnerForm = ({
 
   const modalProps = {
     title:
-      formMode === 'create' ? (
-        <Translate id="createPartner" />
-      ) : (
-        <Translate id="editPartner" />
-      ),
+      formMode === 'create' ? <Translate id="createPartner" /> : <Translate id="editPartner" />,
     visible: modalVisible,
     onCancel: closeModal,
     onOk: onSubmit,

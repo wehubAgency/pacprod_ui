@@ -40,6 +40,7 @@
   "editCoin": "Modifier une pièce",
   "createPartner": "Créer un partenaire",
   "updatePartner": "Modifier un partenaire",
+  "createFilter": "Créer un filtre",
   "update": "Modifier",
   "edit": "Modifier",
   "yes": "Oui",
@@ -253,6 +254,9 @@
     "website": "Votre site internet",
     "emptyWebsite": "Pas de site Internet"
   },
+  "filterForm": {
+    "upload": "Le fichier doit faire exatement 500px de largeur pour 888px de longeur. Il doit également être au format png et être transparent. Si l'image correspond à la taille et au format Png, vous verrez votre filtre apparaitre sur l'exemple à coté. Si vous ne voyez plus la personne de l'exemple c'est que votre filtre n'est pas transparent, nous vous conseillons alors de ne pas le mettre en ligne."
+  },
   "flashAppForm": {
     "label": {
       "name": "Nom",
@@ -370,6 +374,7 @@
   },
   "menu": {
     "qrflashTitle": "QRFlash",
+    "selfieTitle": "Selfie",
     "partnerTitle": "Partenaires",
     "quizTitle": "Quiz",
     "flashappInfos": "Informations Application",
@@ -731,6 +736,10 @@
   "seasonPage": {
     "h1": "Gestion des saisons",
     "intro": "Le système de saison permet de séparer artiste, numéros, représentations, etc d'une saison à une autre. Une saison par défaut est générée à chaque Cirque que vous créez. Veuillez créez une nouvelle saison seulement quand vous en avez le besoin. Vous pourrez alors changer de saison en haut de la page."
+  },
+  "selfiePage": {
+    "h1": "Selfie",
+    "instructions": "Gerez ici les filtres que vous voulez rendre disponible dans votre application."
   },
   "sessionComponent": {
     "name": "Nom",

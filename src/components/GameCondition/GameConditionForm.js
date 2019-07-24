@@ -71,7 +71,7 @@ const GameConditionForm = ({
       .post(`/gameconditions/${selectedGameCondition}`, formData)
       .then((res) => {
         if (res !== 'error') {
-          const gcIndex = gameConditions.findIndex((g) => g.id === res.data.id);
+          const gcIndex = gameConditions.findIndex(g => g.id === res.data.id);
           const newGameConditions = [...gameConditions];
           newGameConditions.splice(gcIndex, 1, res.data);
           setGameConditions(newGameConditions);
@@ -133,10 +133,7 @@ const GameConditionForm = ({
     formConfig,
     editConfig,
     ref: externalFormRef || formRef,
-    edit:
-      formMode === 'edit'
-        ? gameConditions.find((c) => c.id === selectedGameCondition)
-        : null,
+    edit: formMode === 'edit' ? gameConditions.find(c => c.id === selectedGameCondition) : null,
     formName: 'gameConditionForm',
   };
 

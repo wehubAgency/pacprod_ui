@@ -74,7 +74,7 @@ const QuizForm = ({
       .post(`/quiz/${selectedQuiz}`, formData)
       .then((res) => {
         if (res !== 'error') {
-          const quizIndex = allQuiz.findIndex((q) => q.id === res.data.id);
+          const quizIndex = allQuiz.findIndex(q => q.id === res.data.id);
           const newQuiz = [...allQuiz];
           newQuiz.splice(quizIndex, 1, res.data);
           form.resetFields();
@@ -113,12 +113,7 @@ const QuizForm = ({
   };
 
   const modalProps = {
-    title:
-      formMode === 'create' ? (
-        <Translate id="createQuiz" />
-      ) : (
-        <Translate id="editQuiz" />
-      ),
+    title: formMode === 'create' ? <Translate id="createQuiz" /> : <Translate id="editQuiz" />,
     visible: modalVisible,
     onCancel: closeModal,
     onOk: onSubmit,
@@ -129,8 +124,7 @@ const QuizForm = ({
     formConfig,
     editConfig,
     ref: externalFormRef || formRef,
-    edit:
-      formMode === 'edit' ? allQuiz.find((q) => q.id === selectedQuiz) : null,
+    edit: formMode === 'edit' ? allQuiz.find(q => q.id === selectedQuiz) : null,
     formName: 'quizForm',
   };
 

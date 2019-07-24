@@ -14,7 +14,9 @@ const defaultProps = {
   filesToDelete: undefined,
 };
 
-const FileThumb = ({ url, onFileUpdate, filesToDelete, property }) => {
+const FileThumb = ({
+  url, onFileUpdate, filesToDelete, property,
+}) => {
   const [active, setActive] = useState(true);
 
   useEffect(() => {

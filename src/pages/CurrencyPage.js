@@ -7,7 +7,9 @@ import CoinTable from '../components/Coin/CoinTable';
 import iaxios from '../axios';
 
 const _CurrencyPage = ({
-  general: { currentApp, currentEntity, currentSeason, config },
+  general: {
+    currentApp, currentEntity, currentSeason, config,
+  },
 }) => {
   const [coins, setCoins] = useState([]);
   const [selectedCoin, selectCoin] = useState('');

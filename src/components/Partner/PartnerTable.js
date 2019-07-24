@@ -15,13 +15,7 @@ const propTypes = {
 };
 
 const PartnerTable = ({
-  partners,
-  setPartners,
-  selectPartner,
-  selectedPartner,
-  openModal,
-  config,
-  fetching,
+  partners, setPartners, selectPartner, selectedPartner, openModal,
 }) => {
   const partnerListProps = {
     partners,
@@ -30,7 +24,7 @@ const PartnerTable = ({
     selectPartner,
   };
   const partnerInfosProps = {
-    partner: partners.find((p) => p.id === selectedPartner),
+    partner: partners.find(p => p.id === selectedPartner),
     partners,
     setPartners,
     openModal,

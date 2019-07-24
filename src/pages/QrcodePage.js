@@ -7,9 +7,7 @@ import QrcodeInfos from '../components/QRCode/QrcodeInfos';
 import QrcodeForm from '../components/QRCode/QrcodeForm';
 import iaxios from '../axios';
 
-const _QrcodePage = ({
-  general: { currentApp, currentEntity, currentSeason },
-}) => {
+const _QrcodePage = ({ general: { currentApp, currentEntity, currentSeason } }) => {
   const [qrcodes, setQrcodes] = useState([]);
   const [selectedQrcode, selectQrcode] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -72,7 +70,7 @@ const _QrcodePage = ({
         <Col xl={{ span: 18 }}>
           {selectedQrcode && (
             <QrcodeInfos
-              qrcode={qrcodes.find((q) => q.id === selectedQrcode)}
+              qrcode={qrcodes.find(q => q.id === selectedQrcode)}
               qrcodes={qrcodes}
               setQrcodes={setQrcodes}
               selectQrcode={selectQrcode}

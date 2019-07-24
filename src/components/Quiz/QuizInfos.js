@@ -7,7 +7,9 @@ import QuizSettingsManager from '../QuizSettings/QuizSettingsManager';
 import GameConditionManager from '../GameCondition/GameConditionManager';
 import PrizeManager from '../Prize/PrizeManager';
 
-const QuizInfos = ({ quiz, setAllQuiz, allQuiz, translate }) => {
+const QuizInfos = ({
+  quiz, setAllQuiz, allQuiz, translate,
+}) => {
   const [questions, setQuestions] = useState([]);
   const [fetching, setFetching] = useState(false);
 
@@ -28,7 +30,7 @@ const QuizInfos = ({ quiz, setAllQuiz, allQuiz, translate }) => {
       .patch(`/quiz/${quiz.id}/gameconditions`, { gameConditions: ids })
       .then((res) => {
         if (res !== 'error') {
-          const index = allQuiz.findIndex((q) => q.id === res.data.id);
+          const index = allQuiz.findIndex(q => q.id === res.data.id);
           const newQuiz = [...allQuiz];
           newQuiz.splice(index, 1, res.data);
           setAllQuiz(newQuiz);
@@ -59,17 +61,10 @@ const QuizInfos = ({ quiz, setAllQuiz, allQuiz, translate }) => {
           <PrizeManager game={quiz} className="quiz" feature="quiz" />
         </Tabs.TabPane>
         <Tabs.TabPane tab={<Translate id="gameRules" />} key="3">
-          <QuizSettingsManager
-            quiz={quiz}
-            setAllQuiz={setAllQuiz}
-            allQuiz={allQuiz}
-          />
+          <QuizSettingsManager quiz={quiz} setAllQuiz={setAllQuiz} allQuiz={allQuiz} />
         </Tabs.TabPane>
         <Tabs.TabPane tab={<Translate id="gameConditions" />} key="4">
-          <GameConditionManager
-            game={quiz}
-            patchGameConditions={patchGameConditions}
-          />
+          <GameConditionManager game={quiz} patchGameConditions={patchGameConditions} />
         </Tabs.TabPane>
       </Tabs>
     </div>

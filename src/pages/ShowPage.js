@@ -15,7 +15,9 @@ const propTypes = {
 };
 
 const _ShowPage = ({
-  general: { config, currentApp, currentEntity, currentSeason },
+  general: {
+    config, currentApp, currentEntity, currentSeason,
+  },
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [fetching, setFetching] = useState(false);

@@ -1,10 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import {
-  GoogleMap,
-  Marker,
-  withGoogleMap,
-  withScriptjs,
-  Circle,
+  GoogleMap, Marker, withGoogleMap, withScriptjs, Circle,
 } from 'react-google-maps';
 import SearchBox from 'react-google-maps/lib/components/places/SearchBox';
 import { compose, withProps } from 'recompose';
@@ -110,14 +106,11 @@ const Map = compose(
         }}
         onClick={onMapClick}
       >
-        {markers.map((m) => (
-          <Marker
-            key={`${m.lat}${m.lng}`}
-            position={{ lat: m.lat, lng: m.lng }}
-          />
+        {markers.map(m => (
+          <Marker key={`${m.lat}${m.lng}`} position={{ lat: m.lat, lng: m.lng }} />
         ))}
-        {props.radius &&
-          markers.map((m) => (
+        {props.radius
+          && markers.map(m => (
             <Circle
               key={`${m.lat}${m.lng}circle`}
               radius={+props.radius}

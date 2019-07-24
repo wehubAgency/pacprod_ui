@@ -7,7 +7,9 @@ import SessionForm from '../components/Session/SessionForm';
 import SessionTable from '../components/Session/SessionTable';
 
 const _SessionPage = ({
-  general: { currentApp, currentEntity, currentSeason, config },
+  general: {
+    currentApp, currentEntity, currentSeason, config,
+  },
 }) => {
   const [sessions, setSessions] = useState([]);
   const [fetching, setFetching] = useState(false);

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Icon, Row, Col, Divider, Popconfirm, message } from 'antd';
+import {
+  Card, Icon, Row, Col, Divider, Popconfirm, message,
+} from 'antd';
 import { Translate, withLocalize } from 'react-localize-redux';
 import iaxios from '../../axios';
 import styles from '../../styles/components/QuestionInfos.style';
@@ -16,6 +18,7 @@ const propTypes = {
   openModal: PropTypes.func.isRequired,
   componentConfig: PropTypes.object.isRequired,
   quiz: PropTypes.string.isRequired,
+  translate: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -39,7 +42,7 @@ const QuestionInfos = ({
         .delete(`/questions/${id}`, { params: { quiz } })
         .then((res) => {
           if (res !== 'error') {
-            const index = questions.findIndex((q) => q.id === res.data.id);
+            const index = questions.findIndex(q => q.id === res.data.id);
             const newQuestions = [...questions];
             newQuestions.splice(index, 1);
             setQuestions(newQuestions);
@@ -57,7 +60,7 @@ const QuestionInfos = ({
         .patch(`/questions/${id}/enabled`, { enabled: !infos.enabled })
         .then((res) => {
           if (res !== 'error') {
-            const index = questions.findIndex((q) => q.id === res.data.id);
+            const index = questions.findIndex(q => q.id === res.data.id);
             const newQuestions = [...questions];
             newQuestions.splice(index, 1, res.data);
             setQuestions(newQuestions);
@@ -69,18 +72,11 @@ const QuestionInfos = ({
     return (
       <Card
         style={cardStyle}
-        title={`${infos.question}${
-          infos.enabled ? '' : ` (${translate('disabled')})`
-        }`}
-        cover={
-          infos.image ? <img alt={infos.question} src={infos.image} /> : null
-        }
+        title={`${infos.question}${infos.enabled ? '' : ` (${translate('disabled')})`}`}
+        cover={infos.image ? <img alt={infos.question} src={infos.image} /> : null}
         actions={[
           <Icon type="edit" onClick={editQuestion} />,
-          <Icon
-            type={infos.enabled ? 'stop' : 'check'}
-            onClick={toggleQuestion}
-          />,
+          <Icon type={infos.enabled ? 'stop' : 'check'} onClick={toggleQuestion} />,
           <Popconfirm
             title={<Translate id="questionsInfos.confirmDelete" />}
             onConfirm={deleteQuestion}

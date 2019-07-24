@@ -7,7 +7,9 @@ import PaidprizeForm from '../components/Paidprize/PaidprizeForm';
 import iaxios from '../axios';
 
 const _PaidprizePage = ({
-  general: { currentApp, currentEntity, currentSeason, config },
+  general: {
+    currentApp, currentEntity, currentSeason, config,
+  },
 }) => {
   const [paidprizes, setPaidprizes] = useState([]);
   const [selectedPaidprize, selectPaidprize] = useState('');

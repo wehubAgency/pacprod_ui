@@ -16,24 +16,19 @@ const propTypes = {
   }).isRequired,
 };
 
-const SelectApp = ({
-  general: { apps, currentApp },
-  general,
-  selectApp,
-  setApps,
-}) => {
+const SelectApp = ({ general: { apps, currentApp }, ...props }) => {
   const filterOption = (input, option) => {
     const { children } = option.props;
     return children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
   };
 
   const handleChange = (value) => {
-    const selectedApp = apps.find((a) => a.id === value);
+    const selectedApp = apps.find(a => a.id === value);
     iaxios()
       .get(`${ADMIN_API_URI}configs/${selectedApp.configFileName}`)
       .then((res) => {
         const config = jso(defaultConfig, res.data, {});
-        selectApp({ selectedApp, config });
+        props.selectApp({ selectedApp, config });
       });
   };
 
@@ -42,14 +37,14 @@ const SelectApp = ({
       .get('/apps')
       .then((res) => {
         if (res !== 'error') {
-          setApps(res.data);
+          props.setApps(res.data);
           if (res.data.apps.length > 0) {
             const defaultApp = res.data.apps[0];
             iaxios()
               .get(`/configs/${defaultApp.configFileName}`)
               .then((r) => {
                 const config = jso(defaultConfig, r.data, {});
-                selectApp({ selectedApp: defaultApp, config });
+                props.selectApp({ selectedApp: defaultApp, config });
               });
           }
         }
@@ -59,7 +54,7 @@ const SelectApp = ({
 
   const renderOptions = () => {
     const { Option } = Select;
-    return apps.map((a) => (
+    return apps.map(a => (
       <Option value={a.id} key={a.id}>
         {a.name}
       </Option>

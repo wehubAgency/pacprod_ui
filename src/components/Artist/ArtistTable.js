@@ -13,7 +13,9 @@ const propTypes = {
   fetching: PropTypes.bool.isRequired,
 };
 
-const ArtistTable = ({ artists, setArtists, config, openModal, fetching }) => {
+const ArtistTable = ({
+  artists, setArtists, config, openModal, fetching,
+}) => {
   const { componentConfig } = config.entities.artist;
 
   const removeArtist = (id) => {
@@ -21,7 +23,7 @@ const ArtistTable = ({ artists, setArtists, config, openModal, fetching }) => {
       .delete(`/artists/${id}`)
       .then((res) => {
         if (res !== 'error') {
-          const index = artists.findIndex((a) => a.id === res.data.id);
+          const index = artists.findIndex(a => a.id === res.data.id);
           const newArtists = [...artists];
           newArtists.splice(index, 1);
           setArtists(newArtists);
@@ -46,12 +48,7 @@ const ArtistTable = ({ artists, setArtists, config, openModal, fetching }) => {
 
   return (
     <div style={{ marginTop: '50px' }}>
-      <Table
-        dataSource={artists}
-        columns={columns}
-        rowKey="id"
-        loading={fetching}
-      />
+      <Table dataSource={artists} columns={columns} rowKey="id" loading={fetching} />
     </div>
   );
 };

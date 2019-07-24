@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal, List, Avatar } from 'antd';
+import {
+  Button, Modal, List, Avatar,
+} from 'antd';
 import { Translate } from 'react-localize-redux';
 
 const propTypes = {
@@ -9,7 +11,7 @@ const propTypes = {
   }).isRequired,
 };
 
-const ProgramCell = ({ infos: { shows }, infos }) => {
+const ProgramCell = ({ infos: { shows } }) => {
   const [visible, setVisible] = useState(false);
 
   const displayProgram = () => {
@@ -20,7 +22,7 @@ const ProgramCell = ({ infos: { shows }, infos }) => {
     setVisible(false);
   };
 
-  const renderShows = (show) => (
+  const renderShows = show => (
     <List.Item>
       <List.Item.Meta
         avatar={<Avatar src={show.image} />}
@@ -35,13 +37,7 @@ const ProgramCell = ({ infos: { shows }, infos }) => {
       <Button type="default" onClick={displayProgram}>
         <Translate id="programCell.button" />
       </Button>
-      <Modal
-        visible={visible}
-        footer={null}
-        maskClosable
-        destroyOnClose
-        onCancel={onCancel}
-      >
+      <Modal visible={visible} footer={null} maskClosable destroyOnClose onCancel={onCancel}>
         <List dataSource={shows} renderItem={renderShows} />
       </Modal>
     </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Row, Col, Icon, Popconfirm, message } from 'antd';
+import {
+  Card, Row, Col, Icon, Popconfirm, message,
+} from 'antd';
 import Masonry from 'react-responsive-masonry';
 import { Translate, withLocalize } from 'react-localize-redux';
 import iaxios from '../../axios';
@@ -8,14 +10,13 @@ import styles from '../../styles/components/EntityInfos.style';
 
 const propTypes = {
   partner: PropTypes.shape().isRequired,
+  partners: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  setPartners: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
   translate: PropTypes.func.isRequired,
 };
 const PartnerInfos = ({
-  partner,
-  partners,
-  setPartners,
-  openModal,
-  translate,
+  partner, partners, setPartners, openModal, translate,
 }) => {
   const { labelStyle } = styles;
 
@@ -24,7 +25,7 @@ const PartnerInfos = ({
       .patch(`/partners/${partner.id}/enabled`, { enabled: !partner.enabled })
       .then((res) => {
         if (res !== 'error') {
-          const partnerIndex = partners.findIndex((s) => s.id === res.data.id);
+          const partnerIndex = partners.findIndex(s => s.id === res.data.id);
           const newPartners = [...partners];
           newPartners.splice(partnerIndex, 1, res.data);
           setPartners(newPartners);
@@ -38,7 +39,7 @@ const PartnerInfos = ({
       .delete(`/partners/${partner.id}`)
       .then((res) => {
         if (res !== 'error') {
-          const index = partners.findIndex((p) => p.id === res.data.id);
+          const index = partners.findIndex(p => p.id === res.data.id);
           const newPartners = [...partners];
           newPartners.splice(index, 1);
           setPartners(newPartners);
@@ -48,15 +49,10 @@ const PartnerInfos = ({
   };
   return (
     <Card
-      title={`${partner.name}${
-        partner.enabled ? '' : ` (${translate('disabled')})`
-      }`}
+      title={`${partner.name}${partner.enabled ? '' : ` (${translate('disabled')})`}`}
       actions={[
         <Icon type="edit" onClick={() => openModal('edit')} />,
-        <Icon
-          type={partner.enabled ? 'stop' : 'check'}
-          onClick={togglePartner}
-        />,
+        <Icon type={partner.enabled ? 'stop' : 'check'} onClick={togglePartner} />,
         <Popconfirm
           title={<Translate id="questionsInfos.confirmDelete" />}
           onConfirm={deletePartner}
@@ -91,23 +87,11 @@ const PartnerInfos = ({
       <p style={labelStyle}>
         <Translate id="entityInfos.email" />
       </p>
-      <p>
-        {partner.email ? (
-          partner.email
-        ) : (
-          <Translate id="entityInfos.emptyEmail" />
-        )}
-      </p>
+      <p>{partner.email ? partner.email : <Translate id="entityInfos.emptyEmail" />}</p>
       <p style={labelStyle}>
         <Translate id="entityInfos.phone" />
       </p>
-      <p>
-        {partner.phone ? (
-          partner.phone
-        ) : (
-          <Translate id="entityInfos.emptyPhone" />
-        )}
-      </p>
+      <p>{partner.phone ? partner.phone : <Translate id="entityInfos.emptyPhone" />}</p>
       <p style={labelStyle}>
         <Translate id="entityInfos.facebook" />
       </p>
@@ -137,13 +121,8 @@ const PartnerInfos = ({
       </p>
       {partner.photos && partner.photos.length > 0 ? (
         <Masonry columnCount={3} gutter="15px">
-          {partner.photos.map((p) => (
-            <img
-              key={p}
-              src={p}
-              alt="photos"
-              style={{ width: '100%', display: 'bloc' }}
-            />
+          {partner.photos.map(p => (
+            <img key={p} src={p} alt="photos" style={{ width: '100%', display: 'bloc' }} />
           ))}
         </Masonry>
       ) : (
@@ -154,7 +133,7 @@ const PartnerInfos = ({
       </p>
       {partner.videos && partner.videos.length > 0 ? (
         <Row type="flex">
-          {partner.videos.map((v) => (
+          {partner.videos.map(v => (
             <Col key={v}>
               <video key={v} src={v} controls />
             </Col>

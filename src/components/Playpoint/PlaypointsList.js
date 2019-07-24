@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Empty, Card, Icon, Popconfirm } from 'antd';
+import {
+  Empty, Card, Icon, Popconfirm,
+} from 'antd';
 import { Translate } from 'react-localize-redux';
 import PlaypointInfos from './PlaypointInfos';
 import QrcodeManager from '../QRCode/QrcodeManager';
@@ -33,11 +35,11 @@ const PlaypointsList = ({
   const togglePlaypoint = (id) => {
     iaxios()
       .patch(`/playpoints/${id}/enabled`, {
-        enabled: !playpoints.find((p) => p.id === id).enabled,
+        enabled: !playpoints.find(p => p.id === id).enabled,
       })
       .then((res) => {
         if (res !== 'error') {
-          const playpointIndex = playpoints.findIndex((p) => p.id === id);
+          const playpointIndex = playpoints.findIndex(p => p.id === id);
           const newPlaypoints = [...playpoints];
           newPlaypoints.splice(playpointIndex, 1, res.data);
           setPlaypoints(newPlaypoints);
@@ -50,7 +52,7 @@ const PlaypointsList = ({
       .delete(`/playpoints/${id}`, { params: { company: selectedCompany } })
       .then((res) => {
         if (res !== 'error') {
-          const playpointIndex = playpoints.findIndex((p) => p.id === id);
+          const playpointIndex = playpoints.findIndex(p => p.id === id);
           const newPlaypoints = [...playpoints];
           newPlaypoints.splice(playpointIndex, 1);
           setPlaypoints(newPlaypoints);
@@ -63,8 +65,7 @@ const PlaypointsList = ({
     selectPlaypoint(id);
   };
 
-  const renderPlaypoints = () =>
-    playpoints.map((p) => (
+  const renderPlaypoints = () => playpoints.map(p => (
       <Card
         key={p.id}
         style={{
@@ -113,12 +114,12 @@ const PlaypointsList = ({
           </div>
         )}
       </Card>
-    ));
+  ));
 
   const { Meta } = Card;
 
   const managerProps = {
-    playpoint: playpoints.find((p) => p.id === selectedPlaypoint),
+    playpoint: playpoints.find(p => p.id === selectedPlaypoint),
     managerVisible,
     setManagerVisible,
   };

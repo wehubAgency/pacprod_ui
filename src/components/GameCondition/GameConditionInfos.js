@@ -1,8 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Translate } from 'react-localize-redux';
 import moment from '../../moment';
 import TargetTime from '../TargetTime/TargetTime';
 import Map from '../Map';
+
+const propTypes = {
+  gameCondition: PropTypes.shape().isRequired,
+};
 
 const GameConditionInfos = ({ gameCondition }) => {
   const { coordinates } = gameCondition.location;
@@ -22,13 +27,11 @@ const GameConditionInfos = ({ gameCondition }) => {
         center={{ lng: coordinates[0], lat: coordinates[1] }}
         radius={gameCondition.radius}
       />
-      <TargetTime
-        style={{ margin: '25px auto' }}
-        week={gameCondition.gameHours}
-        readonly
-      />
+      <TargetTime style={{ margin: '25px auto' }} week={gameCondition.gameHours} readonly />
     </div>
   );
 };
+
+GameConditionInfos.propTypes = propTypes;
 
 export default GameConditionInfos;

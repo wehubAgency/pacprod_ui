@@ -14,11 +14,7 @@ const propTypes = {
 };
 
 const GameConditionTable = ({
-  gameConditions,
-  setGameConditions,
-  config,
-  openModal,
-  fetching,
+  gameConditions, setGameConditions, config, openModal, fetching,
 }) => {
   const [showDisabled, setShowDisabled] = useState(false);
   const { componentConfig } = config.entities.gameCondition;
@@ -28,7 +24,7 @@ const GameConditionTable = ({
       .delete(`/gameconditions/${id}`)
       .then((res) => {
         if (res !== 'error') {
-          const index = gameConditions.findIndex((g) => g.id === res.data.id);
+          const index = gameConditions.findIndex(g => g.id === res.data.id);
           const newGameConditions = [...gameConditions];
           newGameConditions.splice(index, 1);
           setGameConditions(newGameConditions);
@@ -39,11 +35,11 @@ const GameConditionTable = ({
   const toggleGameCondition = (id) => {
     iaxios()
       .patch(`/gameconditions/${id}/enabled`, {
-        enabled: !gameConditions.find((g) => g.id === id).enabled,
+        enabled: !gameConditions.find(g => g.id === id).enabled,
       })
       .then((res) => {
         if (res !== 'error') {
-          const index = gameConditions.findIndex((g) => g.id === res.data.id);
+          const index = gameConditions.findIndex(g => g.id === res.data.id);
           const newGameConditions = [...gameConditions];
           newGameConditions.splice(index, 1, res.data);
           setGameConditions(newGameConditions);
@@ -68,20 +64,16 @@ const GameConditionTable = ({
       confirm: <Translate id="gameConditionComponent.confirmRemove" />,
     },
   ];
-  const columns = generateColumns(
-    componentConfig,
-    'gameConditionComponent',
-    actions,
-  );
+  const columns = generateColumns(componentConfig, 'gameConditionComponent', actions);
 
   return (
     <div style={{ marginTop: '50px' }}>
-      <Switch checked={showDisabled} onChange={(v) => setShowDisabled(v)} />
+      <Switch checked={showDisabled} onChange={v => setShowDisabled(v)} />
       <span style={{ marginLeft: 15 }}>
         <Translate id="showDisabled" />
       </span>
       <Table
-        dataSource={gameConditions.filter((g) => g.enabled === !showDisabled)}
+        dataSource={gameConditions.filter(g => g.enabled === !showDisabled)}
         columns={columns}
         rowKey="id"
         loading={fetching}

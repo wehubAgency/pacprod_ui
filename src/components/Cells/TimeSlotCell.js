@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Modal } from 'antd';
 import { Translate } from 'react-localize-redux';
 import TargetTime from '../TargetTime/TargetTime';
+
+const propTypes = {
+  infos: PropTypes.shape().isRequired,
+};
 
 const TimeSlotCell = ({ infos }) => {
   const [visible, setVisible] = useState(false);
@@ -33,5 +38,7 @@ const TimeSlotCell = ({ infos }) => {
     </div>
   );
 };
+
+TimeSlotCell.propTypes = propTypes;
 
 export { TimeSlotCell };

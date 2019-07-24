@@ -15,11 +15,7 @@ const propTypes = {
 };
 
 const QuizSettingsForm = ({
-  general: { config },
-  quiz,
-  allQuiz,
-  setAllQuiz,
-  translate,
+  general: { config }, quiz, allQuiz, setAllQuiz, translate,
 }) => {
   const [loading, setLoading] = useState(false);
   const { formConfig, editConfig } = config.entities.quizSettings;
@@ -37,7 +33,7 @@ const QuizSettingsForm = ({
           .patch(`/quiz/${quiz.id}/settings`, { ...values })
           .then((res) => {
             if (res !== 'error') {
-              const index = allQuiz.findIndex((q) => q.id === res.data.id);
+              const index = allQuiz.findIndex(q => q.id === res.data.id);
               const newQuiz = [...allQuiz];
               newQuiz.splice(index, 1, res.data);
               setAllQuiz(newQuiz);

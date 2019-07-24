@@ -13,11 +13,7 @@ const propTypes = {
 };
 
 const PartnerList = ({
-  partners,
-  setPartners,
-  selectedPartner,
-  selectPartner,
-  translate,
+  partners, setPartners, selectedPartner, selectPartner, translate,
 }) => {
   const [oldOrder, setOldOrder] = useState([]);
 
@@ -32,8 +28,7 @@ const PartnerList = ({
   const grid = 16;
 
   const getItemStyle = (isDragging, draggableStyle, id) => ({
-    border:
-      selectedPartner === id ? '2px solid lightgrey' : '1px solid lightgrey',
+    border: selectedPartner === id ? '2px solid lightgrey' : '1px solid lightgrey',
     borderRadius: '2px',
     userSelect: 'none',
     padding: grid,
@@ -42,7 +37,7 @@ const PartnerList = ({
     ...draggableStyle,
   });
 
-  const getListStyle = (isDraggingOver) => ({
+  const getListStyle = isDraggingOver => ({
     background: isDraggingOver ? '#fafafa' : 'white',
     padding: grid,
     width: '100%',
@@ -56,9 +51,7 @@ const PartnerList = ({
     if (!result.destination) {
       return;
     }
-    setPartners(
-      reorder(partners, result.source.index, result.destination.index),
-    );
+    setPartners(reorder(partners, result.source.index, result.destination.index));
     iaxios()
       .patch(`/partners/${result.draggableId}/order`, {
         order: result.destination.index,
@@ -72,10 +65,7 @@ const PartnerList = ({
 
   return (
     <div>
-      <DragDropContext
-        onDragEnd={onDragEnd}
-        onBeforeDragStart={onBeforeDragStart}
-      >
+      <DragDropContext onDragEnd={onDragEnd} onBeforeDragStart={onBeforeDragStart}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div
@@ -84,27 +74,18 @@ const PartnerList = ({
               style={getListStyle(snapshot.isDraggingOver)}
             >
               {partners.map((partner, index) => (
-                <Draggable
-                  key={partner.id}
-                  draggableId={partner.id}
-                  index={index}
-                >
+                <Draggable key={partner.id} draggableId={partner.id} index={index}>
                   {(prov, snap) => (
                     <div
                       ref={prov.innerRef}
                       {...prov.draggableProps}
                       {...prov.dragHandleProps}
-                      style={getItemStyle(
-                        snap.isDragging,
-                        prov.draggableProps.style,
-                        partner.id,
-                      )}
+                      style={getItemStyle(snap.isDragging, prov.draggableProps.style, partner.id)}
                       onClick={() => selectPartner(partner.id)}
                       role="button"
                       tabIndex={0}
                     >
-                      {partner.name}{' '}
-                      {!partner.enabled && ` (${translate('disabled')})`}
+                      {partner.name} {!partner.enabled && ` (${translate('disabled')})`}
                     </div>
                   )}
                 </Draggable>
