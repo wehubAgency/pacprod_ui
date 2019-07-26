@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Translate } from 'react-localize-redux';
+import { compose } from 'redux';
+import { Translate, withLocalize } from 'react-localize-redux';
 import {
   Form,
   Input,
@@ -8,23 +9,27 @@ import {
   Col,
   Checkbox,
   InputNumber,
+  Upload,
+  Icon,
   Modal,
+  message,
   DatePicker,
   TimePicker,
   Switch,
   Radio,
 } from 'antd';
+import axios from 'axios';
 import TargetTime from './TargetTime/TargetTime';
 import Map from './Map';
 import moment from '../moment';
+import { ADMIN_API_URI } from '../constants';
 import DeleteFile from './DeleteFile';
 import styles from '../styles/components/FormGen.style';
-import UploadFile from './UploadFile';
 
 const { TextArea } = Input;
 
 const FormGen = ({
-  formConfig, form, edit, editConfig, datas, formName,
+  formConfig, form, edit, editConfig, datas, formName, translate,
 }) => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -83,6 +88,56 @@ const FormGen = ({
     return result;
   }, []);
 
+  const beforeUpload = (file, key, item) => {
+    const fileList = form.getFieldsValue()[key] || [];
+    const filesLength = fileList.length;
+
+    const { uploadRules } = item;
+    let hasEnoughImage;
+    if (edit && edit[key]) {
+      const filesToDelete = form.getFieldValue(`${key}ToDelete`);
+      const filesToDeleteLength = Array.isArray(filesToDelete) ? filesToDelete.length : 0;
+      const originFilesLength = Array.isArray(edit[key]) ? edit[key].length : 1;
+      hasEnoughImage = originFilesLength + filesLength - filesToDeleteLength < uploadRules.number;
+    } else {
+      hasEnoughImage = filesLength < uploadRules.number;
+    }
+    if (!hasEnoughImage) {
+      message.error(translate('uploadRules.number', { number: uploadRules.number }));
+    }
+
+    const goodFormat = uploadRules.formats.includes(file.type);
+    if (!goodFormat) {
+      message.error(translate('uploadRules.formats', { format: uploadRules.formats }));
+    }
+
+    const goodSize = file.size / 1024 / 1024 < uploadRules.size;
+    if (!goodSize) {
+      message.error(translate('uploadRules.size', { size: uploadRules.size }));
+    }
+
+    if (!(hasEnoughImage && goodFormat && goodSize)) {
+      throw new Error("Erreur pendant l'upload");
+    }
+
+    return true;
+  };
+
+  const onPreview = (file, item) => {
+    if (file.type !== 'video/mp4') {
+      let settings;
+      if (item.previewSettings) {
+        const { ratio } = item.previewSettings;
+        settings = { paddingTop: `${(ratio.height / ratio.width) * 100}%` };
+      } else {
+        settings = { height: '50vh', backgroundSize: 'contain' };
+      }
+      setPreviewSettings(settings);
+      setPreviewImage(file.url || file.thumbUrl);
+      setPreviewVisible(true);
+    }
+  };
+
   const onFileUpdate = (url, property, active) => {
     const actualValue = form.getFieldValue(`${property}ToDelete`);
     if (active) {
@@ -102,6 +157,24 @@ const FormGen = ({
       return e;
     }
     return e && e.fileList;
+  };
+
+  const customRequest = ({ file, onSuccess }) => {
+    const data = new FormData();
+    data.append('file', file);
+    const reqConfig = {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    };
+    axios
+      .post(`${ADMIN_API_URI}uploads`, data, reqConfig)
+      .then((res) => {
+        onSuccess(res.data, file);
+      })
+      .catch(() => {
+        message.error(translate('formGen.uploadError'));
+      });
   };
 
   const getMapChanges = (markers) => {
@@ -160,16 +233,28 @@ const FormGen = ({
         return <Switch defaultChecked={edit ? edit[key] : false} {...attributes} />;
       }
       case 'upload': {
-        const props = {
-          elKey: key,
-          item,
-          edit,
-          form,
-          setPreviewImage,
-          setPreviewSettings,
-          setPreviewVisible,
-        };
-        return <UploadFile {...props} />;
+        return (
+          <Upload.Dragger
+            listType="picture-card"
+            beforeUpload={file => beforeUpload(file, key, item)}
+            onPreview={file => onPreview(file, item)}
+            customRequest={customRequest}
+          >
+            <p className="ant-upload-drag-icon">
+              <Icon type="inbox" />
+            </p>
+            <p className="ant-upload-text">
+              <Translate
+                id="upload.text"
+                data={{
+                  format: item.uploadRules.formats,
+                  size: item.uploadRules.size,
+                  number: item.uploadRules.number,
+                }}
+              />
+            </p>
+          </Upload.Dragger>
+        );
       }
       case 'timeslot': {
         return (
@@ -294,4 +379,7 @@ const FormGen = ({
   );
 };
 
-export default Form.create({ name: 'form_gen' })(FormGen);
+export default compose(
+  Form.create({ name: 'form_gen' }),
+  withLocalize,
+)(FormGen);

@@ -8,12 +8,16 @@ import { ADMIN_API_URI } from '../constants';
 const propTypes = {
   elKey: PropTypes.string.isRequired,
   item: PropTypes.shape().isRequired,
-  edit: PropTypes.shape().isRequired,
+  edit: PropTypes.shape(),
   form: PropTypes.shape().isRequired,
   translate: PropTypes.func.isRequired,
   setPreviewImage: PropTypes.func.isRequired,
   setPreviewSettings: PropTypes.func.isRequired,
   setPreviewVisible: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  edit: null,
 };
 
 const UploadFile = ({
@@ -119,5 +123,6 @@ const UploadFile = ({
 };
 
 UploadFile.propTypes = propTypes;
+UploadFile.defaultProps = defaultProps;
 
 export default withLocalize(UploadFile);
