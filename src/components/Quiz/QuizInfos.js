@@ -6,6 +6,7 @@ import iaxios from '../../axios';
 import QuizSettingsManager from '../QuizSettings/QuizSettingsManager';
 import GameConditionManager from '../GameCondition/GameConditionManager';
 import PrizeManager from '../Prize/PrizeManager';
+import QuizDraw from './QuizDraw';
 
 const QuizInfos = ({
   quiz, setAllQuiz, allQuiz, translate,
@@ -65,6 +66,9 @@ const QuizInfos = ({
         </Tabs.TabPane>
         <Tabs.TabPane tab={<Translate id="gameConditions" />} key="4">
           <GameConditionManager game={quiz} patchGameConditions={patchGameConditions} />
+        </Tabs.TabPane>
+        <Tabs.TabPane tab={<Translate id="randomDrawing" />} key="5">
+          <QuizDraw quiz={quiz} />
         </Tabs.TabPane>
       </Tabs>
     </div>

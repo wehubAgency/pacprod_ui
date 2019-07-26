@@ -41,6 +41,11 @@
   "createPartner": "Créer un partenaire",
   "updatePartner": "Modifier un partenaire",
   "createFilter": "Créer un filtre",
+  "randomDrawing": "Tirage au sort",
+  "randomDraw": "Tirer au sort",
+  "inStock": "en stock",
+  "quizDraw": "Tirer au sort",
+  "confirmWinners": "Confirmez les gagnants",
   "update": "Modifier",
   "edit": "Modifier",
   "yes": "Oui",
@@ -663,6 +668,19 @@
   "circusQuestionPage": {
     "h1": "Questions du Quiz",
     "intro": "Gérer ici les questions qui apparaitront dans le Quiz concernant votre cirque, de votre application. Créer, modifier, effacer et changer même l'ordre des questions"
+  },
+  "quizDrawModal": {
+    "instructions": "Voici les futurs gagnants pour le lot ci-dessous. Veuillez confirmez ces gagnants pour qu'ils revoivent le lot sur leur téléphone ainsi qu'un mail les notifiants de leur gain. Si vous annulez, les lots ne seront pas remis et ils ne seront pas notifiés par mail."
+  },
+  "quizDrawForm": {
+    "label": {
+      "minimumPoints": "Point minimum",
+      "prize": "Lot",
+      "winners": "Nombre de gagnant"
+    },
+    "help": {
+      "winners": "Si vous spécifiez un nombre de gagnants supérieur au stock du lot à gagner, vous ne revevrez quand même que le nombre de gagnant correspondant au stock du lot."
+    }
   },
   "quizForm": {
     "label": {

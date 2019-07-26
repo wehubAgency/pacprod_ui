@@ -2166,6 +2166,51 @@
       },
       "componentConfig": {}
     },
+    "quizDraw": {
+      "formConfig": {
+        "minimumPoints": {
+          "type": "number",
+          "label": "minimumPoints",
+          "initialValue": 0,
+          "attributes": {
+            "min": 0
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "prize": {
+          "type": "select",
+          "label": "prize",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "winners": {
+          "type": "number",
+          "label": "winners",
+          "help": "winners",
+          "initialValue": 1,
+          "attributes": {
+            "min": 1
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      }
+    },
     "quizSessions": {
       "formConfig": {
         "sessions": {
