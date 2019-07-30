@@ -99,9 +99,12 @@ const QuizDraw = ({ general: { config }, quiz: { id, prizes }, translate }) => {
             <p style={{ fontSize: '1.5rem' }}>{potentialPrize.model.name}</p>
           </div>
           {potentialWinners.map(w => (
-            <p style={{ textAlign: 'center', fontSize: '2rem' }} key={w.id}>{`${w.firstname} ${
-              w.lastname
-            }`}</p>
+            <div>
+              <p style={{ textAlign: 'center', fontSize: '2rem' }} key={w.id}>{`${w.firstname} ${
+                w.lastname
+              }`}</p>
+              <p style={{ textAlign: 'center' }}>{w.email}</p>
+            </div>
           ))}
         </Modal>
       )}
