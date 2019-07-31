@@ -70,7 +70,7 @@ const QuestionList = ({
   };
 
   return (
-    <div className="styled-scrollbar" style={{ maxHeight: 700, overflow: 'auto' }}>
+    <div className="styled-scrollbar" style={{ maxHeight: 800, overflow: 'auto' }}>
       <DragDropContext onDragEnd={onDragEnd} onBeforeDragStart={onBeforeDragStart}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
