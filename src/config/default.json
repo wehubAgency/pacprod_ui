@@ -205,6 +205,14 @@
       "page": "SelfiePage",
       "exact": true
     },
+    "webview": {
+      "key": "webview",
+      "title": "webviewTitle",
+      "icon": "code",
+      "path": "/webview",
+      "page": "WebviewPage",
+      "exact": true
+    },
     "common": ["user"]
   },
   "entities": {
@@ -2480,6 +2488,60 @@
             "format": "LL"
           }
         }
+      }
+    },
+    "webview": {
+      "formConfig": {
+        "title": {
+          "type": "text",
+          "label": "title",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "content": {
+          "type": "wysiwyg",
+          "label": "content",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      }
+    },
+    "webviewUrl": {
+      "formConfig": {
+        "title": {
+          "type": "text",
+          "label": "title",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "url": {
+          "type": "text",
+          "label": "url",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
       }
     }
   }

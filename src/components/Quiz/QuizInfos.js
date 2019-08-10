@@ -68,7 +68,7 @@ const QuizInfos = ({
           <GameConditionManager game={quiz} patchGameConditions={patchGameConditions} />
         </Tabs.TabPane>
         <Tabs.TabPane tab={<Translate id="randomDrawing" />} key="5">
-          <QuizDraw quiz={quiz} />
+          <QuizDraw quiz={quiz} setAllQuiz={setAllQuiz} />
         </Tabs.TabPane>
       </Tabs>
     </div>

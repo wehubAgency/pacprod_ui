@@ -5,7 +5,7 @@ import { Translate } from 'react-localize-redux';
 import Carousel from 'react-images';
 
 const propTypes = {
-  infos: PropTypes.shape().isRequired,
+  infos: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 const GalleryCell = ({ infos }) => {

@@ -33,24 +33,13 @@ const RouteGen = ({ general }) => {
       allFeatures.forEach((f) => {
         if (routing[f].routes) {
           Object.entries(routing[f].routes).forEach(([key, route]) => {
-            routes.push(
-              <Route
-                key={key}
-                path={route.path}
-                component={Pages[route.page]}
-              />,
-            );
+            routes.push(<Route key={key} path={route.path} component={Pages[route.page]} />);
           });
         } else {
-          const { key, path, page, exact } = routing[f];
-          routes.push(
-            <Route
-              key={key}
-              exact={exact}
-              path={path}
-              component={Pages[page]}
-            />,
-          );
+          const {
+            key, path, page, exact,
+          } = routing[f];
+          routes.push(<Route key={key} exact={exact} path={path} component={() => Pages[page]} />);
         }
       });
     }

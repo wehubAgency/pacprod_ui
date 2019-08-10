@@ -22,3 +22,4 @@ export * from './GameConditionsPage';
 export * from './QuizPage';
 export * from './PartnerPage';
 export * from './SelfiePage';
+export * from './WebviewPage';

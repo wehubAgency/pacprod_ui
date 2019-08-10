@@ -4,7 +4,7 @@ import { Button, Modal } from 'antd';
 import { Translate } from 'react-localize-redux';
 
 const propTypes = {
-  infos: PropTypes.shape().isRequired,
+  infos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 const VideoCell = ({ infos }) => {

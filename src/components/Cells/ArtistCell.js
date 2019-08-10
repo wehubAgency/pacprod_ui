@@ -6,7 +6,7 @@ const propTypes = {
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
-  style: PropTypes.shape().isRequired,
+  style: PropTypes.object.isRequired,
 };
 
 const artistCell = ({ infos: { image, name }, style }) => (

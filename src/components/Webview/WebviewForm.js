@@ -1,27 +1,23 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal } from 'antd';
-import { connect } from 'react-redux';
+import { Modal, Button } from 'antd';
 import { Translate } from 'react-localize-redux';
-import formateData from '../../services/formateData';
-import { selectApp, setApps } from '../../actions';
+import { connect } from 'react-redux';
 import FormGen from '../FormGen';
 import iaxios from '../../axios';
+import formateData from '../../services/formateData';
 
 const propTypes = {
   inModal: PropTypes.bool,
   setModalVisible: PropTypes.func,
   modalVisible: PropTypes.bool,
+  webviews: PropTypes.arrayOf(PropTypes.shape()),
+  setWebviews: PropTypes.func,
+  selectedWebview: PropTypes.string,
   externalFormRef: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.shape({
-      current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]),
-    }),
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
-  apps: PropTypes.arrayOf(PropTypes.shape()),
-  setApps: PropTypes.func.isRequired,
-  selectedApp: PropTypes.string,
-  formMode: PropTypes.string.isRequired,
   general: PropTypes.shape({
     config: PropTypes.shape().isRequired,
   }).isRequired,
@@ -32,52 +28,52 @@ const defaultProps = {
   setModalVisible: () => {},
   modalVisible: false,
   externalFormRef: null,
-  apps: [],
-  selectedApp: '',
+  webviews: [],
+  setWebviews: () => {},
+  selectedWebview: '',
 };
 
-const AppForm = ({
-  general: { config, currentApp },
+const WebviewForm = ({
+  general: { config },
+  externalFormRef,
   formMode,
   modalVisible,
   setModalVisible,
   inModal,
-  externalFormRef,
-  apps,
-  selectedApp,
-  ...props
+  webviews,
+  setWebviews,
+  selectedWebview,
 }) => {
+  const { formConfig, editConfig } = config.entities.webview;
   const [loading, setLoading] = useState(false);
-  const { formConfig, editConfig } = config.entities.app;
   const formRef = useRef(null);
 
-  const createApp = (formData) => {
-    iaxios('super_admin')
-      .post('/apps', formData)
+  const createWebview = (formData, form) => {
+    iaxios()
+      .post('/webviews', formData)
       .then((res) => {
         if (res !== 'error') {
-          props.setApps({ apps: [...apps, res.data] });
+          setWebviews([...webviews, res.data]);
           if (inModal) {
             setModalVisible(false);
           }
+          form.resetFields();
         }
         setLoading(false);
       });
   };
 
-  const updateApp = (formData) => {
+  const updateWebview = (formData, form) => {
     formData.append('_method', 'PUT');
-    iaxios('super_admin')
-      .post(`/apps/${selectedApp}`, formData)
+    iaxios()
+      .post(`/webviews/${selectedWebview}`, formData)
       .then((res) => {
         if (res !== 'error') {
-          const appIndex = apps.findIndex(a => a.id === res.data.id);
-          const newApps = [...apps];
-          newApps.splice(appIndex, 1, res.data);
-          props.setApps({ apps: newApps });
-          if (currentApp.id === res.data.id) {
-            props.selectApp({ selectedApp: res.data, config, update: true });
-          }
+          const index = webviews.findIndex(s => s.id === res.data.id);
+          const newWebviews = [...webviews];
+          newWebviews.splice(index, 1, res.data);
+          form.resetFields();
+          setWebviews(newWebviews);
           if (inModal) {
             setModalVisible(false);
           }
@@ -92,19 +88,20 @@ const AppForm = ({
     const form = formRef.current;
 
     e.preventDefault();
-    form.validateFieldsAndScroll((err, values) => {
+    form.validateFields((err, values) => {
       if (err === null) {
         const data = { ...values };
         const formData = formateData(data);
         if (formMode === 'create') {
-          createApp(formData);
+          createWebview(formData, form);
         } else if (formMode === 'edit') {
-          updateApp(formData);
+          updateWebview(formData, form);
         }
       } else {
         setLoading(false);
       }
     });
+    setLoading(false);
   };
 
   const closeModal = () => {
@@ -117,63 +114,23 @@ const AppForm = ({
     }
   };
 
-  const features = [
-    {
-      value: 'circusQuiz',
-      label: 'circusQuiz',
-    },
-    {
-      value: 'quiz',
-      label: 'quiz',
-    },
-    {
-      value: 'qrflash',
-      label: 'qrflash',
-    },
-    {
-      value: 'partner',
-      label: 'partner',
-    },
-    {
-      value: 'selfie',
-      label: 'selfie',
-    },
-    {
-      value: 'webview',
-      label: 'webview',
-    },
-  ];
-
-  const type = [
-    {
-      value: 'circus',
-      label: 'circus',
-    },
-    {
-      value: 'flashapp',
-      label: 'flashapp',
-    },
-  ];
-
   const modalProps = {
-    title: formMode === 'create' ? <Translate id="createApp" /> : <Translate id="editApp" />,
+    title:
+      formMode === 'create' ? <Translate id="createWebview" /> : <Translate id="updateWebview" />,
     visible: modalVisible,
     onCancel: closeModal,
     onOk: onSubmit,
     confirmLoading: loading,
     destroyOnClose: true,
+    width: 900,
   };
 
   const formGenProps = {
     formConfig,
     editConfig,
     ref: externalFormRef || formRef,
-    edit: formMode === 'edit' ? apps.find(a => a.id === selectedApp) : null,
-    formName: 'appForm',
-    datas: {
-      features,
-      type,
-    },
+    edit: formMode === 'edit' ? webviews.find(w => w.id === selectedWebview) : null,
+    formName: 'webviewForm',
   };
 
   if (externalFormRef) {
@@ -194,17 +151,17 @@ const AppForm = ({
     <div>
       <FormGen {...formGenProps} />
       <Button type="primary" onClick={onSubmit}>
-        <Translate id="createApp" />
+        <Translate id="createWebview" />
       </Button>
     </div>
   );
 };
 
-AppForm.propTypes = propTypes;
-AppForm.defaultProps = defaultProps;
+WebviewForm.propTypes = propTypes;
+WebviewForm.defaultProps = defaultProps;
 const mapStateToProps = ({ general }) => ({ general });
 
 export default connect(
   mapStateToProps,
-  { selectApp, setApps },
-)(AppForm);
+  {},
+)(WebviewForm);

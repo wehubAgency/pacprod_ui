@@ -2,12 +2,16 @@ import React, { useRef, useState } from 'react';
 import { Translate, withLocalize } from 'react-localize-redux';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Card, Button, Modal } from 'antd';
+import {
+  Card, Button, Modal, message,
+} from 'antd';
 import FormGen from '../FormGen';
 import iaxios from '../../axios';
 import formateData from '../../services/formateData';
 
-const QuizDraw = ({ general: { config }, quiz: { id, prizes }, translate }) => {
+const QuizDraw = ({
+  general: { config }, quiz: { id, prizes }, setAllQuiz, translate,
+}) => {
   const [potentialWinners, setPotentialWinners] = useState([]);
   const [potentialPrize, setPotentialPrize] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -44,7 +48,24 @@ const QuizDraw = ({ general: { config }, quiz: { id, prizes }, translate }) => {
   };
 
   const confirmWinners = () => {
-    console.log(potentialWinners);
+    iaxios()
+      .post(`/quiz/${id}/winners`, {
+        winners: potentialWinners.map(w => ({ id: w.id, quizEntry: w.quizEntryId })),
+        prize: potentialPrize.id,
+      })
+      .then((res) => {
+        if (res !== 'error') {
+          message.success(translate('success'));
+
+          iaxios()
+            .get('/quiz')
+            .then((r) => {
+              setAllQuiz(r.data);
+            });
+          setPotentialPrize(null);
+          setPotentialWinners([]);
+        }
+      });
   };
 
   const options = {

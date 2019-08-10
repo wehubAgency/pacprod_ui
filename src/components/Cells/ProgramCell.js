@@ -7,7 +7,13 @@ import { Translate } from 'react-localize-redux';
 
 const propTypes = {
   infos: PropTypes.shape({
-    shows: PropTypes.arrayOf(PropTypes.object).isRequired,
+    shows: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
   }).isRequired,
 };
 

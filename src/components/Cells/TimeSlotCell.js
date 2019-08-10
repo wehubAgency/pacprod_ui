@@ -5,7 +5,7 @@ import { Translate } from 'react-localize-redux';
 import TargetTime from '../TargetTime/TargetTime';
 
 const propTypes = {
-  infos: PropTypes.shape().isRequired,
+  infos: PropTypes.object.isRequired,
 };
 
 const TimeSlotCell = ({ infos }) => {

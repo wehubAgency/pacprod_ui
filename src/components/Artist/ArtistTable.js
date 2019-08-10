@@ -6,9 +6,15 @@ import generateColumns from '../../services/generateColumns';
 import iaxios from '../../axios';
 
 const propTypes = {
-  artists: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  artists: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   setArtists: PropTypes.func.isRequired,
-  config: PropTypes.shape().isRequired,
+  config: PropTypes.shape({
+    componentConfig: PropTypes.object.isRequired,
+  }).isRequired,
   openModal: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
 };
@@ -16,7 +22,7 @@ const propTypes = {
 const ArtistTable = ({
   artists, setArtists, config, openModal, fetching,
 }) => {
-  const { componentConfig } = config.entities.artist;
+  const { componentConfig } = config;
 
   const removeArtist = (id) => {
     iaxios()

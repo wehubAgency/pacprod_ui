@@ -10,6 +10,8 @@ const propTypes = {
 };
 const CircusInfos = ({ circus }) => {
   const { labelStyle } = styles;
+  const strings = ['description', 'email', 'phone'];
+  const links = ['facebook', 'twitter', 'instagram', 'youtube', 'website'];
   return (
     <div style={{ marginTop: '50px' }}>
       <h1 style={{ textAlign: 'center' }}>{circus.name}</h1>
@@ -20,80 +22,36 @@ const CircusInfos = ({ circus }) => {
         height="250"
         alt={circus.name}
       />
-      <p style={labelStyle}>
-        <Translate id="entityInfos.description" />:
-      </p>
-      <p>
-        {circus.description ? circus.description : <Translate id="entityInfos.emptyDescription" />}
-      </p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.email" />
-      </p>
-      <p>{circus.email ? circus.email : <Translate id="entityInfos.emptyEmail" />}</p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.phone" />
-      </p>
-      <p>{circus.phone ? circus.phone : <Translate id="entityInfos.emptyPhone" />}</p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.facebook" />
-      </p>
-      <p>
-        {circus.facebook ? (
-          <a href={circus.facebook} target="_blank" rel="noopener noreferrer">
-            {circus.facebook}
-          </a>
-        ) : (
-          <Translate id="entityInfos.emptyFacebook" />
-        )}
-      </p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.twitter" />
-      </p>
-      <p>
-        {circus.twitter ? (
-          <a href={circus.twitter} target="_blank" rel="noopener noreferrer">
-            {circus.twitter}
-          </a>
-        ) : (
-          <Translate id="entityInfos.emptyTwitter" />
-        )}
-      </p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.instagram" />
-      </p>
-      <p>
-        {circus.instagram ? (
-          <a href={circus.instagram} target="_blank" rel="noopener noreferrer">
-            {circus.instagram}
-          </a>
-        ) : (
-          <Translate id="entityInfos.emptyInstagram" />
-        )}
-      </p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.youtube" />
-      </p>
-      <p>
-        {circus.youtube ? (
-          <a href={circus.youtube} target="_blank" rel="noopener noreferrer">
-            {circus.youtube}
-          </a>
-        ) : (
-          <Translate id="entityInfos.emptyYoutube" />
-        )}
-      </p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.website" />
-      </p>
-      <p>
-        {circus.website ? (
-          <a href={circus.website} target="_blank" rel="noopener noreferrer">
-            {circus.website}
-          </a>
-        ) : (
-          <Translate id="entityInfos.emptyWebsite" />
-        )}
-      </p>
+      {strings.map(s => (
+        <div key={s}>
+          <p style={labelStyle}>
+            <Translate id={`entityInfos.${s}`} />:
+          </p>
+          <p>
+            {circus[s] ? (
+              circus[s]
+            ) : (
+              <Translate id={`entityInfos.empty${s.charAt(0).toUpperCase() + s.slice(1)}`} />
+            )}
+          </p>
+        </div>
+      ))}
+      {links.map(l => (
+        <div key={l}>
+          <p style={labelStyle}>
+            <Translate id={`entityInfos.${l}`} />
+          </p>
+          <p>
+            {circus[l] ? (
+              <a href={circus[l]} target="_blank" rel="noopener noreferrer">
+                {circus[l]}
+              </a>
+            ) : (
+              <Translate id={`entityInfos.empty${l.charAt(0).toUpperCase() + l.slice(1)}`} />
+            )}
+          </p>
+        </div>
+      ))}
       <p style={labelStyle}>
         <Translate id="entityInfos.photos" />
       </p>

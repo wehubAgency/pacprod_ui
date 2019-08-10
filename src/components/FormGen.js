@@ -18,6 +18,9 @@ import {
   Switch,
   Radio,
 } from 'antd';
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState, convertFromRaw } from 'draft-js';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import axios from 'axios';
 import TargetTime from './TargetTime/TargetTime';
 import Map from './Map';
@@ -293,6 +296,15 @@ const FormGen = ({
             />
           </div>
         );
+      case 'wysiwyg': {
+        let content;
+        if (edit) {
+          content = EditorState.createWithContent(convertFromRaw(JSON.parse(edit[key])));
+        } else {
+          content = EditorState.createEmpty();
+        }
+        return <Editor defaultEditorState={content} />;
+      }
       default:
         throw new Error('Erreur de configuration dans le formulaire');
     }
