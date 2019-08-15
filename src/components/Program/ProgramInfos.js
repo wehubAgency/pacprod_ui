@@ -1,31 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Translate, withLocalize } from 'react-localize-redux';
-import { List, Avatar, Button } from 'antd';
+import { Button } from 'antd';
+import ProgramOrderManager from './ProgramOrderManager';
 import iaxios from '../../axios';
 
 const propTypes = {
   program: PropTypes.shape().isRequired,
   openModal: PropTypes.func.isRequired,
-  translate: PropTypes.func.isRequired,
   programs: PropTypes.arrayOf(PropTypes.object).isRequired,
   setPrograms: PropTypes.func.isRequired,
   selectProgram: PropTypes.func.isRequired,
 };
 
 const ProgramInfos = ({
-  program, openModal, translate, programs, setPrograms, selectProgram,
+  program, openModal, programs, setPrograms, selectProgram,
 }) => {
-  const renderShowsItem = show => (
-    <List.Item key={show.id}>
-      <List.Item.Meta
-        avatar={<Avatar src={show.image} />}
-        title={`${show.name} ${!show.enabled ? translate('programInfos.disabled') : ''}`}
-        description={show.description}
-      />
-    </List.Item>
-  );
-
   const toggleProgram = () => {
     iaxios()
       .patch(`programs/${program.id}/enabled`, { enabled: !program.enabled })
@@ -59,10 +49,15 @@ const ProgramInfos = ({
 
   return (
     <div>
-      <h2>
+      <h2 style={{ textAlign: 'center' }}>
         {program.name} {!program.enabled ? <Translate id="programInfos.disabled" /> : ''}
       </h2>
-      <List bordered dataSource={program.shows} renderItem={renderShowsItem} />
+      <ProgramOrderManager
+        shows={program.shows}
+        programs={programs}
+        setPrograms={setPrograms}
+        program={program}
+      />
       <div style={{ marginTop: 50 }}>
         <Button style={{ marginRight: 15 }} type="primary" onClick={() => openModal('edit')}>
           <span>

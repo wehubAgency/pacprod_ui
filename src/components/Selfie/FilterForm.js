@@ -88,6 +88,7 @@ const FilterForm = ({
 
   const onCancel = () => {
     setModalVisible(false);
+    setFilterUri('');
   };
 
   return (

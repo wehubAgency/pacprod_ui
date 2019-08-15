@@ -16,7 +16,7 @@ const CircusManager = () => {
   const currentEntity = useSelector(({ general }) => general.currentEntity);
   const dispatch = useDispatch();
 
-  const { data, fetching } = useFetchData(`/circus/${currentEntity.id}`);
+  const { data, fetching } = useFetchData(`/circus/${currentEntity.id}`, '');
 
   useEffect(() => {
     setCircus(data);

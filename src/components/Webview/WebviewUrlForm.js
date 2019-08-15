@@ -1,11 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button } from 'antd';
 import { Translate } from 'react-localize-redux';
-import { connect } from 'react-redux';
-import FormGen from '../FormGen';
-import iaxios from '../../axios';
-import formateData from '../../services/formateData';
+import Form from '../Form';
 
 const propTypes = {
   inModal: PropTypes.bool,
@@ -33,135 +29,30 @@ const defaultProps = {
   selectedWebview: '',
 };
 
-const WebviewUrlForm = ({
-  general: { config },
-  externalFormRef,
-  formMode,
-  modalVisible,
-  setModalVisible,
-  inModal,
-  webviews,
-  setWebviews,
-  selectedWebview,
+const WebviewForm = ({
+  webviews, setWebviews, selectedWebview, ...props
 }) => {
-  const { formConfig, editConfig } = config.entities.webviewUrl;
-  const [loading, setLoading] = useState(false);
-  const formRef = useRef(null);
-
-  const createWebview = (formData, form) => {
-    iaxios()
-      .post('/webviews', formData)
-      .then((res) => {
-        if (res !== 'error') {
-          setWebviews([...webviews, res.data]);
-          if (inModal) {
-            setModalVisible(false);
-          }
-          form.resetFields();
-        }
-        setLoading(false);
-      });
-  };
-
-  const updateWebview = (formData, form) => {
-    formData.append('_method', 'PUT');
-    iaxios()
-      .post(`/webviews/${selectedWebview}`, formData)
-      .then((res) => {
-        if (res !== 'error') {
-          const index = webviews.findIndex(s => s.id === res.data.id);
-          const newWebviews = [...webviews];
-          newWebviews.splice(index, 1, res.data);
-          form.resetFields();
-          setWebviews(newWebviews);
-          if (inModal) {
-            setModalVisible(false);
-          }
-        }
-        setLoading(false);
-      });
-  };
-
-  const onSubmit = (e) => {
-    setLoading(true);
-
-    const form = formRef.current;
-
-    e.preventDefault();
-    form.validateFields((err, values) => {
-      if (err === null) {
-        const data = { ...values };
-        const formData = formateData(data);
-        if (formMode === 'create') {
-          createWebview(formData, form);
-        } else if (formMode === 'edit') {
-          updateWebview(formData, form);
-        }
-      } else {
-        setLoading(false);
-      }
-    });
-    setLoading(false);
-  };
-
-  const closeModal = () => {
-    const form = formRef.current;
-    if (formMode === 'edit') {
-      form.resetFields();
-    }
-    if (inModal) {
-      setModalVisible(false);
-    }
-  };
-
-  const modalProps = {
-    title:
-      formMode === 'create' ? <Translate id="createWebview" /> : <Translate id="updateWebview" />,
-    visible: modalVisible,
-    onCancel: closeModal,
-    onOk: onSubmit,
-    confirmLoading: loading,
-    destroyOnClose: true,
-    width: 900,
-  };
-
-  const formGenProps = {
-    formConfig,
-    editConfig,
-    ref: externalFormRef || formRef,
-    edit: formMode === 'edit' ? webviews.find(w => w.id === selectedWebview) : null,
+  const formProps = {
+    ...props,
+    data: webviews,
+    setData: setWebviews,
+    selectedData: selectedWebview,
+    entityName: 'webviewUrl',
     formName: 'webviewForm',
+    createUrl: '/webviews',
+    updateUrl: `/webviews/${selectedWebview}`,
+    modalTitle:
+      props.formMode === 'create' ? (
+        <Translate id="createWebview" />
+      ) : (
+        <Translate id="editWebview" />
+      ),
   };
 
-  if (externalFormRef) {
-    return (
-      <div>
-        <FormGen {...formGenProps} />
-      </div>
-    );
-  }
-  if (inModal) {
-    return (
-      <Modal {...modalProps}>
-        <FormGen {...formGenProps} />
-      </Modal>
-    );
-  }
-  return (
-    <div>
-      <FormGen {...formGenProps} />
-      <Button type="primary" onClick={onSubmit}>
-        <Translate id="createWebview" />
-      </Button>
-    </div>
-  );
+  return <Form {...formProps} />;
 };
 
-WebviewUrlForm.propTypes = propTypes;
-WebviewUrlForm.defaultProps = defaultProps;
-const mapStateToProps = ({ general }) => ({ general });
+WebviewForm.propTypes = propTypes;
+WebviewForm.defaultProps = defaultProps;
 
-export default connect(
-  mapStateToProps,
-  {},
-)(WebviewUrlForm);
+export default WebviewForm;

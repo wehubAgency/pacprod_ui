@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Translate } from 'react-localize-redux';
+import iaxios from '../../axios';
 
-const ProgramShowOrder = ({
-  targetKeys, setTargetKeys, programShows, setProgramShows,
+const ProgramOrderManager = ({
+  shows, programs, setPrograms, program,
 }) => {
+  const [items, setItems] = useState(shows);
+  const [oldOrder, setOldOrder] = useState([]);
   const [selectedShow, selectShow] = useState('');
+
+  useEffect(() => {
+    setItems(shows);
+  }, [shows]);
 
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -19,8 +26,26 @@ const ProgramShowOrder = ({
     if (!result.destination) {
       return;
     }
-    setProgramShows(reorder(programShows, result.source.index, result.destination.index));
-    setTargetKeys(reorder(targetKeys, result.source.index, result.destination.index));
+    const newOrder = reorder(items, result.source.index, result.destination.index);
+    setItems(reorder(newOrder));
+    iaxios()
+      .patch(`/programs/${program.id}/order`, {
+        shows: newOrder.map(i => i.id),
+      })
+      .then((res) => {
+        if (res === 'error') {
+          setItems(oldOrder);
+        } else {
+          const index = programs.findIndex(p => p.id === program.id);
+          const newData = [...programs];
+          newData.splice(index, 1, res.data);
+          setPrograms(newData);
+        }
+      });
+  };
+
+  const onBeforeDragStart = () => {
+    setOldOrder([...items]);
   };
 
   const grid = 16;
@@ -43,8 +68,10 @@ const ProgramShowOrder = ({
 
   return (
     <div>
-      <h2>Ordonnez votre programme</h2>
-      <DragDropContext onDragEnd={onDragEnd}>
+      <h2>
+        <Translate id="programOrderManager.orderProgram" />
+      </h2>
+      <DragDropContext onDragEnd={onDragEnd} onBeforeDragStart={onBeforeDragStart}>
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div
@@ -52,7 +79,7 @@ const ProgramShowOrder = ({
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
-              {programShows.map((item, index) => (
+              {items.map((item, index) => (
                 <Draggable key={item.id} draggableId={item.id} index={index}>
                   {(prov, snap) => (
                     <div
@@ -79,4 +106,4 @@ const ProgramShowOrder = ({
   );
 };
 
-export default ProgramShowOrder;
+export default ProgramOrderManager;

@@ -1,113 +1,70 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import {
-  Modal, Spin, Transfer, Button, Typography,
-} from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Button, Row, Col } from 'antd';
 import { Translate } from 'react-localize-redux';
-import iaxios from '../../axios';
-import PrizeManager from '../Prize/PrizeManager';
+import QrcodeList from './QrcodeList';
+import QrcodeInfos from './QrcodeInfos';
+import QrcodeForm from './QrcodeForm';
+import { useFetchData } from '../../hooks';
 
-const propTypes = {
-  managerVisible: PropTypes.bool.isRequired,
-  setManagerVisible: PropTypes.func.isRequired,
-  playpoint: PropTypes.shape(),
-};
-
-const defaultProps = {
-  playpoint: null,
-};
-
-const QrcodeManager = ({ managerVisible, setManagerVisible, playpoint }) => {
+const QrcodeManager = () => {
   const [qrcodes, setQrcodes] = useState([]);
   const [selectedQrcode, selectQrcode] = useState('');
-  const [targetKeys, setTargetKeys] = useState([]);
-  const [fetching, setFetching] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [formMode, setFormMode] = useState('create');
+
+  const { data, fetching } = useFetchData('/qrcodes');
 
   useEffect(() => {
-    if (playpoint) {
-      setFetching(true);
-      const ax = iaxios();
-      ax.get('/qrcodes').then((res) => {
-        if (res !== 'error') {
-          setQrcodes(res.data);
-        }
-        setFetching(false);
-      });
-      setTargetKeys(playpoint.qrcodes.map(q => q.id));
-      return () => ax.source.cancel();
-    }
-    return () => {};
-  }, [playpoint]);
+    setQrcodes(data);
+  }, [data]);
 
-  const closeManager = () => {
-    setManagerVisible(false);
+  const openModal = (mode = 'create') => {
+    setFormMode(mode);
+    setModalVisible(true);
   };
 
-  const patchPlaypoint = () => {
-    iaxios()
-      .patch(`/playpoints/${playpoint.id}/qrcodes`, {
-        qrcodes: targetKeys,
-      })
-      .then((res) => {
-        if (res !== 'error') {
-          closeManager();
-        }
-      });
+  const formProps = {
+    inModal: true,
+    formMode,
+    modalVisible,
+    setModalVisible,
+    qrcodes,
+    setQrcodes,
+    selectQrcode,
+    selectedQrcode,
   };
 
-  const showPrizes = (id, e) => {
-    e.stopPropagation();
-    selectQrcode(id);
-  };
-
-  if (!playpoint) {
-    return null;
-  }
   return (
-    <Modal
-      title={<Translate id="qrcodeManager.title" />}
-      visible={managerVisible}
-      onCancel={() => closeManager()}
-      onOk={() => patchPlaypoint()}
-      width="600px"
-    >
-      {fetching ? (
-        <Spin />
-      ) : (
-        <div>
-          <Transfer
-            dataSource={qrcodes.map(q => ({ ...q, key: q.id }))}
-            showSearch
-            targetKeys={targetKeys}
-            filterOption={(inputValue, option) => option.description.indexOf(inputValue) > -1}
-            onChange={newTargetKeys => setTargetKeys(newTargetKeys)}
-            render={item => (
-              <span className="qrcode-item">
-                <span style={{ marginRight: 15 }}>{item.name}</span>
-                <Button
-                  shape="circle"
-                  type="dashed"
-                  icon="gift"
-                  onClick={e => showPrizes(item.id, e)}
-                />
-              </span>
-            )}
+    <div>
+      <Button type="primary" icon="plus" onClick={() => openModal()}>
+        <span>
+          <Translate id="createQrcode" />
+        </span>{' '}
+      </Button>
+      <Row style={{ marginTop: 50 }} gutter={24}>
+        <Col xl={{ span: 6 }}>
+          <QrcodeList
+            qrcodes={qrcodes}
+            selectQrcode={selectQrcode}
+            selectedQrcode={selectedQrcode}
+            fetching={fetching}
           />
+        </Col>
+        <Col xl={{ span: 18 }}>
           {selectedQrcode && (
-            <div style={{ marginTop: 25 }}>
-              <Typography.Title level={4} style={{ textAlign: 'center' }}>
-                {qrcodes.find(q => q.id === selectedQrcode).name}
-              </Typography.Title>
-              <PrizeManager qrcode={qrcodes.find(q => q.id === selectedQrcode)} />
-            </div>
+            <QrcodeInfos
+              qrcode={qrcodes.find(q => q.id === selectedQrcode)}
+              qrcodes={qrcodes}
+              setQrcodes={setQrcodes}
+              selectQrcode={selectQrcode}
+              openModal={openModal}
+            />
           )}
-        </div>
-      )}
-    </Modal>
+        </Col>
+      </Row>
+      <QrcodeForm {...formProps} />
+    </div>
   );
 };
-
-QrcodeManager.propTypes = propTypes;
-QrcodeManager.defaultProps = defaultProps;
 
 export default QrcodeManager;

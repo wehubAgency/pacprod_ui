@@ -11,9 +11,6 @@ const propTypes = {
   edit: PropTypes.shape(),
   form: PropTypes.shape().isRequired,
   translate: PropTypes.func.isRequired,
-  setPreviewImage: PropTypes.func.isRequired,
-  setPreviewSettings: PropTypes.func.isRequired,
-  setPreviewVisible: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -21,14 +18,7 @@ const defaultProps = {
 };
 
 const UploadFile = ({
-  elKey,
-  item,
-  edit,
-  form,
-  translate,
-  setPreviewSettings,
-  setPreviewImage,
-  setPreviewVisible,
+  elKey, item, edit, form, translate, ...props
 }) => {
   const beforeUpload = (file, key) => {
     const fileList = form.getFieldsValue()[key] || [];
@@ -65,21 +55,6 @@ const UploadFile = ({
     return true;
   };
 
-  const onPreview = (file) => {
-    if (file.type !== 'video/mp4') {
-      let settings;
-      if (item.previewSettings) {
-        const { ratio } = item.previewSettings;
-        settings = { paddingTop: `${(ratio.height / ratio.width) * 100}%` };
-      } else {
-        settings = { height: '50vh', backgroundSize: 'contain' };
-      }
-      setPreviewSettings(settings);
-      setPreviewImage(file.url || file.thumbUrl);
-      setPreviewVisible(true);
-    }
-  };
-
   const customRequest = ({ file, onSuccess }) => {
     const data = new FormData();
     data.append('file', file);
@@ -100,9 +75,9 @@ const UploadFile = ({
 
   return (
     <Upload.Dragger
+      {...props}
       listType="picture-card"
       beforeUpload={file => beforeUpload(file, elKey, item)}
-      onPreview={file => onPreview(file, item)}
       customRequest={customRequest}
     >
       <p className="ant-upload-drag-icon">

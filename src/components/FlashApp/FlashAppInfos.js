@@ -15,6 +15,9 @@ const FlashAppInfos = ({ flashApp }) => {
   const { labelStyle } = styles;
   const { coordinates } = flashApp.location;
 
+  const strings = ['description', 'email', 'phone'];
+  const links = ['facebook', 'twitter', 'instagram', 'youtube', 'website'];
+
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>{flashApp.name}</h1>
@@ -46,84 +49,36 @@ const FlashAppInfos = ({ flashApp }) => {
         zoom={15}
         center={{ lng: coordinates[0], lat: coordinates[1] }}
       />
-      <p style={labelStyle}>
-        <Translate id="entityInfos.description" />:
-      </p>
-      <p>
-        {flashApp.description ? (
-          flashApp.description
-        ) : (
-          <Translate id="entityInfos.emptyDescription" />
-        )}
-      </p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.email" />
-      </p>
-      <p>{flashApp.email ? flashApp.email : <Translate id="entityInfos.emptyEmail" />}</p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.phone" />
-      </p>
-      <p>{flashApp.phone ? flashApp.phone : <Translate id="entityInfos.emptyPhone" />}</p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.facebook" />
-      </p>
-      <p>
-        {flashApp.facebook ? (
-          <a href={flashApp.facebook} target="_blank" rel="noopener noreferrer">
-            {flashApp.facebook}
-          </a>
-        ) : (
-          <Translate id="entityInfos.emptyFacebook" />
-        )}
-      </p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.twitter" />
-      </p>
-      <p>
-        {flashApp.twitter ? (
-          <a href={flashApp.twitter} target="_blank" rel="noopener noreferrer">
-            {flashApp.twitter}
-          </a>
-        ) : (
-          <Translate id="entityInfos.emptyTwitter" />
-        )}
-      </p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.instagram" />
-      </p>
-      <p>
-        {flashApp.instagram ? (
-          <a href={flashApp.instagram} target="_blank" rel="noopener noreferrer">
-            {flashApp.instagram}
-          </a>
-        ) : (
-          <Translate id="entityInfos.emptyInstagram" />
-        )}
-      </p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.youtube" />
-      </p>
-      <p>
-        {flashApp.youtube ? (
-          <a href={flashApp.youtube} target="_blank" rel="noopener noreferrer">
-            {flashApp.youtube}
-          </a>
-        ) : (
-          <Translate id="entityInfos.emptyYoutube" />
-        )}
-      </p>
-      <p style={labelStyle}>
-        <Translate id="entityInfos.website" />
-      </p>
-      <p>
-        {flashApp.website ? (
-          <a href={flashApp.website} target="_blank" rel="noopener noreferrer">
-            {flashApp.website}
-          </a>
-        ) : (
-          <Translate id="entityInfos.emptyWebsite" />
-        )}
-      </p>
+      {strings.map(s => (
+        <div key={s}>
+          <p style={labelStyle}>
+            <Translate id={`entityInfos.${s}`} />:
+          </p>
+          <p>
+            {flashApp[s] ? (
+              flashApp[s]
+            ) : (
+              <Translate id={`entityInfos.empty${s.charAt(0).toUpperCase() + s.slice(1)}`} />
+            )}
+          </p>
+        </div>
+      ))}
+      {links.map(l => (
+        <div key={l}>
+          <p style={labelStyle}>
+            <Translate id={`entityInfos.${l}`} />
+          </p>
+          <p>
+            {flashApp[l] ? (
+              <a href={flashApp[l]} target="_blank" rel="noopener noreferrer">
+                {flashApp[l]}
+              </a>
+            ) : (
+              <Translate id={`entityInfos.empty${l.charAt(0).toUpperCase() + l.slice(1)}`} />
+            )}
+          </p>
+        </div>
+      ))}
       <p style={labelStyle}>
         <Translate id="entityInfos.photos" />
       </p>

@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Table, Switch } from 'antd';
 import { Translate } from 'react-localize-redux';
 import generateColumns from '../../services/generateColumns';
 import iaxios from '../../axios';
 
 const propTypes = {
-  coins: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  coins: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      enabled: PropTypes.bool.isRequired,
+    }),
+  ).isRequired,
   setCoins: PropTypes.func.isRequired,
-  config: PropTypes.shape().isRequired,
   openModal: PropTypes.func.isRequired,
 };
 
-const CoinTable = ({
-  coins, setCoins, config, openModal,
-}) => {
+const CoinTable = ({ coins, setCoins, openModal }) => {
   const [showDisabled, setShowDisabled] = useState(false);
-  const { componentConfig } = config.entities.coin;
+  const { componentConfig } = useSelector(({ general: { config } }) => config.entities.coin);
 
   const removeCoin = (id) => {
     iaxios()

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { Translate } from 'react-localize-redux';
 import ArtistForm from './ArtistForm';
@@ -7,14 +6,12 @@ import ArtistTable from './ArtistTable';
 import { useFetchData } from '../../hooks';
 
 const ArtistManager = () => {
-  const config = useSelector(({ general }) => general.config.entities.artist);
-
   const [modalVisible, setModalVisible] = useState(false);
   const [formMode, setFormMode] = useState('create');
   const [artists, setArtists] = useState([]);
   const [selectedArtist, setSelectedArtist] = useState('');
 
-  const { data, fetching } = useFetchData('/artist', []);
+  const { data, fetching } = useFetchData('/artists');
 
   useEffect(() => {
     setArtists(data);
@@ -42,7 +39,6 @@ const ArtistManager = () => {
     openModal,
     artists,
     setArtists,
-    config,
     fetching,
   };
 

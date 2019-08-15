@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Table } from 'antd';
 import { Translate } from 'react-localize-redux';
 import generateColumns from '../../services/generateColumns';
@@ -12,17 +13,14 @@ const propTypes = {
     }),
   ).isRequired,
   setArtists: PropTypes.func.isRequired,
-  config: PropTypes.shape({
-    componentConfig: PropTypes.object.isRequired,
-  }).isRequired,
   openModal: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
 };
 
 const ArtistTable = ({
-  artists, setArtists, config, openModal, fetching,
+  artists, setArtists, openModal, fetching,
 }) => {
-  const { componentConfig } = config;
+  const { componentConfig } = useSelector(({ general: { config } }) => config.entities.artist);
 
   const removeArtist = (id) => {
     iaxios()

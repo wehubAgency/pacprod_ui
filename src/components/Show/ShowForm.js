@@ -142,7 +142,7 @@ const ShowForm = ({
     ref: externalFormRef || formRef,
     edit: formMode === 'edit' ? shows.find(s => s.id === selectedShow) : null,
     formName: 'showForm',
-    datas: options,
+    data: options,
   };
 
   if (externalFormRef) {

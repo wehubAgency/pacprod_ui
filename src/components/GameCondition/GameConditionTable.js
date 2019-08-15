@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Table, Switch } from 'antd';
 import { Translate } from 'react-localize-redux';
 import generateColumns from '../../services/generateColumns';
@@ -8,16 +9,17 @@ import iaxios from '../../axios';
 const propTypes = {
   gameConditions: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   setGameConditions: PropTypes.func.isRequired,
-  config: PropTypes.shape().isRequired,
   openModal: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
 };
 
 const GameConditionTable = ({
-  gameConditions, setGameConditions, config, openModal, fetching,
+  gameConditions, setGameConditions, openModal, fetching,
 }) => {
   const [showDisabled, setShowDisabled] = useState(false);
-  const { componentConfig } = config.entities.gameCondition;
+  const { componentConfig } = useSelector(
+    ({ general: { config } }) => config.entities.gameCondition,
+  );
 
   const removeGameCondition = (id) => {
     iaxios()

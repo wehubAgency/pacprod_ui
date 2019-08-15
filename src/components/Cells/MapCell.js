@@ -28,13 +28,7 @@ const MapCell = (props) => {
       <Button type="default" onClick={displayMap}>
         <Translate id="mapCell.button" />
       </Button>
-      <Modal
-        visible={visible}
-        footer={null}
-        maskClosable
-        destroyOnClose
-        onCancel={onCancel}
-      >
+      <Modal visible={visible} footer={null} maskClosable destroyOnClose onCancel={onCancel}>
         <Map markers={[{ lat, lng }]} zoom={15} center={{ lat, lng }} />
       </Modal>
     </div>

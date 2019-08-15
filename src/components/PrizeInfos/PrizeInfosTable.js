@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Table, Switch } from 'antd';
 import { Translate } from 'react-localize-redux';
 import generateColumns from '../../services/generateColumns';
@@ -8,15 +9,14 @@ import iaxios from '../../axios';
 const propTypes = {
   prizeInfos: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   setPrizeInfos: PropTypes.func.isRequired,
-  config: PropTypes.shape().isRequired,
   openModal: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
 };
 
 const PrizeInfosTable = ({
-  prizeInfos, setPrizeInfos, config, openModal, fetching,
+  prizeInfos, setPrizeInfos, openModal, fetching,
 }) => {
-  const { componentConfig } = config.entities.prizeInfos;
+  const { componentConfig } = useSelector(({ general: { config } }) => config.entities.prizeInfos);
   const [showDisabled, setShowDisabled] = useState(false);
 
   const deletePrizeInfos = (id) => {

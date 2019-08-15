@@ -14,7 +14,9 @@ const propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]) }),
   ]),
-  circus: PropTypes.object.isRequired,
+  circus: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 const defaultProps = {
@@ -60,7 +62,6 @@ const CircusForm = ({
     formName: 'circusForm',
     modalTitle:
       formMode === 'create' ? <Translate id="createCircus" /> : <Translate id="editCircus" />,
-    createText: <Translate id="createCircus" />,
     entityName: 'circus',
   };
 

@@ -48,8 +48,14 @@ export default (data, transId, actions = []) => {
         case 'date':
           return {
             ...newEl,
-            render: infos => moment(infos).format(newEl.render.format),
+            render: (infos) => {
+              if (infos) {
+                return moment(infos).format(newEl.render.format);
+              }
+              return '';
+            },
           };
+
         case 'stringarray': {
           return {
             ...newEl,

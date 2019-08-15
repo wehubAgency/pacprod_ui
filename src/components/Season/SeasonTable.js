@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Table } from 'antd';
 import { Translate } from 'react-localize-redux';
 import generateColumns from '../../services/generateColumns';
@@ -9,26 +9,20 @@ import { updateEntity } from '../../actions';
 
 const propTypes = {
   seasons: PropTypes.arrayOf(PropTypes.object).isRequired,
-  config: PropTypes.shape().isRequired,
   openModal: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
   general: PropTypes.shape({
     currentEntity: PropTypes.shape().isRequired,
   }).isRequired,
   entityApiUri: PropTypes.string.isRequired,
-  updateEntity: PropTypes.func.isRequired,
 };
 
 const SeasonTable = ({
-  seasons,
-  config,
-  openModal,
-  fetching,
-  general: { currentEntity },
-  entityApiUri,
-  ...props
+  seasons, openModal, fetching, entityApiUri,
 }) => {
-  const { componentConfig } = config.entities.season;
+  const { componentConfig } = useSelector(({ general: { config } }) => config.entities.season);
+  const { currentEntity } = useSelector(({ general }) => general);
+  const dispatch = useDispatch();
 
   const selectSeason = (e) => {
     const { id } = e.currentTarget.dataset;
@@ -44,7 +38,7 @@ const SeasonTable = ({
           seasons: data.seasons.map(s => ({ id: s.id, name: s.name })),
           currentSeason: data.currentSeason.id,
         };
-        props.updateEntity(entity);
+        dispatch(updateEntity(entity));
       });
   };
 
@@ -82,9 +76,4 @@ const SeasonTable = ({
 
 SeasonTable.propTypes = propTypes;
 
-const mapStateToProps = ({ general }) => ({ general });
-
-export default connect(
-  mapStateToProps,
-  { updateEntity },
-)(SeasonTable);
+export default SeasonTable;

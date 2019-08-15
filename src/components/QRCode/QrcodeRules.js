@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Modal, Checkbox } from 'antd';
 import { Translate } from 'react-localize-redux';
 import FormGen from '../FormGen';
 import iaxios from '../../axios';
 
 const QrcodeRules = ({
-  visible, setVisible, qrcode, qrcodes, setQrcodes, general: { config },
+  visible, setVisible, qrcode, qrcodes, setQrcodes,
 }) => {
-  const { formConfig } = config.entities.qrcodeRules;
+  const { formConfig } = useSelector(({ general: { config } }) => config.entities.qrcodeRules);
   const [rules, setRules] = useState([]);
   const [loading, setLoading] = useState(false);
   const formRef = useRef(null);
@@ -106,9 +106,4 @@ const QrcodeRules = ({
   );
 };
 
-const mapStateToProps = ({ general }) => ({ general });
-
-export default connect(
-  mapStateToProps,
-  {},
-)(QrcodeRules);
+export default QrcodeRules;

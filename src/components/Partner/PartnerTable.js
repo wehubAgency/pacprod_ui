@@ -10,7 +10,6 @@ const propTypes = {
   selectPartner: PropTypes.func.isRequired,
   selectedPartner: PropTypes.string.isRequired,
   openModal: PropTypes.func.isRequired,
-  config: PropTypes.shape().isRequired,
   fetching: PropTypes.bool.isRequired,
 };
 
@@ -27,6 +26,7 @@ const PartnerTable = ({
     partner: partners.find(p => p.id === selectedPartner),
     partners,
     setPartners,
+    selectPartner,
     openModal,
   };
 

@@ -1981,6 +1981,14 @@
             }
           ]
         },
+        "showsTransfer": {
+          "type": "transfer",
+          "label": "shows",
+          "help": "shows",
+          "hiddenInput": "shows",
+          "titles": ["programForm.show", "programForm.program"],
+          "render": "name"
+        },
         "shows": {
           "type": "hidden",
           "rules": [

@@ -28,21 +28,10 @@ const defaultProps = {
 };
 
 const ArtistForm = ({
-  inModal,
-  formMode,
-  modalVisible,
-  setModalVisible,
-  externalFormRef,
-  artists,
-  setArtists,
-  selectedArtist,
+  artists, setArtists, selectedArtist, ...props
 }) => {
   const formProps = {
-    formMode,
-    inModal,
-    modalVisible,
-    setModalVisible,
-    ref: externalFormRef,
+    ...props,
     entityName: 'artist',
     data: artists,
     setData: setArtists,
@@ -51,8 +40,7 @@ const ArtistForm = ({
     updateUrl: `/artists/${selectedArtist}`,
     formName: 'artistForm',
     modalTitle:
-      formMode === 'create' ? <Translate id="createArtist" /> : <Translate id="editArtist" />,
-    createText: <Translate id="createArtist" />,
+      props.formMode === 'create' ? <Translate id="createArtist" /> : <Translate id="editArtist" />,
   };
 
   return <Form {...formProps} />;

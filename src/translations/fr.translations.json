@@ -36,6 +36,8 @@
   "createQuiz": "Créer un Quiz",
   "editQuiz": "Modifier le Quiz",
   "createFlashApp": "Créer une appli",
+  "createPaidprize": "Créer un lot",
+  "editPaidprize": "Modifier un lot",
   "createGameConditions": "Créer des conditions de jeu",
   "editGameConditions": "Modifier des conditions de jeu",
   "editCoin": "Modifier une pièce",
@@ -511,15 +513,15 @@
   },
   "playpointPage": {
     "h1": "Gestion des points de jeux",
-    "intro": "Gérer ici vos enseignes partenaires et leurs points de jeux. Une enseigne peut avoir plusieurs points de jeux auquel vous devez rattacher des qrcodes afin que les gens puissent jouer.",
+    "instructions": "Gérer ici vos enseignes partenaires et leurs points de jeux. Une enseigne peut avoir plusieurs points de jeux auquel vous devez rattacher des qrcodes afin que les gens puissent jouer.",
     "selectCompany": "Selectionnez une enseigne",
     "playPoints": "Points de jeu",
     "prizes": "Lots",
     "qrcodes": "QRCodes",
     "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette enseigne ? Les qrcodes placées dans les points de jeux de l'enseigne ne fonctionneront plus. Cette action est irréversible."
   },
-  "playpointSection": {
-    "title": "Points de jeux"
+  "playpointManager": {
+    "playpoints": "Points de jeux"
   },
   "prizeInfosForm": {
     "label": {
@@ -585,12 +587,19 @@
   },
   "programForm": {
     "label": {
-      "name": "Nom du programme"
+      "name": "Nom du programme",
+      "shows": "Numéros"
     },
     "manageShow": "Ajouter/Enlever des shows à votre programme",
     "show": "Numéros",
     "program": "Programme",
-    "disabled": "(désactivé)"
+    "disabled": "(désactivé)",
+    "help": {
+      "shows": "Veuillez ajouter les numéros qui font parti de votre programme. Vous pourrez les mettre dans l'ordre que vous souhaitez après la création de votre programme."
+    }
+  },
+  "programOrderManager": {
+    "orderProgram": "Ordonnez votre programme"
   },
   "programPage": {
     "h1": "Gestion des Programmes",

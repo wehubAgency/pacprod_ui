@@ -1,137 +1,62 @@
-import React, { useState, useRef } from 'react';
-import { Modal, Button } from 'antd';
-import { connect } from 'react-redux';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Translate } from 'react-localize-redux';
-import FormGen from '../FormGen';
-import formateData from '../../services/formateData';
-import iaxios from '../../axios';
+import Form from '../Form';
+
+const propTypes = {
+  inModal: PropTypes.bool,
+  setModalVisible: PropTypes.func,
+  modalVisible: PropTypes.bool,
+  externalFormRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]) }),
+  ]),
+  companies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setCompanies: PropTypes.func.isRequired,
+  selectedCompany: PropTypes.string.isRequired,
+  selectCompany: PropTypes.func.isRequired,
+  formMode: PropTypes.string.isRequired,
+};
+
+const defaultProps = {
+  inModal: false,
+  setModalVisible: () => {},
+  modalVisible: false,
+  externalFormRef: null,
+};
 
 const CompanyForm = ({
-  general: { config },
-  externalFormRef,
-  inModal,
-  formMode,
-  modalVisible,
-  setModalVisible,
-  selectedCompany,
-  selectCompany,
-  companies,
-  setCompanies,
+  companies, setCompanies, selectedCompany, selectCompany, ...props
 }) => {
-  const { formConfig, editConfig } = config.entities.company;
-  const [loading, setLoading] = useState(false);
-  const formRef = useRef(null);
-
-  const closeModal = () => {
-    setModalVisible(false);
-  };
-
-  const createCompany = (formData) => {
-    iaxios()
-      .post('companies', formData)
-      .then((res) => {
-        if (res !== 'error') {
-          setCompanies([...companies, res.data]);
-          selectCompany(res.data.id);
-          if (inModal) {
-            closeModal();
-          }
-        }
-        setLoading(false);
-      });
-  };
-
-  const updateCompany = (formData) => {
-    formData.append('_method', 'PUT');
-    iaxios()
-      .post(`/company/${selectedCompany}`, formData)
-      .then((res) => {
-        if (res !== 'error') {
-          const companyIndex = companies.findIndex(c => c.id === res.data.id);
-          const newCompanies = [...companies];
-          newCompanies.splice(companyIndex, 1, res.data);
-          setCompanies(newCompanies);
-          if (inModal) {
-            setModalVisible(false);
-          }
-        }
-        setLoading(false);
-      });
-  };
-
-  const onSubmit = (e) => {
-    setLoading(true);
-
-    const form = formRef.current;
-
-    e.preventDefault();
-    form.validateFieldsAndScroll((err, values) => {
-      if (err === null) {
-        const data = { ...values };
-        const formData = formateData(data);
-        if (formMode === 'create') {
-          createCompany(formData);
-        } else if (formMode === 'edit') {
-          updateCompany(formData);
-        }
-      } else {
-        setLoading(false);
-      }
-    });
-  };
-
   const edit = () => {
     const company = companies.find(c => c.id === selectedCompany);
     const companyEdit = { ...company, ...company.address };
     return companyEdit;
   };
 
-  const formGenProps = {
-    formConfig,
-    editConfig,
-    ref: externalFormRef || formRef,
-    edit: formMode === 'edit' ? edit() : null,
+  const formProps = {
+    ...props,
+    entityName: 'company',
+    data: companies,
+    setData: setCompanies,
+    selectedData: selectedCompany,
+    selectData: selectCompany,
+    createUrl: '/companies',
+    updateUrl: `/companies/${selectedCompany}`,
+    customEdit: edit,
     formName: 'companyForm',
-  };
-
-  const modalProps = {
-    title:
-      formMode === 'create' ? <Translate id="createCompany" /> : <Translate id="editCompany" />,
-    visible: modalVisible,
-    onCancel: closeModal,
-    onOk: onSubmit,
-    confirmLoading: loading,
-    destroyOnClose: true,
-    width: '600px',
-  };
-
-  if (externalFormRef) {
-    return (
-      <div>
-        <FormGen {...formGenProps} />
-      </div>
-    );
-  }
-  if (inModal) {
-    return (
-      <Modal {...modalProps}>
-        <FormGen {...formGenProps} />
-      </Modal>
-    );
-  }
-  return (
-    <div>
-      <FormGen {...formGenProps} />
-      <Button type="primary" onClick={onSubmit}>
+    modalTitle:
+      props.formMode === 'create' ? (
         <Translate id="createCompany" />
-      </Button>
-    </div>
-  );
+      ) : (
+        <Translate id="editCompany" />
+      ),
+  };
+
+  return <Form {...formProps} />;
 };
 
-const mapStateToProps = ({ general }) => ({ general });
+CompanyForm.propTypes = propTypes;
+CompanyForm.defaultProps = defaultProps;
 
-export default connect(
-  mapStateToProps,
-  {},
-)(CompanyForm);
+export default CompanyForm;

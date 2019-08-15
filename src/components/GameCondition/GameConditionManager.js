@@ -1,84 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Transfer, Button, Typography } from 'antd';
+import { Button } from 'antd';
 import { Translate } from 'react-localize-redux';
-import GameConditionInfos from './GameConditionInfos';
-import iaxios from '../../axios';
+import GameConditionForm from './GameConditionForm';
+import GameConditionTable from './GameConditionTable';
+import { useFetchData } from '../../hooks';
 
-const propTypes = {
-  game: PropTypes.shape().isRequired,
-  patchGameConditions: PropTypes.func.isRequired,
-};
-
-const GameConditionManager = ({ game, patchGameConditions }) => {
+const GameConditionManager = () => {
   const [gameConditions, setGameConditions] = useState([]);
-  const [targetKeys, setTargetKeys] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [formMode, setFormMode] = useState('create');
   const [selectedGameCondition, selectGameCondition] = useState('');
 
-  useEffect(() => {
-    const ax = iaxios();
-    ax.get('/gameconditions').then((res) => {
-      setGameConditions(res.data);
-    });
-    setTargetKeys(game.gameConditions.map(g => g.id));
-    /* eslint-disable-next-line */
-  }, []);
+  const { data, fetching } = useFetchData('/gameconditions');
 
-  const showGameConditions = (id, e) => {
-    e.stopPropagation();
-    selectGameCondition(id);
+  useEffect(() => {
+    setGameConditions(data);
+  }, [data]);
+
+  const openModal = (mode = 'create', e) => {
+    setFormMode(mode);
+    setModalVisible(true);
+    if (e && e.currentTarget.dataset.id) {
+      selectGameCondition(e.currentTarget.dataset.id);
+    }
   };
 
-  const updateGameConditions = () => {
-    patchGameConditions(targetKeys);
+  const formProps = {
+    inModal: true,
+    formMode,
+    modalVisible,
+    setModalVisible,
+    gameConditions,
+    setGameConditions,
+    selectedGameCondition,
+  };
+
+  const tableProps = {
+    openModal,
+    gameConditions,
+    setGameConditions,
+    fetching,
   };
 
   return (
     <div>
-      <Transfer
-        dataSource={gameConditions.map(g => ({ ...g, key: g.id }))}
-        showSearch
-        targetKeys={targetKeys}
-        filterOption={(inputValue, option) => {
-          const { name } = option;
-          return name.toLowerCase().indexOf(inputValue.toLowerCase()) > -1;
-        }}
-        onChange={newTargetKeys => setTargetKeys(newTargetKeys)}
-        render={item => (
-          <span className="gamecondition-item">
-            <span style={{ marginRight: 15 }}>{item.name}</span>
-            <Button
-              shape="circle"
-              type="dashed"
-              icon="sliders"
-              onClick={e => showGameConditions(item.id, e)}
-            />
-          </span>
-        )}
-      />
-      <Button
-        style={{ margin: '25px auto', display: 'block' }}
-        type="primary"
-        onClick={updateGameConditions}
-      >
+      <Button type="primary" icon="plus" onClick={() => openModal()}>
         <span>
-          <Translate id="updateGameConditions" />
+          <Translate id="createGameConditions" />
         </span>
       </Button>
-      {selectedGameCondition && (
-        <div style={{ marginTop: 25 }}>
-          <Typography.Title level={4} style={{ textAlign: 'center' }}>
-            {gameConditions.find(g => g.id === selectedGameCondition).name}
-          </Typography.Title>
-          <GameConditionInfos
-            gameCondition={gameConditions.find(g => g.id === selectedGameCondition)}
-          />
-        </div>
-      )}
+      <div style={{ marginTop: 50 }}>
+        <GameConditionTable {...tableProps} />
+        <GameConditionForm {...formProps} />
+      </div>
     </div>
   );
 };
-
-GameConditionManager.propTypes = propTypes;
 
 export default GameConditionManager;

@@ -123,7 +123,7 @@ const QrcodeInfos = ({
         </span>
       </Button>
       <QrcodeRules {...qrcodeRulesProps} />
-      <PrizeManager qrcode={qrcode} />
+      <PrizeManager prizesOwner={qrcode} className="qrcode" feature="qrflash" />
     </div>
   );
 };

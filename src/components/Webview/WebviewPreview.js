@@ -12,7 +12,7 @@ const propTypes = {
 const WebviewPreview = ({ webview }) => {
   const [random, setRandom] = useState(0);
 
-  /* disable-eslint-next-line */
+  /* eslint-disable-next-line */
   useEffect(() => setRandom(random + 1), [webview]);
 
   return (

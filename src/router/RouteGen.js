@@ -39,7 +39,7 @@ const RouteGen = ({ general }) => {
           const {
             key, path, page, exact,
           } = routing[f];
-          routes.push(<Route key={key} exact={exact} path={path} component={() => Pages[page]} />);
+          routes.push(<Route key={key} exact={exact} path={path} component={Pages[page]} />);
         }
       });
     }

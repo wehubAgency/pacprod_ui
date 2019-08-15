@@ -22,10 +22,11 @@ const propTypes = {
   createCallback: PropTypes.func,
   updateData: PropTypes.object,
   updateCallback: PropTypes.func,
-  customEdit: PropTypes.object,
+  customEdit: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   selectedData: PropTypes.string,
-  createUrl: PropTypes.string.isRequired,
-  updateUrl: PropTypes.string.isRequired,
+  selectData: PropTypes.func,
+  createUrl: PropTypes.string,
+  updateUrl: PropTypes.string,
   formName: PropTypes.string.isRequired,
   modalTitle: PropTypes.oneOfType([
     PropTypes.func,
@@ -38,6 +39,10 @@ const propTypes = {
     PropTypes.string,
   ]),
   entityName: PropTypes.string.isRequired,
+  modalWidth: PropTypes.number,
+  additionalData: PropTypes.object,
+  customUpdate: PropTypes.func,
+  customCreate: PropTypes.func,
 };
 
 const defaultProps = {
@@ -48,12 +53,19 @@ const defaultProps = {
   data: [],
   setData: () => {},
   createData: null,
-  createCallback: () => {},
+  createCallback: null,
+  createUrl: '',
   updateData: null,
-  updateCallback: () => {},
+  updateCallback: null,
+  updateUrl: '',
   customEdit: null,
   selectedData: '',
-  createText: <Translate id="create" />,
+  createText: 'create',
+  modalWidth: 520,
+  additionalData: {},
+  customCreate: null,
+  customUpdate: null,
+  selectData: null,
 };
 
 const Form = ({
@@ -76,6 +88,11 @@ const Form = ({
   formName,
   modalTitle,
   createText,
+  modalWidth,
+  additionalData,
+  customCreate,
+  customUpdate,
+  selectData,
 }) => {
   const config = useSelector(({ general }) => general.config);
 
@@ -92,6 +109,9 @@ const Form = ({
             createCallback(data, res);
           } else {
             setData([...data, res.data]);
+            if (selectData) {
+              selectData(res.data.id);
+            }
           }
           if (inModal) {
             setModalVisible(false);
@@ -137,13 +157,29 @@ const Form = ({
             rawValues = { ...rawValues, ...createData };
           }
           const formData = formateData(rawValues);
-          createEntity(formData);
+          if (customCreate) {
+            if (customCreate(formData)) {
+              if (inModal) {
+                setModalVisible(false);
+              }
+            }
+          } else {
+            createEntity(formData);
+          }
         } else if (formMode === 'edit') {
           if (updateData) {
             rawValues = { ...rawValues, ...updateData };
           }
           const formData = formateData(rawValues);
-          updateEntity(formData);
+          if (customUpdate) {
+            if (customUpdate(formData)) {
+              if (inModal) {
+                setModalVisible(false);
+              }
+            }
+          } else {
+            updateEntity(formData);
+          }
         }
       } else {
         setLoading(false);
@@ -168,11 +204,15 @@ const Form = ({
     onOk: onSubmit,
     confirmLoading: loading,
     destroyOnClose: true,
+    width: modalWidth,
   };
 
   const edit = () => {
     if (formMode === 'edit') {
       if (customEdit) {
+        if (typeof customEdit === 'function') {
+          return customEdit();
+        }
         return customEdit;
       }
       return data.find(d => d.id === selectedData);
@@ -186,6 +226,7 @@ const Form = ({
     ref: externalFormRef || formRef,
     edit: edit(),
     formName,
+    data: additionalData,
   };
 
   if (externalFormRef) {

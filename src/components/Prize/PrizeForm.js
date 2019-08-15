@@ -41,7 +41,7 @@ const PrizeForm = ({
   setPrizes,
   selectedPrize,
   selectPrize,
-  selectedGame,
+  classId,
   className,
   feature,
 }) => {
@@ -66,7 +66,7 @@ const PrizeForm = ({
   }, []);
 
   const createPrize = (formData) => {
-    formData.append('classId', selectedGame.id);
+    formData.append('classId', classId);
     formData.append('className', className);
     iaxios()
       .post('/prizes', formData)
@@ -149,7 +149,7 @@ const PrizeForm = ({
     formConfig,
     editConfig,
     ref: externalFormRef || formRef,
-    datas: { model: optionsModel },
+    data: { model: optionsModel },
     edit: formMode === 'edit' ? prizes.find(p => p.id === selectedPrize) : null,
     formName: 'prizeForm',
   };

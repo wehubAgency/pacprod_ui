@@ -7,18 +7,18 @@ import PrizeForm from './PrizeForm';
 import iaxios from '../../axios';
 
 const PrizeManager = ({
-  game, className, feature, general: { config },
+  prizesOwner, className, feature, general: { config },
 }) => {
   const { componentConfig } = config.entities.prize;
   const [modalVisible, setModalVisible] = useState(false);
   const [formMode, setFormMode] = useState('create');
-  const [prizes, setPrizes] = useState(game.prizes);
+  const [prizes, setPrizes] = useState(prizesOwner.prizes);
   const [selectedPrize, selectPrize] = useState('');
   const [showDisabled, setShowDisabled] = useState(false);
 
   useEffect(() => {
-    setPrizes(game.prizes);
-  }, [game]);
+    setPrizes(prizesOwner.prizes);
+  }, [prizesOwner]);
 
   const openModal = (mode = 'create', e) => {
     setFormMode(mode);
@@ -30,7 +30,7 @@ const PrizeManager = ({
 
   const deletePrize = (id) => {
     iaxios()
-      .delete(`/prizes/${id}`, { params: { classId: game.id } })
+      .delete(`/prizes/${id}`, { params: { classId: prizesOwner.id } })
       .then((res) => {
         if (res !== 'error') {
           const index = prizes.findIndex(p => p.id === res.data.id);
@@ -87,7 +87,7 @@ const PrizeManager = ({
     setPrizes,
     selectedPrize,
     selectPrize,
-    selectedGame: game,
+    classId: prizesOwner.id,
     feature,
     className,
   };

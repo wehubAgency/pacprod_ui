@@ -6,7 +6,15 @@ import TargetTime from '../TargetTime/TargetTime';
 import Map from '../Map';
 
 const propTypes = {
-  gameCondition: PropTypes.shape().isRequired,
+  gameCondition: PropTypes.shape({
+    startDate: PropTypes.string.isRequired,
+    endDate: PropTypes.string,
+    location: PropTypes.shape({
+      coordinates: PropTypes.arrayOf(PropTypes.number).isRequired,
+    }).isRequired,
+    radius: PropTypes.number.isRequired,
+    gameHours: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.bool)).isRequired,
+  }).isRequired,
 };
 
 const GameConditionInfos = ({ gameCondition }) => {
@@ -17,10 +25,12 @@ const GameConditionInfos = ({ gameCondition }) => {
         <Translate id="gameConditionInfos.startDate" /> :
         {` ${moment(gameCondition.startDate).format('LLLL')}`}
       </p>
-      <p>
-        <Translate id="gameConditionInfos.endDate" /> :
-        {` ${moment(gameCondition.endDate).format('LLLL')}`}
-      </p>
+      {gameCondition.endDate && (
+        <p>
+          <Translate id="gameConditionInfos.endDate" /> :
+          {` ${moment(gameCondition.endDate).format('LLLL')}`}
+        </p>
+      )}
       <Map
         markers={[{ lng: coordinates[0], lat: coordinates[1] }]}
         zoom={15}

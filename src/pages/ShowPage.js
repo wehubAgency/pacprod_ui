@@ -29,8 +29,8 @@ const _ShowPage = ({
   useEffect(() => {
     setFetching(true);
     const ax = iaxios();
-    const getShows = ax.get('/show');
-    const getArtists = ax.get('/artist');
+    const getShows = ax.get('/shows');
+    const getArtists = ax.get('/artists');
     Promise.all([getShows, getArtists]).then(([showsRes, artistsRes]) => {
       if (showsRes !== 'error') {
         setShows(showsRes.data);

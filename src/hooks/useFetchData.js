@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import iaxios from '../axios';
 import store from '../store';
 
-function useFetchData(url, initState = '') {
+function useFetchData(urls, initState = []) {
   const [fetching, setFetching] = useState(false);
   const [data, setData] = useState(initState);
 
@@ -11,9 +11,15 @@ function useFetchData(url, initState = '') {
   useEffect(() => {
     setFetching(true);
     const ax = iaxios();
-    ax.get(url).then((res) => {
-      if (res !== 'error') {
-        setData(res.data);
+    let requests;
+    if (Array.isArray(urls)) {
+      requests = urls.map(url => ax.get(url));
+    } else {
+      requests = [ax.get(urls)];
+    }
+    Promise.all(requests).then((res) => {
+      if (res.indexOf('error') === -1) {
+        setData(res.map(r => r.data));
       }
       setFetching(false);
     });
@@ -21,6 +27,12 @@ function useFetchData(url, initState = '') {
     // eslint-disable-next-line
   }, [currentApp, currentEntity, currentSeason]);
 
+  if (data === null) {
+    return { data: null, fetching };
+  }
+  if (data.length === 1) {
+    return { data: data[0], fetching };
+  }
   return { data, fetching };
 }
 

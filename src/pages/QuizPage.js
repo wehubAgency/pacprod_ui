@@ -13,6 +13,7 @@ const _QuizPage = ({ general: { currentApp, currentEntity, currentSeason } }) =>
   const [formMode, setFormMode] = useState('create');
 
   useEffect(() => {
+    selectQuiz('');
     const ax = iaxios();
     ax.get('/quiz').then((res) => {
       setAllQuiz(res.data);

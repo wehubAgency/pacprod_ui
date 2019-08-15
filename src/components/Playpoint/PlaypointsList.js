@@ -5,7 +5,8 @@ import {
 } from 'antd';
 import { Translate } from 'react-localize-redux';
 import PlaypointInfos from './PlaypointInfos';
-import QrcodeManager from '../QRCode/QrcodeManager';
+import QrcodeTransfer from '../QRCode/QrcodeTransfer';
+import PlaypointDisabledFilter from './PlaypointDisabledFilter';
 import iaxios from '../../axios';
 
 const propTypes = {
@@ -52,6 +53,7 @@ const PlaypointsList = ({
       .delete(`/playpoints/${id}`, { params: { company: selectedCompany } })
       .then((res) => {
         if (res !== 'error') {
+          selectPlaypoint('');
           const playpointIndex = playpoints.findIndex(p => p.id === id);
           const newPlaypoints = [...playpoints];
           newPlaypoints.splice(playpointIndex, 1);
@@ -88,37 +90,13 @@ const PlaypointsList = ({
         ]}
       >
         <Meta title={p.name} description={<PlaypointInfos playpoint={p} />} />
-        {!p.enabled && (
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              bottom: 48,
-              left: 0,
-              backgroundColor: 'rgba(0,0,0,0.6)',
-            }}
-          >
-            <span
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                color: 'white',
-                fontSize: '2rem',
-              }}
-            >
-              <Translate id="disabled" />
-            </span>
-          </div>
-        )}
+        {!p.enabled && <PlaypointDisabledFilter />}
       </Card>
   ));
 
   const { Meta } = Card;
 
-  const managerProps = {
+  const transferProps = {
     playpoint: playpoints.find(p => p.id === selectedPlaypoint),
     managerVisible,
     setManagerVisible,
@@ -130,7 +108,7 @@ const PlaypointsList = ({
   return (
     <div style={{ display: 'flex', padding: '5px' }}>
       {renderPlaypoints()}
-      <QrcodeManager {...managerProps} />
+      <QrcodeTransfer {...transferProps} />
     </div>
   );
 };

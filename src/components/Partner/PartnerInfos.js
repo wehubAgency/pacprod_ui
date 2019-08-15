@@ -14,9 +14,10 @@ const propTypes = {
   setPartners: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   translate: PropTypes.func.isRequired,
+  selectPartner: PropTypes.func.isRequired,
 };
 const PartnerInfos = ({
-  partner, partners, setPartners, openModal, translate,
+  partner, partners, setPartners, selectPartner, openModal, translate,
 }) => {
   const { labelStyle } = styles;
 
@@ -39,6 +40,7 @@ const PartnerInfos = ({
       .delete(`/partners/${partner.id}`)
       .then((res) => {
         if (res !== 'error') {
+          selectPartner('');
           const index = partners.findIndex(p => p.id === res.data.id);
           const newPartners = [...partners];
           newPartners.splice(index, 1);

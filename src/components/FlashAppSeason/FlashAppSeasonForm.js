@@ -1,12 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Button, Modal } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
 import { Translate } from 'react-localize-redux';
-import FormGen from '../FormGen';
-import formateData from '../../services/formateData';
-import iaxios from '../../axios';
 import { addSeason, updateSeason } from '../../actions';
+import Form from '../Form';
 
 const propTypes = {
   inModal: PropTypes.bool,
@@ -39,134 +36,43 @@ const defaultProps = {
 };
 
 const FlashAppSeasonForm = ({
-  general: { config, currentEntity, currentApp },
-  formMode,
-  modalVisible,
-  setModalVisible,
-  inModal,
-  externalFormRef,
-  seasons,
-  setSeasons,
-  selectedSeason,
-  ...props
+  seasons, setSeasons, selectedSeason, ...props
 }) => {
-  const [loading, setLoading] = useState(false);
-  const { formConfig, editConfig } = config.entities.season;
-  const formRef = useRef(null);
+  const { currentEntity, currentApp } = useSelector(({ general }) => general);
+  const dispatch = useDispatch();
 
-  const createSeason = (formData) => {
-    formData.append('flashapp', currentEntity.id);
-    formData.append('app', currentApp.id);
-    iaxios()
-      .post('/flashappseasons', formData)
-      .then((res) => {
-        if (res !== 'error') {
-          setSeasons([...seasons, res.data]);
-          props.addSeason(res.data);
-          if (inModal) {
-            setModalVisible(false);
-          }
-        }
-        setLoading(false);
-      });
-  };
-
-  const editSeason = (formData) => {
-    formData.append('_method', 'PUT');
-    iaxios()
-      .post(`/flashappseasons/${selectedSeason}`, formData)
-      .then((res) => {
-        if (res !== 'error') {
-          const seasonIndex = seasons.findIndex(s => s.id === res.data.id);
-          const newSeasons = [...seasons];
-          newSeasons.splice(seasonIndex, 1, res.data);
-          setSeasons(newSeasons);
-          props.updateSeason(res.data);
-          if (inModal) {
-            setModalVisible(false);
-          }
-        }
-        setLoading(false);
-      });
-  };
-
-  const onSubmit = (e) => {
-    setLoading(true);
-
-    const form = formRef.current;
-
-    e.preventDefault();
-    form.validateFieldsAndScroll((err, values) => {
-      if (err === null) {
-        const data = { ...values };
-        const formData = formateData(data);
-        if (formMode === 'create') {
-          createSeason(formData);
-        } else if (formMode === 'edit') {
-          editSeason(formData);
-        }
-      } else {
-        setLoading(false);
-      }
-    });
-  };
-
-  const closeModal = () => {
-    const form = formRef.current;
-    if (formMode === 'edit') {
-      form.resetFields();
-    }
-    if (inModal) {
-      setModalVisible(false);
-    }
-  };
-
-  const modalProps = {
-    title: formMode === 'create' ? <Translate id="createSeason" /> : <Translate id="editSeason" />,
-    visible: modalVisible,
-    onCancel: closeModal,
-    onOk: onSubmit,
-    confirmLoading: loading,
-    destroyOnClose: true,
-  };
-
-  const formGenProps = {
-    formConfig,
-    editConfig,
-    ref: externalFormRef || formRef,
-    edit: formMode === 'edit' ? seasons.find(s => s.id === selectedSeason) : null,
+  const formProps = {
+    ...props,
+    data: seasons,
+    setData: setSeasons,
+    selectedData: selectedSeason,
+    createData: {
+      flashapp: currentEntity.id,
+      app: currentApp.id,
+    },
+    createCallback: (_, res) => {
+      setSeasons([...seasons, res.data]);
+      dispatch(addSeason(res.data));
+    },
+    updateCallback: (_, res) => {
+      const index = seasons.findIndex(s => s.id === res.data.id);
+      const newSeasons = [...seasons];
+      newSeasons.splice(index, 1, res.data);
+      setSeasons(newSeasons);
+      dispatch(updateSeason(res.data));
+    },
+    createUrl: '/flashappseasons',
+    updateUrl: `/flashappseasons/${selectedSeason}`,
     formName: 'seasonForm',
+    modalTitle:
+      props.formMode === 'create' ? <Translate id="createSeason" /> : <Translate id="editSeason" />,
+    entityName: 'season',
   };
 
-  if (externalFormRef) {
-    return (
-      <div>
-        <FormGen {...formGenProps} />
-      </div>
-    );
-  }
-  if (inModal) {
-    return (
-      <Modal {...modalProps}>
-        <FormGen {...formGenProps} />
-      </Modal>
-    );
-  }
-  return (
-    <div>
-      <FormGen {...formGenProps} />
-      <Button type="primary" onClick={onSubmit}>
-        <Translate id="createSeason" />
-      </Button>
-    </div>
-  );
+  return <Form {...formProps} />;
 };
 
 FlashAppSeasonForm.propTypes = propTypes;
 FlashAppSeasonForm.defaultProps = defaultProps;
-const mapStateToProps = ({ general }) => ({ general });
 
-export default connect(
-  mapStateToProps,
-  { addSeason, updateSeason },
-)(FlashAppSeasonForm);
+export default FlashAppSeasonForm;

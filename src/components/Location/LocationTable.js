@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Table } from 'antd';
 import { Translate } from 'react-localize-redux';
 import generateColumns from '../../services/generateColumns';
@@ -8,14 +9,15 @@ import iaxios from '../../axios';
 const propTypes = {
   locations: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   setLocations: PropTypes.func.isRequired,
-  componentConfig: PropTypes.shape().isRequired,
   openModal: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
 };
 
 const LocationTable = ({
-  locations, setLocations, componentConfig, openModal, fetching,
+  locations, setLocations, openModal, fetching,
 }) => {
+  const { componentConfig } = useSelector(({ general: { config } }) => config.entities.location);
+
   const removeArtist = (id) => {
     iaxios()
       .delete(`/locations/${id}`)

@@ -27,29 +27,31 @@ const QrcodeList = ({
     </List.Item>
   );
 
-  const filter = () => {
+  const filter = (arr) => {
     if (search) {
-      return qrcodes.filter(q => q.name
+      return arr.filter(q => q.name
         .toString()
         .toLowerCase()
         .includes(search.toLowerCase()));
     }
-    if (!showDisabled) {
-      return qrcodes.filter(q => q.enabled);
-    }
-    return qrcodes;
+    return arr;
   };
 
   return (
     <div>
-      <Input.Search onSearch={s => setSearch(s)} />
+      <Input.Search onSearch={s => setSearch(s)} enterButton />
       <div style={{ margin: '15px 0' }}>
         <Switch checked={showDisabled} onChange={v => setShowDisabled(v)} />
         <span style={{ marginLeft: 15 }}>
           <Translate id="showDisabled" />
         </span>
       </div>
-      <List size="large" dataSource={filter()} renderItem={renderItem} loading={fetching} />
+      <List
+        size="large"
+        dataSource={filter(qrcodes.filter(q => q.enabled !== showDisabled))}
+        renderItem={renderItem}
+        loading={fetching}
+      />
     </div>
   );
 };

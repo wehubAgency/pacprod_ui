@@ -4,7 +4,7 @@ import { Translate, withLocalize } from 'react-localize-redux';
 import QuestionsManager from '../Questions/QuestionsManager';
 import iaxios from '../../axios';
 import QuizSettingsManager from '../QuizSettings/QuizSettingsManager';
-import GameConditionManager from '../GameCondition/GameConditionManager';
+import GameConditionTransfer from '../GameCondition/GameConditionTransfer';
 import PrizeManager from '../Prize/PrizeManager';
 import QuizDraw from './QuizDraw';
 
@@ -59,13 +59,13 @@ const QuizInfos = ({
           <QuestionsManager {...questionsManagerProps} />
         </Tabs.TabPane>
         <Tabs.TabPane tab={<Translate id="prizes" />} key="2">
-          <PrizeManager game={quiz} className="quiz" feature="quiz" />
+          <PrizeManager prizesOwner={quiz} className="quiz" feature="quiz" />
         </Tabs.TabPane>
         <Tabs.TabPane tab={<Translate id="gameRules" />} key="3">
           <QuizSettingsManager quiz={quiz} setAllQuiz={setAllQuiz} allQuiz={allQuiz} />
         </Tabs.TabPane>
         <Tabs.TabPane tab={<Translate id="gameConditions" />} key="4">
-          <GameConditionManager game={quiz} patchGameConditions={patchGameConditions} />
+          <GameConditionTransfer game={quiz} patchGameConditions={patchGameConditions} />
         </Tabs.TabPane>
         <Tabs.TabPane tab={<Translate id="randomDrawing" />} key="5">
           <QuizDraw quiz={quiz} setAllQuiz={setAllQuiz} />

@@ -4,7 +4,16 @@ import { Descriptions } from 'antd';
 import { Translate } from 'react-localize-redux';
 
 const propTypes = {
-  company: PropTypes.shape().isRequired,
+  company: PropTypes.shape({
+    logo: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    address: PropTypes.shape({
+      fullAddress: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 const CompanyInfos = ({ company }) => {
@@ -15,6 +24,7 @@ const CompanyInfos = ({ company }) => {
       <Descriptions
         title={<Translate id="companyInfos.title" />}
         size="small"
+        bordered
         column={{
           xxl: 4,
           xl: 3,

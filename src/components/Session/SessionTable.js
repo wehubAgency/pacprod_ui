@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Table, Switch } from 'antd';
 import { Translate } from 'react-localize-redux';
 import generateColumn from '../../services/generateColumns';
@@ -8,16 +9,15 @@ import iaxios from '../../axios';
 const propTypes = {
   sessions: PropTypes.arrayOf(PropTypes.object).isRequired,
   setSessions: PropTypes.func.isRequired,
-  config: PropTypes.shape().isRequired,
   openModal: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
 };
 
 const SessionTable = ({
-  sessions, setSessions, config, openModal, fetching,
+  sessions, setSessions, openModal, fetching,
 }) => {
   const [showDisabled, setShowDisabled] = useState(false);
-  const { componentConfig } = config.entities.session;
+  const { componentConfig } = useSelector(({ general: { config } }) => config.entities.session);
 
   const toggleSession = (id) => {
     const session = sessions.find(s => s.id === id);

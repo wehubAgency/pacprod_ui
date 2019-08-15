@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   infos: PropTypes.shape({
-    image: PropTypes.string.isRequired,
+    profilePicture: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
   style: PropTypes.object.isRequired,
 };
 
-const artistCell = ({ infos: { image, name }, style }) => (
+const artistCell = ({ infos: { profilePicture, name }, style }) => (
   <div>
-    <img src={image} style={{ ...style.image }} alt={name} />
+    <img src={profilePicture} style={{ ...style.image }} alt={name} />
     {name}
   </div>
 );
