@@ -36,7 +36,6 @@ export default (key, item, i, data, form, formName, edit) => {
       return <TextArea {...attributes} />;
     case 'select': {
       const options = data || item.options;
-      console.log(options);
       return (
         <Select {...item.attributes}>
           {options.map(o => (

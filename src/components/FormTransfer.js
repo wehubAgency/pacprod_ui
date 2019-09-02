@@ -32,6 +32,7 @@ const FormTransfer = ({
 
   useEffect(() => {
     form.setFieldsValue({ [hiddenInput]: targetKeys });
+    /* eslint-disable-next-line */
   }, [targetKeys]);
 
   const handleChange = (nextTargetKeys) => {

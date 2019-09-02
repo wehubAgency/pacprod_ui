@@ -1285,165 +1285,6 @@
         }
       }
     },
-    "paidprize": {
-      "formConfig": {
-        "name": {
-          "type": "text",
-          "label": "name",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
-        },
-        "image": {
-          "type": "upload",
-          "label": "image",
-          "text": "image",
-          "valuePropName": "fileList",
-          "previewSettings": {
-            "ratio": {
-              "width": 1,
-              "height": 1
-            }
-          },
-          "uploadRules": {
-            "number": 1,
-            "formats": ["image/jpeg", "image/png"],
-            "size": 3
-          },
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
-        },
-        "barcode": {
-          "type": "upload",
-          "label": "barcode",
-          "text": "image",
-          "help": "barcode",
-          "valuePropName": "fileList",
-          "previewSettings": {
-            "ratio": {
-              "width": 1,
-              "height": 1
-            }
-          },
-          "uploadRules": {
-            "number": 1,
-            "formats": ["image/jpeg", "image/png"],
-            "size": 3
-          }
-        },
-        "cost": {
-          "type": "number",
-          "label": "cost",
-          "attributes": {
-            "min": 1
-          },
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
-        },
-        "stock": {
-          "type": "number",
-          "label": "stock",
-          "help": "stock",
-          "attributes": {
-            "min": -1
-          },
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
-        },
-        "tos": {
-          "type": "textarea",
-          "label": "tos",
-          "help": "tos"
-        },
-        "instructions": {
-          "type": "textarea",
-          "label": "instructions",
-          "help": "instructions",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
-        }
-      },
-      "editConfig": {
-        "excludeFields": []
-      },
-      "componentConfig": {
-        "name": {
-          "title": "name",
-          "dataIndex": "name"
-        },
-        "image": {
-          "title": "image",
-          "dataIndex": "image",
-          "render": {
-            "type": "image",
-            "style": {
-              "width": "50px"
-            }
-          }
-        },
-        "barcode": {
-          "title": "barcode",
-          "dataIndex": "barcode",
-          "render": {
-            "type": "image",
-            "style": {
-              "width": "50px"
-            }
-          }
-        },
-        "stock": {
-          "title": "stock",
-          "dataIndex": "stock"
-        },
-        "cost": {
-          "title": "cost",
-          "dataIndex": "cost"
-        },
-        "description": {
-          "title": "description",
-          "dataIndex": "description",
-          "render": {
-            "type": "ellipsis",
-            "size": 50
-          }
-        },
-        "tos": {
-          "title": "tos",
-          "dataIndex": "tos",
-          "render": {
-            "type": "ellipsis",
-            "size": 50
-          }
-        },
-        "instructions": {
-          "title": "instructions",
-          "dataIndex": "instructions",
-          "render": {
-            "type": "ellipsis",
-            "size": 50
-          }
-        }
-      }
-    },
     "partner": {
       "formConfig": {
         "name": {
@@ -1822,6 +1663,23 @@
               "message": "required"
             }
           ]
+        },
+        "address": {
+          "type": "text",
+          "label": "address",
+          "help": "address"
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode"
+        },
+        "city": {
+          "type": "text",
+          "label": "city"
+        },
+        "country": {
+          "type": "text",
+          "label": "country"
         }
       },
       "editConfig": {
@@ -1857,6 +1715,209 @@
             "type": "ellipsis",
             "size": "50"
           }
+        },
+        "address": {
+          "title": "address",
+          "dataIndex": "withdrawalAddress.fullAddress"
+        }
+      }
+    },
+    "paidprize": {
+      "formConfig": {
+        "model": {
+          "type": "select",
+          "label": "model",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "stock": {
+          "type": "number",
+          "label": "stock",
+          "help": "stock",
+          "attributes": {
+            "min": -1
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "cost": {
+          "type": "number",
+          "label": "cost",
+          "attributes": {
+            "min": 1
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "instructions": {
+          "type": "textarea",
+          "label": "instructions",
+          "help": "instructions",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "address": {
+          "type": "text",
+          "label": "address",
+          "help": "address"
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode"
+        },
+        "city": {
+          "type": "text",
+          "label": "city"
+        },
+        "country": {
+          "type": "text",
+          "label": "country"
+        }
+      },
+      "editConfig": {
+        "excludeFields": ["model"]
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "model.name"
+        },
+        "image": {
+          "title": "image",
+          "dataIndex": "model.image",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "stock": {
+          "title": "stock",
+          "dataIndex": "stock"
+        },
+        "cost": {
+          "title": "cost",
+          "dataIndex": "cost"
+        },
+        "instructions": {
+          "title": "instructions",
+          "dataIndex": "instructions",
+          "render": {
+            "type": "ellipsis",
+            "size": "50"
+          }
+        },
+        "address": {
+          "title": "address",
+          "dataIndex": "withdrawalAddress.fullAddress"
+        }
+      }
+    },
+    "quizPrize": {
+      "formConfig": {
+        "model": {
+          "type": "select",
+          "label": "model",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "stock": {
+          "type": "number",
+          "label": "stock",
+          "help": "stock",
+          "attributes": {
+            "min": -1
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "instructions": {
+          "type": "textarea",
+          "label": "instructions",
+          "help": "instructions",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "address": {
+          "type": "text",
+          "label": "address",
+          "help": "address"
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode"
+        },
+        "city": {
+          "type": "text",
+          "label": "city"
+        },
+        "country": {
+          "type": "text",
+          "label": "country"
+        }
+      },
+      "editConfig": {
+        "excludeFields": ["model"]
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "model.name"
+        },
+        "image": {
+          "title": "image",
+          "dataIndex": "model.image",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "stock": {
+          "title": "stock",
+          "dataIndex": "stock"
+        },
+        "instructions": {
+          "title": "instructions",
+          "dataIndex": "instructions",
+          "render": {
+            "type": "ellipsis",
+            "size": "50"
+          }
+        },
+        "address": {
+          "title": "address",
+          "dataIndex": "withdrawalAddress.fullAddress"
         }
       }
     },

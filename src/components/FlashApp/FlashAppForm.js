@@ -43,9 +43,9 @@ const FlashAppForm = ({ flashApp, ...props }) => {
     updateCallback: (_, res) => {
       dispatch(updateEntity(res.data));
     },
-    customEdit: { ...flashApp, ...flashApp.address },
+    customEdit: flashApp ? { ...flashApp, ...flashApp.address } : null,
     createUrl: '/flashapps',
-    updateUrl: `/flashapps/${flashApp.id}`,
+    updateUrl: flashApp ? `/flashapps/${flashApp.id}` : '',
     formName: 'flashAppForm',
     modalTitle:
       props.formMode === 'create' ? (

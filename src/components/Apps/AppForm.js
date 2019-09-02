@@ -170,7 +170,7 @@ const AppForm = ({
     ref: externalFormRef || formRef,
     edit: formMode === 'edit' ? apps.find(a => a.id === selectedApp) : null,
     formName: 'appForm',
-    datas: {
+    data: {
       features,
       type,
     },

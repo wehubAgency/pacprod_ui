@@ -7,9 +7,9 @@ import PrizeForm from './PrizeForm';
 import iaxios from '../../axios';
 
 const PrizeManager = ({
-  prizesOwner, className, feature, general: { config },
+  prizesOwner, className, feature, general: { config }, entityName,
 }) => {
-  const { componentConfig } = config.entities.prize;
+  const { componentConfig } = config.entities[entityName];
   const [modalVisible, setModalVisible] = useState(false);
   const [formMode, setFormMode] = useState('create');
   const [prizes, setPrizes] = useState(prizesOwner.prizes);
@@ -73,9 +73,7 @@ const PrizeManager = ({
       confirm: <Translate id="prizeComponent.confirmRemove" />,
     },
   ];
-  if (feature !== 'qrflash' && feature !== 'argame') {
-    delete componentConfig.coef;
-  }
+
   const columns = generateColumns(componentConfig, 'prizeComponent', actions);
 
   const formProps = {
@@ -90,6 +88,7 @@ const PrizeManager = ({
     classId: prizesOwner.id,
     feature,
     className,
+    entityName,
   };
 
   return (

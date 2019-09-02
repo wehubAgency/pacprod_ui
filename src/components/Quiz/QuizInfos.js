@@ -59,7 +59,7 @@ const QuizInfos = ({
           <QuestionsManager {...questionsManagerProps} />
         </Tabs.TabPane>
         <Tabs.TabPane tab={<Translate id="prizes" />} key="2">
-          <PrizeManager prizesOwner={quiz} className="quiz" feature="quiz" />
+          <PrizeManager prizesOwner={quiz} className="quiz" feature="quiz" entityName="quizPrize" />
         </Tabs.TabPane>
         <Tabs.TabPane tab={<Translate id="gameRules" />} key="3">
           <QuizSettingsManager quiz={quiz} setAllQuiz={setAllQuiz} allQuiz={allQuiz} />

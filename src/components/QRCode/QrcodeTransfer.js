@@ -102,6 +102,7 @@ const QrcodeTransfer = ({ managerVisible, setManagerVisible, playpoint }) => {
                 prizesOwner={qrcodes.find(q => q.id === selectedQrcode)}
                 className="qrcode"
                 feature="qrflash"
+                entityName="prize"
               />
             </div>
           )}

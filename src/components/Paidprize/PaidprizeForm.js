@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Translate } from 'react-localize-redux';
+import iaxios from '../../axios';
 import Form from '../Form';
 
 const propTypes = {
@@ -24,6 +25,28 @@ const defaultProps = {
 const PaidprizeForm = ({
   paidprizes, setPaidprizes, selectedPaidprize, ...props
 }) => {
+  const [models, setModels] = useState([]);
+
+  useEffect(() => {
+    iaxios()
+      .get('/prizeinfos')
+      .then((res) => {
+        if (res !== 'error') {
+          setModels(res.data);
+        }
+      });
+  }, []);
+
+  const optionsModel = models.map(m => ({
+    value: m.id,
+    label: m.name,
+  }));
+
+  const edit = () => {
+    const paidprize = paidprizes.find(p => p.id === selectedPaidprize);
+    const paidprizeEdit = { ...paidprize, ...paidprize.withdrawalAddress };
+    return paidprizeEdit;
+  };
   const formProps = {
     ...props,
     data: paidprizes,
@@ -33,13 +56,14 @@ const PaidprizeForm = ({
     updateUrl: `/paidprizes/${selectedPaidprize}`,
     entityName: 'paidprize',
     formName: 'paidprizeForm',
+    customEdit: edit,
+    additionalData: { model: optionsModel },
     modalTitle:
       props.formMode === 'create' ? (
         <Translate id="createPaidprize" />
       ) : (
         <Translate id="editPaidprize" />
       ),
-    createText: <Translate id="createPaidprize" />,
   };
 
   return <Form {...formProps} />;

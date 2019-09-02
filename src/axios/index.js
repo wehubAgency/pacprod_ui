@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { notification } from 'antd';
-import { ADMIN_API_URI } from '../constants';
+import { ADMIN_API_URI, SUPER_ADMIN_API_URI } from '../constants';
 import store from '../store';
 
 export default (role = 'admin') => {
@@ -12,7 +12,7 @@ export default (role = 'admin') => {
   const iaxios = axios.create({
     baseURL:
       role === 'super_admin'
-        ? `${ADMIN_API_URI}superadmin`
+        ? SUPER_ADMIN_API_URI
         : ADMIN_API_URI + (currentApp !== null ? currentApp.apiPrefix : ''),
     headers: {
       common: { Authorization: token },

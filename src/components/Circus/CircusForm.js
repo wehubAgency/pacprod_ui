@@ -56,9 +56,9 @@ const CircusForm = ({
     updateCallback: (_, res) => {
       dispatch(updateEntity(res.data));
     },
-    customEdit: circus,
+    customEdit: circus || null,
     createUrl: '/circus',
-    updateUrl: `/circus/${circus.id}`,
+    updateUrl: circus ? `/circus/${circus.id}` : '',
     formName: 'circusForm',
     modalTitle:
       formMode === 'create' ? <Translate id="createCircus" /> : <Translate id="editCircus" />,
