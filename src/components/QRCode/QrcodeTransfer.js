@@ -69,7 +69,7 @@ const QrcodeTransfer = ({ managerVisible, setManagerVisible, playpoint }) => {
       visible={managerVisible}
       onCancel={() => closeManager()}
       onOk={() => patchPlaypoint()}
-      width="600px"
+      width="750px"
     >
       {fetching ? (
         <Spin />
