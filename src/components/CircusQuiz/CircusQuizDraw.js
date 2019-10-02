@@ -18,12 +18,12 @@ const propTypes = {
   translate: PropTypes.func.isRequired,
 };
 
-const QuizDraw = ({ quiz: { id, prizes }, setAllQuiz, translate }) => {
+const CircusQuizDraw = ({ quiz: { id, prizes, sessions }, setAllQuiz, translate }) => {
   const [potentialWinners, setPotentialWinners] = useState([]);
   const [potentialPrize, setPotentialPrize] = useState(null);
   const [loading, setLoading] = useState(false);
   const formRef = useRef(null);
-  const { formConfig } = useSelector(({ general: { config } }) => config.entities.quizDraw);
+  const { formConfig } = useSelector(({ general: { config } }) => config.entities.circusQuizDraw);
 
   const draw = (e) => {
     setLoading(true);
@@ -36,7 +36,7 @@ const QuizDraw = ({ quiz: { id, prizes }, setAllQuiz, translate }) => {
         const data = { ...values };
         const formData = formateData(data);
         iaxios()
-          .post(`/quiz/${id}/draw`, formData)
+          .post(`/circusquiz/${id}/draw`, formData)
           .then((res) => {
             if (res !== 'error') {
               setPotentialWinners(res.data.winners);
@@ -56,7 +56,7 @@ const QuizDraw = ({ quiz: { id, prizes }, setAllQuiz, translate }) => {
 
   const confirmWinners = () => {
     iaxios()
-      .post(`/quiz/${id}/winners`, {
+      .post(`/circusquiz/${id}/winners`, {
         winners: potentialWinners.map(w => ({ id: w.id, quizEntry: w.quizEntryId })),
         prize: potentialPrize.id,
       })
@@ -79,6 +79,7 @@ const QuizDraw = ({ quiz: { id, prizes }, setAllQuiz, translate }) => {
     prize: prizes
       .filter(p => p.stock > 0)
       .map(p => ({ value: p.id, label: `${p.model.name} (${p.stock} ${translate('inStock')})` })),
+    sessions: sessions.map(s => ({ value: s.id, label: `${s.name}` })),
   };
 
   const formProps = {
@@ -141,6 +142,6 @@ const QuizDraw = ({ quiz: { id, prizes }, setAllQuiz, translate }) => {
   );
 };
 
-QuizDraw.propTypes = propTypes;
+CircusQuizDraw.propTypes = propTypes;
 
-export default withLocalize(QuizDraw);
+export default withLocalize(CircusQuizDraw);

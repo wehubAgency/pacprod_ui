@@ -16,7 +16,7 @@ const propTypes = {
   }).isRequired,
 };
 
-const SeasonTable = ({ seasons, openModal, fetching }) => {
+const FlashAppSeasonTable = ({ seasons, openModal, fetching }) => {
   const { componentConfig } = useSelector(({ general: { config } }) => config.entities.season);
   const { currentEntity } = useSelector(({ general }) => general);
   const dispatch = useDispatch();
@@ -71,6 +71,6 @@ const SeasonTable = ({ seasons, openModal, fetching }) => {
   );
 };
 
-SeasonTable.propTypes = propTypes;
+FlashAppSeasonTable.propTypes = propTypes;
 
-export default SeasonTable;
+export default FlashAppSeasonTable;

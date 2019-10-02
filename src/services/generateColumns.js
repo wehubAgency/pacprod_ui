@@ -99,7 +99,10 @@ export default (data, transId, actions = []) => {
                 );
               case 'disable':
                 return (
-                  <Tooltip key={a.type} title={<Translate id="disable" />}>
+                  <Tooltip
+                    key={a.type}
+                    title={el.enabled ? <Translate id="disable" /> : <Translate id="enable" />}
+                  >
                     <Button
                       className="action-button"
                       shape="circle"

@@ -1,11 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button } from 'antd';
 import { Translate } from 'react-localize-redux';
-import { connect } from 'react-redux';
-import FormGen from '../FormGen';
-import iaxios from '../../axios';
-import formateData from '../../services/formateData';
+import { useFetchData } from '../../hooks';
+import Form from '../Form';
 
 const propTypes = {
   inModal: PropTypes.bool,
@@ -18,10 +15,6 @@ const propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
-  general: PropTypes.shape({
-    config: PropTypes.shape().isRequired,
-  }).isRequired,
-  artists: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 
 const defaultProps = {
@@ -35,85 +28,15 @@ const defaultProps = {
 };
 
 const ShowForm = ({
-  general: { config },
-  externalFormRef,
-  artists,
-  formMode,
-  modalVisible,
-  setModalVisible,
-  inModal,
-  shows,
-  setShows,
-  selectedShow,
+  shows, setShows, selectedShow, ...props
 }) => {
-  const { formConfig, editConfig } = config.entities.show;
-  const [loading, setLoading] = useState(false);
-  const formRef = useRef(null);
+  const [artists, setArtists] = useState([]);
 
-  const createShow = (formData, form) => {
-    iaxios()
-      .post('/shows', formData)
-      .then((res) => {
-        if (res !== 'error') {
-          setShows([...shows, res.data]);
-          if (inModal) {
-            setModalVisible(false);
-          }
-          form.resetFields();
-        }
-        setLoading(false);
-      });
-  };
+  const { data } = useFetchData('/artists');
 
-  const updateShow = (formData, form) => {
-    formData.append('_method', 'PUT');
-    iaxios()
-      .post(`/show/${selectedShow}`, formData)
-      .then((res) => {
-        if (res !== 'error') {
-          const showIndex = shows.findIndex(s => s.id === res.data.id);
-          const newShows = [...shows];
-          newShows.splice(showIndex, 1, res.data);
-          form.resetFields();
-          setShows(newShows);
-          if (inModal) {
-            setModalVisible(false);
-          }
-        }
-        setLoading(false);
-      });
-  };
-
-  const onSubmit = (e) => {
-    setLoading(true);
-
-    const form = formRef.current;
-
-    e.preventDefault();
-    form.validateFields((err, values) => {
-      if (err === null) {
-        const data = { ...values };
-        const formData = formateData(data);
-        if (formMode === 'create') {
-          createShow(formData, form);
-        } else if (formMode === 'edit') {
-          updateShow(formData, form);
-        }
-      } else {
-        setLoading(false);
-      }
-    });
-  };
-
-  const closeModal = () => {
-    const form = formRef.current;
-    if (formMode === 'edit') {
-      form.resetFields();
-    }
-    if (inModal) {
-      setModalVisible(false);
-    }
-  };
+  useEffect(() => {
+    setArtists(data);
+  }, [data]);
 
   const options = {
     artist: artists.map(a => ({
@@ -122,58 +45,26 @@ const ShowForm = ({
     })),
   };
 
-  const modalProps = {
-    title:
-      formMode === 'create' ? (
-        <Translate id="showForm.createShow" />
-      ) : (
-        <Translate id="showForm.editShow" />
-      ),
-    visible: modalVisible,
-    onCancel: closeModal,
-    onOk: onSubmit,
-    confirmLoading: loading,
-    destroyOnClose: true,
-  };
+  const additionalData = { ...options };
 
-  const formGenProps = {
-    formConfig,
-    editConfig,
-    ref: externalFormRef || formRef,
-    edit: formMode === 'edit' ? shows.find(s => s.id === selectedShow) : null,
+  const formProps = {
+    ...props,
+    data: shows,
+    setData: setShows,
+    selectedData: selectedShow,
+    entityName: 'show',
     formName: 'showForm',
-    data: options,
+    createUrl: '/shows',
+    updateUrl: `/shows/${selectedShow}`,
+    additionalData,
+    modalTitle:
+      props.formMode === 'create' ? <Translate id="createShow" /> : <Translate id="editShow" />,
   };
 
-  if (externalFormRef) {
-    return (
-      <div>
-        <FormGen {...formGenProps} />
-      </div>
-    );
-  }
-  if (inModal) {
-    return (
-      <Modal {...modalProps}>
-        <FormGen {...formGenProps} />
-      </Modal>
-    );
-  }
-  return (
-    <div>
-      <FormGen {...formGenProps} />
-      <Button type="primary" onClick={onSubmit}>
-        <Translate id="showForm.createShow" />
-      </Button>
-    </div>
-  );
+  return <Form {...formProps} />;
 };
 
 ShowForm.propTypes = propTypes;
 ShowForm.defaultProps = defaultProps;
-const mapStateToProps = ({ general }) => ({ general });
 
-export default connect(
-  mapStateToProps,
-  {},
-)(ShowForm);
+export default ShowForm;

@@ -36,13 +36,12 @@ const defaultProps = {
   },
 };
 
-const { Header, Content, Footer, Sider } = Layout;
+const {
+  Header, Content, Footer, Sider,
+} = Layout;
 
 const AdminLayout = ({
-  location,
-  history,
-  initialize,
-  addTranslationForLanguage,
+  location, history, initialize, addTranslationForLanguage,
 }) => {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -55,10 +54,7 @@ const AdminLayout = ({
       history.push('/');
     }
     initialize({
-      languages: [
-        { name: 'Français', code: 'fr' },
-        { name: 'English', code: 'en' },
-      ],
+      languages: [{ name: 'Français', code: 'fr' }, { name: 'English', code: 'en' }],
       options: { renderToStaticMarkup },
     });
     addTranslationForLanguage(frTranslation, 'fr');
@@ -70,13 +66,7 @@ const AdminLayout = ({
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={onCollapse}
-        breakpoint="md"
-        width={250}
-      >
+      <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} breakpoint="md" width={250}>
         <div className="logo" />
         <Row>
           <Col span={0} md={{ span: 24 }}>
@@ -95,9 +85,7 @@ const AdminLayout = ({
             <RouteGen />
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
+        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
       </Layout>
     </Layout>
   );

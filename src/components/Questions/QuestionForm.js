@@ -12,6 +12,7 @@ const propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
   setQuestions: PropTypes.func.isRequired,
   selectedQuestion: PropTypes.string.isRequired,
+  circusQuiz: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -19,6 +20,7 @@ const defaultProps = {
   setModalVisible: () => {},
   modalVisible: false,
   externalFormRef: null,
+  circusQuiz: false,
 };
 
 const QuestionForm = ({
@@ -26,13 +28,14 @@ const QuestionForm = ({
   setQuestions,
   selectedQuestion,
   selectQuestion,
+  circusQuiz,
   quiz,
   ...props
 }) => {
   const formProps = {
     ...props,
     data: questions,
-    createData: { quiz },
+    createData: { quiz, circusQuiz },
     setData: setQuestions,
     selectedData: selectedQuestion,
     selectData: selectQuestion,

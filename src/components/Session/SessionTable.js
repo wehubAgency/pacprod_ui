@@ -33,6 +33,19 @@ const SessionTable = ({
       });
   };
 
+  const deleteSession = (id) => {
+    iaxios()
+      .delete(`/sessions/${id}`)
+      .then((res) => {
+        if (res !== 'error') {
+          const index = sessions.findIndex(s => s.id === res.data.id);
+          const newSessions = [...sessions];
+          newSessions.splice(index, 1);
+          setSessions(newSessions);
+        }
+      });
+  };
+
   const actions = [
     {
       type: 'edit',
@@ -44,6 +57,11 @@ const SessionTable = ({
       type: 'disable',
       func: toggleSession,
     },
+    {
+      type: 'remove',
+      func: deleteSession,
+      confirm: <Translate id="sessionComponent.confirmRemove" />,
+    },
   ];
 
   const columns = generateColumn(componentConfig, 'sessionComponent', actions);
@@ -52,7 +70,7 @@ const SessionTable = ({
     <div style={{ marginTop: '50px' }}>
       <Switch checked={showDisabled} onChange={v => setShowDisabled(v)} />
       <span style={{ marginLeft: 15 }}>
-        <Translate id="sessionTable.showDisabled" />
+        <Translate id="showDisabled" />
       </span>
       <Table
         dataSource={sessions.filter(s => s.enabled === !showDisabled)}

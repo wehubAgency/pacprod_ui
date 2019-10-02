@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Table } from 'antd';
+import { Table, Switch } from 'antd';
 import { Translate } from 'react-localize-redux';
 import generateColumns from '../../services/generateColumns';
 import iaxios from '../../axios';
@@ -17,8 +17,23 @@ const LocationTable = ({
   locations, setLocations, openModal, fetching,
 }) => {
   const { componentConfig } = useSelector(({ general: { config } }) => config.entities.location);
+  const [showDisabled, setShowDisabled] = useState(false);
 
-  const removeArtist = (id) => {
+  const toggleLocation = (id) => {
+    const location = locations.find(l => l.id === id);
+    iaxios()
+      .patch(`/locations/${id}/enabled`, { enabled: !location.enabled })
+      .then((res) => {
+        if (res !== 'error') {
+          const index = locations.findIndex(l => l.id === res.data.id);
+          const newLocations = [...locations];
+          newLocations.splice(index, 1, res.data);
+          setLocations(newLocations);
+        }
+      });
+  };
+
+  const removeLocation = (id) => {
     iaxios()
       .delete(`/locations/${id}`)
       .then((res) => {
@@ -39,8 +54,12 @@ const LocationTable = ({
       },
     },
     {
+      type: 'disable',
+      func: toggleLocation,
+    },
+    {
       type: 'remove',
-      func: removeArtist,
+      func: removeLocation,
       confirm: <Translate id="locationComponent.confirmRemove" />,
     },
   ];
@@ -49,7 +68,16 @@ const LocationTable = ({
 
   return (
     <div style={{ marginTop: '50px' }}>
-      <Table dataSource={locations} columns={columns} rowKey="id" loading={fetching} />
+      <Switch checked={showDisabled} onChange={v => setShowDisabled(v)} />
+      <span style={{ marginLeft: 15 }}>
+        <Translate id="showDisabled" />
+      </span>
+      <Table
+        dataSource={locations.filter(l => l.enabled === !showDisabled)}
+        columns={columns}
+        rowKey="id"
+        loading={fetching}
+      />
     </div>
   );
 };

@@ -1,4 +1,7 @@
 {
+  "error": "Erreur",
+  "errorDescription": "Une erreur est survenue, veuillez réessayer ou contacter le support.",
+  "disconnect": "Se déconnecter",
   "create": "Créer",
   "createApp": "Créer une application",
   "editApp": "Modifier une application",
@@ -75,8 +78,11 @@
   "gameRules": "Règles du jeu",
   "questions": "Questions",
   "prizes": "Lots",
+  "sessions": "Représentations",
   "description": "Description",
   "updateGameConditions": "Mettre à jours les conditions de jeu",
+  "totalUser": "Total utilisateurs",
+  "moreInfos": "Plus d'informations",
   "rules": {
     "required": "Obligatoire",
     "email": "L'email doit être valide.",
@@ -146,9 +152,6 @@
     "h1": "Gestion des artistes",
     "intro": "Gérer ici les artistes pour votre page Place au Cirque et/ou votre application."
   },
-  "artistTable": {
-    "showDisabled": "Voir les artistes désactivés"
-  },
   "breadcrumb": {
     "home": "Accueil"
   },
@@ -198,9 +201,22 @@
     "setVisible": "Rendre visible votre cirque sur Place au Cirque",
     "setNotVisible": "Rendre votre Cirque non visible sur Place au Cirque"
   },
-  "circusQuizSessions": {
-    "sessionsTitle": "Représentations avec le Quiz",
-    "sessionsInfos": "Déplacez dans la colonne de droite les représentations dans lesquelles, vous voulez que le quiz soit actif. Dans les représentations ou le quiz est actif, les joueurs pourront participer au quiz pendant la durée de la représentation (que vous avez du renseigner lors de la création de la représentation). Les joueurs ne pourront pas accéder au quiz pendant une représentation se trouvant dans la colonne de gauche."
+  "circusQuizForm": {
+    "label": {
+      "name": "Nom",
+      "description": "Description"
+    },
+    "help": {
+      "description": "Texte descriptif du quiz sur son sujet, ses gains, la date de son tirage au sort, etc..."
+    }
+  },
+  "circusQuizPage": {
+    "h1": "Gestions des quiz pour cirque",
+    "instructions": "Gérez ici vos différents Quiz. Vous pouvez ajouter des questions, des lots, définir les représentations où le jeu est jouable, modifier les paramètres du Quiz etc... Veuillez commencer par choisir un Quiz ci-dessous ou par en créer un avec le bouton."
+  },
+  "circusQuizSessionsForm": {
+    "sessionsWithout": "Sans Quiz",
+    "sessionsWith": "Avec Quiz"
   },
   "coinComponent": {
     "name": "Nom",
@@ -373,9 +389,6 @@
   "locationPage": {
     "h1": "Mes emplacements",
     "intro": "Gérer ici les emplacements nécessaires au fonctionnement de votre application. Veuillez indiquer précisément le centre de votre chapiteau dans les endroits ou votre Cirque sera cette saison."
-  },
-  "locationTable": {
-    "showDisabled": "Voir les emplacements désactivés"
   },
   "map": {
     "searchAdress": "Recherchez une adresse"
@@ -702,7 +715,8 @@
     "label": {
       "minimumPoints": "Point minimum",
       "prize": "Lot",
-      "winners": "Nombre de gagnant"
+      "winners": "Nombre de gagnant",
+      "sessions": "Représentations"
     },
     "help": {
       "winners": "Si vous spécifiez un nombre de gagnants supérieur au stock du lot à gagner, vous ne revevrez quand même que le nombre de gagnant correspondant au stock du lot."
@@ -726,10 +740,6 @@
     "removeQuiz": "Supprimer Quiz",
     "confirmRemove": "Vous êtes sur le point de supprimer le quiz. Il n'apparaitra donc plus sur l'application. Êtes-vous sûr de vouloir le supprimer ?"
   },
-  "quizSessionsForm": {
-    "sessionsWithout": "Sans Quiz",
-    "sessionsWith": "Avec Quiz"
-  },
   "quizSettings": {
     "gameMode": "Type de jeu"
   },
@@ -738,13 +748,15 @@
       "randomQuestions": "Questions aléatoires",
       "randomQuestionsNumber": "Nombre de questions choisies au hasard",
       "uniqueParticipation": "Participation unique",
-      "dailyParticipation": "Participation journalière"
+      "dailyParticipation": "Participation journalière",
+      "radius": "Rayon"
     },
     "help": {
       "randomQuestions": "Lorque que vous cochez cette option, vos utilisateurs n'auront pas les mêmes questions, ces dernières seront choisies au hasard dans la liste de vos questions. \nDans ce mode de jeu, toutes les bonnes réponses comptent pour 1 point.",
       "randomQuestionsNumber": "Ce nombre ne sera pris en compte que lorque vous aurez coché \"Questions aléatoires\". Il correspond au nombre de questions qu'il y aura dans votre quiz. Si vous mettez un chiffre supérieur au nombre de questions, toutes les questions seront prises.",
       "uniqueParticipation": "Les joueurs ne peuvent jouer au quiz qu'une seule fois",
-      "dailyParticipation": "Nombre de fois qu'un joueur peut jouer au quiz par jour. Ce paramètre n'est pas pris en compte si vous avez coché \"Participation unique\""
+      "dailyParticipation": "Nombre de fois qu'un joueur peut jouer au quiz par jour. Ce paramètre n'est pas pris en compte si vous avez coché \"Participation unique\"",
+      "radius": "Rayon de la zone dans laquelle vos joueurs peuvent participer à votre quiz (en mètre)"
     }
   },
   "rulesForm": {
@@ -790,7 +802,8 @@
     "date": "Date",
     "duration": "Durée",
     "location": "Emplacement",
-    "program": "Programme"
+    "program": "Programme",
+    "confirmRemove": "Vous êtes sur le point de supprimer une représentation. Voulez-vous continuer ?"
   },
   "sessionForm": {
     "label": {
@@ -809,14 +822,12 @@
     "h1": "Gestion des séances",
     "intro": "Gérer ici les séances de votre cirque. Il est nécéssaire d'avoir rentré vos séances afin de faire fonctionner le Quiz et le Référendum des Animaux."
   },
-  "sessionTable": {
-    "showDisabled": "Voir les séances désactivées"
-  },
   "showComponent": {
     "name": "Nom",
     "image": "Image",
     "description": "Description",
-    "artist": "Artiste"
+    "artist": "Artiste",
+    "confirmRemove": "Vous êtes sur le point de supprimer un numéro, il sera alors retiré de tous vos programmes le contenant. Voulez-vous continuer ?"
   },
   "showForm": {
     "label": {
@@ -830,8 +841,14 @@
     "h1": "Gestion des numéros",
     "intro": "Gérer ici les numéros de vos artistes. Pour créer un numéros, vous devez d'abord avoir créer l'artiste correspondant ici:"
   },
-  "showTable": {
-    "showDisabled": "Voir les numéros désactivés"
+  "userComponent": {
+    "firstname": "Prenom",
+    "lastname": "Nom",
+    "email": "Email"
+  },
+  "userPage": {
+    "h1": "Vos utilisateurs",
+    "instructions": "Gérer ici vos utilisateurs."
   },
   "webviewActions": {
     "confirmDelete": "Vous êtes sur le point de supprimer cette page. Elle n'apparaitra plus dans votre application. Êtes-vous sûr de vouloir supprimer cette page ?"

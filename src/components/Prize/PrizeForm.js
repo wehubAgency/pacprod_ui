@@ -46,10 +46,12 @@ const PrizeForm = ({
       });
   }, []);
 
-  const optionsModel = models.map(m => ({
-    value: m.id,
-    label: m.name,
-  }));
+  const optionsModel = models
+    .filter(m => m.enabled)
+    .map(m => ({
+      value: m.id,
+      label: m.name,
+    }));
 
   const edit = () => {
     const prize = prizes.find(p => p.id === selectedPrize);

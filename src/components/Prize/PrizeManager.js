@@ -7,7 +7,7 @@ import PrizeForm from './PrizeForm';
 import iaxios from '../../axios';
 
 const PrizeManager = ({
-  prizesOwner, className, feature, general: { config }, entityName,
+  prizesOwner, className, general: { config }, entityName,
 }) => {
   const { componentConfig } = config.entities[entityName];
   const [modalVisible, setModalVisible] = useState(false);
@@ -86,7 +86,6 @@ const PrizeManager = ({
     selectedPrize,
     selectPrize,
     classId: prizesOwner.id,
-    feature,
     className,
     entityName,
   };

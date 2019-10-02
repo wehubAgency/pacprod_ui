@@ -71,20 +71,9 @@
       "key": "circusQuiz",
       "title": "circusQuizTitle",
       "icon": "question",
-      "routes": {
-        "questions": {
-          "title": "circusQuestionTitle",
-          "path": "/circusquestions",
-          "page": "CircusQuestionPage",
-          "exact": true
-        },
-        "settings": {
-          "title": "circusQuizSettingsTitle",
-          "path": "/circusQuizSettings",
-          "page": "CircusQuizSettingsPage",
-          "exact": true
-        }
-      }
+      "path": "/circusQuiz",
+      "page": "CircusQuizPage",
+      "exact": true
     },
     "gameConditions": {
       "key": "gameConditions",
@@ -146,7 +135,7 @@
         "season": {
           "title": "seasonTitle",
           "path": "/season",
-          "page": "SeasonPage",
+          "page": "CircusSeasonPage",
           "exact": true
         }
       }
@@ -571,6 +560,120 @@
         "excludeFields": []
       },
       "componentConfig": {}
+    },
+    "circusQuiz": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "description": {
+          "type": "textarea",
+          "label": "description",
+          "help": "description"
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {}
+    },
+    "circusQuizDraw": {
+      "formConfig": {
+        "minimumPoints": {
+          "type": "number",
+          "label": "minimumPoints",
+          "initialValue": 0,
+          "attributes": {
+            "min": 0
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "sessions": {
+          "type": "select",
+          "label": "sessions",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "prize": {
+          "type": "select",
+          "label": "prize",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "winners": {
+          "type": "number",
+          "label": "winners",
+          "help": "winners",
+          "initialValue": 1,
+          "attributes": {
+            "min": 1
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      }
+    },
+    "circusQuizSettings": {
+      "formConfig": {
+        "randomQuestions": {
+          "type": "checkbox",
+          "label": "randomQuestions",
+          "help": "randomQuestions"
+        },
+        "randomQuestionsNumber": {
+          "type": "number",
+          "label": "randomQuestionsNumber",
+          "help": "randomQuestionsNumber",
+          "attributes": {
+            "min": 1
+          }
+        },
+        "uniqueParticipation": {
+          "type": "checkbox",
+          "label": "uniqueParticipation",
+          "help": "uniqueParticipation"
+        },
+        "radius": {
+          "type": "number",
+          "label": "radius",
+          "help": "radius",
+          "attributes": {
+            "min": 50
+          },
+          "initialValue": 100
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      }
     },
     "coin": {
       "formConfig": {
@@ -2556,6 +2659,26 @@
             "type": "date",
             "format": "LL"
           }
+        }
+      }
+    },
+    "user": {
+      "formConfig": {},
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "firstname": {
+          "title": "firstname",
+          "dataIndex": "firstname"
+        },
+        "lastname": {
+          "title": "lastname",
+          "dataIndex": "lastname"
+        },
+        "email": {
+          "title": "email",
+          "dataIndex": "email"
         }
       }
     },

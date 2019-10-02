@@ -16,9 +16,6 @@ const propTypes = {
   setSessions: PropTypes.func,
   selectedSession: PropTypes.string,
   formMode: PropTypes.string.isRequired,
-  general: PropTypes.shape({
-    config: PropTypes.shape().isRequired,
-  }).isRequired,
 };
 
 const defaultProps = {
@@ -44,10 +41,12 @@ const SessionForm = ({
     setPrograms(data[1]);
   }, [data]);
 
-  const optionsLocation = locations.map(l => ({
-    value: l.id,
-    label: l.address.fullAddress,
-  }));
+  const optionsLocation = locations
+    .filter(l => l.enabled)
+    .map(l => ({
+      value: l.id,
+      label: l.address.fullAddress,
+    }));
 
   const optionsProgram = programs
     .filter(p => p.enabled)

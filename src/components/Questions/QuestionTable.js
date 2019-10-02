@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { Row, Col, Empty } from 'antd';
 import QuestionList from './QuestionList';
 import QuestionInfos from './QuestionInfos';
+
+const propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setQuestions: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
+  selectedQuestion: PropTypes.string.isRequired,
+  selectQuestion: PropTypes.func.isRequired,
+  quiz: PropTypes.string.isRequired,
+  circusQuiz: PropTypes.bool,
+};
+
+const defaultProps = {
+  circusQuiz: false,
+};
 
 const QuestionTable = ({
   questions,
@@ -10,11 +25,11 @@ const QuestionTable = ({
   openModal,
   selectedQuestion,
   selectQuestion,
-  general: { config },
   quiz,
+  circusQuiz,
 }) => {
   const [items, setItems] = useState([]);
-  const { componentConfig } = config.entities.question;
+  const { componentConfig } = useSelector(({ general: { config } }) => config.entities.question);
 
   useEffect(() => {
     setItems(
@@ -32,6 +47,7 @@ const QuestionTable = ({
     selectedQuestion,
     selectQuestion,
     quiz,
+    circusQuiz,
   };
   const questionInfosProps = {
     infos: questions.find(q => q.id === selectedQuestion),
@@ -57,9 +73,7 @@ const QuestionTable = ({
   );
 };
 
-const mapStateToProps = ({ general }) => ({ general });
+QuestionTable.propTypes = propTypes;
+QuestionTable.defaultProps = defaultProps;
 
-export default connect(
-  mapStateToProps,
-  {},
-)(QuestionTable);
+export default QuestionTable;

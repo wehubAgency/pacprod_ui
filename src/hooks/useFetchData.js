@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import iaxios from '../axios';
 import store from '../store';
 
-function useFetchData(urls, initState = []) {
+function useFetchData(urls, initState = [], conditions = []) {
   const [fetching, setFetching] = useState(false);
   const [data, setData] = useState(initState);
 
@@ -25,7 +25,7 @@ function useFetchData(urls, initState = []) {
     });
     return () => ax.source.cancel();
     // eslint-disable-next-line
-  }, [currentApp, currentEntity, currentSeason]);
+  }, [currentApp, currentEntity, currentSeason, ...conditions]);
 
   if (data === null) {
     return { data: null, fetching };

@@ -15,10 +15,15 @@ const propTypes = {
   selectedQuestion: PropTypes.string.isRequired,
   selectQuestion: PropTypes.func.isRequired,
   quiz: PropTypes.string.isRequired,
+  circusQuiz: PropTypes.bool,
+};
+
+const defaultProps = {
+  circusQuiz: false,
 };
 
 const QuestionList = ({
-  items, setItems, selectedQuestion, selectQuestion, quiz,
+  items, setItems, selectedQuestion, selectQuestion, quiz, circusQuiz,
 }) => {
   const [oldOrder, setOldOrder] = useState([]);
 
@@ -61,6 +66,7 @@ const QuestionList = ({
       .patch(`/questions/${result.draggableId}/order`, {
         order: result.destination.index,
         quiz,
+        circusQuiz,
       })
       .then((res) => {
         if (res === 'error') {
@@ -106,5 +112,6 @@ const QuestionList = ({
 };
 
 QuestionList.propTypes = propTypes;
+QuestionList.defaultProps = defaultProps;
 
 export default QuestionList;

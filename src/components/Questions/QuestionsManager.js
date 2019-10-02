@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Translate } from 'react-localize-redux';
 import { Button, Spin } from 'antd';
 import QuestionTable from './QuestionTable';
 import QuestionForm from './QuestionForm';
+import { useFetchData } from '../../hooks';
 
 const propTypes = {
-  questions: PropTypes.arrayOf(PropTypes.shape()),
-  setQuestions: PropTypes.func.isRequired,
   quiz: PropTypes.string.isRequired,
-  fetching: PropTypes.bool.isRequired,
+  circusQuiz: PropTypes.bool,
 };
 
 const defaultProps = {
-  questions: [],
+  circusQuiz: false,
 };
 
-const QuestionsManager = ({
-  questions, setQuestions, quiz, fetching,
-}) => {
+const QuestionsManager = ({ quiz, circusQuiz }) => {
+  const [questions, setQuestions] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [formMode, setFormMode] = useState('create');
   const [selectedQuestion, selectQuestion] = useState('');
+
+  const { data, fetching } = useFetchData(
+    `/questions?quiz=${quiz}${circusQuiz ? '&circusQuiz=true' : ''}`,
+    [],
+    [quiz],
+  );
+
+  useEffect(() => {
+    setQuestions(data);
+  }, [data, quiz]);
 
   const openModal = (mode) => {
     setModalVisible(true);
@@ -39,6 +47,7 @@ const QuestionsManager = ({
     selectedQuestion,
     selectQuestion,
     quiz,
+    circusQuiz,
   };
   const questionTableProps = {
     questions,
@@ -47,6 +56,7 @@ const QuestionsManager = ({
     selectQuestion,
     selectedQuestion,
     quiz,
+    circusQuiz,
   };
 
   return (

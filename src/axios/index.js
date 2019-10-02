@@ -1,7 +1,18 @@
 import axios from 'axios';
 import { notification } from 'antd';
-import { ADMIN_API_URI, SUPER_ADMIN_API_URI } from '../constants';
+import { ADMIN_API_URI, SUPER_ADMIN_API_URI, API_URI } from '../constants';
 import store from '../store';
+
+const refreshToken = async () => {
+  const rt = localStorage.getItem('refreshToken');
+
+  const res = await axios.post(`${API_URI}user/refresh`, { refreshToken: rt });
+
+  localStorage.setItem('token', `Bearer ${res.data.access_token}`);
+  localStorage.setItem('refreshToken', res.data.refresh_token);
+
+  return res.data.access_token;
+};
 
 export default (role = 'admin') => {
   const { currentApp, currentEntity, currentSeason } = store.getState().general;
@@ -23,25 +34,45 @@ export default (role = 'admin') => {
   iaxios.interceptors.response.use(
     res => res,
     (err) => {
-      console.log({ err });
       if (err.constructor.name !== 'Cancel') {
-        const { message, description, type } = err.response.data.error;
-        let descriptionMessage = '';
+        const {
+          config,
+          response: { status },
+        } = err;
+        const originalRequest = { ...config };
+        switch (status) {
+          case 401: {
+            return refreshToken().then((t) => {
+              originalRequest.headers.Authorization = `Bearer ${t}`;
+              return axios(originalRequest);
+            });
+          }
+          default: {
+            // const { message, description, type } = err.response.data.error;
+            // let descriptionMessage = '';
 
-        switch (type) {
-          case 'validator':
-            descriptionMessage = description
-              .map(e => `${e.property_path}: ${e.message}`)
-              .join('\r\n');
-            break;
-          default:
-            descriptionMessage = description;
+            // switch (type) {
+            //   case 'validator':
+            //     descriptionMessage = description
+            //       .map(e => `${e.property_path}: ${e.message}`)
+            //       .join('\r\n');
+            //     break;
+            //   default:
+            //     descriptionMessage = description;
+            // }
+
+            // notification.error({
+            //   message,
+            //   description,
+            //   placement: 'topLeft',
+            // });
+            notification.error({
+              message: 'Error',
+              description: 'An error occured. Please retry or contact the support.',
+              placement: 'topLeft',
+            });
+          }
         }
-        notification.error({
-          message,
-          description: descriptionMessage,
-          placement: 'topLeft',
-        });
       }
       return Promise.resolve('error');
     },

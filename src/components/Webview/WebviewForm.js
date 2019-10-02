@@ -14,9 +14,6 @@ const propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
-  general: PropTypes.shape({
-    config: PropTypes.shape().isRequired,
-  }).isRequired,
 };
 
 const defaultProps = {

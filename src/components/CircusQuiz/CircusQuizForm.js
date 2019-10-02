@@ -22,19 +22,19 @@ const defaultProps = {
   externalFormRef: null,
 };
 
-const QuizForm = ({
+const CircusQuizForm = ({
   allQuiz, setAllQuiz, selectedQuiz, selectQuiz, ...props
 }) => {
   const formProps = {
     ...props,
-    entityName: 'quiz',
+    entityName: 'circusQuiz',
     data: allQuiz,
     setData: setAllQuiz,
     selectedData: selectedQuiz,
     selectData: selectQuiz,
-    createUrl: '/quiz',
-    updateUrl: `/quiz/${selectedQuiz}`,
-    formName: 'quizForm',
+    createUrl: '/circusquiz',
+    updateUrl: `/circusquiz/${selectedQuiz}`,
+    formName: 'circusQuizForm',
     modalTitle:
       props.formMode === 'create' ? <Translate id="createQuiz" /> : <Translate id="editQuiz" />,
   };
@@ -42,7 +42,7 @@ const QuizForm = ({
   return <Form {...formProps} />;
 };
 
-QuizForm.propTypes = propTypes;
-QuizForm.defaultProps = defaultProps;
+CircusQuizForm.propTypes = propTypes;
+CircusQuizForm.defaultProps = defaultProps;
 
-export default QuizForm;
+export default CircusQuizForm;

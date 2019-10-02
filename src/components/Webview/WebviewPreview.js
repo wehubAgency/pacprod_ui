@@ -21,7 +21,7 @@ const WebviewPreview = ({ webview }) => {
         position: 'relative',
         overflow: 'hidden',
         paddingTop: '78%',
-        width: 300,
+        width: '50%',
         height: 0,
         margin: '0 auto',
         border: '1px solid lightgray',

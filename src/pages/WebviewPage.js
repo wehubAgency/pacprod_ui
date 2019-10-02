@@ -20,6 +20,7 @@ const _WebviewPage = ({ general: { currentApp, currentEntity, currentSeason } })
     const ax = iaxios();
 
     ax.get('/webviews').then((res) => {
+      console.log({ res });
       if (res !== 'error') {
         setWebviews(res.data);
       }

@@ -21,7 +21,7 @@ const LoginPage = ({ form, setAuthenticated }) => {
         axios
           .post(`${API_URI}user/getToken`, { ...values, admin: true })
           .then((res) => {
-            if (res.data !== 'INVALID_GRANT' && res.data !== 'BAD_ROLE') {
+            if (res.data.err !== 'INVALID_GRANT' && res.data.err !== 'BAD_ROLE') {
               localStorage.setItem('token', `Bearer ${res.data.access_token}`);
               localStorage.setItem('refreshToken', res.data.refresh_token);
               setAuthenticated(true);

@@ -14,12 +14,9 @@ const propTypes = {
   general: PropTypes.shape({
     currentEntity: PropTypes.shape().isRequired,
   }).isRequired,
-  entityApiUri: PropTypes.string.isRequired,
 };
 
-const SeasonTable = ({
-  seasons, openModal, fetching, entityApiUri,
-}) => {
+const CircusSeasonTable = ({ seasons, openModal, fetching }) => {
   const { componentConfig } = useSelector(({ general: { config } }) => config.entities.season);
   const { currentEntity } = useSelector(({ general }) => general);
   const dispatch = useDispatch();
@@ -27,7 +24,7 @@ const SeasonTable = ({
   const selectSeason = (e) => {
     const { id } = e.currentTarget.dataset;
     iaxios()
-      .patch(`${entityApiUri}/${currentEntity.id}/currentseason`, {
+      .patch(`/circus/${currentEntity.id}/currentseason`, {
         currentSeason: id,
       })
       .then((res) => {
@@ -74,6 +71,6 @@ const SeasonTable = ({
   );
 };
 
-SeasonTable.propTypes = propTypes;
+CircusSeasonTable.propTypes = propTypes;
 
-export default SeasonTable;
+export default CircusSeasonTable;

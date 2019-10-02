@@ -23,7 +23,7 @@ const App = ({ general: { locale } }) => {
     if (token) {
       setFetching(true);
       iaxios()
-        .get('checktoken')
+        .get('/checktoken')
         .then((res) => {
           if (res.data === 'OK') {
             setAuthenticated(true);

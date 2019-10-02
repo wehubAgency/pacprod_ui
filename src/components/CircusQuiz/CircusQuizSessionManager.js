@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Transfer, Button } from 'antd';
+import { Transfer, Button, message } from 'antd';
 import { withLocalize, Translate } from 'react-localize-redux';
 import iaxios from '../../axios';
+import { useFetchData } from '../../hooks';
 
 const propTypes = {
   quiz: PropTypes.shape().isRequired,
-  setQuiz: PropTypes.func.isRequired,
-  sessions: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  setAllQuiz: PropTypes.func.isRequired,
+  allQuiz: PropTypes.arrayOf(PropTypes.object).isRequired,
   translate: PropTypes.func.isRequired,
 };
 
-const QuizSessionsForm = ({
-  quiz, setQuiz, sessions, translate,
+const CircusQuizSessionsManager = ({
+  quiz, allQuiz, setAllQuiz, translate,
 }) => {
+  const [sessions, setSessions] = useState([]);
   const [targetKeys, setTargetKeys] = useState([]);
+
+  const { data } = useFetchData('/sessions');
+
+  useEffect(() => {
+    setSessions(data);
+  }, [data]);
 
   useEffect(() => {
     setTargetKeys(quiz.sessions.map(s => s.id));
@@ -26,10 +34,14 @@ const QuizSessionsForm = ({
 
   const updateSessions = () => {
     iaxios()
-      .patch(`/quiz/${quiz.id}/sessions`, { sessions: targetKeys })
+      .patch(`/circusquiz/${quiz.id}/sessions`, { sessions: targetKeys })
       .then((res) => {
         if (res !== 'error') {
-          setQuiz(res.data);
+          const index = allQuiz.findIndex(q => q.id === res.data.id);
+          const newQuiz = [...allQuiz];
+          newQuiz.splice(index, 1, res.data);
+          setAllQuiz(newQuiz);
+          message.success(translate('success'));
         }
       });
   };
@@ -39,8 +51,8 @@ const QuizSessionsForm = ({
       <Transfer
         dataSource={sessions.map(s => ({ ...s, key: s.id }))}
         titles={[
-          translate('quizSessionsForm.sessionsWithout'),
-          translate('quizSessionsForm.sessionsWith'),
+          translate('circusQuizSessionsForm.sessionsWithout'),
+          translate('circusQuizSessionsForm.sessionsWith'),
         ]}
         targetKeys={targetKeys}
         render={item => <span>{item.name}</span>}
@@ -53,6 +65,6 @@ const QuizSessionsForm = ({
   );
 };
 
-QuizSessionsForm.propTypes = propTypes;
+CircusQuizSessionsManager.propTypes = propTypes;
 
-export default withLocalize(QuizSessionsForm);
+export default withLocalize(CircusQuizSessionsManager);
