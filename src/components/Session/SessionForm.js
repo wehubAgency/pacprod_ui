@@ -42,7 +42,7 @@ const SessionForm = ({
   }, [data]);
 
   const optionsLocation = locations
-    .filter(l => l.enabled)
+    // .filter(l => l.enabled)
     .map(l => ({
       value: l.id,
       label: l.address.fullAddress,

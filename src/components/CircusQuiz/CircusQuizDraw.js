@@ -65,7 +65,7 @@ const CircusQuizDraw = ({ quiz: { id, prizes, sessions }, setAllQuiz, translate 
           message.success(translate('success'));
 
           iaxios()
-            .get('/quiz')
+            .get('/circusquiz')
             .then((r) => {
               setAllQuiz(r.data);
             });
