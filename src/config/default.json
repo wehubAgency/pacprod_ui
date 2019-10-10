@@ -771,10 +771,6 @@
             {
               "type": "email",
               "message": "email"
-            },
-            {
-              "required": true,
-              "message": "required"
             }
           ]
         },
@@ -793,13 +789,7 @@
             "number": 1,
             "formats": ["image/jpeg", "image/png"],
             "size": 3
-          },
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
+          }
         },
         "description": {
           "type": "textarea",
@@ -807,43 +797,19 @@
         },
         "address": {
           "type": "text",
-          "label": "address",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
+          "label": "address"
         },
         "city": {
           "type": "text",
-          "label": "city",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
+          "label": "city"
         },
         "zipcode": {
           "type": "text",
-          "label": "zipcode",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
+          "label": "zipcode"
         },
         "country": {
           "type": "text",
-          "label": "country",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
+          "label": "country"
         }
       },
       "editConfig": {
@@ -1522,7 +1488,7 @@
           "uploadRules": {
             "number": 2,
             "formats": ["video/mp4"],
-            "size": 10
+            "size": 25
           }
         }
       },
@@ -1597,10 +1563,6 @@
             {
               "type": "email",
               "message": "email"
-            },
-            {
-              "required": true,
-              "message": "required"
             }
           ]
         },

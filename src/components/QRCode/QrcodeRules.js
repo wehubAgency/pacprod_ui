@@ -28,7 +28,7 @@ const QrcodeRules = ({
 
   const closeModal = () => {
     setVisible(false);
-    setRules([]);
+    // setRules([]);
   };
 
   const patchRules = () => {

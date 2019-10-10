@@ -162,6 +162,7 @@ const Form = ({
               if (inModal) {
                 setModalVisible(false);
               }
+              setLoading(false);
             }
           } else {
             createEntity(formData);
@@ -176,6 +177,7 @@ const Form = ({
               if (inModal) {
                 setModalVisible(false);
               }
+              setLoading(false);
             }
           } else {
             updateEntity(formData);
