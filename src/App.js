@@ -29,7 +29,8 @@ const App = ({ general: { locale } }) => {
             setAuthenticated(true);
           }
           setFetching(false);
-        });
+        })
+        .catch(() => setFetching(false));
     }
   }, []);
 

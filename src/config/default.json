@@ -140,6 +140,69 @@
         }
       }
     },
+    "ar": {
+      "key": "ar",
+      "title": "arTitle",
+      "icon": "scan",
+      "routes": {
+        "arObject": {
+          "title": "arObjectTitle",
+          "path": "/arobject",
+          "page": "ARObjectPage",
+          "exact": true
+        },
+        "arexpo": {
+          "title": "arExpoTitle",
+          "path": "/arexpotarget",
+          "page": "ARExpoTarget",
+          "exact": true
+        },
+        "argame": {
+          "title": "arGameTitle",
+          "path": "/argametarget",
+          "page": "ARGameTarget",
+          "exact": true
+        }
+      }
+    },
+    "arexpo": {
+      "key": "ar",
+      "title": "arTitle",
+      "icon": "scan",
+      "routes": {
+        "arObject": {
+          "title": "arObjectTitle",
+          "path": "/arobject",
+          "page": "ARObjectPage",
+          "exact": true
+        },
+        "arexpo": {
+          "title": "arExpoTitle",
+          "path": "/arexpotarget",
+          "page": "ARExpoTarget",
+          "exact": true
+        }
+      }
+    },
+    "argame": {
+      "key": "ar",
+      "title": "arTitle",
+      "icon": "scan",
+      "routes": {
+        "arObject": {
+          "title": "arObjectTitle",
+          "path": "/arobject",
+          "page": "ARObjectPage",
+          "exact": true
+        },
+        "argame": {
+          "title": "arGameTitle",
+          "path": "/argametarget",
+          "page": "ARGameTarget",
+          "exact": true
+        }
+      }
+    },
     "admin": {
       "key": "admin",
       "title": "adminTitle",
@@ -236,6 +299,18 @@
           "type": "checkboxgrp",
           "label": "features"
         },
+        "vuforiaAccessKey": {
+          "type": "text",
+          "label": "accessKeyVuforia",
+          "help": "accessKeyVuforia",
+          "conditions": [
+            {
+              "param": "features",
+              "operator": "someRegexp",
+              "value": "^ar"
+            }
+          ]
+        },
         "apiPrefix": {
           "type": "text",
           "label": "apiPrefix",
@@ -316,6 +391,71 @@
           "render": {
             "type": "stringarray"
           }
+        }
+      }
+    },
+    "arobject": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "attributes": {
+            "type": "text"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "description": {
+          "type": "text",
+          "label": "description",
+          "attributes": {
+            "type": "text"
+          }
+        },
+        "model": {
+          "type": "upload",
+          "label": "model",
+          "text": "model",
+          "valuePropName": "fileList",
+          "uploadRules": {
+            "number": 1,
+            "formats": ["video/mp4"],
+            "size": 10
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "customJson": {
+          "type": "upload",
+          "label": "customJson",
+          "text": "customJson",
+          "valuePropName": "fileList",
+          "uploadRules": {
+            "number": 1,
+            "formats": ["application/json"],
+            "size": 2
+          }
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "description": {
+          "title": "description",
+          "dataIndex": "description"
         }
       }
     },

@@ -98,6 +98,8 @@ const PlaypointsList = ({
 
   const transferProps = {
     playpoint: playpoints.find(p => p.id === selectedPlaypoint),
+    setPlaypoints,
+    playpoints,
     managerVisible,
     setManagerVisible,
   };

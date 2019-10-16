@@ -54,6 +54,8 @@
   "visibleWebview": "Rendre la page visible",
   "nonVisibleWebview": "Rendre la page non-visible",
   "deleteWebview": "Supprimer la page",
+  "createArobject": "Créer un Objet RA",
+  "editArobject": "Editer un Objet RA",
   "randomDrawing": "Tirage au sort",
   "randomDraw": "Tirer au sort",
   "inStock": "en stock",
@@ -115,7 +117,8 @@
       "configFilename": "Nom du fichier de configuration",
       "adminName": "Nom de compte de l'admin",
       "adminEmail": "Email de l'admin",
-      "adminPassword": "Mot de passe de l'admin"
+      "adminPassword": "Mot de passe de l'admin",
+      "accessKeyVuforia": "Access Key Vuforia"
     },
     "options": {
       "quiz": "Quiz",
@@ -127,11 +130,29 @@
       "flashapp": "Appli Flashplay",
       "partner": "Partenaires",
       "selfie": "Selfie",
-      "webview": "Pages statiques"
+      "webview": "Pages statiques",
+      "arexpo": "ARExpo"
     },
     "help": {
-      "codeName": "Un seul mot en camelCase"
+      "codeName": "Un seul mot en camelCase",
+      "accessKeyVuforia": "Clef disponible dans la base de données Vuforia créée pour l'application, Onglet Database Access Keys -> Client Access Keys -> Access Key"
     }
+  },
+  "arobjectComponent": {
+    "name": "Nom",
+    "description": "Description"
+  },
+  "arobjectForm": {
+    "label": {
+      "name": "Nom",
+      "description": "Description",
+      "model": "Modèle 3d ou vidéo",
+      "customJson": "Fichier Json personnalisé"
+    }
+  },
+  "arobjectPage": {
+    "h1": "Objet 3D / Vidéo",
+    "instructions": "Créer ici des modèles 3D ou des vidéos que vous pourrez ensuite aller associer avec une cible RA"
   },
   "artistComponent": {
     "profilePicture": "Image de profile",
@@ -402,6 +423,10 @@
     "noImages": "Pas d'image"
   },
   "menu": {
+    "arTitle": "Réalité Augmentée",
+    "arObjectTitle": "Objet RA",
+    "arExpoTitle": "Cible RA Expo",
+    "arGameTitle": "Cible RA Jeux",
     "qrflashTitle": "QRFlash",
     "selfieTitle": "Selfie",
     "partnerTitle": "Partenaires",

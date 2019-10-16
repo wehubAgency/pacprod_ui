@@ -22,3 +22,4 @@ export * from './PartnerPage';
 export * from './SelfiePage';
 export * from './WebviewPage';
 export * from './CircusQuizPage';
+export * from './ARObjectPage';

@@ -8,9 +8,15 @@ export default (features = [], common, appType, role) => {
   if (features.some(f => conditionnalGames.indexOf(f) > -1)) {
     allFeatures.push('gameConditions');
   }
-  if (features.includes('qrflash') || features.includes('argame') || features.includes('arexpo')) {
+  if (features.includes('qrflash') || features.includes('argame')) {
     allFeatures.push('company');
     allFeatures.push('currency');
+  }
+  if (features.some(f => f.match(RegExp('^ar')))) {
+    if (features.includes('argame') && features.includes('arexpo')) {
+      allFeatures = allFeatures.filter(f => !f.match(RegExp('^ar')));
+      allFeatures.push('ar');
+    }
   }
   allFeatures = [...allFeatures, ...common];
   allFeatures.push(appType);

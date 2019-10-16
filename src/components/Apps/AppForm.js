@@ -142,6 +142,10 @@ const AppForm = ({
       value: 'webview',
       label: 'webview',
     },
+    {
+      value: 'arexpo',
+      label: 'arexpo',
+    },
   ];
 
   const type = [

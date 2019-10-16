@@ -11,13 +11,21 @@ const propTypes = {
   managerVisible: PropTypes.bool.isRequired,
   setManagerVisible: PropTypes.func.isRequired,
   playpoint: PropTypes.shape(),
+  playpoints: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setPlaypoints: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
   playpoint: null,
 };
 
-const QrcodeTransfer = ({ managerVisible, setManagerVisible, playpoint }) => {
+const QrcodeTransfer = ({
+  managerVisible,
+  setManagerVisible,
+  playpoint,
+  playpoints,
+  setPlaypoints,
+}) => {
   const [qrcodes, setQrcodes] = useState([]);
   const [selectedQrcode, selectQrcode] = useState('');
   const [targetKeys, setTargetKeys] = useState([]);
@@ -50,6 +58,10 @@ const QrcodeTransfer = ({ managerVisible, setManagerVisible, playpoint }) => {
       })
       .then((res) => {
         if (res !== 'error') {
+          const index = playpoints.findIndex(p => p.id === res.data.id);
+          const newPlaypoints = [...playpoints];
+          newPlaypoints.splice(index, 1, res.data);
+          setPlaypoints(newPlaypoints);
           closeManager();
         }
       });

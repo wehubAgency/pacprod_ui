@@ -20,68 +20,63 @@ const propTypes = {
 
 const { SubMenu, Item } = Menu;
 
-const AdminMenu = withRouter(
-  ({ theme, defaultSelectedKeys, mode, general }) => {
-    const renderMenu = () => {
-      const {
-        currentApp: { features },
-        currentApp,
-        config,
-      } = general;
+const AdminMenu = withRouter(({
+  theme, defaultSelectedKeys, mode, general,
+}) => {
+  const renderMenu = () => {
+    const {
+      currentApp: { features },
+      currentApp,
+      config,
+    } = general;
 
-      const { common } = config.routing;
-      const allFeatures = getFeatures(
-        features,
-        common,
-        currentApp.type,
-        general.role,
-      );
+    const { common } = config.routing;
+    const allFeatures = getFeatures(features, common, currentApp.type, general.role);
 
-      return allFeatures.map((f) => {
-        const menuItem = config.routing[f];
-        if (menuItem.routes && Object.entries(menuItem.routes).length > 0) {
-          return (
-            <SubMenu
-              key={menuItem.key}
-              title={
-                <span>
-                  <Icon type={menuItem.icon} />
-                  <span>
-                    <Translate id={`menu.${menuItem.title}`} />
-                  </span>
-                </span>
-              }
-            >
-              {Object.entries(menuItem.routes).map(([key, route]) => (
-                <Item key={key}>
-                  <Link to={route.path}>
-                    <Translate id={`menu.${route.title}`} />
-                  </Link>
-                </Item>
-              ))}
-            </SubMenu>
-          );
-        }
+    return allFeatures.map((f) => {
+      const menuItem = config.routing[f];
+      if (menuItem.routes && Object.entries(menuItem.routes).length > 0) {
         return (
-          <Item key={menuItem.key}>
-            <Link to={menuItem.path}>
-              <Icon type={menuItem.icon} />
+          <SubMenu
+            key={menuItem.key}
+            title={
               <span>
-                <Translate id={`menu.${menuItem.title}`} />
+                <Icon type={menuItem.icon} />
+                <span>
+                  <Translate id={`menu.${menuItem.title}`} />
+                </span>
               </span>
-            </Link>
-          </Item>
+            }
+          >
+            {Object.entries(menuItem.routes).map(([key, route]) => (
+              <Item key={key}>
+                <Link to={route.path}>
+                  <Translate id={`menu.${route.title}`} />
+                </Link>
+              </Item>
+            ))}
+          </SubMenu>
         );
-      });
-    };
+      }
+      return (
+        <Item key={menuItem.key}>
+          <Link to={menuItem.path}>
+            <Icon type={menuItem.icon} />
+            <span>
+              <Translate id={`menu.${menuItem.title}`} />
+            </span>
+          </Link>
+        </Item>
+      );
+    });
+  };
 
-    return (
-      <Menu theme={theme} defaultSelectedKeys={defaultSelectedKeys} mode={mode}>
-        {general.currentApp !== null && general.currentEntity && renderMenu()}
-      </Menu>
-    );
-  },
-);
+  return (
+    <Menu theme={theme} defaultSelectedKeys={defaultSelectedKeys} mode={mode}>
+      {general.currentApp !== null && general.currentEntity && renderMenu()}
+    </Menu>
+  );
+});
 
 AdminMenu.propTypes = propTypes;
 
