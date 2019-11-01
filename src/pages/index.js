@@ -23,3 +23,6 @@ export * from './SelfiePage';
 export * from './WebviewPage';
 export * from './CircusQuizPage';
 export * from './ARObjectPage';
+export * from './ARTargetPage';
+export * from './ARExpoPage';
+export * from './ARGamePage';

@@ -30,7 +30,9 @@ const FormGen = ({
         }
         if (el.type !== 'upload' && excludeFields.indexOf(key) === -1) {
           if (el.type === 'select') {
-            values[key] = edit[editKey].id;
+            if (edit[editKey]) {
+              values[key] = edit[editKey].id;
+            }
           } else if (el.type === 'date') {
             values[key] = moment(edit[editKey]);
           } else {
@@ -105,61 +107,66 @@ const FormGen = ({
         testConditions = checkConditions(el, formValues);
       }
 
-      if (testConditions) {
-        const itemNumber = el.number || 1;
-        const cols = [];
-        const custom = {};
-        if (el.type === 'upload') {
-          custom.valuePropName = 'fileList';
-          custom.getValueFromEvent = normFile;
-        }
-        for (let i = 0; i < itemNumber; i += 1) {
-          const itemKey = itemNumber > 1 ? `${key}[${i}]` : key;
-          cols.push(
-            <Col key={itemKey} span={24} lg={{ span: itemNumber > 1 ? 12 : 24 }}>
-              {edit !== null && el.type === 'upload' && edit[key] && (
-                <div>
-                  <Item key={`${itemKey}ToDelete`}>
-                    {getFieldDecorator(`${itemKey}ToDelete`, {})(
-                      generateInput(`${key}ToDelete`, { type: 'hidden' }, i),
-                    )}
-                  </Item>
-                  <DeleteFile
-                    onFileUpdate={onFileUpdate}
-                    files={edit[key]}
-                    filesToDelete={form.getFieldValue(`${key}ToDelete`)}
-                    property={key}
-                  />
-                </div>
-              )}
-              <Item
-                key={itemKey}
-                validateStatus={getFieldError(itemKey) ? 'error' : ''}
-                extra={el.help ? <Translate id={`${formName}.help.${el.help}`} /> : ''}
-                label={
-                  i === 0 && el.type !== 'hidden' ? (
-                    <Translate id={`${formName}.label.${el.label}`} />
-                  ) : (
-                    ''
-                  )
-                }
-              >
-                {getFieldDecorator(itemKey, {
-                  rules: generateRules(el, key),
-                  initialValue: el.initialValue,
-                  ...custom,
-                })(generateInput(key, el, i, data[key], form, formName, edit))}
-              </Item>
-            </Col>,
-          );
-        }
-        return (
-          <Row key={key} type="flex" gutter={16} align="bottom">
-            {cols}
-          </Row>
+      // if (testConditions) {
+      const itemNumber = el.number || 1;
+      const cols = [];
+      const custom = {};
+      if (el.type === 'upload') {
+        custom.valuePropName = 'fileList';
+        custom.getValueFromEvent = normFile;
+      }
+      for (let i = 0; i < itemNumber; i += 1) {
+        const itemKey = itemNumber > 1 ? `${key}[${i}]` : key;
+        cols.push(
+          <Col
+            style={{ visibility: testConditions ? 'visible' : 'hidden' }}
+            key={itemKey}
+            span={24}
+            lg={{ span: itemNumber > 1 ? 12 : 24 }}
+          >
+            {edit !== null && el.type === 'upload' && edit[key] && (
+              <div>
+                <Item key={`${itemKey}ToDelete`}>
+                  {getFieldDecorator(`${itemKey}ToDelete`, {})(
+                    generateInput(`${key}ToDelete`, { type: 'hidden' }, i),
+                  )}
+                </Item>
+                <DeleteFile
+                  onFileUpdate={onFileUpdate}
+                  files={edit[key]}
+                  filesToDelete={form.getFieldValue(`${key}ToDelete`)}
+                  property={key}
+                />
+              </div>
+            )}
+            <Item
+              key={itemKey}
+              validateStatus={getFieldError(itemKey) ? 'error' : ''}
+              extra={el.help ? <Translate id={`${formName}.help.${el.help}`} /> : ''}
+              label={
+                i === 0 && el.type !== 'hidden' ? (
+                  <Translate id={`${formName}.label.${el.label}`} />
+                ) : (
+                  ''
+                )
+              }
+            >
+              {getFieldDecorator(itemKey, {
+                rules: generateRules(el, key),
+                initialValue: el.initialValue,
+                ...custom,
+              })(generateInput(key, el, i, data[key], form, formName, edit))}
+            </Item>
+          </Col>,
         );
       }
-      return false;
+      return (
+        <Row key={key} type="flex" gutter={16} align="bottom">
+          {cols}
+        </Row>
+      );
+      // }
+      // return false;
     });
   };
 

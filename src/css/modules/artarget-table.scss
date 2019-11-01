@@ -1,0 +1,10 @@
+.bad-target {
+  background-color: rgba($error-color, 0.2);
+  img {
+    filter: grayscale(1);
+  }
+}
+
+.disabled-target {
+  background-color: rgba($warning-color, 0.2);
+}

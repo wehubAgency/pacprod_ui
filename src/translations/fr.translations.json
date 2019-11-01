@@ -56,6 +56,12 @@
   "deleteWebview": "Supprimer la page",
   "createArobject": "Créer un Objet RA",
   "editArobject": "Editer un Objet RA",
+  "createArTarget": "Créer une cible RA",
+  "editArTarget": "Modifier une cible RA",
+  "createArexpoLink": "Créer une association",
+  "editArexpoLink": "Modifier une association",
+  "createArgameLink": "Créer une association",
+  "editArgameLink": "Modifier une association",
   "randomDrawing": "Tirage au sort",
   "randomDraw": "Tirer au sort",
   "inStock": "en stock",
@@ -85,6 +91,10 @@
   "updateGameConditions": "Mettre à jours les conditions de jeu",
   "totalUser": "Total utilisateurs",
   "moreInfos": "Plus d'informations",
+  "errorDuplicates": "La cible n'a pas pu être créée/activée car une autre cible présente trop de similitude avec celle ci",
+  "noConditions": "Pas de conditions",
+  "settings": "Paramètres",
+  "argamelinks": "Association Cible/Objet RA",
   "rules": {
     "required": "Obligatoire",
     "email": "L'email doit être valide.",
@@ -118,7 +128,9 @@
       "adminName": "Nom de compte de l'admin",
       "adminEmail": "Email de l'admin",
       "adminPassword": "Mot de passe de l'admin",
-      "accessKeyVuforia": "Access Key Vuforia"
+      "vClientAccessKey": "Access Key Client Vuforia",
+      "vServerAccessKey": "Access Key Server Vuforia",
+      "vServerSecret": "Server Secret Vuforia"
     },
     "options": {
       "quiz": "Quiz",
@@ -131,12 +143,77 @@
       "partner": "Partenaires",
       "selfie": "Selfie",
       "webview": "Pages statiques",
-      "arexpo": "ARExpo"
+      "arexpo": "ARExpo",
+      "argame": "ARGame"
     },
     "help": {
       "codeName": "Un seul mot en camelCase",
-      "accessKeyVuforia": "Clef disponible dans la base de données Vuforia créée pour l'application, Onglet Database Access Keys -> Client Access Keys -> Access Key"
+      "vClientAccessKey": "Clef disponible dans la base de données Vuforia créée pour l'application, Onglet Database Access Keys -> Client Access Keys -> Access Key",
+      "vServerAccessKey": "Clef disponible dans la base de données Vuforia créée pour l'application, Onglet Database Access Keys -> Server Access Keys -> Access Key",
+      "vServerSecret": "Clef disponible dans la base de données Vuforia créée pour l'application, Onglet Database Access Keys -> Server Access Keys -> Secret"
     }
+  },
+  "arexpoLinkComponent": {
+    "target": "Cible",
+    "model": "Objet RA",
+    "condition": "Conditions",
+    "confirmRemove": "Vous êtes sur le point de supprimer cette association. Êtes-vous sur de vouloir continuer ?"
+  },
+  "arexpoLinkForm": {
+    "label": {
+      "target": "Cible",
+      "model": "Objet RA",
+      "gameCondition": "Condition"
+    },
+    "help": {
+      "target": "Si une cible n'apparait pas dans la liste c'est qu'elle est désactivée ou bien déjà associé à un objet RA."
+    }
+  },
+  "argameLinkComponent": {
+    "target": "Cible",
+    "winModel": "Objet RA victoire",
+    "looseModel": "Objet RA défaite",
+    "prizes": "Lots",
+    "rules": "Paramètres",
+    "confirmRemove": "Vous êtes sur le point de supprimer cette association. Êtes-vous sur de vouloir continuer ?"
+  },
+  "argameLinkForm": {
+    "label": {
+      "target": "Cible",
+      "winModel": "Objet RA victoire",
+      "looseModel": "Objet RA défaite"
+    },
+    "help": {
+      "target": "Si une cible n'apparait pas dans la liste c'est qu'elle est désactivée ou bien déjà associé à un objet RA."
+    }
+  },
+  "argamerulesForm": {
+    "instructions": "Par défaut, chaque association prendra pour paramètres les paramètres généraux indiqués dans l'onglet \"Paramètres\". Vous pouvez ici surpasser un ou plusieurs de ces paramètres pour uniquement cette association. Cochez les règles que vous voulez appliquer a cette association. Les règles non cochées seront alors prises dans la configuration générale dans le menu \"Paramètres\".",
+    "label": {
+      "dailyParticipation": "Participation journalière",
+      "generalWinrate": "Taux de gain général (%)",
+      "localized": "Géolocalisation",
+      "unique": "Flash unique par Cible",
+      "haveCurrency": "Gain de monnaie virtuelle",
+      "currencyProportion": "Taux de monnaie virtuelle (%)",
+      "coinsProportion": "Taux de distribution de monnaie (%)"
+    },
+    "help": {
+      "dailyParticipation": "Nombre de fois qu'un joueur peut flasher la même cible dans la même journée.",
+      "generalWinrate": "Pourcentage de chance d'obtenir un gain (monnaie virtuelle ou lot) à chaque flash.",
+      "localized": "Les joueurs ont-ils besoin de se trouver dans le rayon du point de jeu pour jouer ou non.",
+      "unique": "Les cibles peuvent-elles être flashées une et une seule fois ou bien un nombre défini (participation journalière) de fois par jour.",
+      "haveCurrency": "Y a t-il ou non de la monnaie virtuelle dans les gains possibles.",
+      "currencyProportion": "Sur un gain, le pourcentage de chance d'obtenir de la monnaie virtuelle plutôt qu'un lot."
+    }
+  },
+  "arexpoPage": {
+    "h1": "Exposition RA",
+    "instructions": "Associer ici une cible à un objet AR. Vous pouvez également lui associer des conditions particulières pour que vos joueurs puissent le voir."
+  },
+  "argamePage": {
+    "h1": "Jeux RA",
+    "instructions": "Associer ici une cible à un objet AR en cas de victiore et un cas de défaite. Vous pourrez ensuite lui combiner des lots mais aussi l'asigner à un point de jeux dans la page \"Enseigne et points de jeux\". Vous pouvez également changer les règles générales et appliquer des règles spécifiques à certaines associations."
   },
   "arobjectComponent": {
     "name": "Nom",
@@ -153,6 +230,34 @@
   "arobjectPage": {
     "h1": "Objet 3D / Vidéo",
     "instructions": "Créer ici des modèles 3D ou des vidéos que vous pourrez ensuite aller associer avec une cible RA"
+  },
+  "arTargetComponent": {
+    "name": "Nom",
+    "target": "Image",
+    "status": "Statut",
+    "width": "Taille (en mètre)",
+    "trackingRating": "Note de reconnaissance",
+    "totalRecos": "Total reconnaissances",
+    "currentMonthRecos": "Reconnaissances ce mois",
+    "previousMonthRecos": "Reconnaissances le mois d'avant",
+    "enabled": "Activé",
+    "caption": "Les cibles sur fond rouges ne sont pas activables. Soit la mise en place de la cible à échouée, soit son score de reconnaissance est inférieur à 3 étoiles. Nous vous conseillons de modifier l'image ou bien de les supprimer.\nLes cibles en orange sont simplement désactivés. Veuillez les activer par le biais de la colonne \"Actions\" pour pouvoir les associer à des modèles 3D ou des vidéos.",
+    "badTarget": "La cible ne respecte pas les conditions minimum pour être activée. Vous pouvez la supprimer ou bien changer l'image pour une image plus complexe"
+  },
+  "arTargetForm": {
+    "label": {
+      "name": "Nom",
+      "target": "Image",
+      "width": "Taille (en mètre)"
+    },
+    "help": {
+      "target": "Veuillez déposer ici une image de bonne qualité et de nature plutot complexe. Evitez les logos trop simples sur fond blanc par exemple car le téléphone aura plus de mal à les identifier. Le potentiel d'une cible à être reconnu est noté sur 5 étoiles, toutes les images dont ce score est inférieurs à 3 étoiles ne seront pas acceptées.",
+      "width": "Taille de votre cible sur votre PLV ou autres."
+    }
+  },
+  "arTargetPage": {
+    "h1": "Cible RA",
+    "instructions": "Créer ici une cible de réalité augmentée. Il s'agit du déclencheur de votre vidéo/modèle 3D. Une fois crée, elle doit être associé à un Objet RA à partir des pages Exposition RA ou Jeux RA."
   },
   "artistComponent": {
     "profilePicture": "Image de profile",
@@ -420,13 +525,16 @@
     "showTimeSlot": "Voir les horaires",
     "openVideo": "Voir vidéos",
     "noVideo": "Pas de vidéo",
-    "noImages": "Pas d'image"
+    "noImages": "Pas d'image",
+    "openPrizeManager": "Gestion des lots",
+    "openRulesManager": "Paramètres particulier"
   },
   "menu": {
     "arTitle": "Réalité Augmentée",
     "arObjectTitle": "Objet RA",
-    "arExpoTitle": "Cible RA Expo",
-    "arGameTitle": "Cible RA Jeux",
+    "arTargetTitle": "Cible RA",
+    "arExpoTitle": "Exposition RA",
+    "arGameTitle": "Jeux RA",
     "qrflashTitle": "QRFlash",
     "selfieTitle": "Selfie",
     "partnerTitle": "Partenaires",

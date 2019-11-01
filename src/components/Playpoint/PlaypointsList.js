@@ -6,6 +6,7 @@ import {
 import { Translate } from 'react-localize-redux';
 import PlaypointInfos from './PlaypointInfos';
 import QrcodeTransfer from '../QRCode/QrcodeTransfer';
+import ARGameLinkTransfer from '../ARGameLink/ARGameLinkTransfer';
 import PlaypointDisabledFilter from './PlaypointDisabledFilter';
 import iaxios from '../../axios';
 
@@ -27,6 +28,7 @@ const PlaypointsList = ({
   selectedCompany,
 }) => {
   const [managerVisible, setManagerVisible] = useState(false);
+  const [arGameLinkManagerVisible, setArGameLinkManagerVisible] = useState(false);
 
   const editPlaypoint = (id) => {
     selectPlaypoint(id);
@@ -67,6 +69,11 @@ const PlaypointsList = ({
     selectPlaypoint(id);
   };
 
+  const openArGameLinkManager = (id) => {
+    setArGameLinkManagerVisible(true);
+    selectPlaypoint(id);
+  };
+
   const renderPlaypoints = () => playpoints.map(p => (
       <Card
         key={p.id}
@@ -87,6 +94,7 @@ const PlaypointsList = ({
             <Icon type="delete" />
           </Popconfirm>,
           <Icon type="qrcode" onClick={() => openQrcodeManager(p.id)} />,
+          <Icon type="scan" onClick={() => openArGameLinkManager(p.id)} />,
         ]}
       >
         <Meta title={p.name} description={<PlaypointInfos playpoint={p} />} />
@@ -104,6 +112,14 @@ const PlaypointsList = ({
     setManagerVisible,
   };
 
+  const gameLinksTransferProps = {
+    playpoint: playpoints.find(p => p.id === selectedPlaypoint),
+    setPlaypoints,
+    playpoints,
+    visible: arGameLinkManagerVisible,
+    setVisible: setArGameLinkManagerVisible,
+  };
+
   if (playpoints.length === 0) {
     return <Empty />;
   }
@@ -111,6 +127,7 @@ const PlaypointsList = ({
     <div style={{ display: 'flex', padding: '5px' }}>
       {renderPlaypoints()}
       <QrcodeTransfer {...transferProps} />
+      <ARGameLinkTransfer {...gameLinksTransferProps} />
     </div>
   );
 };

@@ -146,6 +146,10 @@ const AppForm = ({
       value: 'arexpo',
       label: 'arexpo',
     },
+    {
+      value: 'argame',
+      label: 'argame',
+    },
   ];
 
   const type = [

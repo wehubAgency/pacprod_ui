@@ -151,16 +151,22 @@
           "page": "ARObjectPage",
           "exact": true
         },
-        "arexpo": {
-          "title": "arExpoTitle",
-          "path": "/arexpotarget",
-          "page": "ARExpoTarget",
+        "artarget": {
+          "title": "arTargetTitle",
+          "path": "/artarget",
+          "page": "ARTargetPage",
           "exact": true
         },
         "argame": {
           "title": "arGameTitle",
           "path": "/argametarget",
-          "page": "ARGameTarget",
+          "page": "ARGamePage",
+          "exact": true
+        },
+        "arexpo": {
+          "title": "arExpoTitle",
+          "path": "/arexpo",
+          "page": "ARExpoPage",
           "exact": true
         }
       }
@@ -176,10 +182,16 @@
           "page": "ARObjectPage",
           "exact": true
         },
+        "artarget": {
+          "title": "arTargetTitle",
+          "path": "/artarget",
+          "page": "ARTargetPage",
+          "exact": true
+        },
         "arexpo": {
           "title": "arExpoTitle",
-          "path": "/arexpotarget",
-          "page": "ARExpoTarget",
+          "path": "/arexpo",
+          "page": "ARExpoPage",
           "exact": true
         }
       }
@@ -195,10 +207,16 @@
           "page": "ARObjectPage",
           "exact": true
         },
+        "artarget": {
+          "title": "arTargetTitle",
+          "path": "/artarget",
+          "page": "ARTargetPage",
+          "exact": true
+        },
         "argame": {
           "title": "arGameTitle",
           "path": "/argametarget",
-          "page": "ARGameTarget",
+          "page": "ARGamePage",
           "exact": true
         }
       }
@@ -299,10 +317,34 @@
           "type": "checkboxgrp",
           "label": "features"
         },
-        "vuforiaAccessKey": {
+        "vClientAccessKey": {
           "type": "text",
-          "label": "accessKeyVuforia",
-          "help": "accessKeyVuforia",
+          "label": "vClientAccessKey",
+          "help": "vClientAccessKey",
+          "conditions": [
+            {
+              "param": "features",
+              "operator": "someRegexp",
+              "value": "^ar"
+            }
+          ]
+        },
+        "vServerAccessKey": {
+          "type": "text",
+          "label": "vServerAccessKey",
+          "help": "vServerAccessKey",
+          "conditions": [
+            {
+              "param": "features",
+              "operator": "someRegexp",
+              "value": "^ar"
+            }
+          ]
+        },
+        "vServerSecret": {
+          "type": "text",
+          "label": "vServerSecret",
+          "help": "vServerSecret",
           "conditions": [
             {
               "param": "features",
@@ -391,6 +433,339 @@
           "render": {
             "type": "stringarray"
           }
+        }
+      }
+    },
+    "arexpoLink": {
+      "formConfig": {
+        "target": {
+          "type": "select",
+          "label": "target",
+          "help": "target",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "model": {
+          "type": "select",
+          "label": "model",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "gameCondition": {
+          "type": "select",
+          "label": "gameCondition",
+          "attributes": {},
+          "options": []
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "target": {
+          "title": "target",
+          "dataIndex": "target.target",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "model": {
+          "title": "model",
+          "dataIndex": "model.name"
+        },
+        "condition": {
+          "title": "condition",
+          "dataIndex": "gameCondition.name"
+        }
+      }
+    },
+    "argameRules": {
+      "formConfig": {
+        "dailyParticipation": {
+          "type": "number",
+          "label": "dailyParticipation",
+          "initialValue": 1,
+          "attributes": {
+            "min": 1
+          },
+          "help": "dailyParticipation",
+          "rules": [{ "required": true, "message": "required" }]
+        },
+        "generalWinrate": {
+          "type": "number",
+          "label": "generalWinrate",
+          "initialValue": 50,
+          "attributes": {
+            "min": 0,
+            "max": 100
+          },
+          "help": "generalWinrate",
+          "rules": [{ "required": true, "message": "required" }]
+        },
+        "localized": {
+          "type": "checkbox",
+          "label": "localized",
+          "help": "localized"
+        },
+        "unique": {
+          "type": "checkbox",
+          "label": "unique",
+          "help": "unique"
+        },
+        "haveCurrency": {
+          "type": "checkbox",
+          "label": "haveCurrency",
+          "help": "haveCurrency"
+        },
+        "currencyProportion": {
+          "type": "number",
+          "label": "currencyProportion",
+          "initialValue": 50,
+          "help": "currencyProportion",
+          "attributes": {
+            "min": 1,
+            "max": 100
+          },
+          "rules": [{ "required": true, "message": "required" }]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      }
+    },
+    "argameLink": {
+      "formConfig": {
+        "target": {
+          "type": "select",
+          "label": "target",
+          "help": "target",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "winModel": {
+          "type": "select",
+          "label": "winModel",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "looseModel": {
+          "type": "select",
+          "label": "looseModel",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "target": {
+          "title": "target",
+          "dataIndex": "target.target",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "winModel": {
+          "title": "winModel",
+          "dataIndex": "winModel.name"
+        },
+        "looseModel": {
+          "title": "looseModel",
+          "dataIndex": "looseModel.name"
+        },
+        "prizes": {
+          "title": "prizes",
+          "render": {
+            "type": "custom",
+            "id": "ARGamePrizesCell"
+          }
+        },
+        "rules": {
+          "title": "rules",
+          "render": {
+            "type": "custom",
+            "id": "ARGameRulesCell"
+          }
+        }
+      }
+    },
+    "argamelinkRules": {
+      "formConfig": {
+        "dailyParticipation": {
+          "type": "number",
+          "label": "dailyParticipation",
+          "attributes": {
+            "min": 1
+          },
+          "help": "dailyParticipation"
+        },
+        "generalWinrate": {
+          "type": "number",
+          "label": "generalWinrate",
+          "attributes": {
+            "min": 0,
+            "max": 100
+          },
+          "help": "generalWinrate"
+        },
+        "localized": {
+          "type": "checkbox",
+          "label": "localized",
+          "help": "localized"
+        },
+        "unique": {
+          "type": "checkbox",
+          "label": "unique",
+          "help": "unique"
+        },
+        "haveCurrency": {
+          "type": "checkbox",
+          "label": "haveCurrency",
+          "help": "haveCurrency"
+        },
+        "currencyProportion": {
+          "type": "number",
+          "label": "currencyProportion",
+          "help": "currencyProportion",
+          "attributes": {
+            "min": 1,
+            "max": 100
+          }
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {}
+    },
+    "arTarget": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "attributes": {
+            "type": "text"
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "target": {
+          "type": "upload",
+          "label": "target",
+          "text": "target",
+          "help": "target",
+          "valuePropName": "fileList",
+          "uploadRules": {
+            "number": 1,
+            "formats": ["image/jpeg", "image/png"],
+            "size": 10
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "width": {
+          "type": "number",
+          "label": "width",
+          "text": "number",
+          "help": "width",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ],
+          "initialValue": 1
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "name"
+        },
+        "target": {
+          "title": "target",
+          "dataIndex": "target",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "status": {
+          "title": "status",
+          "dataIndex": "status"
+        },
+        "width": {
+          "title": "width",
+          "dataIndex": "width"
+        },
+        "trackingRating": {
+          "title": "trackingRating",
+          "dataIndex": "trackingRating",
+          "render": {
+            "type": "starRating"
+          }
+        },
+        "totalRecos": {
+          "title": "totalRecos",
+          "dataIndex": "totalRecos"
+        },
+        "currentMonthRecos": {
+          "title": "currentMonthRecos",
+          "dataIndex": "currentMonthRecos"
+        },
+        "previousMonthRecos": {
+          "title": "previousMonthRecos",
+          "dataIndex": "previousMonthRecos"
         }
       }
     },
@@ -1355,7 +1730,7 @@
           "label": "generalWinrate",
           "initialValue": 50,
           "attributes": {
-            "min": 1,
+            "min": 0,
             "max": 100
           },
           "help": "generalWinrate",
@@ -2313,7 +2688,7 @@
           "type": "number",
           "label": "generalWinrate",
           "attributes": {
-            "min": 1,
+            "min": 0,
             "max": 100
           },
           "help": "generalWinrate"

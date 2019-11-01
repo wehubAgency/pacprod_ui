@@ -1,7 +1,7 @@
 import React from 'react';
 import { Translate } from 'react-localize-redux';
 import {
-  Button, Popconfirm, Icon, Tooltip,
+  Button, Popconfirm, Icon, Tooltip, Rate,
 } from 'antd';
 import InlineSVG from 'svg-inline-react';
 import FilterDropdown from '../components/FilterDropdown';
@@ -62,6 +62,12 @@ export default (data, transId, actions = []) => {
             render: strings => (Array.isArray(strings) ? strings.join(', ') : ''),
           };
         }
+        case 'starRating': {
+          return {
+            ...newEl,
+            render: rate => <Rate disabled value={rate} />,
+          };
+        }
         default:
           return null;
       }
@@ -106,7 +112,9 @@ export default (data, transId, actions = []) => {
                     <Button
                       className="action-button"
                       shape="circle"
-                      onClick={() => a.func(el.id)}
+                      onClick={() => {
+                        a.func(el.id);
+                      }}
                       icon={el.enabled ? 'stop' : 'check'}
                     />
                   </Tooltip>
