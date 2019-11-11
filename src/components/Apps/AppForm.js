@@ -123,6 +123,10 @@ const AppForm = ({
       label: 'circusQuiz',
     },
     {
+      value: 'circusVote',
+      label: 'circusVote',
+    },
+    {
       value: 'quiz',
       label: 'quiz',
     },

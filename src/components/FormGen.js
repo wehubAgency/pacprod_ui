@@ -31,9 +31,9 @@ const FormGen = ({
         if (el.type !== 'upload' && excludeFields.indexOf(key) === -1) {
           if (el.type === 'select') {
             if (edit[editKey]) {
-              values[key] = edit[editKey].id;
+              values[key] = edit[editKey].id ? edit[editKey].id : edit[editKey];
             }
-          } else if (el.type === 'date') {
+          } else if (el.type === 'date' && edit[editKey]) {
             values[key] = moment(edit[editKey]);
           } else {
             values[key] = edit[editKey];
@@ -119,7 +119,8 @@ const FormGen = ({
         const itemKey = itemNumber > 1 ? `${key}[${i}]` : key;
         cols.push(
           <Col
-            style={{ visibility: testConditions ? 'visible' : 'hidden' }}
+            // style={{ visibility: testConditions ? 'visible' : 'hidden' }}
+            style={{ display: testConditions ? 'block' : 'none' }}
             key={itemKey}
             span={24}
             lg={{ span: itemNumber > 1 ? 12 : 24 }}

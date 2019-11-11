@@ -54,6 +54,10 @@
   "visibleWebview": "Rendre la page visible",
   "nonVisibleWebview": "Rendre la page non-visible",
   "deleteWebview": "Supprimer la page",
+  "createVote": "Créer un vote",
+  "editVote": "Modifier un vote",
+  "disableVote": "Désactiver un vote",
+  "removeVote": "Supprimer un vote",
   "createArobject": "Créer un Objet RA",
   "editArobject": "Editer un Objet RA",
   "createArTarget": "Créer une cible RA",
@@ -65,12 +69,14 @@
   "randomDrawing": "Tirage au sort",
   "randomDraw": "Tirer au sort",
   "inStock": "en stock",
-  "quizDraw": "Tirer au sort",
+  "infiniteStock": "Stock infini",
+  "draw": "Tirer au sort",
   "confirmWinners": "Confirmez les gagnants",
   "update": "Modifier",
   "edit": "Modifier",
   "yes": "Oui",
   "no": "Non",
+  "none": "Aucun",
   "success": "Opération réussie",
   "fail": "Opération échouée",
   "nodata": "Pas de données",
@@ -144,7 +150,8 @@
       "selfie": "Selfie",
       "webview": "Pages statiques",
       "arexpo": "ARExpo",
-      "argame": "ARGame"
+      "argame": "ARGame",
+      "circusVote": "Vote pour Cirque"
     },
     "help": {
       "codeName": "Un seul mot en camelCase",
@@ -343,6 +350,59 @@
   "circusQuizSessionsForm": {
     "sessionsWithout": "Sans Quiz",
     "sessionsWith": "Avec Quiz"
+  },
+  "circusVoteDrawForm": {
+    "label": {
+      "session": "Représentation",
+      "prize": "Lot",
+      "winners": "Nombre de gagnant"
+    },
+    "help": {
+      "winners": "Si vous spécifiez un nombre de gagnants supérieur au stock du lot à gagner, vous ne revevrez quand même que le nombre de gagnant correspondant au stock du lot."
+    }
+  },
+  "circusVoteDrawModal": {
+    "instructions": "Voici les futurs gagnants pour le lot ci-dessous. Veuillez confirmez ces gagnants pour qu'ils revoivent le lot sur leur téléphone ainsi qu'un mail les notifiants de leur gain. Si vous annulez, les lots ne seront pas remis et ils ne seront pas notifiés par mail."
+  },
+  "circusVoteForm": {
+    "label": {
+      "name": "Nom",
+      "description": "Description",
+      "type": "Sujet du vote"
+    },
+    "help": {
+      "description": "Texte descriptif du vote sur ses gains, la date de son tirage au sort, etc...Cette information est visible dans l'application.",
+      "type": "Choisissez si vos spectateurs doivent choisir leurs artistes ou numéros préférés."
+    }
+  },
+  "circusVoteManager": {
+    "disableVote": "Désactiver un vote",
+    "enableVote": "Activer un vote",
+    "removeVote": "Supprimer un vote"
+  },
+  "circusVotePage": {
+    "h1": "Vote",
+    "instructions": "Organiser des votes pour que votre public choisisse les artistes ou numéros qu'ils ont préféré pendant la représentation."
+  },
+  "circusVoteSessionsForm": {
+    "sessionsWithout": "Sans Vote",
+    "sessionsWith": "Avec Vote"
+  },
+  "circusVoteSettingsForm": {
+    "label": {
+      "choicesNumber": "Nombre de choix possibles",
+      "uniqueParticipation": "Participation unique",
+      "localized": "Géolocalisation",
+      "quizParticipationRequired": "Participation au quiz obligatoire",
+      "radius": "Rayon (en mètre)"
+    },
+    "help": {
+      "choicesNumber": "Nombre de numéros/artistes que le spectateur pourra choisir",
+      "uniqueParticipation": "Si activé, les joueurs ne peuvent jouer au vote qu'une seule fois",
+      "localized": "Si activé, les joueurs ne peuvent participer au jeu que pendant les représentations.",
+      "quizParticipationRequired": "Si activé, les joueurs ne peuvent participer au vote seulement si ils ont aussi participer au quiz.",
+      "radius": "Rayon de la zone dans laquelle vos joueurs peuvent participer à votre vote (en mètre) si l'option \"Geolocalisation\" est activée"
+    }
   },
   "coinComponent": {
     "name": "Nom",
@@ -564,7 +624,8 @@
     "seasonTitle": "Saisons",
     "adminTitle": "Admin",
     "logsTitle": "Logs",
-    "appsTitle": "Gestion Apps"
+    "appsTitle": "Gestion Apps",
+    "circusVoteTitle": "Vote du Cirque"
   },
   "paidprizeComponent": {
     "name": "Nom",
@@ -599,6 +660,10 @@
   "paidprizePage": {
     "h1": "Gestion des lots payants",
     "instructions": "Créez et gérez ici les lots que les gens pourront acheter avec la monnaie virtuelle de votre application."
+  },
+  "participationPrize": {
+    "instructions": "Ajouter un ou plusieurs lot dans votre jeu et assigner ici, si vous le souhaitez, un gain pour toute participation. Vous pouvez donc créer un lot avec un stock limité ce qui fera gagner ces lots aux X premiers participants ou bien signifier que vous voulez un stock infini afin que tous les participants puissent profiter d'un gain.",
+    "selectPrize": "Choisir ce lot"
   },
   "partnerComponent": {
     "name": "Nom",

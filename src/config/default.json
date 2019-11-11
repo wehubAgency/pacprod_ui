@@ -75,6 +75,14 @@
       "page": "CircusQuizPage",
       "exact": true
     },
+    "circusVote": {
+      "key": "circusVote",
+      "title": "circusVoteTitle",
+      "icon": "file-done",
+      "path": "/circusVote",
+      "page": "CircusVotePage",
+      "exact": true
+    },
     "gameConditions": {
       "key": "gameConditions",
       "title": "gameConditionsTitle",
@@ -699,7 +707,7 @@
           "uploadRules": {
             "number": 1,
             "formats": ["image/jpeg", "image/png"],
-            "size": 10
+            "size": 2
           },
           "rules": [
             {
@@ -1175,6 +1183,120 @@
           "type": "checkbox",
           "label": "uniqueParticipation",
           "help": "uniqueParticipation"
+        },
+        "radius": {
+          "type": "number",
+          "label": "radius",
+          "help": "radius",
+          "attributes": {
+            "min": 50
+          },
+          "initialValue": 100
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
+      }
+    },
+    "circusVote": {
+      "formConfig": {
+        "name": {
+          "type": "text",
+          "label": "name",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "description": {
+          "type": "textarea",
+          "label": "description",
+          "help": "description"
+        },
+        "type": {
+          "type": "select",
+          "label": "type",
+          "help": "type",
+          "options": [
+            { "label": "Artistes", "value": "artist" },
+            { "label": "Numéros", "value": "show" }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": ["type"]
+      },
+      "componentConfig": {}
+    },
+    "circusVoteDraw": {
+      "formConfig": {
+        "session": {
+          "type": "select",
+          "label": "session",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "prize": {
+          "type": "select",
+          "label": "prize",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "winners": {
+          "type": "number",
+          "label": "winners",
+          "help": "winners",
+          "initialValue": 1,
+          "attributes": {
+            "min": 1
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      }
+    },
+    "circusVoteSettings": {
+      "formConfig": {
+        "choicesNumber": {
+          "type": "number",
+          "label": "choicesNumber",
+          "help": "choicesNumber",
+          "attributes": {
+            "min": 1
+          }
+        },
+        "uniqueParticipation": {
+          "type": "checkbox",
+          "label": "uniqueParticipation",
+          "help": "uniqueParticipation"
+        },
+        "localized": {
+          "type": "checkbox",
+          "label": "localized",
+          "help": "localized"
+        },
+        "quizParticipationRequired": {
+          "type": "checkbox",
+          "label": "quizParticipationRequired",
+          "help": "quizParticipationRequired"
         },
         "radius": {
           "type": "number",
@@ -2411,6 +2533,97 @@
       }
     },
     "quizPrize": {
+      "formConfig": {
+        "model": {
+          "type": "select",
+          "label": "model",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "stock": {
+          "type": "number",
+          "label": "stock",
+          "help": "stock",
+          "attributes": {
+            "min": -1
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "instructions": {
+          "type": "textarea",
+          "label": "instructions",
+          "help": "instructions",
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "address": {
+          "type": "text",
+          "label": "address",
+          "help": "address"
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode"
+        },
+        "city": {
+          "type": "text",
+          "label": "city"
+        },
+        "country": {
+          "type": "text",
+          "label": "country"
+        }
+      },
+      "editConfig": {
+        "excludeFields": ["model"]
+      },
+      "componentConfig": {
+        "name": {
+          "title": "name",
+          "dataIndex": "model.name"
+        },
+        "image": {
+          "title": "image",
+          "dataIndex": "model.image",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": "50px"
+            }
+          }
+        },
+        "stock": {
+          "title": "stock",
+          "dataIndex": "stock"
+        },
+        "instructions": {
+          "title": "instructions",
+          "dataIndex": "instructions",
+          "render": {
+            "type": "ellipsis",
+            "size": "50"
+          }
+        },
+        "address": {
+          "title": "address",
+          "dataIndex": "withdrawalAddress.fullAddress"
+        }
+      }
+    },
+    "votePrize": {
       "formConfig": {
         "model": {
           "type": "select",

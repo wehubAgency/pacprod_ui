@@ -43,7 +43,8 @@ export default (state = INITIAL_STATE, { type, payload }) => {
           currentEntity: entities.length > 0 ? entities[0] : INITIAL_STATE.currentEntity,
           currentSeason:
             entities.length > 0
-              ? entities[0].seasons[entities[0].seasons.length - 1]
+              ? // ? entities[0].seasons[entities[0].seasons.length - 1]
+              entities[0].currentSeason
               : INITIAL_STATE.currentSeason,
           entities,
           seasons: entities.length > 0 ? entities[0].seasons : INITIAL_STATE.seasons,

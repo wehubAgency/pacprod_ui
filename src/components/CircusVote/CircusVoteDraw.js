@@ -10,20 +10,21 @@ import iaxios from '../../axios';
 import formateData from '../../services/formateData';
 
 const propTypes = {
-  quiz: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    prizes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-  setAllQuiz: PropTypes.func.isRequired,
+  vote: PropTypes.object.isRequired,
+  setAllVotes: PropTypes.func.isRequired,
   translate: PropTypes.func.isRequired,
 };
 
-const CircusQuizDraw = ({ quiz: { id, prizes, sessions }, setAllQuiz, translate }) => {
+const CircusVoteDraw = ({
+  vote: {
+    id, prizes, sessions, settings,
+  }, setAllVotes, translate,
+}) => {
   const [potentialWinners, setPotentialWinners] = useState([]);
   const [potentialPrize, setPotentialPrize] = useState(null);
   const [loading, setLoading] = useState(false);
   const formRef = useRef(null);
-  const { formConfig } = useSelector(({ general: { config } }) => config.entities.circusQuizDraw);
+  const { formConfig } = useSelector(({ general: { config } }) => config.entities.circusVoteDraw);
 
   const draw = (e) => {
     setLoading(true);
@@ -36,7 +37,7 @@ const CircusQuizDraw = ({ quiz: { id, prizes, sessions }, setAllQuiz, translate 
         const data = { ...values };
         const formData = formateData(data);
         iaxios()
-          .post(`/circusquiz/${id}/draw`, formData)
+          .post(`/circusvotes/${id}/draw`, formData)
           .then((res) => {
             if (res !== 'error') {
               setPotentialWinners(res.data.winners);
@@ -56,8 +57,8 @@ const CircusQuizDraw = ({ quiz: { id, prizes, sessions }, setAllQuiz, translate 
 
   const confirmWinners = () => {
     iaxios()
-      .post(`/circusquiz/${id}/winners`, {
-        winners: potentialWinners.map(w => ({ id: w.id, quizEntry: w.quizEntryId })),
+      .post(`/circusvotes/${id}/winners`, {
+        winners: potentialWinners.map(w => ({ id: w.id, voteEntry: w.voteEntryId })),
         prize: potentialPrize.id,
       })
       .then((res) => {
@@ -65,9 +66,9 @@ const CircusQuizDraw = ({ quiz: { id, prizes, sessions }, setAllQuiz, translate 
           message.success(translate('success'));
 
           iaxios()
-            .get('/circusquiz')
+            .get('/circusvotes')
             .then((r) => {
-              setAllQuiz(r.data);
+              setAllVotes(r.data);
             });
           setPotentialPrize(null);
           setPotentialWinners([]);
@@ -82,9 +83,13 @@ const CircusQuizDraw = ({ quiz: { id, prizes, sessions }, setAllQuiz, translate 
     sessions: sessions.map(s => ({ value: s.id, label: `${s.name}` })),
   };
 
+  if (!settings.localized) {
+    delete formConfig.session;
+  }
+
   const formProps = {
     formConfig,
-    formName: 'quizDrawForm',
+    formName: 'circusVoteDrawForm',
     data: options,
     ref: formRef,
   };
@@ -108,7 +113,7 @@ const CircusQuizDraw = ({ quiz: { id, prizes, sessions }, setAllQuiz, translate 
             <h4>
               <Translate id="instructions" />
             </h4>
-            <Translate id="quizDrawModal.instructions" />
+            <Translate id="circusVoteDrawModal.instructions" />
           </div>
           <div
             style={{
@@ -130,7 +135,7 @@ const CircusQuizDraw = ({ quiz: { id, prizes, sessions }, setAllQuiz, translate 
           {potentialWinners.map(w => (
             <div>
               <p
-                style={{ textAlign: 'center', fontSize: '2rem' }}
+                style={{ textAlign: 'center', fontSize: '2rem', marginBottom: '5px' }}
                 key={w.id}
               >{`${w.firstname} ${w.lastname}`}</p>
               <p style={{ textAlign: 'center' }}>{w.email}</p>
@@ -142,6 +147,6 @@ const CircusQuizDraw = ({ quiz: { id, prizes, sessions }, setAllQuiz, translate 
   );
 };
 
-CircusQuizDraw.propTypes = propTypes;
+CircusVoteDraw.propTypes = propTypes;
 
-export default withLocalize(CircusQuizDraw);
+export default withLocalize(CircusVoteDraw);

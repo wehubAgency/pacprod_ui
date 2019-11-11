@@ -26,3 +26,4 @@ export * from './ARObjectPage';
 export * from './ARTargetPage';
 export * from './ARExpoPage';
 export * from './ARGamePage';
+export * from './CircusVotePage';
