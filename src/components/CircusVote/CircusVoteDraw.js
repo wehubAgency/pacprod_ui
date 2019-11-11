@@ -80,7 +80,7 @@ const CircusVoteDraw = ({
     prize: prizes
       .filter(p => p.stock > 0)
       .map(p => ({ value: p.id, label: `${p.model.name} (${p.stock} ${translate('inStock')})` })),
-    sessions: sessions.map(s => ({ value: s.id, label: `${s.name}` })),
+    session: sessions.map(s => ({ value: s.id, label: `${s.name}` })),
   };
 
   if (!settings.localized) {
