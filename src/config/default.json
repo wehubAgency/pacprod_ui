@@ -806,7 +806,7 @@
           "valuePropName": "fileList",
           "uploadRules": {
             "number": 1,
-            "formats": ["video/mp4"],
+            "formats": [],
             "size": 10
           },
           "rules": [

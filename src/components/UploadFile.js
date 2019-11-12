@@ -38,7 +38,7 @@ const UploadFile = ({
       message.error(translate('uploadRules.number', { number: uploadRules.number }));
     }
 
-    const goodFormat = uploadRules.formats.includes(file.type);
+    const goodFormat = uploadRules.formats.length > 0 ? uploadRules.formats.includes(file.type) : true;
     if (!goodFormat) {
       message.error(translate('uploadRules.formats', { format: uploadRules.formats }));
     }

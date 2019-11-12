@@ -7,6 +7,7 @@ import CircusQuizSettingsManager from '../CircusQuizSettings/CircusQuizSettingsM
 import CircusQuizSessionManager from './CircusQuizSessionManager';
 import PrizeManager from '../Prize/PrizeManager';
 import CircusQuizDraw from './CircusQuizDraw';
+import ParticipationPrize from '../ParticipationPrize/ParticipationPrize';
 
 const propTypes = {
   quiz: PropTypes.shape({
@@ -29,6 +30,11 @@ const CircusQuizInfos = ({ quiz, setAllQuiz, allQuiz }) => (
       </Tabs.TabPane>
       <Tabs.TabPane tab={<Translate id="prizes" />} key="2">
         <PrizeManager prizesOwner={quiz} className="circusQuiz" entityName="quizPrize" />
+          <ParticipationPrize
+            url={`circusquiz/${quiz.id}`}
+            prizes={quiz.prizes}
+            initialPrize={quiz.participationPrize}
+          />
       </Tabs.TabPane>
       <Tabs.TabPane tab={<Translate id="gameRules" />} key="3">
         <CircusQuizSettingsManager quiz={quiz} setAllQuiz={setAllQuiz} allQuiz={allQuiz} />
