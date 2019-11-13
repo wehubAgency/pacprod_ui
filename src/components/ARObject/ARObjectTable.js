@@ -14,14 +14,16 @@ const propTypes = {
 };
 
 const ARObjectTable = ({
-  arobjects, setArobjects, openModal, fetching,
+ arobjects, setArobjects, openModal, fetching 
 }) => {
   const [showDisabled, setShowDisabled] = useState(false);
-  const { componentConfig } = useSelector(({ general: { config } }) => config.entities.arobject);
+  const { componentConfig } = useSelector(
+    ({ general: { config } }) => config.entities.arobject,
+  );
 
   const removeArobject = (id) => {
     iaxios()
-      .deleted(`/arobjects/${id}`)
+      .delete(`/arobjects/${id}`)
       .then((res) => {
         if (res !== 'error') {
           const index = arobjects.findIndex(a => a.id === res.data.id);
@@ -35,7 +37,9 @@ const ARObjectTable = ({
   const toggleArobject = (id) => {
     const arobject = arobjects.find(a => a.id === id);
     iaxios()
-      .patch(`/arobjects/${arobject.id}/enabled`, { enabled: !arobject.enabled })
+      .patch(`/arobjects/${arobject.id}/enabled`, {
+        enabled: !arobject.enabled,
+      })
       .then((res) => {
         if (res !== 'error') {
           const index = arobjects.findIndex(a => a.id === res.data.id);
@@ -60,11 +64,15 @@ const ARObjectTable = ({
     {
       type: 'remove',
       func: removeArobject,
-      confirm: <Translate id="ArobjectComponent.confirmRemove" />,
+      confirm: <Translate id="arobjectComponent.confirmRemove" />,
     },
   ];
 
-  const columns = generateColumns(componentConfig, 'arobjectComponent', actions);
+  const columns = generateColumns(
+    componentConfig,
+    'arobjectComponent',
+    actions,
+  );
 
   return (
     <div style={{ marginTop: '50px' }}>

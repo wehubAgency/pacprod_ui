@@ -15,10 +15,16 @@ const propTypes = {
 };
 
 const ARTargetTable = ({
-  arTargets, setArTargets, openModal, fetching, translate,
+  arTargets,
+  setArTargets,
+  openModal,
+  fetching,
+  translate,
 }) => {
   const [checkIntervals, setCheckIntervals] = useState([]);
-  const { componentConfig } = useSelector(({ general: { config } }) => config.entities.arTarget);
+  const { componentConfig } = useSelector(
+    ({ general: { config } }) => config.entities.arTarget,
+  );
   const { currentApp } = useSelector(({ general }) => general);
 
   const intervalCheck = (t, interval = null) => {
@@ -42,7 +48,9 @@ const ARTargetTable = ({
   };
 
   useEffect(() => {
-    const processingTargets = arTargets.filter(a => a.status === 'processing');
+    const processingTargets = arTargets.filter(
+      a => a.status === 'processing',
+    );
     processingTargets.forEach((t) => {
       if (!checkIntervals.includes(t.id)) {
         intervalCheck(t);
@@ -72,7 +80,11 @@ const ARTargetTable = ({
         .patch(`/artargets/${arTarget.id}/enabled`, { appId: currentApp.id })
         .then((res) => {
           if (res !== 'error') {
-            if (res.data.state && res.data.state === 'error' && res.data.err === 'DUPLICATES') {
+            if (
+              res.data.state
+              && res.data.state === 'error'
+              && res.data.err === 'DUPLICATES'
+            ) {
               message.error(translate('errorDuplicates'), 8);
             } else {
               const index = arTargets.findIndex(a => a.id === res.data.id);
@@ -101,11 +113,15 @@ const ARTargetTable = ({
     {
       type: 'remove',
       func: removeArTarget,
-      confirm: <Translate id="artargetComponent.confirmRemove" />,
+      confirm: <Translate id="arTargetComponent.confirmRemove" />,
     },
   ];
 
-  const columns = generateColumns(componentConfig, 'arTargetComponent', actions);
+  const columns = generateColumns(
+    componentConfig,
+    'arTargetComponent',
+    actions,
+  );
 
   return (
     <div style={{ marginTop: '50px' }}>

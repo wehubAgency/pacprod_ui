@@ -225,7 +225,8 @@
   "arobjectComponent": {
     "name": "Nom",
     "description": "Description",
-    "type": "Type"
+    "type": "Type",
+    "confirmRemove": "Vous êtes sur le point de supprimer un objet RA. Si vous le supprimer, toutes les targets associcées à cet objet cesseront de fonctionner. Êtes vous sûr de vouloir supprimer cet objet ?"
   },
   "arobjectForm": {
     "label": {
@@ -251,7 +252,8 @@
     "previousMonthRecos": "Reconnaissances le mois d'avant",
     "enabled": "Activé",
     "caption": "Les cibles sur fond rouges ne sont pas activables. Soit la mise en place de la cible à échouée, soit son score de reconnaissance est inférieur à 3 étoiles. Nous vous conseillons de modifier l'image ou bien de les supprimer.\nLes cibles en orange sont simplement désactivés. Veuillez les activer par le biais de la colonne \"Actions\" pour pouvoir les associer à des modèles 3D ou des vidéos.",
-    "badTarget": "La cible ne respecte pas les conditions minimum pour être activée. Vous pouvez la supprimer ou bien changer l'image pour une image plus complexe"
+    "badTarget": "La cible ne respecte pas les conditions minimum pour être activée. Vous pouvez la supprimer ou bien changer l'image pour une image plus complexe",
+    "confirmRemove": "Vous êtes sur le point de supprimer une cible RA. Si vous la supprimer, la réalité augmenté ne se déclenchera plus si vos utilisateurs regarde cette cible. Êtes-vous sûr de vouloir supprimer cette cible ?"
   },
   "arTargetForm": {
     "label": {
