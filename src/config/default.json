@@ -799,6 +799,20 @@
             "type": "text"
           }
         },
+        "type": {
+          "type": "select",
+          "label": "type",
+          "options": [
+            { "label": "Video", "value": "video" },
+            { "label": "3d", "value": "3d" }
+          ],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
         "model": {
           "type": "upload",
           "label": "model",
@@ -839,6 +853,10 @@
         "description": {
           "title": "description",
           "dataIndex": "description"
+        },
+        "type": {
+          "title": "type",
+          "dataIndex": "type"
         }
       }
     },

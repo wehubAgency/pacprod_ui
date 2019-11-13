@@ -224,14 +224,16 @@
   },
   "arobjectComponent": {
     "name": "Nom",
-    "description": "Description"
+    "description": "Description",
+    "type": "Type"
   },
   "arobjectForm": {
     "label": {
       "name": "Nom",
       "description": "Description",
       "model": "Modèle 3d ou vidéo",
-      "customJson": "Fichier Json personnalisé"
+      "customJson": "Fichier Json personnalisé",
+      "type": "Type"
     }
   },
   "arobjectPage": {
