@@ -27,12 +27,27 @@ const defaultProps = {
 };
 
 const ARObjectForm = ({
-  arobjects, setArobjects, selectedArobject, ...props
+  arobjects,
+  setArobjects,
+  selectedArobject,
+  ...props
 }) => {
+  const customEdit = () => {
+    const object = arobjects.find(a => a.id === selectedArobject);
+    const { position, rotate, scale } = object.customJson;
+    return {
+      ...object,
+      position: position.join(','),
+      rotate: rotate.join(','),
+      scale: scale.join(','),
+    };
+  };
+
   const formProps = {
     ...props,
     data: arobjects,
     setData: setArobjects,
+    customEdit,
     selectedData: selectedArobject,
     entityName: 'arobject',
     formName: 'arobjectForm',

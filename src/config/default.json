@@ -830,16 +830,56 @@
             }
           ]
         },
-        "customJson": {
-          "type": "upload",
-          "label": "customJson",
-          "text": "customJson",
-          "valuePropName": "fileList",
-          "uploadRules": {
-            "number": 1,
-            "formats": ["application/json"],
-            "size": 2
-          }
+        "position": {
+          "type": "text",
+          "label": "position",
+          "help": "position",
+          "initialValue": "0,0,0",
+          "rules": [
+            {
+              "pattern": "^[0-9]+,[0-9],[0-9]+$",
+              "flags": "",
+              "exemple": "0,0,0"
+            },
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "rotate": {
+          "type": "text",
+          "label": "rotate",
+          "help": "rotate",
+          "initialValue": "0,0,0",
+          "rules": [
+            {
+              "pattern": "^[0-9]+,[0-9],[0-9]+$",
+              "flags": "",
+              "exemple": "0,0,0"
+            },
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "scale": {
+          "type": "text",
+          "label": "scale",
+          "help": "scale",
+          "initialValue": "1,1,1",
+          "rules": [
+            {
+              "pattern": "^[0-9]+,[0-9],[0-9]+$",
+              "flags": "",
+              "exemple": "1,1,1"
+            },
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
         }
       },
       "editConfig": {

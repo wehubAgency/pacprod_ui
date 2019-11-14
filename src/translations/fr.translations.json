@@ -233,8 +233,15 @@
       "name": "Nom",
       "description": "Description",
       "model": "Modèle 3d ou vidéo",
-      "customJson": "Fichier Json personnalisé",
+      "position": "Position",
+      "rotate": "Rotation",
+      "scale": "Echelle",
       "type": "Type"
+    },
+    "help": {
+      "position": "Position de vote modèle sous la forme x,y,z",
+      "rotate": "Rotation de vote modèle sous la forme x,y,z",
+      "scale": "Echelle de vote modèle sous la forme x,y,z"
     }
   },
   "arobjectPage": {

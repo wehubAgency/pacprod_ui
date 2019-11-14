@@ -13,7 +13,7 @@ const defaultProps = {
 };
 
 const FormGen = ({
-  formConfig, form, edit, editConfig, data, formName,
+ formConfig, form, edit, editConfig, data, formName 
 }) => {
   const { getFieldDecorator, getFieldError } = form;
   const { Item } = Form;
@@ -46,36 +46,40 @@ const FormGen = ({
   }, [edit]);
 
   const generateRules = ({ rules = [], type }, key) => rules.reduce((result, r) => {
-    if ('pattern' in r) {
-      result.push({
-        pattern: RegExp(r.pattern, r.flags),
-        message: <Translate id="rules.pattern" data={{ exemple: r.exemple }} />,
-      });
-    } else if ('max' in r) {
-      result.push({
-        ...r,
-        message: <Translate id="rules.max" data={{ max: r.max }} />,
-      });
-    } else if (edit && type === 'upload' && 'required' in r) {
-      if (
-        form.getFieldValue(`${key}ToDelete`)
+      if ('pattern' in r) {
+        result.push({
+          pattern: RegExp(r.pattern, r.flags),
+          message: (
+            <Translate id="rules.pattern" data={{ exemple: r.exemple }} />
+          ),
+        });
+      } else if ('max' in r) {
+        result.push({
+          ...r,
+          message: <Translate id="rules.max" data={{ max: r.max }} />,
+        });
+      } else if (edit && type === 'upload' && 'required' in r) {
+        if (
+          form.getFieldValue(`${key}ToDelete`)
           && form.getFieldValue(`${key}ToDelete`).length > 0
-      ) {
-        result.push({ ...r, message: <Translate id="rules.required" /> });
+        ) {
+          result.push({ ...r, message: <Translate id="rules.required" /> });
+        } else {
+          return result;
+        }
       } else {
-        return result;
+        result.push({ ...r, message: <Translate id={`rules.${r.message}`} /> });
       }
-    } else {
-      result.push({ ...r, message: <Translate id={`rules.${r.message}`} /> });
-    }
-    return result;
-  }, []);
+      return result;
+    }, []);
 
   const onFileUpdate = (url, property, active) => {
     const actualValue = form.getFieldValue(`${property}ToDelete`);
     if (active) {
       form.setFieldsValue({
-        [`${property}ToDelete`]: Array.isArray(actualValue) ? [...actualValue, url] : [url],
+        [`${property}ToDelete`]: Array.isArray(actualValue)
+          ? [...actualValue, url]
+          : [url],
       });
     } else {
       const index = actualValue.indexOf(url);
@@ -128,9 +132,10 @@ const FormGen = ({
             {edit !== null && el.type === 'upload' && edit[key] && (
               <div>
                 <Item key={`${itemKey}ToDelete`}>
-                  {getFieldDecorator(`${itemKey}ToDelete`, {})(
-                    generateInput(`${key}ToDelete`, { type: 'hidden' }, i),
-                  )}
+                  {getFieldDecorator(
+                    `${itemKey}ToDelete`,
+                    {},
+                  )(generateInput(`${key}ToDelete`, { type: 'hidden' }, i))}
                 </Item>
                 <DeleteFile
                   onFileUpdate={onFileUpdate}
@@ -143,7 +148,9 @@ const FormGen = ({
             <Item
               key={itemKey}
               validateStatus={getFieldError(itemKey) ? 'error' : ''}
-              extra={el.help ? <Translate id={`${formName}.help.${el.help}`} /> : ''}
+              extra={
+                el.help ? <Translate id={`${formName}.help.${el.help}`} /> : ''
+              }
               label={
                 i === 0 && el.type !== 'hidden' ? (
                   <Translate id={`${formName}.label.${el.label}`} />
