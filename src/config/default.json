@@ -1242,6 +1242,11 @@
           "label": "uniqueParticipation",
           "help": "uniqueParticipation"
         },
+        "magicFinale": {
+          "type": "checkbox",
+          "label": "magicFinale",
+          "help": "magicFinale"
+        },
         "radius": {
           "type": "number",
           "label": "radius",
@@ -1891,6 +1896,52 @@
             "id": "TimeSlotCell"
           }
         }
+      }
+    },
+    "magicFinale": {
+      "formConfig": {
+        "session": {
+          "type": "select",
+          "label": "session",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "prize": {
+          "type": "select",
+          "label": "prize",
+          "attributes": {},
+          "options": [],
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        },
+        "winners": {
+          "type": "number",
+          "label": "winners",
+          "help": "winners",
+          "initialValue": 1,
+          "attributes": {
+            "min": 1
+          },
+          "rules": [
+            {
+              "required": true,
+              "message": "required"
+            }
+          ]
+        }
+      },
+      "editConfig": {
+        "excludeFields": []
       }
     },
     "qrflashRules": {

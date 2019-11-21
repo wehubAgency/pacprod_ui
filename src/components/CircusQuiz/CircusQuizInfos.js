@@ -7,6 +7,7 @@ import CircusQuizSettingsManager from '../CircusQuizSettings/CircusQuizSettingsM
 import CircusQuizSessionManager from './CircusQuizSessionManager';
 import PrizeManager from '../Prize/PrizeManager';
 import CircusQuizDraw from './CircusQuizDraw';
+import MagicFinaleManager from '../MagicFinale/MagicFinaleManager';
 import ParticipationPrize from '../ParticipationPrize/ParticipationPrize';
 
 const propTypes = {
@@ -29,22 +30,39 @@ const CircusQuizInfos = ({ quiz, setAllQuiz, allQuiz }) => (
         <QuestionsManager quiz={quiz.id} circusQuiz />
       </Tabs.TabPane>
       <Tabs.TabPane tab={<Translate id="prizes" />} key="2">
-        <PrizeManager prizesOwner={quiz} className="circusQuiz" entityName="quizPrize" />
-          <ParticipationPrize
-            url={`circusquiz/${quiz.id}`}
-            prizes={quiz.prizes}
-            initialPrize={quiz.participationPrize}
-          />
+        <PrizeManager
+          prizesOwner={quiz}
+          className="circusQuiz"
+          entityName="quizPrize"
+        />
+        <ParticipationPrize
+          url={`circusquiz/${quiz.id}`}
+          prizes={quiz.prizes}
+          initialPrize={quiz.participationPrize}
+        />
       </Tabs.TabPane>
       <Tabs.TabPane tab={<Translate id="gameRules" />} key="3">
-        <CircusQuizSettingsManager quiz={quiz} setAllQuiz={setAllQuiz} allQuiz={allQuiz} />
+        <CircusQuizSettingsManager
+          quiz={quiz}
+          setAllQuiz={setAllQuiz}
+          allQuiz={allQuiz}
+        />
       </Tabs.TabPane>
       <Tabs.TabPane tab={<Translate id="sessions" />} key="4">
-        <CircusQuizSessionManager quiz={quiz} setAllQuiz={setAllQuiz} allQuiz={allQuiz} />
+        <CircusQuizSessionManager
+          quiz={quiz}
+          setAllQuiz={setAllQuiz}
+          allQuiz={allQuiz}
+        />
       </Tabs.TabPane>
       <Tabs.TabPane tab={<Translate id="randomDrawing" />} key="5">
         <CircusQuizDraw quiz={quiz} setAllQuiz={setAllQuiz} />
       </Tabs.TabPane>
+      {quiz.settings.magicFinale && (
+        <Tabs.TabPane tab={<Translate id="magicFinale" />} key="6">
+          <MagicFinaleManager game={quiz} />
+        </Tabs.TabPane>
+      )}
     </Tabs>
   </div>
 );

@@ -101,6 +101,7 @@
   "noConditions": "Pas de conditions",
   "settings": "Paramètres",
   "argamelinks": "Association Cible/Objet RA",
+  "magicFinale": "Final Magique",
   "rules": {
     "required": "Obligatoire",
     "email": "L'email doit être valide.",
@@ -600,6 +601,16 @@
     "openPrizeManager": "Gestion des lots",
     "openRulesManager": "Paramètres particulier"
   },
+  "magicFinaleForm": {
+    "label": {
+      "session": "Représentation",
+      "prize": "Lot",
+      "winners": "Nombre de gagnant"
+    },
+    "help": {
+      "winners": "Si vous spécifiez un nombre de gagnants supérieur au stock du lot à gagner, vous ne revevrez quand même que le nombre de gagnant correspondant au stock du lot."
+    }
+  },
   "menu": {
     "arTitle": "Réalité Augmentée",
     "arObjectTitle": "Objet RA",
@@ -958,6 +969,7 @@
       "randomQuestionsNumber": "Nombre de questions choisies au hasard",
       "uniqueParticipation": "Participation unique",
       "dailyParticipation": "Participation journalière",
+      "magicFinale": "Final Magique",
       "radius": "Rayon"
     },
     "help": {
@@ -965,6 +977,7 @@
       "randomQuestionsNumber": "Ce nombre ne sera pris en compte que lorque vous aurez coché \"Questions aléatoires\". Il correspond au nombre de questions qu'il y aura dans votre quiz. Si vous mettez un chiffre supérieur au nombre de questions, toutes les questions seront prises.",
       "uniqueParticipation": "Les joueurs ne peuvent jouer au quiz qu'une seule fois",
       "dailyParticipation": "Nombre de fois qu'un joueur peut jouer au quiz par jour. Ce paramètre n'est pas pris en compte si vous avez coché \"Participation unique\"",
+      "magicFinale": "Les téléphones des participants au quiz vont clignoter jusqu'à ce q'un seul d'entre eux (le vainqueur) reste allumé.",
       "radius": "Rayon de la zone dans laquelle vos joueurs peuvent participer à votre quiz (en mètre)"
     }
   },

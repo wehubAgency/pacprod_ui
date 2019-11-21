@@ -30,6 +30,7 @@
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "save-svg-as-png": "^1.4.14",
+    "socket.io-client": "^2.3.0",
     "svg-inline-react": "^3.1.0"
   },
   "devDependencies": {
