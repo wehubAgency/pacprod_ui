@@ -60,7 +60,7 @@ const CircusQuizInfos = ({ quiz, setAllQuiz, allQuiz }) => (
       </Tabs.TabPane>
       {quiz.settings.magicFinale && (
         <Tabs.TabPane tab={<Translate id="magicFinale" />} key="6">
-          <MagicFinaleManager game={quiz} />
+          <MagicFinaleManager game={quiz} setAllQuiz={setAllQuiz} />
         </Tabs.TabPane>
       )}
     </Tabs>

@@ -1923,21 +1923,6 @@
               "message": "required"
             }
           ]
-        },
-        "winners": {
-          "type": "number",
-          "label": "winners",
-          "help": "winners",
-          "initialValue": 1,
-          "attributes": {
-            "min": 1
-          },
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
         }
       },
       "editConfig": {
