@@ -7,7 +7,10 @@ import PrizeForm from './PrizeForm';
 import iaxios from '../../axios';
 
 const PrizeManager = ({
-  prizesOwner, className, general: { config }, entityName,
+  prizesOwner,
+  className,
+  general: { config },
+  entityName,
 }) => {
   const { componentConfig } = config.entities[entityName];
   const [modalVisible, setModalVisible] = useState(false);
@@ -30,7 +33,9 @@ const PrizeManager = ({
 
   const deletePrize = (id) => {
     iaxios()
-      .delete(`/prizes/${id}`, { params: { classId: prizesOwner.id } })
+      .delete(`/prizes/${id}`, {
+        params: { classId: prizesOwner.id, className },
+      })
       .then((res) => {
         if (res !== 'error') {
           const index = prizes.findIndex(p => p.id === res.data.id);
@@ -95,7 +100,12 @@ const PrizeManager = ({
       <h4>
         <Translate id="prizeManager.title" />
       </h4>
-      <Button style={{ margin: '25px 0' }} type="primary" icon="plus" onClick={() => openModal()}>
+      <Button
+        style={{ margin: '25px 0' }}
+        type="primary"
+        icon="plus"
+        onClick={() => openModal()}
+      >
         <span>
           <Translate id="addPrize" />
         </span>{' '}
@@ -120,7 +130,4 @@ const PrizeManager = ({
 
 const mapStateToProps = ({ general }) => ({ general });
 
-export default connect(
-  mapStateToProps,
-  {},
-)(PrizeManager);
+export default connect(mapStateToProps, {})(PrizeManager);
