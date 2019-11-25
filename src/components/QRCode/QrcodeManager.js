@@ -16,6 +16,9 @@ const QrcodeManager = () => {
 
   useEffect(() => {
     setQrcodes(data);
+    if (data.findIndex(d => d.id === selectedQrcode) === -1) {
+      selectQrcode('');
+    }
   }, [data]);
 
   const openModal = (mode = 'create') => {

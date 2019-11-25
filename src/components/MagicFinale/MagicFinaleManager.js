@@ -27,6 +27,7 @@ const MagicFinaleManager = ({ game, translate, setAllQuiz }) => {
         const roomId = `${game.id}${values.session}`;
         socket.emit('join', { roomId, userId: 'admin' });
         socket.emit('draw', { roomId });
+        socket.disconnect();
 
         socket.on('result', (userId) => {
           const data = {
