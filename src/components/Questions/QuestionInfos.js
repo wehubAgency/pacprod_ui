@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Card, Icon, Row, Col, Divider, Popconfirm, message,
+ Card, Icon, Row, Col, Divider, Popconfirm, message 
 } from 'antd';
 import { Translate, withLocalize } from 'react-localize-redux';
 import iaxios from '../../axios';
@@ -19,10 +19,12 @@ const propTypes = {
   componentConfig: PropTypes.object.isRequired,
   quiz: PropTypes.string.isRequired,
   translate: PropTypes.func.isRequired,
+  circusQuiz: PropTypes.bool,
 };
 
 const defaultProps = {
   infos: undefined,
+  circusQuiz: false,
 };
 
 const QuestionInfos = ({
@@ -33,13 +35,14 @@ const QuestionInfos = ({
   openModal,
   translate,
   quiz,
+  circusQuiz,
 }) => {
   const { cardStyle, listItemStyle } = styles;
   if (infos !== undefined) {
     const deleteQuestion = () => {
       const { id } = infos;
       iaxios()
-        .delete(`/questions/${id}`, { params: { quiz } })
+        .delete(`/questions/${id}`, { params: { quiz, circusQuiz } })
         .then((res) => {
           if (res !== 'error') {
             const index = questions.findIndex(q => q.id === res.data.id);
@@ -72,11 +75,18 @@ const QuestionInfos = ({
     return (
       <Card
         style={cardStyle}
-        title={`${infos.question}${infos.enabled ? '' : ` (${translate('disabled')})`}`}
-        cover={infos.image ? <img alt={infos.question} src={infos.image} /> : null}
+        title={`${infos.question}${
+          infos.enabled ? '' : ` (${translate('disabled')})`
+        }`}
+        cover={
+          infos.image ? <img alt={infos.question} src={infos.image} /> : null
+        }
         actions={[
           <Icon type="edit" onClick={editQuestion} />,
-          <Icon type={infos.enabled ? 'stop' : 'check'} onClick={toggleQuestion} />,
+          <Icon
+            type={infos.enabled ? 'stop' : 'check'}
+            onClick={toggleQuestion}
+          />,
           <Popconfirm
             title={<Translate id="questionsInfos.confirmDelete" />}
             onConfirm={deleteQuestion}

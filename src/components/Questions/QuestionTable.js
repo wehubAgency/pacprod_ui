@@ -29,7 +29,9 @@ const QuestionTable = ({
   circusQuiz,
 }) => {
   const [items, setItems] = useState([]);
-  const { componentConfig } = useSelector(({ general: { config } }) => config.entities.question);
+  const { componentConfig } = useSelector(
+    ({ general: { config } }) => config.entities.question,
+  );
 
   useEffect(() => {
     setItems(
@@ -56,6 +58,7 @@ const QuestionTable = ({
     setQuestions,
     openModal,
     quiz,
+    circusQuiz,
   };
 
   if (questions.length === 0) {

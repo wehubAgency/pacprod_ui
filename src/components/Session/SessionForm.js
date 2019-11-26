@@ -10,7 +10,9 @@ const propTypes = {
   modalVisible: PropTypes.bool,
   externalFormRef: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.shape({ current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]) }),
+    PropTypes.shape({
+      current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]),
+    }),
   ]),
   sessions: PropTypes.arrayOf(PropTypes.shape()),
   setSessions: PropTypes.func,
@@ -29,7 +31,7 @@ const defaultProps = {
 };
 
 const SessionForm = ({
-  sessions, setSessions, selectedSession, ...props
+ sessions, setSessions, selectedSession, ...props 
 }) => {
   const [locations, setLocations] = useState([]);
   const [programs, setPrograms] = useState([]);
@@ -42,7 +44,7 @@ const SessionForm = ({
   }, [data]);
 
   const optionsLocation = locations
-    // .filter(l => l.enabled)
+    .filter(l => l.enabled)
     .map(l => ({
       value: l.id,
       label: l.address.fullAddress,

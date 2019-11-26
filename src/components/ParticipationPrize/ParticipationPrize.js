@@ -16,10 +16,10 @@ const defaultProps = {
 };
 
 const ParticipationPrize = ({
-  url, prizes, initialPrize, translate,
+ url, prizes, initialPrize, translate 
 }) => {
   const [loading, setLoading] = useState(false);
-  const [participationPrize, setParticipationPrize] = useState(null);
+  const [participationPrize, setParticipationPrize] = useState(initialPrize.id);
 
   const handleChange = value => setParticipationPrize(value);
 
