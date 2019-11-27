@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Modal, Spin, Transfer, Button, Typography,
+ Modal, Spin, Transfer, Button, Typography 
 } from 'antd';
 import { Translate } from 'react-localize-redux';
 import iaxios from '../../axios';
@@ -91,7 +91,8 @@ const QrcodeTransfer = ({
             dataSource={qrcodes.map(q => ({ ...q, key: q.id }))}
             showSearch
             targetKeys={targetKeys}
-            filterOption={(inputValue, option) => option.description.indexOf(inputValue) > -1}
+            filterOption={(inputValue, option) => option.name.indexOf(inputValue) > -1
+            }
             onChange={newTargetKeys => setTargetKeys(newTargetKeys)}
             render={item => (
               <span className="qrcode-item">

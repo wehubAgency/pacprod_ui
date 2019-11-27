@@ -75,8 +75,8 @@ const QuestionInfos = ({
     return (
       <Card
         style={cardStyle}
-        title={`${infos.question}${
-          infos.enabled ? '' : ` (${translate('disabled')})`
+        title={`${infos.enabled ? '' : ` (${translate('disabled')})`}${
+          infos.question
         }`}
         cover={
           infos.image ? <img alt={infos.question} src={infos.image} /> : null
