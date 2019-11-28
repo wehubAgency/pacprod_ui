@@ -14,7 +14,9 @@ const propTypes = {
   modalVisible: PropTypes.bool,
   externalFormRef: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.shape({ current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]) }),
+    PropTypes.shape({
+      current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]),
+    }),
   ]),
   data: PropTypes.arrayOf(PropTypes.shape()),
   setData: PropTypes.func,
@@ -30,12 +32,16 @@ const propTypes = {
   formName: PropTypes.string.isRequired,
   modalTitle: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.shape({ current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]) }),
+    PropTypes.shape({
+      current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]),
+    }),
     PropTypes.string,
   ]).isRequired,
   createText: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.shape({ current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]) }),
+    PropTypes.shape({
+      current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]),
+    }),
     PropTypes.string,
   ]),
   entityName: PropTypes.string.isRequired,

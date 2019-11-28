@@ -38,8 +38,12 @@ const CompanyInfos = ({ company }) => {
           <img src={company.logo} alt={company.name} width="80" height="80" />
         </Item>
         <Item label={<Translate id="companyInfos.name" />}>{company.name}</Item>
-        <Item label={<Translate id="companyInfos.phone" />}>{company.phone}</Item>
-        <Item label={<Translate id="companyInfos.email" />}>{company.email}</Item>
+        <Item label={<Translate id="companyInfos.phone" />}>
+          {company.phone}
+        </Item>
+        <Item label={<Translate id="companyInfos.email" />}>
+          {company.email}
+        </Item>
         <Item label={<Translate id="companyInfos.fullAddress" />}>
           {company.address.fullAddress}
         </Item>

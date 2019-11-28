@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Button,
-  Empty,
-  Typography,
-  Popconfirm,
-  Spin,
-  Row,
-  Col,
-  Select,
+ Button, Empty, Typography, Popconfirm, Spin, Row, Col 
 } from 'antd';
 import { Translate } from 'react-localize-redux';
 import CompanyForm from './CompanyForm';
 import CompanyInfos from './CompanyInfos';
-import PlaypointManager from '../Playpoint/PlaypointManager';
 import { useFetchData } from '../../hooks';
 import iaxios from '../../axios';
 
-const CompanyManager = () => {
+const CompanyManager = ({ getCompanies, getSelectedCompany }) => {
   const [companies, setCompanies] = useState([]);
   const [formMode, setFormMode] = useState('create');
   const [selectedCompany, selectCompany] = useState('');
@@ -28,6 +20,19 @@ const CompanyManager = () => {
     setCompanies(data);
     selectCompany(data.length > 0 ? data[0].id : '');
   }, [data]);
+
+  useEffect(() => {
+    getCompanies(
+      companies.map(({ id, name }) => ({
+        id,
+        name,
+      })),
+    );
+  }, [getCompanies, companies]);
+
+  useEffect(() => {
+    getSelectedCompany(selectedCompany);
+  }, [selectedCompany, getSelectedCompany]);
 
   const openModal = (mode = 'create') => {
     setModalVisible(true);
@@ -61,30 +66,18 @@ const CompanyManager = () => {
             c => c.id === selectedCompany,
           );
           const newCompanies = [...companies];
+          setCompanies(newCompanies);
           newCompanies.splice(companyIndex, 1);
           setCompanies(newCompanies);
         }
       });
   };
 
-  const filterOption = (input, option) => {
-    const { children } = option.props;
-    return children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
-  };
-
-  const renderOptions = () => companies.map(c => (
-      <Option key={c.id} value={c.id}>
-        {c.name}
-      </Option>
-    ));
-
   const { Title } = Typography;
-  const { Option } = Select;
 
   const formProps = {
     inModal: true,
     formMode,
-    setFormMode,
     modalVisible,
     setModalVisible,
     companies,
@@ -99,22 +92,6 @@ const CompanyManager = () => {
         <Spin />
       ) : (
         <div>
-          <h3>
-            <Translate id="playpointPage.selectCompany" />
-          </h3>
-          <div style={{ margin: '25px 0' }}>
-            <Select
-              showSearch
-              style={{ width: 200 }}
-              placeholder={<Translate id="playpointPage.selectCompany" />}
-              onChange={value => selectCompany(value)}
-              optionFilterProp="children"
-              filterOption={filterOption}
-              value={selectedCompany}
-            >
-              {renderOptions()}
-            </Select>
-          </div>
           <Button type="primary" icon="plus" onClick={() => openModal()}>
             <span>
               <Translate id="createCompany" />
@@ -185,12 +162,6 @@ const CompanyManager = () => {
                   </Popconfirm>
                 </Col>
               </Row>
-              <PlaypointManager
-                playpoints={
-                  companies.find(c => c.id === selectedCompany).playpoints
-                }
-                selectedCompany={selectedCompany}
-              />
             </div>
           )}
         </div>

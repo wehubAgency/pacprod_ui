@@ -20,6 +20,7 @@ const PrizeManager = ({
   const [showDisabled, setShowDisabled] = useState(false);
 
   useEffect(() => {
+    selectPrize('');
     setPrizes(prizesOwner.prizes);
   }, [prizesOwner]);
 

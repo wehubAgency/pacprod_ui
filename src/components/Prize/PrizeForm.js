@@ -55,8 +55,11 @@ const PrizeForm = ({
 
   const edit = () => {
     const prize = prizes.find(p => p.id === selectedPrize);
-    const prizeEdit = { ...prize, ...prize.withdrawalAddress };
-    return prizeEdit;
+    if (prize) {
+      const prizeEdit = { ...prize, ...prize.withdrawalAddress };
+      return prizeEdit;
+    }
+    return {};
   };
 
   const formProps = {
@@ -72,7 +75,11 @@ const PrizeForm = ({
     additionalData: { model: optionsModel },
     customEdit: edit,
     modalTitle:
-      props.formMode === 'create' ? <Translate id="createPrize" /> : <Translate id="editPrize" />,
+      props.formMode === 'create' ? (
+        <Translate id="createPrize" />
+      ) : (
+        <Translate id="editPrize" />
+      ),
   };
 
   return <Form {...formProps} />;

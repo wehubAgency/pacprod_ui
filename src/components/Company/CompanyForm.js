@@ -9,7 +9,9 @@ const propTypes = {
   modalVisible: PropTypes.bool,
   externalFormRef: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.shape({ current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]) }),
+    PropTypes.shape({
+      current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]),
+    }),
   ]),
   companies: PropTypes.arrayOf(PropTypes.object).isRequired,
   setCompanies: PropTypes.func.isRequired,
@@ -26,12 +28,19 @@ const defaultProps = {
 };
 
 const CompanyForm = ({
-  companies, setCompanies, selectedCompany, selectCompany, ...props
+  companies,
+  setCompanies,
+  selectedCompany,
+  selectCompany,
+  ...props
 }) => {
   const edit = () => {
     const company = companies.find(c => c.id === selectedCompany);
-    const companyEdit = { ...company, ...company.address };
-    return companyEdit;
+    if (company) {
+      const companyEdit = { ...company, ...company.address };
+      return companyEdit;
+    }
+    return null;
   };
 
   const formProps = {

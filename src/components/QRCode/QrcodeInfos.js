@@ -18,7 +18,12 @@ const propTypes = {
 };
 
 const QrcodeInfos = ({
-  qrcode, qrcodes, setQrcodes, openModal, selectQrcode, translate,
+  qrcode,
+  qrcodes,
+  setQrcodes,
+  openModal,
+  selectQrcode,
+  translate,
 }) => {
   const [showQrcodeRules, setShowQrcodeRules] = useState(false);
 
@@ -93,7 +98,12 @@ const QrcodeInfos = ({
           okText={<Translate id="yes" />}
           cancelText={<Translate id="no" />}
         >
-          <Button style={{ marginLeft: 15 }} type="dashed" shape="circle-outline" icon="delete" />
+          <Button
+            style={{ marginLeft: 15 }}
+            type="dashed"
+            shape="circle-outline"
+            icon="delete"
+          />
         </Popconfirm>
       </div>
       <div style={{ width: '150px', margin: '0 auto', position: 'relative' }}>
@@ -123,7 +133,12 @@ const QrcodeInfos = ({
         </span>
       </Button>
       <QrcodeRules {...qrcodeRulesProps} />
-      <PrizeManager prizesOwner={qrcode} className="qrcode" feature="qrflash" entityName="prize" />
+      <PrizeManager
+        prizesOwner={qrcode}
+        className="qrcode"
+        feature="qrflash"
+        entityName="prize"
+      />
     </div>
   );
 };
