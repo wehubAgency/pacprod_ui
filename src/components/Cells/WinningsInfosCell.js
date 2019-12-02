@@ -9,6 +9,7 @@ const propTypes = {
 
 const WinningsInfosCell = ({ infos }) => {
   let content;
+  console.log({ infos });
 
   switch (infos.gameType) {
     case 'qrflash': {
@@ -18,9 +19,17 @@ const WinningsInfosCell = ({ infos }) => {
             <Translate id="gameId" />: {infos.gameId}
           </p>
           <p>
-            <Translate id="playpoint" />: {infos.playpoint.name} (id:{' '}
+            <Translate id="playpoint" />: {infos.playpoint.name} (id:
             {infos.playpoint.id})
           </p>
+          {infos.qrcode && (
+            <>
+              <p>
+                <Translate id="qrcode" />: {infos.qrcode.name} (id:{' '}
+                {infos.qrcode.id}
+              </p>
+            </>
+          )}
         </div>
       );
       break;
