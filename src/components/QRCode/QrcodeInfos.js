@@ -7,6 +7,7 @@ import { saveSvgAsPng } from 'save-svg-as-png';
 import PrizeManager from '../Prize/PrizeManager';
 import QrcodeRules from './QrcodeRules';
 import iaxios from '../../axios';
+import QrcodeStats from './QrcodeStats';
 
 const propTypes = {
   qrcode: PropTypes.shape().isRequired,
@@ -26,6 +27,7 @@ const QrcodeInfos = ({
   translate,
 }) => {
   const [showQrcodeRules, setShowQrcodeRules] = useState(false);
+  const [qrcodeStatsModal, setQrcodeStatsModal] = useState(false);
 
   const dlQrcode = () => {
     const element = document.querySelector('#qrcode svg');
@@ -105,6 +107,13 @@ const QrcodeInfos = ({
             icon="delete"
           />
         </Popconfirm>
+        <Button
+          style={{ marginLeft: 15 }}
+          type="dashed"
+          shape="circle-outline"
+          icon="area-chart"
+          onClick={() => setQrcodeStatsModal(true)}
+        />
       </div>
       <div style={{ width: '150px', margin: '0 auto', position: 'relative' }}>
         <SVGInline id="qrcode" src={qrcode.image} />
@@ -138,6 +147,11 @@ const QrcodeInfos = ({
         className="qrcode"
         feature="qrflash"
         entityName="prize"
+      />
+      <QrcodeStats
+        setVisible={setQrcodeStatsModal}
+        visible={qrcodeStatsModal}
+        qrcode={qrcode}
       />
     </div>
   );

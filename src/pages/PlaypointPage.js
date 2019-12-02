@@ -1,6 +1,5 @@
 import React from 'react';
 import { Translate } from 'react-localize-redux';
-import PlaypointManager from '../components/Playpoint/PlaypointManager';
 import CompanyManager from '../components/Company/CompanyManager';
 
 const PlaypointPage = () => (

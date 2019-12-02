@@ -6,3 +6,4 @@ export * from './TimeSlotCell';
 export * from './VideoCell';
 export * from './ARGamePrizesCell';
 export * from './ARGameRulesCell';
+export * from './WinningsInfosCell';

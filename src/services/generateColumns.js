@@ -1,7 +1,7 @@
 import React from 'react';
 import { Translate } from 'react-localize-redux';
 import {
-  Button, Popconfirm, Icon, Tooltip, Rate,
+ Button, Popconfirm, Icon, Tooltip, Rate 
 } from 'antd';
 import InlineSVG from 'svg-inline-react';
 import FilterDropdown from '../components/FilterDropdown';
@@ -18,7 +18,9 @@ export default (data, transId, actions = []) => {
           const Comp = CustomCells[newEl.render.id];
           return {
             ...newEl,
-            render: infos => <Comp infos={infos} style={{ ...newEl.render.style }} />,
+            render: infos => (
+              <Comp infos={infos} style={{ ...newEl.render.style }} />
+            ),
           };
         }
         case 'image':
@@ -26,13 +28,26 @@ export default (data, transId, actions = []) => {
             ...newEl,
             render: (image) => {
               const { style } = newEl.render;
-              return image ? <img src={image} style={{ ...style }} alt={key} /> : null;
+              return image ? (
+                <img src={image} style={{ ...style }} alt={key} />
+              ) : null;
             },
+          };
+        case 'boolean':
+          return {
+            ...newEl,
+            render: bool => <Icon type={bool ? 'check' : 'close'} />,
           };
         case 'svg': {
           return {
             ...newEl,
-            render: svg => <InlineSVG src={svg} element="div" style={{ width: 75, height: 75 }} />,
+            render: svg => (
+              <InlineSVG
+                src={svg}
+                element="div"
+                style={{ width: 75, height: 75 }}
+              />
+            ),
           };
         }
         case 'ellipsis':
@@ -76,12 +91,15 @@ export default (data, transId, actions = []) => {
       ...newEl,
       filterDropdown: props => <FilterDropdown {...props} />,
       filterIcon: filtered => (
-        <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+        <Icon
+          type="search"
+          style={{ color: filtered ? '#1890ff' : undefined }}
+        />
       ),
       onFilter: (value, record) => record[newEl.dataIndex]
-        .toString()
-        .toLowerCase()
-        .includes(value.toLowerCase()),
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase()),
     };
   });
   if (actions.length > 0) {
@@ -107,7 +125,13 @@ export default (data, transId, actions = []) => {
                 return (
                   <Tooltip
                     key={a.type}
-                    title={el.enabled ? <Translate id="disable" /> : <Translate id="enable" />}
+                    title={
+                      el.enabled ? (
+                        <Translate id="disable" />
+                      ) : (
+                        <Translate id="enable" />
+                      )
+                    }
                   >
                     <Button
                       className="action-button"
@@ -127,7 +151,11 @@ export default (data, transId, actions = []) => {
                       onConfirm={() => a.func(el.id)}
                       overlayStyle={{ maxWidth: 300 }}
                     >
-                      <Button className="action-button" shape="circle" icon="delete" />
+                      <Button
+                        className="action-button"
+                        shape="circle"
+                        icon="delete"
+                      />
                     </Popconfirm>
                   </Tooltip>
                 );

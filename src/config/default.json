@@ -3466,6 +3466,55 @@
         }
       }
     },
+    "userWinnings": {
+      "formConfig": {},
+      "editConfig": {
+        "excludeFields": []
+      },
+      "componentConfig": {
+        "prizeName": {
+          "title": "prizeName",
+          "dataIndex": "prize.model.name"
+        },
+        "prizeImage": {
+          "title": "prizeImage",
+          "dataIndex": "prize.model.image",
+          "render": {
+            "type": "image",
+            "style": {
+              "width": 50,
+              "height": 50
+            }
+          }
+        },
+        "game": {
+          "title": "game",
+          "dataIndex": "infos.gameType"
+        },
+        "infos": {
+          "title": "infos",
+          "dataIndex": "infos",
+          "render": {
+            "type": "custom",
+            "id": "WinningsInfosCell"
+          }
+        },
+        "date": {
+          "title": "date",
+          "dataIndex": "createdAt",
+          "render": {
+            "type": "date"
+          }
+        },
+        "used": {
+          "title": "used",
+          "dataIndex": "used",
+          "render": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
     "webview": {
       "formConfig": {
         "title": {

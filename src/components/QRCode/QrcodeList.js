@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Translate } from 'react-localize-redux';
 import {
-  List, Typography, Input, Switch,
+ List, Typography, Input, Switch 
 } from 'antd';
 
 const propTypes = {
@@ -13,14 +13,16 @@ const propTypes = {
 };
 
 const QrcodeList = ({
-  qrcodes, selectQrcode, selectedQrcode, fetching,
+ qrcodes, selectQrcode, selectedQrcode, fetching 
 }) => {
   const { Text } = Typography;
   const [search, setSearch] = useState('');
   const [showDisabled, setShowDisabled] = useState(false);
   const renderItem = qrcode => (
     <List.Item
-      className={`pointer qrcode${qrcode.id === selectedQrcode ? ' selected-qrcode' : ''}`}
+      className={`pointer qrcode${
+        qrcode.id === selectedQrcode ? ' selected-qrcode' : ''
+      }`}
       onClick={() => selectQrcode(qrcode.id)}
     >
       <Text strong={qrcode.id === selectedQrcode}>{qrcode.name}</Text>
@@ -30,9 +32,9 @@ const QrcodeList = ({
   const filter = (arr) => {
     if (search) {
       return arr.filter(q => q.name
-        .toString()
-        .toLowerCase()
-        .includes(search.toLowerCase()));
+          .toString()
+          .toLowerCase()
+          .includes(search.toLowerCase()),);
     }
     return arr;
   };
@@ -48,6 +50,7 @@ const QrcodeList = ({
       </div>
       <List
         size="large"
+        style={{ maxHeight: '600px', overflow: 'auto' }}
         dataSource={filter(qrcodes.filter(q => q.enabled !== showDisabled))}
         renderItem={renderItem}
         loading={fetching}

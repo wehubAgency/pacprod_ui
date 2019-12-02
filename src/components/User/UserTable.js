@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Table } from 'antd';
-import { Translate } from 'react-localize-redux';
+import { Table, message } from 'antd';
+import { Translate, withLocalize } from 'react-localize-redux';
 import generateColumns from '../../services/generateColumns';
+import UserWinnings from './UserWinnings';
 import iaxios from '../../axios';
 
-const UserTable = () => {
+const UserTable = ({ translate }) => {
   const [users, setUsers] = useState([]);
+  const [userWinnings, setUserWinnings] = useState([]);
   const [totalUsers, setTotalUsers] = useState(0);
-  const [pagination, setPagination] = useState({ pageSize: 10 });
+  const [pagination, setPagination] = useState({ pageSize: 3 });
   const [loading, setLoading] = useState(false);
 
-  const { componentConfig } = useSelector(({ general: { config } }) => config.entities.user);
+  const { componentConfig } = useSelector(
+    ({ general: { config } }) => config.entities.user,
+  );
   const { currentApp, currentEntity } = useSelector(({ general }) => general);
 
   const fetchUsers = (params = {}) => {
@@ -41,21 +45,29 @@ const UserTable = () => {
     fetchUsers({ results: pager.pageSize, page: pager.current });
   };
 
-  // const getMoreInfos = (e) => {
-  //   console.log(e.currentTarget.dataset.id);
-  // };
+  const getUserWinnings = (e) => {
+    iaxios()
+      .get(`/users/${e.currentTarget.dataset.id}/winnings`)
+      .then((res) => {
+        if (res.data.length) {
+          setUserWinnings(res.data);
+        } else {
+          message.error(translate('noWinnings'));
+        }
+      });
+  };
 
-  // const actions = [
-  //   {
-  //     type: 'userInfos',
-  //     tooltip: <Translate id="moreInfos" />,
-  //     icon: 'info',
-  //     func: getMoreInfos,
-  //   },
-  // ];
+  const actions = [
+    {
+      type: 'userWinnings',
+      tooltip: <Translate id="winnings" />,
+      icon: 'gift',
+      func: getUserWinnings,
+    },
+  ];
 
   // const columns = generateColumns(componentConfig, 'userComponent', actions);
-  const columns = generateColumns(componentConfig, 'userComponent');
+  const columns = generateColumns(componentConfig, 'userComponent', actions);
 
   return (
     <div>
@@ -70,8 +82,12 @@ const UserTable = () => {
         loading={loading}
         onChange={handleTableChange}
       />
+      <UserWinnings
+        userWinnings={userWinnings}
+        setUserWinnings={setUserWinnings}
+      />
     </div>
   );
 };
 
-export default UserTable;
+export default withLocalize(UserTable);

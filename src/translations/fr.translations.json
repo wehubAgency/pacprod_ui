@@ -102,6 +102,8 @@
   "settings": "Paramètres",
   "argamelinks": "Association Cible/Objet RA",
   "magicFinale": "Final Magique",
+  "noWinnings": "Pas de gains",
+  "winnings": "Gains",
   "rules": {
     "required": "Obligatoire",
     "email": "L'email doit être valide.",
@@ -1063,6 +1065,12 @@
     "h1": "Gestion des numéros",
     "intro": "Gérer ici les numéros de vos artistes. Pour créer un numéros, vous devez d'abord avoir créer l'artiste correspondant ici:"
   },
+  "stats": {
+    "totalFlashes": "Total de Flashs",
+    "winPercentage": "Pourcentage de victoire",
+    "todayFlashes": "Flash Aujourd'hui",
+    "oneDayEvolution": "Evolution sur un jour"
+  },
   "userComponent": {
     "firstname": "Prenom",
     "lastname": "Nom",
@@ -1071,6 +1079,14 @@
   "userPage": {
     "h1": "Vos utilisateurs",
     "instructions": "Gérer ici vos utilisateurs."
+  },
+  "userWinningsComponent": {
+    "prizeName": "Nom du gain",
+    "prizeImage": "Image",
+    "game": "Jeux",
+    "infos": "Plus d'infos",
+    "date": "Date",
+    "used": "Utilisé"
   },
   "webviewActions": {
     "confirmDelete": "Vous êtes sur le point de supprimer cette page. Elle n'apparaitra plus dans votre application. Êtes-vous sûr de vouloir supprimer cette page ?"
