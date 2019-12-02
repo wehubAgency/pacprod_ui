@@ -104,6 +104,10 @@
   "magicFinale": "Final Magique",
   "noWinnings": "Pas de gains",
   "winnings": "Gains",
+  "gameId": "Id du jeu",
+  "playpoint": "Point de jeux",
+  "qrcode": "QRCode",
+  "notLocalized": "Non localisé",
   "rules": {
     "required": "Obligatoire",
     "email": "L'email doit être valide.",
