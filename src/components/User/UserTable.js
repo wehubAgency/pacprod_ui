@@ -71,7 +71,11 @@ const UserTable = ({ translate }) => {
         },
       })
       .then((res) => {
-        setUsers(res.data);
+        const newPager = { ...pagination };
+        newPager.total = res.data.total;
+        setPagination(newPager);
+        setUsers(res.data.users);
+        setTotalUsers(res.data.total);
       });
   };
 
