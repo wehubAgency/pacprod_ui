@@ -27,7 +27,6 @@ const QrcodeInfos = ({
   translate,
 }) => {
   const [showQrcodeRules, setShowQrcodeRules] = useState(false);
-  const [qrcodeStatsModal, setQrcodeStatsModal] = useState(false);
 
   const dlQrcode = () => {
     const element = document.querySelector('#qrcode svg');
@@ -107,13 +106,6 @@ const QrcodeInfos = ({
             icon="delete"
           />
         </Popconfirm>
-        <Button
-          style={{ marginLeft: 15 }}
-          type="dashed"
-          shape="circle-outline"
-          icon="area-chart"
-          onClick={() => setQrcodeStatsModal(true)}
-        />
       </div>
       <div
         style={{
@@ -157,11 +149,7 @@ const QrcodeInfos = ({
           </Button>
         </div>
         <div style={{ flexBasis: '75%' }}>
-          <QrcodeStats
-            setVisible={setQrcodeStatsModal}
-            visible={qrcodeStatsModal}
-            qrcode={qrcode}
-          />
+          <QrcodeStats qrcode={qrcode} />
         </div>
       </div>
       <QrcodeRules {...qrcodeRulesProps} />

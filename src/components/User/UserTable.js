@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Table, message } from 'antd';
+import { Table, message, Input } from 'antd';
 import { Translate, withLocalize } from 'react-localize-redux';
 import generateColumns from '../../services/generateColumns';
 import UserWinnings from './UserWinnings';
@@ -57,6 +57,24 @@ const UserTable = ({ translate }) => {
       });
   };
 
+  const searchUser = (search) => {
+    const pager = { ...pagination };
+    pager.current = 1;
+    setPagination(pager);
+    iaxios()
+      .get('/users/search', {
+        params: {
+          search,
+          results: pager.results,
+          page: pager.current,
+          role: currentApp.userRole,
+        },
+      })
+      .then((res) => {
+        setUsers(res.data);
+      });
+  };
+
   const actions = [
     {
       type: 'userWinnings',
@@ -66,14 +84,16 @@ const UserTable = ({ translate }) => {
     },
   ];
 
-  // const columns = generateColumns(componentConfig, 'userComponent', actions);
   const columns = generateColumns(componentConfig, 'userComponent', actions);
+
+  const { Search } = Input;
 
   return (
     <div>
       <p>
         <Translate id="totalUser" />: {totalUsers}
       </p>
+      <Search style={{ width: 250 }} onSearch={searchUser} />
       <Table
         columns={columns}
         rowKey="id"

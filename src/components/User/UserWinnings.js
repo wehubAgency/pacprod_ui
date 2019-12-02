@@ -21,6 +21,7 @@ const UserWinnings = ({ userWinnings, setUserWinnings }) => {
       width="80%"
       visible={Boolean(userWinnings.length)}
       onCancel={() => setUserWinnings([])}
+      onOk={() => setUserWinnings([])}
     >
       <Table columns={columns} rowKey="id" dataSource={userWinnings} />
     </Modal>
