@@ -10,7 +10,7 @@ const UserTable = ({ translate }) => {
   const [users, setUsers] = useState([]);
   const [userWinnings, setUserWinnings] = useState([]);
   const [totalUsers, setTotalUsers] = useState(0);
-  const [pagination, setPagination] = useState({ pageSize: 3 });
+  const [pagination, setPagination] = useState({ pageSize: 10 });
   const [loading, setLoading] = useState(false);
 
   const { componentConfig } = useSelector(
