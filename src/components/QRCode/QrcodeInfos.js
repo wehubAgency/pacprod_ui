@@ -115,43 +115,61 @@ const QrcodeInfos = ({
           onClick={() => setQrcodeStatsModal(true)}
         />
       </div>
-      <div style={{ width: '150px', margin: '0 auto', position: 'relative' }}>
-        <SVGInline id="qrcode" src={qrcode.image} />
-        <Button
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-          }}
-          type="primary"
-          shape="circle"
-          size="large"
-          icon="download"
-          onClick={dlQrcode}
-        />
-      </div>
-      <Button
-        style={{ display: 'block', margin: '0 auto' }}
-        type="primary"
-        icon="plus"
-        onClick={() => openQrcodeRules()}
+      <div
+        style={{
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          marginBottom: '50px',
+        }}
       >
-        <span>
-          <Translate id="qrcodeInfos.addRules" />
-        </span>
-      </Button>
+        <div style={{ marginRight: '50px' }}>
+          <div
+            style={{
+              width: '150px',
+              position: 'relative',
+            }}
+          >
+            <SVGInline id="qrcode" src={qrcode.image} />
+            <Button
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+              type="primary"
+              shape="circle"
+              size="large"
+              icon="download"
+              onClick={dlQrcode}
+            />
+          </div>
+          <Button
+            style={{ display: 'block', margin: '0 auto' }}
+            type="primary"
+            icon="plus"
+            onClick={() => openQrcodeRules()}
+          >
+            <span>
+              <Translate id="qrcodeInfos.addRules" />
+            </span>
+          </Button>
+        </div>
+        <div style={{ flexBasis: '75%' }}>
+          <QrcodeStats
+            setVisible={setQrcodeStatsModal}
+            visible={qrcodeStatsModal}
+            qrcode={qrcode}
+          />
+        </div>
+      </div>
       <QrcodeRules {...qrcodeRulesProps} />
       <PrizeManager
         prizesOwner={qrcode}
         className="qrcode"
         feature="qrflash"
         entityName="prize"
-      />
-      <QrcodeStats
-        setVisible={setQrcodeStatsModal}
-        visible={qrcodeStatsModal}
-        qrcode={qrcode}
       />
     </div>
   );

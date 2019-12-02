@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
- Modal, Spin, Statistic, Icon, Row, Col 
+ Spin, Statistic, Icon, Row, Col 
 } from 'antd';
 import { Translate } from 'react-localize-redux';
 import { useFetchData } from '../../hooks';
 
 const propTypes = {
-  visible: PropTypes.bool.isRequired,
   qrcode: PropTypes.object.isRequired,
-  setVisible: PropTypes.func.isRequired,
 };
 
-const QrcodeStats = ({ visible, qrcode, setVisible }) => {
+const QrcodeStats = ({ qrcode }) => {
   const [stats, setStats] = useState(null);
 
   const { data, fetching } = useFetchData(`/qrcodes/${qrcode.id}/stats`, null, [
@@ -24,8 +22,8 @@ const QrcodeStats = ({ visible, qrcode, setVisible }) => {
   }, [data]);
 
   return (
-    <Modal visible={visible} onCancel={() => setVisible(false)} width="50%">
-      {!stats || fetching ? (
+    <div>
+      {fetching || !stats ? (
         <Spin />
       ) : (
         <div>
@@ -69,7 +67,7 @@ const QrcodeStats = ({ visible, qrcode, setVisible }) => {
           </Row>
         </div>
       )}
-    </Modal>
+    </div>
   );
 };
 
