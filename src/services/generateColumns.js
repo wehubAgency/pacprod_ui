@@ -54,7 +54,7 @@ export default (data, transId, actions = []) => {
           return {
             ...newEl,
             render: (text) => {
-              if (text.length > newEl.render.size) {
+              if (text && text.length > newEl.render.size) {
                 return `${text.substring(0, newEl.render.size)}...`;
               }
               return text;

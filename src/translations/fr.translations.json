@@ -771,12 +771,17 @@
       "barcode": "Code barre",
       "description": "Description",
       "instructions": "Instructions",
-      "tos": "Conditions générales d'utilisation"
+      "tos": "Conditions générales d'utilisation",
+      "address": "Adresse",
+      "city": "Ville",
+      "zipcode": "Code postal",
+      "country": "Pays"
     },
     "help": {
       "barcode": "Nécessaire si le retrait du lot passe par le flash d'un code barre à une borne.",
-      "instructions": "Instructions pour le retrait du lot (Exemple: \"A récuperer à l'accueil de votre magasin\".",
-      "tos": "Non nécéssaire mais important si les lots ont une date limite pour le retrait, si la réduction ne s'applique qu'à certains produit, etc..."
+      "instructions": "Les instructions représentent ce que le gagnant doit effectuer pour aller récupérer son lot ou encore l'utiliser, par exemple, \"Retirer votre lot à l'accueil de votre magasin Leclerc de Pau à l'adresse suivante...\" et de remplir les champs d'adresse ci dessous.",
+      "tos": "Non nécéssaire mais important si les lots ont une date limite pour le retrait, si la réduction ne s'applique qu'à certains produit, etc...",
+      "address": "Adresse de récupération ou d'utilisation du lot"
     }
   },
   "prizeInfosComponent": {
@@ -786,6 +791,7 @@
     "description": "Description",
     "instructions": "Instructions",
     "tos": "Conditions générales d'utilisation",
+    "address": "Adresse",
     "confirmRemove": "Vous êtes sur le point de supprimer ce lot ce qui le rendra ingagnable. Si vous souhaitez cette effet pour une durée déterminée, nous vous conseillons plutôt de désactiver le lot. Voulez-vous donc vraiment le supprimer définitivement ?"
   },
   "prizeComponent": {
@@ -794,6 +800,7 @@
     "stock": "Stock",
     "coef": "Coefficient",
     "instructions": "Instructions",
+    "tos": "Conditions générales d'utilisation",
     "confirmRemove": "Si ce lot a déjà été gagné, nous vous conseillons plutot de le désactiver si vous voulez le rendre innaccessible. Êtes-vous sûr de supprimer ce lot ?",
     "address": "Adresse de récupération"
   },
@@ -803,6 +810,7 @@
       "stock": "Stock",
       "coef": "Coefficient",
       "instructions": "Instructions",
+      "tos": "Conditions générales d'utilisation",
       "address": "Adresse de récupération ou d'utilisation du lot",
       "zipcode": "Code postal",
       "city": "Ville",
@@ -811,9 +819,11 @@
     "help": {
       "stock": "Un stock infini est représenté par la valeur -1",
       "coef": "Le coefficient, pouvant aller de 1 à 10, représente les chances qu'un objet à d'être gagné par rapport aux autres. Plus il est haut, plus l'objet a des chances d'être gagné.",
-      "instructions": "Les instructions représentent ce que le gagnant doit effectuer pour aller récupérer son lot ou encore l'utiliser, par exemple, \"Retirer votre lot à l'accueil de votre magasin Leclerc de Pau à l'adresse suivante...\" et de remplir les champs d'adresse ci dessous.",
-      "address": "Nous vous conseillons fortement de remplir les champs d'adresse pour indiquer au gagnant où retirer/utiliser son lot."
-    }
+      "instructions": "Laisser vide si les instructions sont les memes que le modèle de lot",
+      "tos": "Laisser vide si les conditions sont les memes que le modèle de lot",
+      "address": "Laisser vide si l'adresse est la même que le modèle de lot"
+    },
+    "instructions": "Basez vous sur un modèle de lot et ajouter votre stock, etc... Les champs instructions, conditions générales d'utilisation et adresse de retrait, si laissé vide seront pas défaut calqué sur le modèle de lot."
   },
   "prizeManager": {
     "title": "Gestion des lots"

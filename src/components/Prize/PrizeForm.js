@@ -82,7 +82,12 @@ const PrizeForm = ({
       ),
   };
 
-  return <Form {...formProps} />;
+  return (
+    <div>
+      <Translate id="prizeForm.instructions" />
+      <Form {...formProps} />
+    </div>
+  );
 };
 
 PrizeForm.propTypes = propTypes;

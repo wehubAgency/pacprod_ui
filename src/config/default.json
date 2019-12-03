@@ -2449,29 +2449,28 @@
             }
           ]
         },
+        "tos": {
+          "type": "textarea",
+          "label": "tos",
+          "help": "tos"
+        },
         "instructions": {
           "type": "textarea",
           "label": "instructions",
-          "help": "instructions",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
+          "help": "instructions"
         },
         "address": {
           "type": "text",
           "label": "address",
           "help": "address"
         },
-        "zipcode": {
-          "type": "text",
-          "label": "zipcode"
-        },
         "city": {
           "type": "text",
           "label": "city"
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode"
         },
         "country": {
           "type": "text",
@@ -2503,6 +2502,14 @@
         "coef": {
           "title": "coef",
           "dataIndex": "coef"
+        },
+        "tos": {
+          "title": "tos",
+          "dataIndex": "tos",
+          "render": {
+            "type": "ellipsis",
+            "size": "50"
+          }
         },
         "instructions": {
           "title": "instructions",
@@ -2557,16 +2564,15 @@
             }
           ]
         },
+        "tos": {
+          "type": "textarea",
+          "label": "tos",
+          "help": "tos"
+        },
         "instructions": {
           "type": "textarea",
           "label": "instructions",
-          "help": "instructions",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
+          "help": "instructions"
         },
         "address": {
           "type": "text",
@@ -2612,6 +2618,14 @@
           "title": "cost",
           "dataIndex": "cost"
         },
+        "tos": {
+          "title": "tos",
+          "dataIndex": "tos",
+          "render": {
+            "type": "ellipsis",
+            "size": "50"
+          }
+        },
         "instructions": {
           "title": "instructions",
           "dataIndex": "instructions",
@@ -2652,29 +2666,28 @@
             }
           ]
         },
+        "tos": {
+          "type": "textarea",
+          "label": "tos",
+          "help": "tos"
+        },
         "instructions": {
           "type": "textarea",
           "label": "instructions",
-          "help": "instructions",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
+          "help": "instructions"
         },
         "address": {
           "type": "text",
           "label": "address",
           "help": "address"
         },
-        "zipcode": {
-          "type": "text",
-          "label": "zipcode"
-        },
         "city": {
           "type": "text",
           "label": "city"
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode"
         },
         "country": {
           "type": "text",
@@ -2702,6 +2715,14 @@
         "stock": {
           "title": "stock",
           "dataIndex": "stock"
+        },
+        "tos": {
+          "title": "tos",
+          "dataIndex": "tos",
+          "render": {
+            "type": "ellipsis",
+            "size": "50"
+          }
         },
         "instructions": {
           "title": "instructions",
@@ -2743,29 +2764,28 @@
             }
           ]
         },
+        "tos": {
+          "type": "textarea",
+          "label": "tos",
+          "help": "tos"
+        },
         "instructions": {
           "type": "textarea",
           "label": "instructions",
-          "help": "instructions",
-          "rules": [
-            {
-              "required": true,
-              "message": "required"
-            }
-          ]
+          "help": "instructions"
         },
         "address": {
           "type": "text",
           "label": "address",
           "help": "address"
         },
-        "zipcode": {
-          "type": "text",
-          "label": "zipcode"
-        },
         "city": {
           "type": "text",
           "label": "city"
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode"
         },
         "country": {
           "type": "text",
@@ -2793,6 +2813,14 @@
         "stock": {
           "title": "stock",
           "dataIndex": "stock"
+        },
+        "tos": {
+          "title": "tos",
+          "dataIndex": "tos",
+          "render": {
+            "type": "ellipsis",
+            "size": "50"
+          }
         },
         "instructions": {
           "title": "instructions",
@@ -2869,6 +2897,28 @@
           "type": "textarea",
           "label": "tos",
           "help": "tos"
+        },
+        "instructions": {
+          "type": "textarea",
+          "label": "instructions",
+          "help": "instructions"
+        },
+        "address": {
+          "type": "text",
+          "label": "address",
+          "help": "address"
+        },
+        "city": {
+          "type": "text",
+          "label": "city"
+        },
+        "zipcode": {
+          "type": "text",
+          "label": "zipcode"
+        },
+        "country": {
+          "type": "text",
+          "label": "country"
         }
       },
       "editConfig": {
@@ -2914,6 +2964,18 @@
             "type": "ellipsis",
             "size": 50
           }
+        },
+        "instructions": {
+          "title": "instructions",
+          "dataIndex": "instructions",
+          "render": {
+            "type": "ellipsis",
+            "size": 50
+          }
+        },
+        "address": {
+          "title": "address",
+          "dataIndex": "withdrawalAddress.fullAddress"
         }
       }
     },

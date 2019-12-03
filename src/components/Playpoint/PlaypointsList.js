@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Empty, Card, Icon, Popconfirm,
+ Empty, Card, Icon, Popconfirm, Modal 
 } from 'antd';
 import { Translate } from 'react-localize-redux';
 import PlaypointInfos from './PlaypointInfos';
@@ -9,6 +9,7 @@ import QrcodeTransfer from '../QRCode/QrcodeTransfer';
 import ARGameLinkTransfer from '../ARGameLink/ARGameLinkTransfer';
 import PlaypointDisabledFilter from './PlaypointDisabledFilter';
 import iaxios from '../../axios';
+import PlaypointStats from './PlaypointStats';
 
 const propTypes = {
   playpoints: PropTypes.arrayOf(PropTypes.shape()).isRequired,
@@ -28,7 +29,10 @@ const PlaypointsList = ({
   selectedCompany,
 }) => {
   const [managerVisible, setManagerVisible] = useState(false);
-  const [arGameLinkManagerVisible, setArGameLinkManagerVisible] = useState(false);
+  const [arGameLinkManagerVisible, setArGameLinkManagerVisible] = useState(
+    false,
+  );
+  const [playpointStatsVisible, setPlaypointStatsVisible] = useState(false);
 
   const editPlaypoint = (id) => {
     selectPlaypoint(id);
@@ -74,6 +78,11 @@ const PlaypointsList = ({
     selectPlaypoint(id);
   };
 
+  const openPlaypointStats = (id) => {
+    setPlaypointStatsVisible(true);
+    selectPlaypoint(id);
+  };
+
   const renderPlaypoints = () => playpoints.map(p => (
       <Card
         key={p.id}
@@ -95,12 +104,13 @@ const PlaypointsList = ({
           </Popconfirm>,
           <Icon type="qrcode" onClick={() => openQrcodeManager(p.id)} />,
           <Icon type="scan" onClick={() => openArGameLinkManager(p.id)} />,
+          <Icon type="area-chart" onClick={() => openPlaypointStats(p.id)} />,
         ]}
       >
         <Meta title={p.name} description={<PlaypointInfos playpoint={p} />} />
         {!p.enabled && <PlaypointDisabledFilter />}
       </Card>
-  ));
+    ));
 
   const { Meta } = Card;
 
@@ -128,6 +138,15 @@ const PlaypointsList = ({
       {renderPlaypoints()}
       <QrcodeTransfer {...transferProps} />
       <ARGameLinkTransfer {...gameLinksTransferProps} />
+      <Modal
+        visible={playpointStatsVisible}
+        onConfirm={() => setPlaypointStatsVisible(false)}
+        onCancel={() => setPlaypointStatsVisible(false)}
+      >
+        <PlaypointStats
+          playpoint={playpoints.find(p => p.id === selectedPlaypoint)}
+        />
+      </Modal>
     </div>
   );
 };

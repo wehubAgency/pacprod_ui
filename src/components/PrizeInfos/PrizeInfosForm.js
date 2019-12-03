@@ -9,7 +9,9 @@ const propTypes = {
   modalVisible: PropTypes.bool,
   externalFormRef: PropTypes.oneOfType([
     PropTypes.func,
-    PropTypes.shape({ current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]) }),
+    PropTypes.shape({
+      current: PropTypes.oneOfType([PropTypes.instanceOf(Element), () => null]),
+    }),
   ]),
   formMode: PropTypes.string.isRequired,
 };
@@ -22,8 +24,20 @@ const defaultProps = {
 };
 
 const PrizeInfosForm = ({
-  prizeInfos, setPrizeInfos, selectedPrizeInfos, ...props
+  prizeInfos,
+  setPrizeInfos,
+  selectedPrizeInfos,
+  ...props
 }) => {
+  const edit = () => {
+    const prize = prizeInfos.find(p => p.id === selectedPrizeInfos);
+    if (prize) {
+      const prizeEdit = { ...prize, ...prize.withdrawalAddress };
+      return prizeEdit;
+    }
+    return {};
+  };
+
   const formProps = {
     ...props,
     data: prizeInfos,
@@ -32,6 +46,7 @@ const PrizeInfosForm = ({
     createUrl: '/prizeinfos',
     updateUrl: `/prizeinfos/${selectedPrizeInfos}`,
     formName: 'prizeInfosForm',
+    customEdit: edit,
     entityName: 'prizeInfos',
     modalTitle:
       props.formMode === 'create' ? (
