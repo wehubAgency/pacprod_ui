@@ -63,7 +63,17 @@ const MagicFinaleManager = ({ game, translate, setAllQuiz }) => {
         .filter(p => p.stock !== 0)
         .map(p => ({
           value: p.id,
-          label: `${p.model.name} (${p.stock} ${translate('inStock')})`,
+          label: `${p.model.name} (
+            ${
+          p.stock !== -1 ? (
+                <>
+                  {p.stock} <Translate id="inStock" />
+                </>
+          ) : (
+                <Translate id="infiniteStock" />
+          )
+          }
+            )`,
         })),
       session: game.sessions.map(s => ({ value: s.id, label: `${s.name}` })),
     },
