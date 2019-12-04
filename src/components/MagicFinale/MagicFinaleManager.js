@@ -60,7 +60,7 @@ const MagicFinaleManager = ({ game, translate, setAllQuiz }) => {
     formName: 'magicFinaleForm',
     data: {
       prize: game.prizes
-        .filter(p => p.stock > 0)
+        .filter(p => p.stock !== 0)
         .map(p => ({
           value: p.id,
           label: `${p.model.name} (${p.stock} ${translate('inStock')})`,
