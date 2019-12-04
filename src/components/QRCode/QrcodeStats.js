@@ -38,6 +38,7 @@ const QrcodeStats = ({ qrcode }) => {
               <Statistic
                 title={<Translate id="stats.winPercentage" />}
                 value={stats.winPercentage}
+                precision={2}
                 suffix="%"
               />
             </Col>
@@ -53,6 +54,7 @@ const QrcodeStats = ({ qrcode }) => {
               <Statistic
                 title={<Translate id="stats.oneDayEvolution" />}
                 value={stats.oneDayEvolution}
+                precision={2}
                 valueStyle={{
                   color: stats.oneDayEvolution >= 0 ? '#3f8600' : '#cf1322',
                 }}
