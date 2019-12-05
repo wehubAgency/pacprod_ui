@@ -87,7 +87,6 @@ const PlaypointsList = ({
       <Card
         key={p.id}
         style={{
-          width: 300,
           margin: '5px',
         }}
         cover={<img src={p.logo} alt={p.name} />}
@@ -134,7 +133,14 @@ const PlaypointsList = ({
     return <Empty />;
   }
   return (
-    <div style={{ display: 'flex', padding: '5px' }}>
+    <div
+      style={{
+        display: 'flex',
+        padding: '5px',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+      }}
+    >
       {renderPlaypoints()}
       <QrcodeTransfer {...transferProps} />
       <ARGameLinkTransfer {...gameLinksTransferProps} />
