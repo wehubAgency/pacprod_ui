@@ -88,6 +88,7 @@ const PlaypointsList = ({
         key={p.id}
         style={{
           margin: '5px',
+          flexBasis: '20%',
         }}
         cover={<img src={p.logo} alt={p.name} />}
         actions={[
