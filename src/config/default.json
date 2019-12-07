@@ -816,7 +816,6 @@
         "model": {
           "type": "upload",
           "label": "model",
-          "text": "model",
           "valuePropName": "fileList",
           "uploadRules": {
             "number": 1,
@@ -905,9 +904,6 @@
         "name": {
           "type": "text",
           "label": "name",
-          "attributes": {
-            "type": "text"
-          },
           "rules": [
             {
               "required": true,
@@ -931,7 +927,6 @@
         "profilePicture": {
           "type": "upload",
           "label": "profilePicture",
-          "text": "image",
           "valuePropName": "fileList",
           "uploadRules": {
             "number": 1,
@@ -948,7 +943,6 @@
         "gallery": {
           "type": "upload",
           "label": "gallery",
-          "text": "image",
           "valuePropName": "fileList",
           "uploadRules": {
             "number": 5,
@@ -1094,7 +1088,6 @@
         "logo": {
           "type": "upload",
           "label": "logo",
-          "text": "logo",
           "valuePropName": "fileList",
           "previewSettings": {
             "ratio": {
@@ -1118,7 +1111,6 @@
           "type": "upload",
           "label": "photos",
           "valuePropName": "fileList",
-          "text": "photos",
           "uploadRules": {
             "number": 5,
             "formats": ["image/jpeg", "image/png"],
@@ -1128,7 +1120,6 @@
         "videos": {
           "type": "upload",
           "label": "videos",
-          "text": "videos",
           "valuePropName": "fileList",
           "uploadRules": {
             "number": 2,
@@ -1403,7 +1394,6 @@
         "image": {
           "type": "upload",
           "label": "image",
-          "text": "image",
           "valuePropName": "fileList",
           "previewSettings": {
             "ratio": {
@@ -1477,7 +1467,6 @@
         "logo": {
           "type": "upload",
           "label": "logo",
-          "text": "image",
           "valuePropName": "fileList",
           "previewSettings": {
             "ratio": {
@@ -1720,7 +1709,6 @@
         "logo": {
           "type": "upload",
           "label": "logo",
-          "text": "logo",
           "valuePropName": "fileList",
           "previewSettings": {
             "ratio": {
@@ -1744,7 +1732,6 @@
           "type": "upload",
           "label": "photos",
           "valuePropName": "fileList",
-          "text": "photos",
           "uploadRules": {
             "number": 5,
             "formats": ["image/jpeg", "image/png"],
@@ -1754,7 +1741,6 @@
         "videos": {
           "type": "upload",
           "label": "videos",
-          "text": "videos",
           "valuePropName": "fileList",
           "uploadRules": {
             "number": 2,
@@ -2026,7 +2012,6 @@
         "image": {
           "type": "upload",
           "label": "image",
-          "text": "image",
           "valuePropName": "fileList",
           "uploadRules": {
             "number": 1,
@@ -2186,7 +2171,6 @@
         "logo": {
           "type": "upload",
           "label": "logo",
-          "text": "logo",
           "valuePropName": "fileList",
           "previewSettings": {
             "ratio": {
@@ -2204,7 +2188,6 @@
           "type": "upload",
           "label": "photos",
           "valuePropName": "fileList",
-          "text": "photos",
           "uploadRules": {
             "number": 5,
             "formats": ["image/jpeg", "image/png"],
@@ -2214,7 +2197,6 @@
         "videos": {
           "type": "upload",
           "label": "videos",
-          "text": "videos",
           "valuePropName": "fileList",
           "uploadRules": {
             "number": 2,
@@ -2300,7 +2282,6 @@
         "logo": {
           "type": "upload",
           "label": "logo",
-          "text": "image",
           "valuePropName": "fileList",
           "previewSettings": {
             "ratio": {
@@ -2851,7 +2832,6 @@
         "image": {
           "type": "upload",
           "label": "image",
-          "text": "image",
           "valuePropName": "fileList",
           "previewSettings": {
             "ratio": {
@@ -2878,7 +2858,6 @@
         "barcode": {
           "type": "upload",
           "label": "barcode",
-          "text": "image",
           "help": "barcode",
           "valuePropName": "fileList",
           "previewSettings": {
@@ -3149,7 +3128,6 @@
         "image": {
           "type": "upload",
           "label": "image",
-          "text": "image",
           "valuePropName": "fileList",
           "previewSettings": {
             "ratio": {

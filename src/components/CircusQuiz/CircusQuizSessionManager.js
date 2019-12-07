@@ -13,7 +13,10 @@ const propTypes = {
 };
 
 const CircusQuizSessionsManager = ({
-  quiz, allQuiz, setAllQuiz, translate,
+  quiz,
+  allQuiz,
+  setAllQuiz,
+  translate,
 }) => {
   const [sessions, setSessions] = useState([]);
   const [targetKeys, setTargetKeys] = useState([]);
@@ -49,7 +52,9 @@ const CircusQuizSessionsManager = ({
   return (
     <div>
       <Transfer
-        dataSource={sessions.map(s => ({ ...s, key: s.id }))}
+        dataSource={sessions
+          .filter(s => s.enabled)
+          .map(s => ({ ...s, key: s.id }))}
         titles={[
           translate('circusQuizSessionsForm.sessionsWithout'),
           translate('circusQuizSessionsForm.sessionsWith'),
