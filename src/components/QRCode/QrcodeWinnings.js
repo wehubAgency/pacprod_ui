@@ -26,7 +26,7 @@ const QrcodeWinnings = ({ qrcode }) => {
       <Button type="primary" onClick={() => setVisible(true)}>
         <Translate id="qrcodeWinnings.showWinnings" />
       </Button>
-      <Modal visible={visible}>
+      <Modal visible={visible} width="80%">
         <Table
           dataSource={winnings}
           columns={columns}
