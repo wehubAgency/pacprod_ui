@@ -42,7 +42,7 @@ const QrcodeWinnings = ({ qrcode, translate }) => {
     });
 
     const encodedUri = window.encodeURI(
-      `data:text/csv;charset=utf-8,%EF%BB%BF${csv}`,
+      `data:text/csv;charset=utf-8,%EF%BB%BF,${csv}`,
     );
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
