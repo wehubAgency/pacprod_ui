@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Translate, withLocalize } from 'react-localize-redux';
 import { convertArrayToCSV } from 'convert-array-to-csv';
 import { useFetchData } from '../../hooks';
+import moment from '../../moment';
 import generateColumns from '../../services/generateColumns';
 
 const QrcodeWinnings = ({ qrcode, translate }) => {
@@ -32,7 +33,7 @@ const QrcodeWinnings = ({ qrcode, translate }) => {
       `${w.user.firstname} ${w.user.lastname}`,
       w.user.email,
       w.prize.model.name,
-      w.createdAt,
+      moment(w.createdAt).format('LLLL'),
       w.used ? translate('yes') : translate('no'),
     ]);
 
@@ -42,7 +43,7 @@ const QrcodeWinnings = ({ qrcode, translate }) => {
     });
 
     const encodedUri = window.encodeURI(
-      `data:text/csv;charset=utf-8,%EF%BB%BF,${csv}`,
+      `data:text/csv;charset=utf-8,\uFEFF${csv}`,
     );
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
