@@ -21,7 +21,7 @@ const QrcodeWinnings = ({ qrcode, translate }) => {
   }, [data]);
 
   const downloadCsv = () => {
-    const headers = [
+    const header = [
       translate('user'),
       translate('email'),
       translate('prize'),
@@ -32,16 +32,18 @@ const QrcodeWinnings = ({ qrcode, translate }) => {
       `${w.user.firstname} ${w.user.lastname}`,
       w.user.email,
       w.prize.model.name,
-      w.date,
+      w.createdAt,
       w.used ? translate('yes') : translate('no'),
     ]);
 
     const csv = convertArrayToCSV(csvData, {
-      headers,
+      header,
       separator: ';',
     });
 
-    const encodedUri = window.encodeURI(`data:text/csv;charset=utf-8,${csv}`);
+    const encodedUri = window.encodeURI(
+      `data:text/csv;charset=utf-8,%EF%BB%BF${csv}`,
+    );
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
     link.setAttribute('download', `${qrcode.name}.csv`);
