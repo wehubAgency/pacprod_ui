@@ -108,6 +108,11 @@
   "playpoint": "Point de jeux",
   "qrcode": "QRCode",
   "notLocalized": "Non localisé",
+  "user": "Utilisateur",
+  "email": "Email",
+  "prize": "Lot",
+  "date": "Date",
+  "used": "Utilisé",
   "rules": {
     "required": "Obligatoire",
     "email": "L'email doit être valide.",
@@ -916,7 +921,8 @@
     }
   },
   "qrcodeWinnings": {
-    "showWinnings": "Voir les gagnants"
+    "showWinnings": "Voir les gagnants",
+    "downloadCsv": "Télécharger CSV"
   },
   "questionForm": {
     "extra": {
