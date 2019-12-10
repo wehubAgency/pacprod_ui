@@ -77,6 +77,32 @@ export default (data, transId, actions = []) => {
             render: strings => (Array.isArray(strings) ? strings.join(', ') : ''),
           };
         }
+        case 'user': {
+          return {
+            ...newEl,
+            render: user => (
+              <p>
+                {user.firstname} {user.lastname}
+              </p>
+            ),
+          };
+        }
+        case 'prize': {
+          return {
+            ...newEl,
+            render: prize => (
+              <div>
+                <img
+                  width="50"
+                  height="50"
+                  src={prize.model.image}
+                  alt={prize.model.name}
+                />
+                <p>{prize.model.name}</p>
+              </div>
+            ),
+          };
+        }
         case 'starRating': {
           return {
             ...newEl,

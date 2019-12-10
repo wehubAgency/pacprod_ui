@@ -915,6 +915,9 @@
       "currencyProportion": "Taux de monnaie virtuelle (%)"
     }
   },
+  "qrcodeWinnings": {
+    "showWinnings": "Voir les gagnants"
+  },
   "questionForm": {
     "extra": {
       "answers": "Vous pouvez choisir une ou plusieurs bonnes réponses."
@@ -1114,5 +1117,12 @@
   },
   "webviewPage": {
     "instructions": "Gérer ici les pages supplémentaires que vous voulez afficher dans votre application par exemple une image représentant le programme de votre évènement où bien des informations complémentaires. Vous pouvez également intégrer une page Internet, pour faire par exemple un lien avec votre site internet."
+  },
+  "winningComponent": {
+    "user": "Utilisateur",
+    "userMail": "Mail",
+    "prize": "Lot",
+    "date": "Date",
+    "used": "Utilisé"
   }
 }

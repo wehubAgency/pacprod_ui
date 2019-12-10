@@ -5,6 +5,7 @@ import {
 } from 'antd';
 import { Translate } from 'react-localize-redux';
 import { useFetchData } from '../../hooks';
+import QrcodeWinnings from './QrcodeWinnings';
 
 const propTypes = {
   qrcode: PropTypes.object.isRequired,
@@ -67,6 +68,7 @@ const QrcodeStats = ({ qrcode }) => {
               />
             </Col>
           </Row>
+          <QrcodeWinnings qrcode={qrcode} />
         </div>
       )}
     </div>
