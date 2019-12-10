@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Table } from 'antd';
 import { useSelector } from 'react-redux';
-import { Translate } from 'react-localize-redux';
+import { Translate, withLocalize } from 'react-localize-redux';
 import { convertArrayToCSV } from 'convert-array-to-csv';
 import { useFetchData } from '../../hooks';
 import generateColumns from '../../services/generateColumns';
 
-const QrcodeWinnings = ({ qrcode }) => {
+const QrcodeWinnings = ({ qrcode, translate }) => {
   const [winnings, setWinnings] = useState([]);
   const [visible, setVisible] = useState(false);
 
@@ -22,26 +22,31 @@ const QrcodeWinnings = ({ qrcode }) => {
 
   const downloadCsv = () => {
     const headers = [
-      <Translate id="user" />,
-      <Translate id="email" />,
-      <Translate id="prize" />,
-      <Translate id="date" />,
-      <Translate id="used" />,
+      translate('user'),
+      translate('email'),
+      translate('prize'),
+      translate('date'),
+      translate('used'),
     ];
-    const data = winnings.map(w => [
+    const csvData = winnings.map(w => [
       `${w.user.firstname} ${w.user.lastname}`,
       w.user.email,
       w.prize.model.name,
       w.date,
-      w.used ? <Translate id="yes" /> : <Translate id="no" />,
+      w.used ? translate('yes') : translate('no'),
     ]);
 
-    const csv = convertArrayToCSV(data, {
+    const csv = convertArrayToCSV(csvData, {
       headers,
       separator: ';',
     });
 
-    console.log({ csv });
+    const encodedUri = window.encodeURI(`data:text/csv;charset=utf-8,${csv}`);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `${qrcode.name}.csv`);
+    document.body.appendChild(link);
+    link.click();
   };
 
   const columns = generateColumns(componentConfig, 'winningComponent');
@@ -57,11 +62,11 @@ const QrcodeWinnings = ({ qrcode }) => {
         onCancel={() => setVisible(false)}
         onOk={() => setVisible(false)}
       >
-        {winnings.length > 0 && (
-          <Button type="primary" onClick={downloadCsv}>
-            <Translate id="qrcodeWinnings.downloadCsv" />
-          </Button>
-        )}
+        {/* {winnings.length > 0 && ( */}
+        <Button type="primary" onClick={downloadCsv}>
+          <Translate id="qrcodeWinnings.downloadCsv" />
+        </Button>
+        {/* )} */}
         <Table
           dataSource={winnings}
           columns={columns}
@@ -73,4 +78,4 @@ const QrcodeWinnings = ({ qrcode }) => {
   );
 };
 
-export default QrcodeWinnings;
+export default withLocalize(QrcodeWinnings);
