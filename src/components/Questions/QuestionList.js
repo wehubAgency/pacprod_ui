@@ -23,7 +23,12 @@ const defaultProps = {
 };
 
 const QuestionList = ({
-  items, setItems, selectedQuestion, selectQuestion, quiz, circusQuiz,
+  items,
+  setItems,
+  selectedQuestion,
+  selectQuestion,
+  quiz,
+  circusQuiz,
 }) => {
   const [oldOrder, setOldOrder] = useState([]);
 
@@ -37,13 +42,16 @@ const QuestionList = ({
 
   const grid = 16;
 
-  const getItemStyle = (isDragging, draggableStyle, id) => ({
-    border: selectedQuestion === id ? '1px solid #1890ff' : '1px solid lightgrey',
+  const getItemStyle = (isDragging, draggableStyle, item) => ({
+    border:
+      selectedQuestion === item.id
+        ? '1px solid #1890ff'
+        : '1px solid lightgrey',
     borderRadius: '2px',
     userSelect: 'none',
     padding: grid,
     margin: `0 0 ${grid}px 0`,
-    background: isDragging ? '#e6f7ff' : '#fafafa',
+    background: item.enabled ? '#fafafa' : 'rgba(0,0,0,0.5)',
     ...draggableStyle,
   });
 
@@ -76,8 +84,14 @@ const QuestionList = ({
   };
 
   return (
-    <div className="styled-scrollbar" style={{ maxHeight: 800, overflow: 'auto' }}>
-      <DragDropContext onDragEnd={onDragEnd} onBeforeDragStart={onBeforeDragStart}>
+    <div
+      className="styled-scrollbar"
+      style={{ maxHeight: 800, overflow: 'auto' }}
+    >
+      <DragDropContext
+        onDragEnd={onDragEnd}
+        onBeforeDragStart={onBeforeDragStart}
+      >
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
             <div
@@ -92,7 +106,11 @@ const QuestionList = ({
                       ref={prov.innerRef}
                       {...prov.draggableProps}
                       {...prov.dragHandleProps}
-                      style={getItemStyle(snap.isDragging, prov.draggableProps.style, item.id)}
+                      style={getItemStyle(
+                        snap.isDragging,
+                        prov.draggableProps.style,
+                        item,
+                      )}
                       onClick={() => selectQuestion(item.id)}
                       role="button"
                       tabIndex={0}
