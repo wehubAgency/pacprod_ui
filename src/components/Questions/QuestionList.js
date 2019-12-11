@@ -42,18 +42,21 @@ const QuestionList = ({
 
   const grid = 16;
 
-  const getItemStyle = (isDragging, draggableStyle, item) => ({
-    border:
-      selectedQuestion === item.id
-        ? '1px solid #1890ff'
-        : '1px solid lightgrey',
-    borderRadius: '2px',
-    userSelect: 'none',
-    padding: grid,
-    margin: `0 0 ${grid}px 0`,
-    background: item.enabled ? '#fafafa' : 'rgba(0,0,0,0.5)',
-    ...draggableStyle,
-  });
+  const getItemStyle = (isDragging, draggableStyle, item) => {
+    console.log({ item });
+    return {
+      border:
+        selectedQuestion === item.id
+          ? '1px solid #1890ff'
+          : '1px solid lightgrey',
+      borderRadius: '2px',
+      userSelect: 'none',
+      padding: grid,
+      margin: `0 0 ${grid}px 0`,
+      background: item.enabled ? '#fafafa' : 'rgba(0,0,0,0.5)',
+      ...draggableStyle,
+    };
+  };
 
   const getListStyle = isDraggingOver => ({
     background: isDraggingOver ? '#fafafa' : 'white',

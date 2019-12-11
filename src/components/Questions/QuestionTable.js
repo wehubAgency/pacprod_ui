@@ -39,6 +39,7 @@ const QuestionTable = ({
         id: s.id,
         order: s.order,
         question: s.question,
+        enabled: s.enabled,
       })),
     );
   }, [questions]);
