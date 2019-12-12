@@ -6,7 +6,9 @@ import io from 'socket.io-client';
 import FormGen from '../FormGen';
 import iaxios from '../../axios';
 
-const MagicFinaleManager = ({ game, translate, setAllQuiz }) => {
+const MagicFinaleManager = ({
+ game, url, translate, setAll 
+}) => {
   const [loading, setLoading] = useState(false);
   const [winning, setWinning] = useState(null);
 
@@ -35,14 +37,14 @@ const MagicFinaleManager = ({ game, translate, setAllQuiz }) => {
             prize: values.prize,
           };
           iaxios()
-            .post(`/circusquiz/${game.id}/magicfinale`, data)
+            .post(`/${url}/${game.id}/magicfinale`, data)
             .then((res) => {
               if (res !== 'error') {
                 setWinning(res.data);
                 iaxios()
-                  .get('/circusquiz')
+                  .get(`/${url}`)
                   .then((r) => {
-                    setAllQuiz(r.data);
+                    setAll(r.data);
                   });
               }
               setLoading(false);
@@ -65,7 +67,7 @@ const MagicFinaleManager = ({ game, translate, setAllQuiz }) => {
           value: p.id,
           label: p.model.name,
         })),
-      session: game.sessions.map(s => ({ value: s.id, label: `${s.name}` })),
+      session: game.sessions.filter(s => s.enabled && !s.deleted).map(s => ({ value: s.id, label: `${s.name}` })),
     },
     ref: formRef,
   };

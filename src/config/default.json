@@ -1352,6 +1352,11 @@
           "label": "quizParticipationRequired",
           "help": "quizParticipationRequired"
         },
+        "magicFinale": {
+          "type": "checkbox",
+          "label": "magicFinale",
+          "help": "magicFinale"
+        },
         "radius": {
           "type": "number",
           "label": "radius",

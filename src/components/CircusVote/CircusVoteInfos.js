@@ -6,6 +6,7 @@ import CircusVoteSettingsManager from '../CircusVoteSettings/CircusVoteSettingsM
 import CircusVoteSessionManager from './CircusVoteSessionManager';
 import PrizeManager from '../Prize/PrizeManager';
 import ParticipationPrize from '../ParticipationPrize/ParticipationPrize';
+import MagicFinaleManager from '../MagicFinale/MagicFinaleManager';
 import CircusVoteDraw from './CircusVoteDraw';
 
 const propTypes = {
@@ -41,6 +42,11 @@ const CircusVoteInfos = ({ vote, setAllVotes, allVotes }) => (
         <Tabs.TabPane tab={<Translate id="randomDrawing" />} key="4">
           <CircusVoteDraw vote={vote} setAllVotes={setAllVotes} />
         </Tabs.TabPane>
+      {vote.settings.magicFinale && (
+        <Tabs.TabPane tab={<Translate id="magicFinale" />} key="6">
+          <MagicFinaleManager game={vote} setAll={setAllVotes} url="circusvotes"/>
+        </Tabs.TabPane>
+      )}
       </Tabs>
     </div>
 );

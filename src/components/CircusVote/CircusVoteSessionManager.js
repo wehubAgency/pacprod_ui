@@ -49,7 +49,8 @@ const CircusVoteSessionsManager = ({
   return (
     <div>
       <Transfer
-        dataSource={sessions.map(s => ({ ...s, key: s.id }))}
+        dataSource={sessions.filter(s => s.enabled)
+          .map(s => ({ ...s, key: s.id }))}
         titles={[
           translate('circusVoteSessionsForm.sessionsWithout'),
           translate('circusVoteSessionsForm.sessionsWith'),
